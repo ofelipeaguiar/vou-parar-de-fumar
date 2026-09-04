@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Parar de fumar">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <title>Vou parar de fumar</title>
+  <style>
+    :root{
+      --bg:#0b1020;--card:#141b2d;--card2:#1b2439;--text:#f8fafc;
+      --muted:#94a3b8;--accent:#22c55e;--accent2:#16a34a;--danger:#ef4444;
+      --line:rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    html{background:var(--bg)}
+    body{
+      margin:0;min-height:100vh;background:
+      radial-gradient(circle at top right,rgba(34,197,94,.08),transparent 35%),
+      linear-gradient(180deg,#0b1020,#0e1528);
+      color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+      "Segoe UI",Roboto,Arial,sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom));
+    }
+    button,input{font:inherit}
+    .wrap{max-width:560px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 16px 18px}
+    header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}
+    h1{font-size:25px;line-height:1.1;margin:0 0 5px;letter-spacing:-.4px}
+    .subtitle{font-size:13px;color:var(--muted)}
+    .badge{font-size:11px;color:#bbf7d0;border:1px solid rgba(34,197,94,.25);
+      background:rgba(34,197,94,.08);padding:7px 9px;border-radius:999px;white-space:nowrap}
+    .hero{background:linear-gradient(145deg,rgba(34,197,94,.16),rgba(20,27,45,.95));
+      border:1px solid var(--line);border-radius:26px;padding:22px;margin-bottom:14px}
+    .day{font-size:13px;color:var(--muted);text-transform:capitalize}
+    .count{font-size:74px;line-height:1;font-weight:800;letter-spacing:-4px;margin:10px 0 0}
+    .label{font-size:16px;color:#cbd5e1;margin-bottom:20px}
+    .mainbtn{width:100%;border:0;background:var(--accent);color:#052e16;font-weight:800;
+      padding:18px 16px;border-radius:18px;font-size:18px;box-shadow:0 8px 30px rgba(34,197,94,.16)}
+    .mainbtn:active{transform:scale(.985)}
+    .last{display:flex;justify-content:space-between;gap:10px;margin-top:14px;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+    .card,.panel{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:16px}
+    .card .k{font-size:12px;color:var(--muted);margin-bottom:7px}
+    .card .v{font-size:23px;font-weight:750}
+    .panel{margin-bottom:14px}
+    .panel h2{font-size:16px;margin:0 0 13px}
+    .history-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}
+    .history-row:last-child{border-bottom:0}
+    .date-title{font-size:14px}
+    .date-sub{font-size:12px;color:var(--muted);margin-top:3px}
+    .day-total{font-size:21px;font-weight:750}
+    .empty{padding:12px 0;color:var(--muted);font-size:14px;line-height:1.5}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .secondary,.danger{border:1px solid var(--line);background:var(--card2);color:var(--text);
+      padding:11px 13px;border-radius:13px;font-size:13px;font-weight:650}
+    .danger{color:#fecaca}
+    .note{font-size:12px;line-height:1.5;color:var(--muted);margin-top:12px}
+    .nav{
+      position:fixed;left:0;right:0;bottom:0;background:rgba(10,15,28,.90);
+      backdrop-filter:blur(18px);border-top:1px solid var(--line);
+      padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+    }
+    .navin{max-width:560px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+    .nav button{background:transparent;border:0;color:var(--muted);padding:8px 4px;border-radius:12px;font-size:11px}
+    .nav button.active{color:#86efac;background:rgba(34,197,94,.08)}
+    .nav .ico{font-size:20px;display:block;margin-bottom:2px}
+    section.tab{display:none}
+    section.tab.active{display:block}
+    #toast{position:fixed;left:50%;bottom:105px;transform:translateX(-50%) translateY(10px);
+      opacity:0;pointer-events:none;background:#e2e8f0;color:#0f172a;padding:10px 14px;border-radius:999px;
+      font-size:13px;font-weight:700;transition:.2s;white-space:nowrap;z-index:4}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .time-list{display:flex;flex-wrap:wrap;gap:8px}
+    .time-chip{font-size:12px;background:var(--card2);border:1px solid var(--line);padding:7px 9px;border-radius:999px;color:#cbd5e1}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div>
+        <h1>Vou parar de fumar</h1>
+        <div class="subtitle">Um registro de cada vez.</div>
+      </div>
+      <div class="badge">modo local</div>
+    </header>
+
+    <section id="home" class="tab active">
+      <div class="hero">
+        <div class="day" id="todayLabel">Hoje</div>
+        <div class="count" id="todayCount">0</div>
+        <div class="label" id="cigLabel">cigarros hoje</div>
+        <button class="mainbtn" id="smokeBtn">+ Fumei agora</button>
+        <div class="last">
+          <span id="lastTime">Nenhum registro hoje</span>
+          <span id="sinceLast"></span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="k">Média últimos 7 dias</div>
+          <div class="v" id="avg7">—</div>
+        </div>
+        <div class="card">
+          <div class="k">Total registrado</div>
+          <div class="v" id="totalCount">0</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Horários de hoje</h2>
+        <div id="todayTimes" class="time-list"></div>
+        <div id="noTimes" class="empty">Quando você registrar um cigarro, o horário aparece aqui.</div>
+      </div>
+
+      <div class="actions">
+        <button class="secondary" id="undoBtn">Desfazer último registro</button>
+      </div>
+    </section>
+
+    <section id="history" class="tab">
+      <div class="panel">
+        <h2>Histórico</h2>
+        <div id="historyList"></div>
+      </div>
+    </section>
+
+    <section id="data" class="tab">
+      <div class="panel">
+        <h2>Seus dados</h2>
+        <div class="actions">
+          <button class="secondary" id="exportBtn">Exportar backup</button>
+          <label class="secondary" style="cursor:pointer">
+            Importar backup
+            <input type="file" id="importFile" accept=".json,application/json" hidden>
+          </label>
+        </div>
+        <div class="note">
+          Nesta primeira versão os registros ficam armazenados neste navegador. Quando conectarmos o Supabase,
+          migraremos o histórico para a nuvem. O backup permite guardar uma cópia independente enquanto isso.
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Manutenção</h2>
+        <button class="danger" id="clearBtn">Apagar todos os registros</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <nav class="nav">
+    <div class="navin">
+      <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
+      <button data-tab="history"><span class="ico">▥</span>Histórico</button>
+      <button data-tab="data"><span class="ico">↥</span>Dados</button>
+    </div>
+  </nav>
+
+<script>
+(() => {
+  const KEY = 'vou_parar_de_fumar_records_v1';
+  const getRecords = () => {
+    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+    catch { return []; }
+  };
+  const saveRecords = r => localStorage.setItem(KEY, JSON.stringify(r));
+  let records = getRecords();
+
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2,'0');
+  const localDateKey = date => {
+    const d = new Date(date);
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  };
+  const todayKey = () => localDateKey(new Date());
+  const timeText = iso => new Date(iso).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const dateText = key => {
+    const [y,m,d] = key.split('-').map(Number);
+    return new Date(y,m-1,d).toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
+  };
+  const toast = msg => {
+    $('toast').textContent = msg; $('toast').classList.add('show');
+    clearTimeout(window.__t); window.__t=setTimeout(()=>$('toast').classList.remove('show'),1600);
+  };
+
+  function render(){
+    records.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+    const today = todayKey();
+    const todayRecs = records.filter(r => localDateKey(r.timestamp)===today);
+
+    $('todayLabel').textContent = new Date().toLocaleDateString('pt-BR',
+      {weekday:'long',day:'2-digit',month:'long'});
+    $('todayCount').textContent = todayRecs.length;
+    $('cigLabel').textContent = todayRecs.length === 1 ? 'cigarro hoje' : 'cigarros hoje';
+    $('totalCount').textContent = records.length;
+
+    if(todayRecs.length){
+      const last = todayRecs[todayRecs.length-1];
+      $('lastTime').textContent = `Último: ${timeText(last.timestamp)}`;
+      const mins = Math.max(0,Math.floor((Date.now()-new Date(last.timestamp))/60000));
+      $('sinceLast').textContent = mins < 60 ? `há ${mins} min` : `há ${Math.floor(mins/60)}h${pad(mins%60)}`;
+    } else {
+      $('lastTime').textContent='Nenhum registro hoje';
+      $('sinceLast').textContent='';
+    }
+
+    $('todayTimes').innerHTML = todayRecs.map(r=>`<span class="time-chip">${timeText(r.timestamp)}</span>`).join('');
+    $('noTimes').style.display = todayRecs.length ? 'none' : 'block';
+
+    // average over last 7 calendar days including today
+    let counts=[];
+    for(let i=0;i<7;i++){
+      const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()-i);
+      const k=localDateKey(d);
+      counts.push(records.filter(r=>localDateKey(r.timestamp)===k).length);
+    }
+    const hasAny = counts.some(n=>n>0);
+    $('avg7').textContent = hasAny ? (counts.reduce((a,b)=>a+b,0)/7).toFixed(1).replace('.',',') : '—';
+
+    const grouped = {};
+    records.forEach(r => {
+      const k=localDateKey(r.timestamp);
+      (grouped[k] ||= []).push(r);
+    });
+    const keys=Object.keys(grouped).sort().reverse();
+    $('historyList').innerHTML = keys.length ? keys.map(k=>{
+      const arr=grouped[k];
+      const first=timeText(arr[0].timestamp), last=timeText(arr[arr.length-1].timestamp);
+      return `<div class="history-row"><div><div class="date-title">${dateText(k)}</div>
+        <div class="date-sub">${first}${arr.length>1?' → '+last:''}</div></div>
+        <div class="day-total">${arr.length}</div></div>`;
+    }).join('') : `<div class="empty">Seu histórico vai aparecer aqui conforme você registrar.</div>`;
+  }
+
+  $('smokeBtn').addEventListener('click',()=>{
+    records.push({id:crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(), timestamp:new Date().toISOString()});
+    saveRecords(records); render(); toast('Registrado');
+  });
+
+  $('undoBtn').addEventListener('click',()=>{
+    if(!records.length){ toast('Não há registro para desfazer'); return; }
+    const last = records[records.length-1];
+    if(confirm(`Apagar o registro das ${timeText(last.timestamp)}?`)){
+      records.pop(); saveRecords(records); render(); toast('Registro removido');
+    }
+  });
+
+  $('exportBtn').addEventListener('click',()=>{
+    const payload={app:'vou-parar-de-fumar',version:1,exportedAt:new Date().toISOString(),records};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url;
+    a.download=`vou-parar-de-fumar-backup-${todayKey()}.json`; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000); toast('Backup criado');
+  });
+
+  $('importFile').addEventListener('change', async e=>{
+    const f=e.target.files[0]; if(!f) return;
+    try{
+      const data=JSON.parse(await f.text());
+      if(!Array.isArray(data.records)) throw new Error();
+      if(!confirm(`Importar ${data.records.length} registros e substituir os dados atuais?`)) return;
+      records=data.records; saveRecords(records); render(); toast('Backup importado');
+    }catch{ alert('Não consegui ler esse backup.'); }
+    e.target.value='';
+  });
+
+  $('clearBtn').addEventListener('click',()=>{
+    if(confirm('Apagar TODOS os registros deste aparelho? Esta ação não pode ser desfeita sem um backup.')){
+      records=[]; saveRecords(records); render(); toast('Registros apagados');
+    }
+  });
+
+  document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('section.tab').forEach(s=>s.classList.toggle('active',s.id===btn.dataset.tab));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+
+  render();
+  setInterval(render,60000);
+})();
+</script>
+</body>
+</html>
