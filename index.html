@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.3.2">
+<meta name="app-version" content="7.4.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -870,6 +870,10 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   background:rgba(5,15,30,.94);border-color:rgba(176,216,250,.28);
   color:#f3f8fc;font-size:13px;line-height:1.3;box-shadow:0 9px 24px rgba(0,0,0,.26)
 }
+#petMessage.speech-bubble{
+  color:#f6fbff!important;-webkit-text-fill-color:#f6fbff!important;
+  opacity:1!important;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.72)
+}
 .speech-bubble::after{bottom:-7px;border-width:7px;border-top-color:rgba(5,15,30,.94)}
 .pet-reaction-v731{
   top:69px!important;width:min(300px,84%)!important;
@@ -880,7 +884,9 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .pet-zone-v731{
   top:clamp(140px,19svh,168px)!important;
   width:clamp(116px,16.5svh,150px)!important;
-  height:clamp(116px,16.5svh,150px)!important
+  height:clamp(116px,16.5svh,150px)!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  padding:0!important;color:inherit;-webkit-appearance:none;appearance:none
 }
 .pet-zone-v731 .pet-bob{
   width:clamp(108px,15.5svh,142px);height:clamp(108px,15.5svh,142px)
@@ -965,6 +971,173 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .traffic,.pet-bob,.pet-sway,.pet-touch-hint{animation:none!important}
 }
 
+/* =========================================================
+   V7.4 — HOME SIMPLES
+   Nimbo em primeiro plano, cenário calmo e resumo útil do dia.
+   ========================================================= */
+.habitat-v731{
+  height:330px;margin-bottom:9px;border-radius:24px;
+  background:#102641;border-color:rgba(123,203,241,.24);
+  box-shadow:0 18px 48px rgba(0,0,0,.22)
+}
+.city-scene-v731,.nimbo-icon-actions,.pet-touch-hint-v731{display:none!important}
+.calm-backdrop{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 31%,rgba(125,200,235,.18),transparent 31%),
+    linear-gradient(180deg,#142e50 0%,#173653 56%,#122b47 56%,#0d1d32 100%)
+}
+.calm-backdrop::before{
+  content:"";position:absolute;left:50%;top:76px;width:220px;height:220px;
+  transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.07),rgba(114,222,241,.025) 52%,transparent 70%)
+}
+.calm-backdrop::after{
+  content:"";position:absolute;left:7%;right:7%;bottom:65px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(143,213,237,.20),transparent);
+  box-shadow:0 -28px 0 rgba(143,213,237,.035),0 -56px 0 rgba(143,213,237,.025)
+}
+.habitat-v731::after{opacity:.025;background-size:14px 14px}
+.habitat-head-v731{top:13px;left:15px;right:15px}
+.habitat-head-v731 .pet-name{font-size:13px;letter-spacing:.03em}
+.habitat-head-v731 .pet-state{font-size:9px;color:#8edcf0;margin-top:3px;text-transform:lowercase}
+
+.speech-bubble{
+  top:51px;width:min(300px,84%);padding:8px 12px;border-radius:13px;
+  background:rgba(6,18,35,.72);border-color:rgba(176,216,250,.18);
+  color:#f2f8fc;font-size:11px;line-height:1.3;box-shadow:none;
+  backdrop-filter:blur(7px)
+}
+#petMessage.speech-bubble{font-weight:500;text-shadow:none}
+.speech-bubble::after{bottom:-6px;border-width:6px;border-top-color:rgba(6,18,35,.72)}
+.pet-reaction-v731{
+  top:73px!important;width:min(280px,80%)!important;
+  font-size:11px!important;padding:8px 11px!important;border-radius:13px!important
+}
+
+.pet-zone-v731{
+  top:171px!important;width:min(318px,94%)!important;height:184px!important;
+  border:0!important;background:none!important;box-shadow:none!important;padding:0!important;
+  pointer-events:none;-webkit-appearance:none;appearance:none;
+  --nimbo-main:#4fca80;--nimbo-light:#8bf1b0;--nimbo-glow:rgba(98,233,143,.28)
+}
+.pet-zone-v731 .pet-bob{
+  width:184px;height:184px;animation:none;transform-origin:50% 82%
+}
+.pet-zone-v731 .pet-sway{
+  animation:nimboPace 8.8s ease-in-out infinite;transform-origin:50% 72%
+}
+.pet-zone-v731 .body-main{fill:var(--nimbo-main)!important}
+.pet-zone-v731 .body-light{fill:var(--nimbo-light)!important}
+.pet-zone-v731 .pet-svg{
+  filter:drop-shadow(0 12px 8px rgba(0,0,0,.24)) drop-shadow(0 0 14px var(--nimbo-glow))
+}
+.pet-zone-v731::before{width:104px;height:12px;bottom:4px;background:rgba(4,11,22,.26)}
+@keyframes nimboPace{
+  0%{transform:translateX(-42px) scaleX(1)}
+  43%{transform:translateX(42px) scaleX(1)}
+  48%{transform:translateX(42px) scaleX(.12)}
+  52%{transform:translateX(42px) scaleX(-1)}
+  93%{transform:translateX(-42px) scaleX(-1)}
+  98%{transform:translateX(-42px) scaleX(-.12)}
+  100%{transform:translateX(-42px) scaleX(1)}
+}
+
+.stats-v731{
+  left:10px;right:10px;bottom:9px;grid-template-columns:repeat(4,1fr);gap:5px;z-index:7
+}
+.stats-v731 .stat{
+  min-width:0;padding:6px 7px;border-radius:10px;
+  background:rgba(5,16,31,.78);border-color:rgba(132,191,229,.13);backdrop-filter:blur(6px)
+}
+.stats-v731 .stat-head{font-size:8px;line-height:1.1;margin-bottom:5px;gap:3px;white-space:nowrap}
+.stats-v731 .stat-head span{overflow:hidden;text-overflow:ellipsis}
+.stats-v731 .stat-head b{font-size:10px}
+.stats-v731 .meter{height:4px;border-radius:999px}.stats-v731 .meter i{border-radius:999px}
+
+.quick-actions-v731{gap:8px;margin:0 0 8px}
+.quick-actions-v731 .quick{min-height:76px;border-radius:17px;padding:9px 8px}
+.quick-actions-v731 .quick-icon{font-size:20px;margin-bottom:3px}
+.quick-actions-v731 .quick-title{font-size:14px}.quick-actions-v731 .quick-sub{font-size:10px}
+
+.daily-summary-row{grid-template-columns:1fr 1fr;gap:8px;margin:0 0 5px}
+.daily-summary-card{
+  min-height:104px;border-radius:17px;padding:12px 13px;
+  background:linear-gradient(180deg,rgba(20,39,64,.98),rgba(15,31,52,.98));
+  border-color:rgba(118,177,230,.17)
+}
+.daily-summary-card::after{content:"";position:absolute;left:13px;right:13px;top:0;height:2px;border-radius:999px;background:#8294aa;opacity:.65}
+.daily-summary-card.smoke-summary::after{background:#aab8c8}
+.daily-summary-card.resist-summary::after{background:#57df8c}
+.daily-summary-card .summary-icon{display:none!important}
+.summary-top{display:flex;align-items:flex-start;gap:8px;min-width:0}
+.summary-number{font-size:34px;line-height:.95;margin:0;letter-spacing:-1px;flex:0 0 auto}
+.summary-label{font-size:11px;line-height:1.2;padding-top:2px;color:#e8eef5}
+.recent-label{font-size:9px;color:#7f93aa;margin-top:10px}
+.recent-times{font:600 10px/1.45 var(--pixel);color:#cbd9e6;margin-top:3px;min-height:28px}
+.resist-summary .recent-times{color:#8be7ab}
+.close-day-card{
+  grid-column:1/-1;min-height:47px;padding:12px 14px;display:flex;align-items:center;
+  font-size:14px;line-height:1.2;background:linear-gradient(180deg,#153351,#102b48)
+}
+.close-day-card::before,.close-day-card::after{content:none!important;display:none!important}
+
+.today-details{margin-top:0}.today-details>summary{
+  padding:8px 0 7px;color:#8ca0b7;font-size:11px;font-weight:650
+}
+.today-card-compact.day-detail-card{margin-top:0;padding:14px 15px 15px;border-radius:18px}
+.day-detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.day-detail-date{font-size:13px;font-weight:750;text-transform:capitalize;color:#edf5fb}
+.day-detail-trend{font-size:10px;line-height:1.35;color:#87a0b7;margin-top:4px}
+.day-detail-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.day-detail-metrics .baseline{
+  text-align:left;padding:9px 10px;border-radius:11px;background:#0c192a;border:1px solid var(--line);
+  font-size:9px
+}
+.day-detail-metrics .baseline strong{font-size:13px;margin-top:3px}
+.timeline-title{font-size:10px;font-weight:750;color:#b6c5d3;margin-top:13px}
+.day-timeline{display:grid;gap:6px;margin-top:7px;max-height:170px;overflow:auto}
+.timeline-event{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 9px;border-radius:10px;background:#0c192a;border-left:2px solid #8294aa}
+.timeline-event.resist{border-left-color:#57df8c}.timeline-type{font-size:10px;color:#dce6ef}.timeline-event.resist .timeline-type{color:#93eab1}
+.timeline-event time{font:700 10px var(--pixel);color:#a9b9c8}
+.timeline-empty{font-size:11px;color:#7f93aa;padding:9px 0}
+.undo-context{font-size:9px;color:#7f93aa;margin-top:12px;line-height:1.4}
+.day-detail-card .actions{margin-top:8px}.day-detail-card .secondary{width:100%;padding:11px 12px}
+.day-detail-card .secondary:disabled{opacity:.4}
+
+@media(max-width:360px){
+  .habitat-v731{height:310px}
+  .pet-zone-v731{top:163px!important;height:170px!important}
+  .pet-zone-v731 .pet-bob{width:170px;height:170px}
+  .stats-v731 .stat{padding:5px 6px}.stats-v731 .stat-head{font-size:7.5px}
+  .summary-number{font-size:31px}.summary-label{font-size:10px}
+  .recent-times{font-size:9px}
+}
+@media(max-height:780px) and (max-width:500px){
+  .habitat-v731{height:292px;margin-bottom:8px}
+  .habitat-head-v731{top:11px}
+  .speech-bubble{top:46px;font-size:10px;padding:7px 10px}
+  .pet-zone-v731{top:150px!important;height:158px!important}
+  .pet-zone-v731 .pet-bob{width:158px;height:158px}
+  .pet-zone-v731::before{width:90px;height:10px}
+  .stats-v731{bottom:7px}.stats-v731 .stat{padding:5px 6px}.stats-v731 .stat-head{font-size:7.5px;margin-bottom:4px}.stats-v731 .stat-head b{font-size:9px}
+  .quick-actions-v731 .quick{min-height:72px}
+  .daily-summary-card{min-height:98px;padding:10px 11px}.daily-summary-card::after{left:11px;right:11px}
+  .summary-number{font-size:31px}.recent-label{margin-top:8px}
+  .close-day-card{min-height:44px}
+}
+@media(max-height:700px) and (max-width:500px){
+  .habitat-v731{height:268px}
+  .speech-bubble{top:43px;width:80%}
+  .pet-zone-v731{top:137px!important;height:142px!important}
+  .pet-zone-v731 .pet-bob{width:142px;height:142px}
+  .quick-actions-v731 .quick{min-height:68px}
+  .daily-summary-card{min-height:91px}.recent-label{margin-top:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pet-zone-v731 .pet-sway{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -1026,24 +1199,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 <section id="home" class="tab active">
 
   <div class="habitat habitat-v731" id="nimboHabitat">
-    <div class="city-scene-v731" aria-hidden="true">
-      <div class="city-glow"></div>
-      <div class="city-stars"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="city-buildings back">
-        <span class="bldg b1"></span><span class="bldg b2"></span><span class="bldg b3"></span><span class="bldg b4"></span><span class="bldg b5"></span><span class="bldg b6"></span><span class="bldg b7"></span>
-      </div>
-      <div class="city-buildings front">
-        <span class="bldg f1"></span><span class="bldg f2"></span><span class="bldg f3"></span><span class="bldg f4"></span><span class="bldg f5"></span>
-      </div>
-      <div class="city-tree tree-left"></div><div class="city-tree tree-right"></div>
-      <div class="street-light lamp1"></div><div class="street-light lamp2"></div>
-      <div class="city-road-v731"><span class="road-line"></span>
-        <span class="traffic car car-a"></span>
-        <span class="traffic bus bus-a"></span>
-        <span class="traffic moto moto-a"></span>
-        <span class="traffic car car-b"></span>
-      </div>
-    </div>
+    <div class="calm-backdrop" aria-hidden="true"></div>
 
     <div class="habitat-head habitat-head-v731">
       <div>
@@ -1056,7 +1212,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
     <div class="speech-bubble pet-message-v731" id="petMessage">Só mais um dia com você por aqui.</div>
     <div class="pet-reaction pet-reaction-v731" id="petReaction" aria-live="polite"></div>
 
-    <button class="pet-zone pet-zone-v731 neutral" id="petZone" data-level="1" type="button" aria-label="Interagir com Nimbo">
+    <div class="pet-zone pet-zone-v731 neutral" id="petZone" data-level="1" role="img" aria-label="Nimbo">
       <div class="pet-bob"><div class="pet-sway">
         <svg class="pet-svg" viewBox="0 0 120 120" aria-label="Nimbo">
           <rect x="35" y="99" width="50" height="7" fill="rgba(0,0,0,.18)"/>
@@ -1083,22 +1239,13 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
           <rect x="39" y="88" width="15" height="8" fill="#173c47"/><rect x="66" y="88" width="15" height="8" fill="#173c47"/>
         </svg>
       </div></div>
-    </button>
-    <div class="pet-touch-hint pet-touch-hint-v731">Toque no Nimbo!</div>
-
-    <div class="nimbo-icon-actions" aria-label="Ações com o Nimbo">
-      <button class="nimbo-icon-btn" id="feedBtn" type="button" aria-label="Dar comida" title="Dar comida">🍎</button>
-      <button class="nimbo-icon-btn" id="bathBtn" type="button" aria-label="Dar banho" title="Dar banho">🚿</button>
-      <button class="nimbo-icon-btn" id="walkBtn" type="button" aria-label="Passear" title="Passear">👟</button>
-      <button class="nimbo-icon-btn" id="playBtn" type="button" aria-label="Brincar" title="Brincar">🎮</button>
-      <button class="nimbo-icon-btn" id="affectionBtn" type="button" aria-label="Dar carinho" title="Dar carinho">♥</button>
     </div>
 
     <div class="stats stats-v731">
-      <div class="stat"><div class="stat-head"><span>♥ Vitalidade</span><b id="vitalityText">55</b></div><div class="meter"><i id="vitalityBar"></i></div></div>
-      <div class="stat"><div class="stat-head"><span>◆ Vínculo</span><b id="bondText">0</b></div><div class="meter"><i id="bondBar"></i></div></div>
-      <div class="stat"><div class="stat-head"><span>⚑ Fôlego</span><b id="breathText">50</b></div><div class="meter"><i id="breathBar"></i></div></div>
-      <div class="stat"><div class="stat-head"><span>🛡 Resiliência</span><b id="resilienceText">25</b></div><div class="meter"><i id="resilienceBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>Vitalidade</span><b id="vitalityText">55</b></div><div class="meter"><i id="vitalityBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>Vínculo</span><b id="bondText">0</b></div><div class="meter"><i id="bondBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>Fôlego</span><b id="breathText">50</b></div><div class="meter"><i id="breathBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>Resiliência</span><b id="resilienceText">25</b></div><div class="meter"><i id="resilienceBar"></i></div></div>
     </div>
   </div>
 
@@ -1111,30 +1258,42 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
   <div class="daily-summary-row" aria-label="Resumo de hoje">
     <div class="daily-summary-card smoke-summary">
-      <div class="summary-icon" aria-hidden="true">🚬</div>
-      <div class="summary-number" id="todayCount">0</div>
-      <div class="summary-label"><span id="cigLabel">cigarros</span> hoje</div>
-      <div class="summary-sub" id="lastTime">Nenhum registrado hoje</div>
-      <div id="todayLabel" class="sr-only">Hoje</div>
+      <div class="summary-top">
+        <div class="summary-number" id="todayCount">0</div>
+        <div class="summary-label"><span id="cigLabel">cigarros</span><br>hoje</div>
+      </div>
+      <div class="recent-label">Últimos horários</div>
+      <div class="recent-times" id="lastTime">Nenhum registro</div>
     </div>
     <div class="daily-summary-card resist-summary">
-      <div class="summary-icon" aria-hidden="true">🚭</div>
-      <div class="summary-number" id="resistToday">0</div>
-      <div class="summary-label">Vontades superadas</div>
-      <div class="summary-sub good-text">hoje</div>
+      <div class="summary-top">
+        <div class="summary-number" id="resistToday">0</div>
+        <div class="summary-label">Vontades<br>superadas</div>
+      </div>
+      <div class="recent-label">Últimos horários</div>
+      <div class="recent-times" id="lastResistTimes">Nenhum registro</div>
     </div>
     <button class="daily-summary-card close-day-card" id="closeDayBtn" type="button">Fechar o dia</button>
   </div>
 
   <details class="today-details">
     <summary>Detalhes do dia</summary>
-    <div class="today-card today-card-compact">
-      <div class="today-row compact baseline-pack">
+    <div class="today-card today-card-compact day-detail-card">
+      <div class="day-detail-head">
+        <div>
+          <div class="day-detail-date" id="todayLabel">Hoje</div>
+          <div class="day-detail-trend" id="trendText">Estabelecendo referência</div>
+        </div>
+      </div>
+      <div class="day-detail-metrics">
         <div class="baseline"><span id="baselineStatus">baseline em observação</span><strong id="baselineValue">—</strong></div>
         <div class="baseline"><span>Média 7 dias</span><strong id="avg7">—</strong></div>
+        <div class="baseline"><span>Maior intervalo hoje</span><strong id="longestGap">—</strong></div>
+        <div class="baseline"><span>Desde o último cigarro</span><strong id="sinceLastSmoke">—</strong></div>
       </div>
-      <div class="trend-line" id="trendText">estabelecendo referência</div>
-      <div class="times times-compact" id="todayTimes"></div>
+      <div class="timeline-title">Eventos de hoje</div>
+      <div class="day-timeline" id="todayTimes"></div>
+      <div class="undo-context" id="lastEventNote">Nenhum evento para desfazer hoje.</div>
       <div class="actions"><button class="secondary" id="undoBtn">Desfazer último evento</button></div>
     </div>
   </details>
@@ -1326,7 +1485,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   <div class="panel">
     <h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
-    <div class="note">Versão instalada: v7.2</div>
+    <div class="note">Versão instalada: v7.4.0</div>
   </div>
 
   <div class="panel">
@@ -1385,7 +1544,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.3.2';
+  const APP_VERSION='7.4.0';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2827,6 +2986,23 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(f>=65)pet.classList.add('high-breath');
     if(r>=65)pet.classList.add('high-resilience');
     if(v<40)pet.classList.add('low-vitality');
+
+    const tones=[
+      {label:'vitalidade',value:v,main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.30)'},
+      {label:'vínculo',value:b,main:'#55c9c3',light:'#9cf1e6',glow:'rgba(114,222,241,.28)'},
+      {label:'fôlego',value:f,main:'#55aee3',light:'#9adfff',glow:'rgba(105,190,244,.30)'},
+      {label:'resiliência',value:r,main:'#d7ad4f',light:'#ffe08a',glow:'rgba(255,214,107,.28)'}
+    ];
+    const tone=tones.reduce((best,item)=>item.value>best.value?item:best,tones[0]);
+    pet.style.setProperty('--nimbo-main',tone.main);
+    pet.style.setProperty('--nimbo-light',tone.light);
+    pet.style.setProperty('--nimbo-glow',tone.glow);
+    pet.dataset.attribute=tone.label;
+    const state=$('petState');
+    if(state){
+      const mood=state.textContent.split(' · ')[0];
+      state.textContent=`${mood} · ${tone.label}`;
+    }
   }
 
   function schedulePetIdle(){
@@ -2868,38 +3044,33 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function determineNimboExpression(v,b,f,r){
-    const n=decayNimboNeeds();
-    const avg=(Number(n.food||0)+Number(n.clean||0)+Number(n.joy||0))/3;
+    const avg=(v+b+f+r)/4;
     let expression='neutral';
     let moodTag='atento';
 
-    if(avg<30||b<22){expression='sleepy'; moodTag='sonolento';}
-    else if(v<38||n.clean<28){expression='tired'; moodTag='cansado';}
-    else if(n.joy<35){expression='bored'; moodTag='entediado';}
-    else if(f>74&&n.joy>60){expression='playful'; moodTag='animado';}
-    else if(r>76&&avg>65){expression='radiant'; moodTag='radiante';}
-    else if(avg>70){expression='happy'; moodTag='bem humorado';}
+    if(v<30||f<28){expression='sleepy'; moodTag='sonolento';}
+    else if(v<42||r<34){expression='tired'; moodTag='cansado';}
+    else if(b<24){expression='bored'; moodTag='quieto';}
+    else if(f>74&&b>48){expression='playful'; moodTag='animado';}
+    else if(r>76&&avg>64){expression='radiant'; moodTag='radiante';}
+    else if(avg>66){expression='happy'; moodTag='bem humorado';}
 
-    if((Number(n.food||0)<24||Number(n.clean||0)<24||Number(n.joy||0)<24) && expression!=='sleepy'){
-      moodTag='impaciente';
-    }
-
-    n.moodTag=moodTag;
-    return {expression,moodTag,needs:n};
+    return {expression,moodTag};
   }
 
   function ambientNimboLine(){
-    const n=ensureNimbo();
     if(!observed().length)return 'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
     if(!game.baselineLocked)return `Observando seus primeiros dias: ${Math.min(observed().length,7)}/7 para formar a baseline.`;
-    if(n.food<28)return 'Tô com fome de pausa. Um lanche ou um registro honesto já me anima.';
-    if(n.clean<28)return 'A cidade cola em mim. Um banho rápido me ajuda a clarear.';
-    if(n.joy<30)return 'Topa um passeio curto? Eu fico melhor quando a gente se move.';
+    const v=vitality(),b=bond(),f=breath(),r=resilience();
+    if(v<35)return 'Hoje pede um pouco mais de gentileza. Um registro de cada vez.';
+    if(f<38)return 'Seu fôlego se constrói aos poucos. Só precisamos continuar observando.';
+    if(b<25)return 'Ainda estamos criando vínculo. Cada registro me ajuda a entender seu ritmo.';
+    if(r<35)return 'Uma vontade não precisa virar ordem. Ela também pode só passar.';
     const lines=[
       'Entre uma pressão e outra, ainda existe espaço para respirar.',
-      'A cidade segue correndo. A nossa prática é não correr atrás dela o tempo todo.',
-      'Nem toda vontade manda. Algumas apenas passam pela avenida.',
-      'Você registra. Eu transformo isso em mapa.'
+      'Nem toda vontade manda. Algumas apenas passam.',
+      'Você registra. Eu acompanho o caminho com você.',
+      'O que importa agora é enxergar o próximo passo.'
     ];
     return lines[Math.floor(Math.random()*lines.length)];
   }
@@ -2983,11 +3154,24 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     $('todayCount').textContent=st.length;
     $('cigLabel').textContent=st.length===1?'cigarro':'cigarros';
     $('resistToday').textContent=rt.length;
-    $('lastTime').textContent=st.length?`Último: ${time(st[st.length-1].timestamp)}`:'Nenhum cigarro registrado hoje';
-    $('todayTimes').innerHTML=[
-      ...st.map(x=>`<span class="chip">${time(x.timestamp)} cig.</span>`),
-      ...rt.map(x=>`<span class="chip good">${time(x.timestamp)} ✦</span>`)
-    ].join('');
+    const recentTimes=list=>list.slice(-3).reverse().map(x=>time(x.timestamp)).join(' · ');
+    $('lastTime').textContent=st.length?recentTimes(st):'Nenhum registro';
+    $('lastResistTimes').textContent=rt.length?recentTimes(rt):'Nenhum registro';
+
+    const todayEvents=[
+      ...st.map(x=>({...x,type:'smoke'})),
+      ...rt.map(x=>({...x,type:'resist'}))
+    ].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
+
+    $('todayTimes').innerHTML=todayEvents.length
+      ?todayEvents.map(event=>`<div class="timeline-event ${event.type}"><span class="timeline-type">${event.type==='smoke'?'Fumei':'Vontade superada'}</span><time datetime="${event.timestamp}">${time(event.timestamp)}</time></div>`).join('')
+      :'<div class="timeline-empty">Nenhum evento registrado hoje.</div>';
+
+    const lastTodayEvent=todayEvents[0];
+    $('lastEventNote').textContent=lastTodayEvent
+      ?`Último evento: ${lastTodayEvent.type==='smoke'?'cigarro':'vontade superada'} às ${time(lastTodayEvent.timestamp)}.`
+      :'Nenhum evento para desfazer hoje.';
+    $('undoBtn').disabled=!lastTodayEvent;
 
     $('closeDayBtn').textContent=isClosed(t)?'Dia fechado ✓':'Fechar o dia';
     $('closeDayBtn').classList.toggle('closed',isClosed(t));
@@ -2998,6 +3182,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const a=avg7(),r=reduction();
     $('avg7').textContent=a===null?'—':a.toFixed(1).replace('.',',');
     $('trendText').textContent=r===null?`${Math.min(observed().length,7)}/7 dias observados`:`${r>=0?'↓':'↑'} ${Math.abs(r).toFixed(0)}% vs baseline`;
+    const smokeGaps=st.slice(1).map((item,index)=>(new Date(item.timestamp)-new Date(st[index].timestamp))/60000);
+    $('longestGap').textContent=smokeGaps.length?formatMinutes(Math.max(...smokeGaps)):'—';
+    $('sinceLastSmoke').textContent=st.length
+      ?formatMinutes(Math.max(0,(Date.now()-new Date(st[st.length-1].timestamp).getTime())/60000))
+      :'Sem registro hoje';
 
     $('vitalityText').textContent=v;
     $('bondText').textContent=b;
@@ -3303,18 +3492,25 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   $('undoBtn').onclick=()=>{
     const events=[
-      ...smokes.map(x=>({...x,type:'smoke'})),
-      ...resists.map(x=>({...x,type:'resist'}))
+      ...smokes.filter(x=>key(x.timestamp)===today()).map(x=>({...x,type:'smoke'})),
+      ...resists.filter(x=>key(x.timestamp)===today()).map(x=>({...x,type:'resist'}))
     ].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
 
     if(!events.length){
-      toast('Não há evento para desfazer');
+      toast('Não há evento de hoje para desfazer');
       return;
     }
 
     const last=events[events.length-1];
+    const eventName=last.type==='smoke'?'o cigarro':'a vontade superada';
 
-    if(confirm(`Apagar o último evento das ${time(last.timestamp)}?`)){
+    if(confirm(`Desfazer ${eventName} registrado às ${time(last.timestamp)}?`)){
+      const wasClosed=isClosed(today());
+      if(wasClosed){
+        closedDays=closedDays.filter(x=>x.date!==today());
+        write(CLOSED_KEY,closedDays);
+        addPendingDelete('closure',today());
+      }
       if(last.type==='smoke'){
         smokes=smokes.filter(x=>x.id!==last.id);
         write(SMOKE_KEY,smokes);
@@ -3325,13 +3521,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
       addPendingDelete('event',last.id);
       render();
-      toast('Último evento removido');
+      toast(wasClosed?'Evento removido e dia reaberto':'Último evento removido');
       scheduleSync();
     }
   };
 
   $('exportBtn').onclick=()=>{
-    const data={app:'vou-parar-de-fumar',version:'7.2',exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game,vale};
+    const data={app:'vou-parar-de-fumar',version:APP_VERSION,exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game,vale};
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;
@@ -3622,18 +3818,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('closeStorySheet').onclick=closeStory;
   $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
 
-  $('petZone').onclick=()=>reactPet('touch');
-
   if($('homeResourceStrip'))$('homeResourceStrip').onclick=()=>{
     const resourceBtn=document.querySelector('.nav button[data-tab="resources"]');
     if(resourceBtn)resourceBtn.click();
   };
-
-  $('feedBtn').onclick=()=>performCare('feed');
-  $('bathBtn').onclick=()=>performCare('bath');
-  $('walkBtn').onclick=()=>performCare('walk');
-  $('playBtn').onclick=()=>performCare('play');
-  $('affectionBtn').onclick=()=>performCare('affection');
 
   document.querySelectorAll('[data-journey]').forEach(btn=>{
     btn.onclick=()=>{
