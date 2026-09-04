@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.4.0">
+<meta name="app-version" content="7.4.1">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1138,6 +1138,95 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .pet-zone-v731 .pet-sway{animation:none!important}
 }
 
+/* =========================================================
+   V7.4.1 — NIMBO NATURAL
+   Movimento irregular, toque restaurado e fala apenas transitória.
+   ========================================================= */
+#petMessage{display:none!important}
+.pet-reaction-v731{
+  top:67px!important;z-index:9;
+  background:rgba(6,18,35,.90);border-color:rgba(176,216,250,.24);
+  box-shadow:0 8px 22px rgba(0,0,0,.24)
+}
+.pet-reaction-v731::after{
+  content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:rgba(6,18,35,.90);border-bottom:0
+}
+
+.pet-zone-v731{
+  pointer-events:none;cursor:pointer;touch-action:manipulation;outline:none;
+  --nimbo-scale:1;--walk-x:0px;--walk-duration:1600ms
+}
+.pet-zone-v731:focus-visible{
+  outline:2px solid rgba(255,214,107,.9);outline-offset:-8px;border-radius:22px
+}
+.pet-walker{
+  width:184px;height:100%;display:grid;place-items:center;pointer-events:auto;
+  transform:translateX(var(--walk-x));
+  transition:transform var(--walk-duration) cubic-bezier(.42,0,.2,1);
+  will-change:transform
+}
+.pet-walker.walk-paused{transition:none!important}
+.pet-facing{
+  width:100%;height:100%;display:grid;place-items:center;
+  transform:scaleX(var(--nimbo-dir,1)) scale(var(--nimbo-scale));
+  transform-origin:50% 86%;transition:transform .10s steps(1,end)
+}
+.pet-zone-v731 .pet-sway{animation:none!important}
+.pet-walker.walking .pet-bob{animation:nimboWalkStep .34s ease-in-out infinite}
+.pet-walker.walking .foot-left{animation:nimboFootLeft .34s steps(2,end) infinite}
+.pet-walker.walking .foot-right{animation:nimboFootRight .34s steps(2,end) infinite}
+.nimbo-foot{transform-box:fill-box;transform-origin:center}
+@keyframes nimboWalkStep{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2.5px)}
+}
+@keyframes nimboFootLeft{
+  0%,49%{transform:translateY(0)}
+  50%,100%{transform:translateY(2px)}
+}
+@keyframes nimboFootRight{
+  0%,49%{transform:translateY(2px)}
+  50%,100%{transform:translateY(0)}
+}
+.pet-zone-v731 .pet-svg .eye{animation:none}
+.pet-zone-v731.nimbo-blink .eyes-open .eye,
+.pet-zone-v731.nimbo-blink .eyes-bored,
+.pet-zone-v731.nimbo-blink .eyes-confused,
+.pet-zone-v731.nimbo-blink .eyes-shocked{
+  transform:scaleY(.10);transform-box:fill-box;transform-origin:center
+}
+
+.stats-v731 .stat{position:relative}
+.stats-v731 .stat-head{display:block;padding-right:0}
+.stats-v731 .stat-head span{display:block;overflow:visible;text-overflow:clip;text-align:left;letter-spacing:-.12px}
+.stats-v731 .stat-head b{position:absolute;right:6px;bottom:5px}
+.stats-v731 .meter{margin-right:17px}
+
+.close-day-card{padding-right:48px}
+.close-day-card::before{
+  content:'☀'!important;display:block!important;position:absolute;
+  left:auto!important;right:15px;top:50%;transform:translateY(-50%);
+  font-size:21px;line-height:1;color:#ffd66b
+}
+.close-day-card.closed::before{content:'✓'!important;color:#8af0ad}
+
+@media(max-width:360px){
+  .pet-walker{width:170px}
+}
+@media(max-height:780px) and (max-width:500px){
+  .pet-zone-v731{height:164px!important}
+  .pet-walker{width:164px}
+  .pet-zone-v731 .pet-bob{width:164px;height:164px}
+}
+@media(max-height:700px) and (max-width:500px){
+  .pet-walker{width:142px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pet-walker{transition:none!important;transform:none!important}
+  .pet-walker.walking .pet-bob,.pet-walker.walking .nimbo-foot{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -1212,8 +1301,10 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
     <div class="speech-bubble pet-message-v731" id="petMessage">Só mais um dia com você por aqui.</div>
     <div class="pet-reaction pet-reaction-v731" id="petReaction" aria-live="polite"></div>
 
-    <div class="pet-zone pet-zone-v731 neutral" id="petZone" data-level="1" role="img" aria-label="Nimbo">
-      <div class="pet-bob"><div class="pet-sway">
+    <div class="pet-zone pet-zone-v731 neutral" id="petZone" data-level="1" role="button" tabindex="0" aria-label="Tocar no Nimbo">
+      <div class="pet-walker" id="petWalker">
+        <div class="pet-facing">
+          <div class="pet-bob"><div class="pet-sway">
         <svg class="pet-svg" viewBox="0 0 120 120" aria-label="Nimbo">
           <rect x="35" y="99" width="50" height="7" fill="rgba(0,0,0,.18)"/>
           <g class="wind-lines"><rect x="9" y="46" width="15" height="3" fill="#9deeff"/><rect x="5" y="53" width="11" height="3" fill="#9deeff"/><rect x="96" y="42" width="13" height="3" fill="#9deeff"/></g>
@@ -1236,16 +1327,18 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
           <g class="mouth-radiant"><rect x="48" y="74" width="5" height="4" fill="#15363d"/><rect x="53" y="78" width="14" height="5" fill="#15363d"/><rect x="67" y="74" width="5" height="4" fill="#15363d"/><rect x="36" y="74" width="5" height="5" fill="#ffafc2"/><rect x="79" y="74" width="5" height="5" fill="#ffafc2"/></g>
           <g class="mouth-shocked"><rect x="56" y="75" width="8" height="9" fill="#15363d"/></g>
           <g class="mouth-confused"><rect x="49" y="79" width="6" height="4" fill="#15363d"/><rect x="55" y="76" width="6" height="4" fill="#15363d"/><rect x="61" y="78" width="7" height="4" fill="#15363d"/></g>
-          <rect x="39" y="88" width="15" height="8" fill="#173c47"/><rect x="66" y="88" width="15" height="8" fill="#173c47"/>
+          <rect class="nimbo-foot foot-left" x="39" y="88" width="15" height="8" fill="#173c47"/><rect class="nimbo-foot foot-right" x="66" y="88" width="15" height="8" fill="#173c47"/>
         </svg>
-      </div></div>
+          </div></div>
+        </div>
+      </div>
     </div>
 
     <div class="stats stats-v731">
-      <div class="stat"><div class="stat-head"><span>Vitalidade</span><b id="vitalityText">55</b></div><div class="meter"><i id="vitalityBar"></i></div></div>
-      <div class="stat"><div class="stat-head"><span>Vínculo</span><b id="bondText">0</b></div><div class="meter"><i id="bondBar"></i></div></div>
-      <div class="stat"><div class="stat-head"><span>Fôlego</span><b id="breathText">50</b></div><div class="meter"><i id="breathBar"></i></div></div>
-      <div class="stat"><div class="stat-head"><span>Resiliência</span><b id="resilienceText">25</b></div><div class="meter"><i id="resilienceBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>♥ Vitalidade</span><b id="vitalityText">55</b></div><div class="meter"><i id="vitalityBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>◆ Vínculo</span><b id="bondText">0</b></div><div class="meter"><i id="bondBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>⚑ Fôlego</span><b id="breathText">50</b></div><div class="meter"><i id="breathBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>🛡 Resiliência</span><b id="resilienceText">25</b></div><div class="meter"><i id="resilienceBar"></i></div></div>
     </div>
   </div>
 
@@ -1415,23 +1508,23 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
     <div class="attr-grid">
       <div class="attr-card">
         <div class="attr-top"><span class="attr-name">❤️ Vitalidade</span><span class="attr-value" id="attrVitality">55</span></div>
-        <div class="attr-desc">Responde à tendência de redução do consumo.</div>
-        <div class="attr-effect">No Vale: aumenta a capacidade de produção.</div>
+        <div class="attr-desc">Compara sua média recente de cigarros com a baseline.</div>
+        <div class="attr-effect">No Nimbo: muda cor, brilho e tamanho.</div>
       </div>
       <div class="attr-card">
         <div class="attr-top"><span class="attr-name">◆ Vínculo</span><span class="attr-value" id="attrBond">0</span></div>
-        <div class="attr-desc">Nasce da consistência dos registros e do retorno.</div>
-        <div class="attr-effect">No Vale: melhora a eficiência das construções.</div>
+        <div class="attr-desc">Nasce da consistência dos registros e dos dias fechados.</div>
+        <div class="attr-effect">No Nimbo: amplia a variedade e o calor das respostas ao toque.</div>
       </div>
       <div class="attr-card">
         <div class="attr-top"><span class="attr-name">🌬️ Fôlego</span><span class="attr-value" id="attrBreath">50</span></div>
-        <div class="attr-desc">Acompanha o espaço que surge entre um cigarro e outro.</div>
-        <div class="attr-effect">No futuro: exploração, movimento e alcance.</div>
+        <div class="attr-desc">Considera os intervalos e o horário do primeiro cigarro.</div>
+        <div class="attr-effect">No Nimbo: regula distância, velocidade e pausas da caminhada.</div>
       </div>
       <div class="attr-card">
         <div class="attr-top"><span class="attr-name">🛡️ Resiliência</span><span class="attr-value" id="attrResilience">25</span></div>
-        <div class="attr-desc">Cresce quando uma vontade aparece e você consegue atravessá-la.</div>
-        <div class="attr-effect">No futuro: desafios e resistência em combate.</div>
+        <div class="attr-desc">Cresce com vontades superadas e sua frequência nos últimos dias.</div>
+        <div class="attr-effect">No Nimbo: fortalece postura, aura e reação de confiança.</div>
       </div>
     </div>
   </div>
@@ -1485,7 +1578,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   <div class="panel">
     <h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
-    <div class="note">Versão instalada: v7.4.0</div>
+    <div class="note">Versão instalada: v7.4.1</div>
   </div>
 
   <div class="panel">
@@ -1544,7 +1637,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.4.0';
+  const APP_VERSION='7.4.1';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2192,9 +2285,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function vitality(){
     const r=reduction();
-    const recent=last7().reduce((s,k)=>s+resistCount(k),0);
-    let v=r===null?55:52+r*.85;
-    v+=Math.min(recent*2.3,14);
+    const v=r===null?55:55+r*.9;
     return Math.round(clamp(v,15,100));
   }
 
@@ -2241,16 +2332,28 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function breath(){
     ensureValeBaselines();
     const recent=last7();
-    const current=averageIntervalsForDays(recent);
-    const base=vale.baselines.intervalMinutes;
-    if(current===null||base===null||base<=0)return 50;
-    return Math.round(clamp(50+((current-base)/base)*65,20,100));
+    const currentInterval=averageIntervalsForDays(recent);
+    const baseInterval=vale.baselines.intervalMinutes;
+    const currentFirst=firstCigAverageForDays(recent);
+    const baseFirst=vale.baselines.firstCigMinute;
+    let score=50,hasSignal=false;
+
+    if(currentInterval!==null&&baseInterval!==null&&baseInterval>0){
+      score+=clamp(((currentInterval-baseInterval)/baseInterval)*48,-28,34);
+      hasSignal=true;
+    }
+    if(currentFirst!==null&&baseFirst!==null){
+      score+=clamp((currentFirst-baseFirst)/4,-16,18);
+      hasSignal=true;
+    }
+
+    return hasSignal?Math.round(clamp(score,20,100)):50;
   }
 
   function resilience(){
     const recentResists=last7().reduce((s,k)=>s+resistCount(k),0);
     const daysWithResist=last7().filter(k=>resistCount(k)>0).length;
-    return Math.round(clamp(25+recentResists*7+daysWithResist*4,20,100));
+    return Math.round(clamp(25+recentResists*4.5+daysWithResist*4.5,20,100));
   }
 
   function firstCigImprovement(){
@@ -2876,7 +2979,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function message(m,b){
     if(!observed().length)return'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
-    if(!game.baselineLocked)return`Observando seus primeiros dias: ${Math.min(observed().length,7)}/7 para formar a baseline.`;
+    if(!game.baselineLocked)return'Ainda estou conhecendo seu ritmo.';
     if(b<25)return'Fiquei sonolento sem notícias. Um registro honesto já me ajuda a acordar.';
     return{
       tired:'A semana apertou um pouco. Eu continuo aqui — o histórico ainda vale.',
@@ -2888,6 +2991,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   let petReactionTimer=null;
   let petIdleTimer=null;
+  let petExpressionTimer=null;
+  let petExpressionOverride=null;
+  let petWalkTimer=null;
+  let petWalkEndTimer=null;
+  let petBlinkTimer=null;
+  let petBlinkEndTimer=null;
+  let nimboWalkX=0;
+  let nimboWalkUntil=0;
+  let petMotionProfile={vitality:55,breath:50};
 
   function showPetReaction(text,tone='calm',duration=2200){
     const box=$('petReaction');
@@ -2897,6 +3009,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     box.classList.remove('good','calm','warm','show');
     box.classList.add(tone,'show');
     petReactionTimer=setTimeout(()=>box.classList.remove('show'),duration);
+  }
+
+  function setTemporaryPetExpression(expression,duration=2200){
+    clearTimeout(petExpressionTimer);
+    petExpressionOverride=expression;
+    setPetExpression(expression);
+    petExpressionTimer=setTimeout(()=>{
+      petExpressionOverride=null;
+      const current=determineNimboExpression(vitality(),bond(),breath(),resilience());
+      setPetExpression(current.expression);
+    },duration);
   }
 
   function petMotion(kind='touch'){
@@ -2920,11 +3043,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function reactPet(kind){
+    if(kind!=='idle')pauseNimboWalk(kind==='touch'?1200:2600);
     petMotion(kind);
     const v=vitality(),b=bond(),f=breath(),r=resilience();
 
     if(kind==='smoke'){
-      setPetExpression('confused');
+      setTemporaryPetExpression('confused',2400);
       const lines=[
         'Anotei. Continuamos daqui.',
         'Tudo bem. O importante é continuar vendo com clareza.',
@@ -2935,24 +3059,24 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
 
     if(kind==='resist'){
-      setPetExpression('radiant');
+      setTemporaryPetExpression('radiant',2400);
       const lines=[
         '✦ Eu senti essa escolha.',
         'Um pouco mais de espaço.',
-        'Isso virou Presença no Vale.'
+        'Essa vontade passou e ficou registrada.'
       ];
       showPetReaction(lines[Math.floor(Math.random()*lines.length)],'good',2400);
       return;
     }
 
     if(kind==='close'){
-      setPetExpression('happy');
-      showPetReaction('Dia guardado no Vale. Amanhã a gente continua.','warm',2500);
+      setTemporaryPetExpression('happy',2500);
+      showPetReaction('Dia guardado. Amanhã a gente continua.','warm',2500);
       return;
     }
 
     if(kind==='touch'){
-      setPetExpression(Math.random()<0.22?'playful':'neutral');
+      setTemporaryPetExpression(Math.random()<0.22?'playful':'neutral',2200);
       let lines;
       if(v<40){
         lines=['Hoje eu tô mais quieto. Fica aqui um pouco.','Nem todo dia precisa ser forte.'];
@@ -2963,14 +3087,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       }else if(f>=70){
         lines=['Tá sentindo o ar? Tem mais espaço agora.','Hoje eu tô leve.'];
       }else{
-        lines=['Um passo de cada vez.','Tô prestando atenção com você.','O Vale tá crescendo.'];
+        lines=['Um passo de cada vez.','Tô prestando atenção com você.','Cada registro deixa seu ritmo mais claro.'];
       }
       showPetReaction(lines[Math.floor(Math.random()*lines.length)],b>=60?'warm':'calm',2200);
       return;
     }
 
     if(kind==='idle'){
-      setPetExpression(Math.random()<0.5?'bored':'neutral');
+      setTemporaryPetExpression(Math.random()<0.5?'bored':'neutral',1000);
       const lines=b>=60
         ?['…','♪','✦']
         :v<40?['…','zzz','…']:['…','✦','♪'];
@@ -2987,27 +3111,110 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(r>=65)pet.classList.add('high-resilience');
     if(v<40)pet.classList.add('low-vitality');
 
-    const tones=[
-      {label:'vitalidade',value:v,main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.30)'},
-      {label:'vínculo',value:b,main:'#55c9c3',light:'#9cf1e6',glow:'rgba(114,222,241,.28)'},
-      {label:'fôlego',value:f,main:'#55aee3',light:'#9adfff',glow:'rgba(105,190,244,.30)'},
-      {label:'resiliência',value:r,main:'#d7ad4f',light:'#ffe08a',glow:'rgba(255,214,107,.28)'}
-    ];
-    const tone=tones.reduce((best,item)=>item.value>best.value?item:best,tones[0]);
+    const tone=v<35
+      ?{main:'#71888b',light:'#a5b5b3',glow:'rgba(132,167,177,.18)'}
+      :v<55
+        ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
+        :v<75
+          ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
+          :{main:'#45d6a8',light:'#9bf6d2',glow:'rgba(94,242,191,.34)'};
     pet.style.setProperty('--nimbo-main',tone.main);
     pet.style.setProperty('--nimbo-light',tone.light);
     pet.style.setProperty('--nimbo-glow',tone.glow);
-    pet.dataset.attribute=tone.label;
-    const state=$('petState');
-    if(state){
-      const mood=state.textContent.split(' · ')[0];
-      state.textContent=`${mood} · ${tone.label}`;
+    pet.style.setProperty('--nimbo-scale',(0.94+(v/100)*0.10).toFixed(3));
+    pet.setAttribute('aria-label',`Tocar no Nimbo. Vitalidade ${v}, Vínculo ${b}, Fôlego ${f}, Resiliência ${r}.`);
+    petMotionProfile={vitality:v,breath:f};
+  }
+
+  function motionReduced(){
+    return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function randomBetween(min,max){
+    return min+Math.random()*(max-min);
+  }
+
+  function scheduleNimboWalk(soon=false){
+    clearTimeout(petWalkTimer);
+    clearTimeout(petWalkEndTimer);
+    if(motionReduced())return;
+    const energy=(petMotionProfile.vitality+petMotionProfile.breath)/2;
+    const min=soon?450:1200+(100-energy)*18;
+    const max=soon?1100:3000+(100-energy)*34;
+    petWalkTimer=setTimeout(walkNimbo,randomBetween(min,max));
+  }
+
+  function walkNimbo(){
+    const walker=$('petWalker');
+    if(!walker||motionReduced())return;
+    if(document.visibilityState!=='visible'||!document.querySelector('#home.tab.active')){
+      scheduleNimboWalk(false);
+      return;
     }
+
+    const f=petMotionProfile.breath;
+    const range=clamp(28+f*.34,36,58);
+    let target=randomBetween(-range,range);
+    for(let i=0;i<5&&Math.abs(target-nimboWalkX)<24;i++)target=randomBetween(-range,range);
+    if(Math.abs(target-nimboWalkX)<18)target=nimboWalkX>=0?-range:range;
+
+    const distance=Math.abs(target-nimboWalkX);
+    const speed=25+f*.23;
+    const duration=Math.round(clamp(distance/speed*1000,850,2550));
+    const direction=target>=nimboWalkX?1:-1;
+
+    walker.style.setProperty('--nimbo-dir',String(direction));
+    petWalkTimer=setTimeout(()=>{
+      walker.style.setProperty('--walk-duration',`${duration}ms`);
+      walker.style.setProperty('--walk-x',`${target.toFixed(1)}px`);
+      walker.classList.add('walking');
+      nimboWalkX=target;
+      nimboWalkUntil=Date.now()+duration;
+      petWalkEndTimer=setTimeout(()=>{
+        walker.classList.remove('walking');
+        scheduleNimboWalk(false);
+      },duration+40);
+    },90);
+  }
+
+  function pauseNimboWalk(delay=1500){
+    clearTimeout(petWalkTimer);
+    clearTimeout(petWalkEndTimer);
+    const walker=$('petWalker');
+    if(walker){
+      const transform=getComputedStyle(walker).transform;
+      if(transform&&transform!=='none'&&window.DOMMatrixReadOnly){
+        const currentX=new DOMMatrixReadOnly(transform).m41;
+        if(Number.isFinite(currentX)){
+          walker.classList.add('walk-paused');
+          walker.style.setProperty('--walk-x',`${currentX.toFixed(1)}px`);
+          void walker.offsetWidth;
+          walker.classList.remove('walk-paused');
+          nimboWalkX=currentX;
+        }
+      }
+      walker.classList.remove('walking');
+    }
+    nimboWalkUntil=0;
+    if(!motionReduced())petWalkTimer=setTimeout(walkNimbo,delay);
+  }
+
+  function scheduleNimboBlink(){
+    clearTimeout(petBlinkTimer);
+    if(motionReduced())return;
+    petBlinkTimer=setTimeout(()=>{
+      const pet=$('petZone');
+      if(pet&&document.visibilityState==='visible'&&document.querySelector('#home.tab.active')){
+        pet.classList.add('nimbo-blink');
+        petBlinkEndTimer=setTimeout(()=>pet.classList.remove('nimbo-blink'),135);
+      }
+      scheduleNimboBlink();
+    },randomBetween(2400,7200));
   }
 
   function schedulePetIdle(){
     clearTimeout(petIdleTimer);
-    const delay=12000+Math.random()*12000;
+    const delay=16000+Math.random()*22000;
     petIdleTimer=setTimeout(()=>{
       if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active')){
         reactPet('idle');
@@ -3048,19 +3255,28 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let expression='neutral';
     let moodTag='atento';
 
-    if(v<30||f<28){expression='sleepy'; moodTag='sonolento';}
-    else if(v<42||r<34){expression='tired'; moodTag='cansado';}
+    const lastSmoke=smokes.length?smokes[smokes.length-1]:null;
+    const lastResist=resists.length?resists[resists.length-1]:null;
+    const latest=!lastSmoke?lastResist:!lastResist?lastSmoke:
+      (new Date(lastSmoke.timestamp)>new Date(lastResist.timestamp)?lastSmoke:lastResist);
+    const latestType=latest===lastSmoke?'smoke':'resist';
+    const latestAge=latest?Math.max(0,(Date.now()-new Date(latest.timestamp).getTime())/60000):Infinity;
+
+    if(latestAge<=8&&latestType==='smoke'){expression='confused'; moodTag='se recompondo';}
+    else if(latestAge<=8&&latestType==='resist'){expression='radiant'; moodTag='confiante';}
+    else if(v<30||f<26){expression='sleepy'; moodTag='sonolento';}
+    else if(v<42||f<38){expression='tired'; moodTag='cansado';}
     else if(b<24){expression='bored'; moodTag='quieto';}
-    else if(f>74&&b>48){expression='playful'; moodTag='animado';}
-    else if(r>76&&avg>64){expression='radiant'; moodTag='radiante';}
-    else if(avg>66){expression='happy'; moodTag='bem humorado';}
+    else if(r>=72&&v>=50){expression='radiant'; moodTag='firme';}
+    else if(f>=68&&v>=48){expression='playful'; moodTag='leve';}
+    else if(avg>=62){expression='happy'; moodTag='bem humorado';}
 
     return {expression,moodTag};
   }
 
   function ambientNimboLine(){
     if(!observed().length)return 'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
-    if(!game.baselineLocked)return `Observando seus primeiros dias: ${Math.min(observed().length,7)}/7 para formar a baseline.`;
+    if(!game.baselineLocked)return 'Ainda estou conhecendo seu ritmo.';
     const v=vitality(),b=bond(),f=breath(),r=resilience();
     if(v<35)return 'Hoje pede um pouco mais de gentileza. Um registro de cada vez.';
     if(f<38)return 'Seu fôlego se constrói aos poucos. Só precisamos continuar observando.';
@@ -3173,7 +3389,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       :'Nenhum evento para desfazer hoje.';
     $('undoBtn').disabled=!lastTodayEvent;
 
-    $('closeDayBtn').textContent=isClosed(t)?'Dia fechado ✓':'Fechar o dia';
+    $('closeDayBtn').textContent=isClosed(t)?'Dia fechado':'Fechar o dia';
     $('closeDayBtn').classList.toggle('closed',isClosed(t));
 
     $('baselineValue').textContent=game.baseline===null?'—':`${game.baseline.toFixed(1).replace('.',',')}/dia`;
@@ -3207,7 +3423,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     const pet=$('petZone');
     pet.dataset.level=p.level;
-    setPetExpression(nimbo.expression);
+    setPetExpression(petExpressionOverride||nimbo.expression);
     applyPetVisualState(v,b,f,rr);
 
     $('xpValue').textContent=p.xp;
@@ -3818,6 +4034,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('closeStorySheet').onclick=closeStory;
   $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
 
+  const homePet=$('petZone');
+  homePet.onclick=()=>reactPet('touch');
+  homePet.onkeydown=e=>{
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      reactPet('touch');
+    }
+  };
+
   if($('homeResourceStrip'))$('homeResourceStrip').onclick=()=>{
     const resourceBtn=document.querySelector('.nav button[data-tab="resources"]');
     if(resourceBtn)resourceBtn.click();
@@ -3866,6 +4091,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     checkAchievements({notify:false});
     render();
     schedulePetIdle();
+    scheduleNimboWalk(true);
+    scheduleNimboBlink();
 
     if(!window.supabase){
       setSyncState('error','SEM NUVEM');
