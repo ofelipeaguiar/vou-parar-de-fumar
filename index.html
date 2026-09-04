@@ -2,12 +2,27 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  >
+
+  <!-- versão usada pelo atualizador -->
+  <meta name="app-version" content="4">
+
+  <!-- tentativa adicional de evitar HTML antigo -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <meta name="theme-color" content="#07111f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Vou parar">
+
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
   <title>Vou parar de fumar</title>
 
   <style>
@@ -19,14 +34,16 @@
       --muted:#91a0b5;
       --line:rgba(255,255,255,.085);
       --green:#62e98f;
-      --green2:#42d778;
       --cyan:#72def1;
       --yellow:#ffd66b;
       --purple:#b69cff;
       --pixel:"Courier New",ui-monospace,SFMono-Regular,Menlo,monospace;
     }
 
-    *{box-sizing:border-box}
+    *{
+      box-sizing:border-box;
+    }
+
     html{
       background:var(--bg);
       scroll-behavior:smooth;
@@ -36,15 +53,37 @@
       margin:0;
       min-height:100vh;
       color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
       background:
-        radial-gradient(circle at 50% -8%,rgba(98,233,143,.09),transparent 30%),
-        linear-gradient(180deg,#07111f,#0a1427 58%,#07101d);
-      padding-bottom:calc(88px + env(safe-area-inset-bottom));
+        radial-gradient(
+          circle at 50% -8%,
+          rgba(98,233,143,.09),
+          transparent 30%
+        ),
+        linear-gradient(
+          180deg,
+          #07111f,
+          #0a1427 58%,
+          #07101d
+        );
+
+      padding-bottom:
+        calc(88px + env(safe-area-inset-bottom));
+
       -webkit-tap-highlight-color:transparent;
     }
 
-    button,input{
+    button,
+    input{
       font:inherit;
     }
 
@@ -56,21 +95,29 @@
     .wrap{
       max-width:600px;
       margin:auto;
-      padding:calc(14px + env(safe-area-inset-top)) 14px 20px;
+
+      padding:
+        calc(14px + env(safe-area-inset-top))
+        14px
+        20px;
     }
 
     header{
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
+
       gap:10px;
+
       margin-bottom:11px;
     }
 
     h1{
       font-size:23px;
       line-height:1.08;
+
       margin:0 0 4px;
+
       letter-spacing:-.55px;
     }
 
@@ -81,120 +128,203 @@
 
     .badge{
       font:10px var(--pixel);
+
       color:#bdf5cd;
-      border:1px solid rgba(98,233,143,.23);
-      background:rgba(98,233,143,.065);
+
+      border:
+        1px solid rgba(98,233,143,.23);
+
+      background:
+        rgba(98,233,143,.065);
+
       padding:7px 8px;
+
       border-radius:999px;
+
       white-space:nowrap;
     }
 
     /* HABITAT */
+
     .habitat{
       position:relative;
       overflow:hidden;
+
       height:300px;
+
       border-radius:25px;
+
       margin-bottom:10px;
-      border:1px solid rgba(114,222,241,.16);
+
+      border:
+        1px solid rgba(114,222,241,.16);
+
       background:
-        linear-gradient(180deg,#12324c 0%,#102b43 66%,#103c34 66%,#0c302b 100%);
-      box-shadow:0 18px 55px rgba(0,0,0,.23);
+        linear-gradient(
+          180deg,
+          #12324c 0%,
+          #102b43 66%,
+          #103c34 66%,
+          #0c302b 100%
+        );
+
+      box-shadow:
+        0 18px 55px rgba(0,0,0,.23);
     }
 
     .habitat::after{
       content:"";
+
       position:absolute;
       inset:0;
+
       pointer-events:none;
+
       opacity:.14;
+
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        linear-gradient(
+          rgba(255,255,255,.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.035) 1px,
+          transparent 1px
+        );
+
       background-size:8px 8px;
     }
 
     .habitat-head{
       position:absolute;
+
       z-index:4;
+
       top:15px;
       left:16px;
       right:16px;
+
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
     }
 
     .pet-name{
-      font:700 13px var(--pixel);
+      font:
+        700 13px var(--pixel);
+
       color:#e0ffea;
     }
 
     .pet-state{
-      font:10px var(--pixel);
+      font:
+        10px var(--pixel);
+
       color:#94deb0;
+
       margin-top:3px;
     }
 
     .form-badge{
-      font:10px var(--pixel);
+      font:
+        10px var(--pixel);
+
       color:#d8f3fb;
-      background:rgba(5,15,25,.26);
-      border:1px solid rgba(255,255,255,.11);
+
+      background:
+        rgba(5,15,25,.26);
+
+      border:
+        1px solid rgba(255,255,255,.11);
+
       padding:6px 8px;
+
       border-radius:8px;
     }
 
     .sky-cloud{
       position:absolute;
+
       z-index:1;
+
       top:73px;
       left:25px;
+
       width:38px;
       height:10px;
+
       background:#bce7ef;
+
       opacity:.13;
-      box-shadow:10px -7px 0 #bce7ef,23px 0 0 #bce7ef;
+
+      box-shadow:
+        10px -7px 0 #bce7ef,
+        23px 0 0 #bce7ef;
     }
 
     .sky-cloud.two{
       left:auto;
+
       right:28px;
       top:88px;
+
       transform:scale(.65);
+
       opacity:.10;
     }
 
     .grass{
       position:absolute;
+
       z-index:1;
+
       bottom:19px;
       left:22px;
+
       width:7px;
       height:18px;
+
       background:#52c97a;
-      box-shadow:7px 6px 0 #6cdf8e,-7px 8px 0 #44b96c;
+
+      box-shadow:
+        7px 6px 0 #6cdf8e,
+        -7px 8px 0 #44b96c;
     }
 
     .stone{
       position:absolute;
+
       z-index:1;
+
       bottom:19px;
       right:24px;
+
       width:20px;
       height:7px;
+
       background:#53736e;
-      box-shadow:6px -5px 0 #698985;
+
+      box-shadow:
+        6px -5px 0 #698985;
     }
+
+    /* NIMBO */
 
     .pet-zone{
       position:absolute;
+
       z-index:3;
+
       left:50%;
       top:45%;
+
       width:170px;
       height:170px;
-      transform:translate(-50%,-50%);
+
+      transform:
+        translate(-50%,-50%);
+
       display:grid;
       place-items:center;
     }
@@ -202,21 +332,33 @@
     .pet-bob{
       width:150px;
       height:150px;
-      animation:bob 2.4s ease-in-out infinite;
-      transform-origin:50% 82%;
+
+      animation:
+        bob 2.4s ease-in-out infinite;
+
+      transform-origin:
+        50% 82%;
     }
 
     .pet-sway{
       width:100%;
       height:100%;
-      animation:sway 5s ease-in-out infinite;
+
+      animation:
+        sway 5s ease-in-out infinite;
     }
 
     .pet-svg{
       width:100%;
       height:100%;
+
       overflow:visible;
-      filter:drop-shadow(0 14px 9px rgba(0,0,0,.22));
+
+      filter:
+        drop-shadow(
+          0 14px 9px rgba(0,0,0,.22)
+        );
+
       shape-rendering:crispEdges;
     }
 
@@ -227,11 +369,15 @@
     .pet-svg .eye{
       transform-box:fill-box;
       transform-origin:center;
-      animation:blink 5.5s infinite;
+
+      animation:
+        blink 5.5s infinite;
     }
 
     .pet-svg .spark{
-      animation:sparkle 1.6s ease-in-out infinite;
+      animation:
+        sparkle 1.6s ease-in-out infinite;
+
       transform-box:fill-box;
       transform-origin:center;
     }
@@ -240,235 +386,423 @@
       display:none;
     }
 
-    .pet-zone[data-level="2"] .ear-extra{
+    .pet-zone[data-level="2"]
+    .ear-extra{
       display:block;
     }
 
-    .pet-zone[data-level="3"] .accent2,
-    .pet-zone[data-level="4"] .accent2,
-    .pet-zone[data-level="5"] .accent2{
+    .pet-zone[data-level="3"]
+    .accent2,
+
+    .pet-zone[data-level="4"]
+    .accent2,
+
+    .pet-zone[data-level="5"]
+    .accent2{
       display:block;
     }
 
-    .pet-zone[data-level="4"] .wing,
-    .pet-zone[data-level="5"] .wing{
+    .pet-zone[data-level="4"]
+    .wing,
+
+    .pet-zone[data-level="5"]
+    .wing{
       display:block;
     }
 
-    .pet-zone[data-level="5"] .halo{
+    .pet-zone[data-level="5"]
+    .halo{
       display:block;
     }
 
-    .ear-extra,.wing,.halo{
+    .ear-extra,
+    .wing,
+    .halo{
       display:none;
     }
 
-    .pet-zone.happy .mouth-neutral,
-    .pet-zone.happy .mouth-tired,
-    .pet-zone.happy .mouth-radiant{
+    .mouth-happy,
+    .mouth-tired,
+    .mouth-radiant{
       display:none;
     }
 
-    .pet-zone.happy .mouth-happy{
-      display:block;
-    }
+    .pet-zone.happy
+    .mouth-neutral,
 
-    .pet-zone.radiant .mouth-neutral,
-    .pet-zone.radiant .mouth-tired,
-    .pet-zone.radiant .mouth-happy{
+    .pet-zone.happy
+    .mouth-tired,
+
+    .pet-zone.happy
+    .mouth-radiant{
       display:none;
     }
 
-    .pet-zone.radiant .mouth-radiant{
+    .pet-zone.happy
+    .mouth-happy{
       display:block;
     }
 
-    .pet-zone.tired .mouth-neutral,
-    .pet-zone.tired .mouth-happy,
-    .pet-zone.tired .mouth-radiant{
+    .pet-zone.radiant
+    .mouth-neutral,
+
+    .pet-zone.radiant
+    .mouth-tired,
+
+    .pet-zone.radiant
+    .mouth-happy{
       display:none;
     }
 
-    .pet-zone.tired .mouth-tired{
+    .pet-zone.radiant
+    .mouth-radiant{
       display:block;
     }
 
-    .pet-zone.sleepy .eye{
+    .pet-zone.tired
+    .mouth-neutral,
+
+    .pet-zone.tired
+    .mouth-happy,
+
+    .pet-zone.tired
+    .mouth-radiant{
+      display:none;
+    }
+
+    .pet-zone.tired
+    .mouth-tired{
+      display:block;
+    }
+
+    .pet-zone.sleepy
+    .eye{
       animation:none;
-      transform:scaleY(.18);
+
+      transform:
+        scaleY(.18);
     }
 
-    .pet-zone.sleepy .mouth-neutral,
-    .pet-zone.sleepy .mouth-happy,
-    .pet-zone.sleepy .mouth-radiant{
+    .pet-zone.sleepy
+    .mouth-neutral,
+
+    .pet-zone.sleepy
+    .mouth-happy,
+
+    .pet-zone.sleepy
+    .mouth-radiant{
       display:none;
     }
 
-    .pet-zone.sleepy .mouth-tired{
+    .pet-zone.sleepy
+    .mouth-tired{
       display:block;
     }
 
-    .mouth-happy,.mouth-tired,.mouth-radiant{
-      display:none;
-    }
+    .pet-zone.tired
+    .body-main,
 
-    .pet-zone.tired .body-main,
-    .pet-zone.sleepy .body-main{
+    .pet-zone.sleepy
+    .body-main{
       fill:#71888b;
     }
 
-    .pet-zone.tired .body-light,
-    .pet-zone.sleepy .body-light{
+    .pet-zone.tired
+    .body-light,
+
+    .pet-zone.sleepy
+    .body-light{
       fill:#9fb0ae;
     }
 
-    .pet-zone[data-level="3"] .body-main{fill:#45c9bf}
-    .pet-zone[data-level="3"] .body-light{fill:#83eee1}
+    .pet-zone[data-level="3"]
+    .body-main{
+      fill:#45c9bf;
+    }
 
-    .pet-zone[data-level="4"] .body-main{fill:#52afe6}
-    .pet-zone[data-level="4"] .body-light{fill:#8bd9ff}
+    .pet-zone[data-level="3"]
+    .body-light{
+      fill:#83eee1;
+    }
 
-    .pet-zone[data-level="5"] .body-main{fill:#a084ef}
-    .pet-zone[data-level="5"] .body-light{fill:#d5c6ff}
+    .pet-zone[data-level="4"]
+    .body-main{
+      fill:#52afe6;
+    }
 
-    .pet-zone.radiant .pet-bob{
+    .pet-zone[data-level="4"]
+    .body-light{
+      fill:#8bd9ff;
+    }
+
+    .pet-zone[data-level="5"]
+    .body-main{
+      fill:#a084ef;
+    }
+
+    .pet-zone[data-level="5"]
+    .body-light{
+      fill:#d5c6ff;
+    }
+
+    .pet-zone.radiant
+    .pet-bob{
       animation-duration:1.65s;
     }
 
-    .pet-zone.tired .pet-bob{
+    .pet-zone.tired
+    .pet-bob{
       animation-duration:3.5s;
     }
 
-    .pet-zone.sleepy .pet-bob{
+    .pet-zone.sleepy
+    .pet-bob{
       animation-duration:4.5s;
+
       opacity:.86;
     }
 
     @keyframes bob{
-      0%,100%{transform:translateY(2px)}
-      50%{transform:translateY(-9px)}
+      0%,100%{
+        transform:
+          translateY(2px);
+      }
+
+      50%{
+        transform:
+          translateY(-9px);
+      }
     }
 
     @keyframes sway{
-      0%,100%{transform:rotate(-1.5deg)}
-      50%{transform:rotate(1.5deg)}
+      0%,100%{
+        transform:
+          rotate(-1.5deg);
+      }
+
+      50%{
+        transform:
+          rotate(1.5deg);
+      }
     }
 
     @keyframes blink{
-      0%,44%,48%,100%{transform:scaleY(1)}
-      45%,47%{transform:scaleY(.1)}
+      0%,44%,48%,100%{
+        transform:
+          scaleY(1);
+      }
+
+      45%,47%{
+        transform:
+          scaleY(.1);
+      }
     }
 
     @keyframes sparkle{
-      0%,100%{opacity:.45;transform:scale(.7)}
-      50%{opacity:1;transform:scale(1.25)}
+      0%,100%{
+        opacity:.45;
+
+        transform:
+          scale(.7);
+      }
+
+      50%{
+        opacity:1;
+
+        transform:
+          scale(1.25);
+      }
     }
 
     @keyframes petPop{
-      0%{transform:translate(-50%,-50%) scale(1)}
-      35%{transform:translate(-50%,-56%) scale(1.08)}
-      100%{transform:translate(-50%,-50%) scale(1)}
+      0%{
+        transform:
+          translate(-50%,-50%)
+          scale(1);
+      }
+
+      35%{
+        transform:
+          translate(-50%,-56%)
+          scale(1.08);
+      }
+
+      100%{
+        transform:
+          translate(-50%,-50%)
+          scale(1);
+      }
     }
 
     @keyframes petShake{
-      0%,100%{transform:translate(-50%,-50%)}
-      25%{transform:translate(calc(-50% - 5px),-50%)}
-      75%{transform:translate(calc(-50% + 5px),-50%)}
+      0%,100%{
+        transform:
+          translate(-50%,-50%);
+      }
+
+      25%{
+        transform:
+          translate(
+            calc(-50% - 5px),
+            -50%
+          );
+      }
+
+      75%{
+        transform:
+          translate(
+            calc(-50% + 5px),
+            -50%
+          );
+      }
     }
 
     .pet-zone.pop{
-      animation:petPop .45s ease;
+      animation:
+        petPop .45s ease;
     }
 
     .pet-zone.shake{
-      animation:petShake .32s ease;
+      animation:
+        petShake .32s ease;
     }
 
     .pet-message{
       position:absolute;
+
       z-index:4;
+
       left:50%;
       bottom:56px;
-      transform:translateX(-50%);
-      width:calc(100% - 32px);
+
+      transform:
+        translateX(-50%);
+
+      width:
+        calc(100% - 32px);
+
       max-width:390px;
-      font:10px/1.4 var(--pixel);
+
+      font:
+        10px/1.4 var(--pixel);
+
       color:#d8edf2;
+
       text-align:center;
-      background:rgba(5,15,25,.48);
-      border:1px solid rgba(255,255,255,.08);
+
+      background:
+        rgba(5,15,25,.48);
+
+      border:
+        1px solid rgba(255,255,255,.08);
+
       border-radius:9px;
+
       padding:7px 9px;
     }
 
     .stats{
       position:absolute;
+
       z-index:4;
+
       left:16px;
       right:16px;
       bottom:12px;
+
       display:grid;
-      grid-template-columns:1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap:8px;
     }
 
     .stat{
-      background:rgba(5,15,25,.42);
-      border:1px solid rgba(255,255,255,.075);
+      background:
+        rgba(5,15,25,.42);
+
+      border:
+        1px solid rgba(255,255,255,.075);
+
       border-radius:11px;
+
       padding:8px;
     }
 
     .stat-head{
       display:flex;
       justify-content:space-between;
+
       font-size:10px;
+
       color:#d3dfe8;
+
       margin-bottom:5px;
     }
 
     .meter{
       height:6px;
+
       background:#09131f;
+
       border-radius:2px;
+
       overflow:hidden;
     }
 
     .meter i{
       display:block;
+
       width:0;
       height:100%;
+
       background:var(--green);
-      transition:width .45s;
+
+      transition:
+        width .45s;
     }
 
     #bondBar{
       background:var(--cyan);
     }
 
-    /* QUICK ACTIONS */
+    /* BOTÕES PRINCIPAIS */
+
     .quick-actions{
       display:grid;
-      grid-template-columns:1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap:9px;
+
       margin-bottom:10px;
     }
 
     .quick{
       min-height:86px;
+
       border-radius:17px;
-      border:1px solid var(--line);
+
+      border:
+        1px solid var(--line);
+
       padding:12px 9px;
+
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
+
       text-align:center;
+
       font-weight:800;
     }
 
     .quick:active{
-      transform:scale(.98);
+      transform:
+        scale(.98);
     }
 
     .quick.smoke{
@@ -477,169 +811,253 @@
     }
 
     .quick.resist{
-      background:linear-gradient(180deg,#66ec92,#46d77a);
+      background:
+        linear-gradient(
+          180deg,
+          #66ec92,
+          #46d77a
+        );
+
       color:#07351a;
+
       border-color:transparent;
     }
 
     .quick-icon{
-      font:22px var(--pixel);
+      font:
+        22px var(--pixel);
+
       line-height:1;
+
       margin-bottom:5px;
     }
 
     .quick-title{
       font-size:13px;
+
       line-height:1.15;
     }
 
     .quick-sub{
       font-size:9px;
       font-weight:550;
+
       opacity:.68;
+
       margin-top:4px;
+
       line-height:1.2;
     }
 
+    /* CARDS */
+
     .today-card,
     .panel{
-      background:rgba(16,29,50,.93);
-      border:1px solid var(--line);
+      background:
+        rgba(16,29,50,.93);
+
+      border:
+        1px solid var(--line);
+
       border-radius:19px;
+
       padding:14px;
+
       margin-bottom:11px;
     }
 
     .today-row{
       display:flex;
+
       justify-content:space-between;
       align-items:flex-end;
+
       gap:10px;
     }
 
     .day-label{
       text-transform:capitalize;
+
       color:var(--muted);
+
       font-size:11px;
     }
 
     .count{
       font-size:38px;
       font-weight:800;
+
       letter-spacing:-1.5px;
+
       line-height:1;
+
       margin-top:3px;
     }
 
     .count small{
       font-size:12px;
       font-weight:500;
+
       color:#cbd5e1;
+
       letter-spacing:0;
     }
 
     .baseline{
       text-align:right;
+
       color:var(--muted);
+
       font-size:9px;
+
       line-height:1.4;
     }
 
     .baseline strong{
       display:block;
+
       color:#e7f4fb;
+
       font-size:12px;
+
       margin-top:2px;
     }
 
     .today-foot{
       display:flex;
+
       justify-content:space-between;
       align-items:center;
+
       gap:8px;
+
       margin-top:10px;
+
       color:var(--muted);
+
       font-size:10px;
     }
 
     .tiny{
-      border:1px solid var(--line);
+      border:
+        1px solid var(--line);
+
       background:transparent;
+
       color:#ced7e2;
+
       padding:6px 8px;
+
       border-radius:8px;
+
       font-size:10px;
     }
 
     .tiny.closed{
       color:#bdf8ce;
-      border-color:rgba(98,233,143,.24);
+
+      border-color:
+        rgba(98,233,143,.24);
     }
 
     .times{
       display:flex;
+
       flex-wrap:wrap;
+
       gap:6px;
+
       margin-top:8px;
     }
 
     .chip{
-      font:9px var(--pixel);
+      font:
+        9px var(--pixel);
+
       padding:5px 7px;
+
       border-radius:6px;
+
       background:#172943;
-      border:1px solid var(--line);
+
+      border:
+        1px solid var(--line);
+
       color:#c9d7e5;
     }
 
     .chip.good{
       color:#c7f8d5;
-      background:rgba(66,215,120,.10);
+
+      background:
+        rgba(66,215,120,.10);
     }
 
     .grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap:9px;
+
       margin-bottom:11px;
     }
 
     .metric{
       background:#101d32;
-      border:1px solid var(--line);
+
+      border:
+        1px solid var(--line);
+
       border-radius:16px;
+
       padding:12px;
     }
 
     .metric-k{
       font-size:10px;
+
       color:var(--muted);
     }
 
     .metric-v{
       font-size:20px;
       font-weight:760;
+
       margin-top:4px;
     }
 
     .metric-s{
       font-size:9px;
+
       color:var(--muted);
+
       margin-top:3px;
     }
 
     .panel h2{
       font-size:14px;
-      margin:0 0 10px;
+
+      margin:
+        0 0 10px;
     }
 
     .history-row{
       display:grid;
-      grid-template-columns:1fr auto;
+
+      grid-template-columns:
+        1fr auto;
+
       gap:10px;
+
       align-items:center;
-      padding:10px 0;
-      border-bottom:1px solid var(--line);
+
+      padding:
+        10px 0;
+
+      border-bottom:
+        1px solid var(--line);
     }
 
     .history-row:last-child{
@@ -648,13 +1066,17 @@
 
     .date-title{
       font-size:12px;
+
       text-transform:capitalize;
     }
 
     .date-sub{
       font-size:9px;
+
       color:var(--muted);
+
       margin-top:3px;
+
       line-height:1.5;
     }
 
@@ -664,35 +1086,49 @@
 
     .day-score strong{
       display:block;
+
       font-size:18px;
     }
 
     .day-score span{
       font-size:8px;
+
       color:var(--muted);
     }
 
     .empty{
       font-size:12px;
+
       color:var(--muted);
+
       line-height:1.55;
+
       padding:7px 0;
     }
 
     .actions{
       display:flex;
+
       gap:8px;
+
       flex-wrap:wrap;
     }
 
     .secondary,
     .danger{
-      border:1px solid var(--line);
+      border:
+        1px solid var(--line);
+
       background:#18273f;
+
       color:var(--text);
+
       padding:10px 11px;
+
       border-radius:11px;
+
       font-size:11px;
+
       font-weight:650;
     }
 
@@ -702,86 +1138,136 @@
 
     .note{
       font-size:9px;
+
       line-height:1.55;
+
       color:var(--muted);
+
       margin-top:10px;
     }
 
-    /* JOURNEY */
+    /* JORNADA */
+
     .journey-hero{
-      background:linear-gradient(145deg,rgba(182,156,255,.12),rgba(16,29,50,.94));
-      border:1px solid rgba(182,156,255,.16);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(182,156,255,.12),
+          rgba(16,29,50,.94)
+        );
+
+      border:
+        1px solid rgba(182,156,255,.16);
+
       border-radius:19px;
+
       padding:14px;
+
       margin-bottom:11px;
     }
 
     .journey-title{
-      font:11px var(--pixel);
+      font:
+        11px var(--pixel);
+
       color:#dcd1ff;
     }
 
     .xp-num{
       font-size:28px;
       font-weight:800;
+
       margin:6px 0;
     }
 
     .xpbar{
       height:8px;
+
       background:#0b1523;
+
       border-radius:3px;
+
       overflow:hidden;
     }
 
     .xpbar i{
       display:block;
+
       height:100%;
+
       background:var(--purple);
+
       width:0;
     }
 
     .xpnote{
       font-size:9px;
+
       color:var(--muted);
+
       margin-top:6px;
     }
 
     .evo-line{
       display:grid;
-      grid-template-columns:repeat(5,1fr);
+
+      grid-template-columns:
+        repeat(5,1fr);
+
       gap:4px;
+
       margin-top:12px;
     }
 
     .evo{
-      font:7px var(--pixel);
+      font:
+        7px var(--pixel);
+
       text-align:center;
+
       color:#728299;
+
       padding:7px 2px;
+
       border-radius:6px;
-      border:1px solid var(--line);
+
+      border:
+        1px solid var(--line);
+
       background:#0d192b;
     }
 
     .evo.done{
       color:#c8f8d7;
-      border-color:rgba(98,233,143,.2);
-      background:rgba(98,233,143,.06);
+
+      border-color:
+        rgba(98,233,143,.2);
+
+      background:
+        rgba(98,233,143,.06);
     }
 
     .evo.current{
       color:#fff4be;
-      border-color:rgba(255,214,107,.3);
-      background:rgba(255,214,107,.08);
+
+      border-color:
+        rgba(255,214,107,.3);
+
+      background:
+        rgba(255,214,107,.08);
     }
 
     .power{
       display:flex;
+
       gap:9px;
+
       align-items:center;
+
       padding:9px 0;
-      border-bottom:1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
     }
 
     .power:last-child{
@@ -791,69 +1277,112 @@
     .power-icon{
       width:31px;
       height:31px;
+
       display:grid;
       place-items:center;
+
       border-radius:8px;
+
       background:#172943;
-      border:1px solid var(--line);
-      font:13px var(--pixel);
+
+      border:
+        1px solid var(--line);
+
+      font:
+        13px var(--pixel);
     }
 
     .power.locked{
       opacity:.36;
-      filter:grayscale(1);
+
+      filter:
+        grayscale(1);
     }
 
     .power-name{
       font-size:11px;
+
       font-weight:700;
     }
 
     .power-desc{
       font-size:9px;
+
       color:var(--muted);
+
       margin-top:2px;
+
       line-height:1.35;
     }
 
-    /* NAV */
+    /* NAVEGAÇÃO */
+
     .nav{
       position:fixed;
+
       left:0;
       right:0;
       bottom:0;
+
       z-index:20;
-      background:rgba(5,13,25,.92);
-      backdrop-filter:blur(18px);
-      border-top:1px solid var(--line);
-      padding:7px 9px calc(7px + env(safe-area-inset-bottom));
+
+      background:
+        rgba(5,13,25,.92);
+
+      backdrop-filter:
+        blur(18px);
+
+      border-top:
+        1px solid var(--line);
+
+      padding:
+        7px 9px
+        calc(
+          7px +
+          env(safe-area-inset-bottom)
+        );
     }
 
     .navin{
       max-width:600px;
+
       margin:auto;
+
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+
+      grid-template-columns:
+        repeat(4,1fr);
+
       gap:4px;
     }
 
     .nav button{
       background:transparent;
+
       border:0;
+
       color:#8998ad;
+
       padding:6px 3px;
+
       border-radius:10px;
+
       font-size:9px;
     }
 
     .nav button.active{
       color:#aef5c2;
-      background:rgba(98,233,143,.07);
+
+      background:
+        rgba(98,233,143,.07);
     }
 
     .nav .ico{
-      font:14px var(--pixel);
+      font:
+        14px var(--pixel);
+
       display:block;
+
       margin-bottom:2px;
     }
 
@@ -867,863 +1396,3251 @@
 
     #toast{
       position:fixed;
+
       z-index:30;
+
       left:50%;
       bottom:98px;
-      transform:translateX(-50%) translateY(8px);
-      max-width:calc(100vw - 30px);
+
+      transform:
+        translateX(-50%)
+        translateY(8px);
+
+      max-width:
+        calc(100vw - 30px);
+
       text-align:center;
+
       opacity:0;
+
       pointer-events:none;
+
       background:#eef8f4;
+
       color:#0b2a19;
+
       padding:9px 12px;
+
       border-radius:999px;
+
       font-size:10px;
       font-weight:800;
+
       transition:.2s;
     }
 
     #toast.show{
       opacity:1;
-      transform:translateX(-50%) translateY(0);
+
+      transform:
+        translateX(-50%)
+        translateY(0);
     }
 
     @media(max-width:350px){
-      .quick-title{font-size:12px}
-      .habitat{height:286px}
-      .pet-zone{width:155px;height:155px}
-      .pet-bob{width:140px;height:140px}
+      .quick-title{
+        font-size:12px;
+      }
+
+      .habitat{
+        height:286px;
+      }
+
+      .pet-zone{
+        width:155px;
+        height:155px;
+      }
+
+      .pet-bob{
+        width:140px;
+        height:140px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <header>
-      <div>
-        <h1>Vou parar de fumar</h1>
-        <div class="subtitle">Um registro de cada vez.</div>
-      </div>
-      <div class="badge">NIMBO • LOCAL</div>
-    </header>
 
-    <section id="home" class="tab active">
-      <div class="habitat">
-        <div class="sky-cloud"></div>
-        <div class="sky-cloud two"></div>
-        <div class="grass"></div>
-        <div class="stone"></div>
+<main class="wrap">
 
-        <div class="habitat-head">
-          <div>
-            <div class="pet-name">NIMBO</div>
-            <div class="pet-state" id="petState">atento</div>
-          </div>
-          <div class="form-badge" id="levelBadge">FORMA 1</div>
-        </div>
-
-        <div class="pet-zone neutral" id="petZone" data-level="1">
-          <div class="pet-bob">
-            <div class="pet-sway">
-              <svg class="pet-svg" viewBox="0 0 120 120" aria-label="Nimbo">
-                <rect x="35" y="99" width="50" height="7" fill="rgba(0,0,0,.18)"/>
-
-                <g class="wing">
-                  <rect x="15" y="56" width="18" height="14" class="body-main" fill="#4fca80"/>
-                  <rect x="87" y="56" width="18" height="14" class="body-main" fill="#4fca80"/>
-                  <rect x="10" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/>
-                  <rect x="101" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/>
-                </g>
-
-                <rect x="38" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
-                <rect x="69" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
-
-                <rect x="31" y="43" width="58" height="47" class="body-main" fill="#4fca80"/>
-                <rect x="25" y="53" width="70" height="28" class="body-main" fill="#4fca80"/>
-                <rect x="37" y="37" width="46" height="12" class="body-light" fill="#8bf1b0"/>
-                <rect x="27" y="56" width="8" height="18" class="body-light" fill="#8bf1b0"/>
-
-                <g class="accent2">
-                  <rect x="52" y="26" width="6" height="9" fill="#ffd66b"/>
-                  <rect x="64" y="20" width="6" height="11" fill="#ffd66b"/>
-                </g>
-
-                <g class="halo">
-                  <rect x="42" y="13" width="36" height="5" fill="#fff2a8"/>
-                  <rect x="37" y="17" width="5" height="5" fill="#fff2a8"/>
-                  <rect x="78" y="17" width="5" height="5" fill="#fff2a8"/>
-                  <rect class="spark" x="24" y="26" width="5" height="5" fill="#fff2a8"/>
-                  <rect class="spark" x="92" y="31" width="5" height="5" fill="#fff2a8"/>
-                </g>
-
-                <rect class="eye" x="43" y="59" width="9" height="10" fill="#15363d"/>
-                <rect class="eye" x="68" y="59" width="9" height="10" fill="#15363d"/>
-
-                <g class="mouth-neutral">
-                  <rect x="52" y="77" width="16" height="4" fill="#15363d"/>
-                </g>
-
-                <g class="mouth-tired">
-                  <rect x="52" y="79" width="16" height="4" fill="#15363d"/>
-                  <rect x="56" y="75" width="8" height="4" fill="#15363d"/>
-                </g>
-
-                <g class="mouth-happy">
-                  <rect x="50" y="75" width="5" height="4" fill="#15363d"/>
-                  <rect x="55" y="79" width="10" height="4" fill="#15363d"/>
-                  <rect x="65" y="75" width="5" height="4" fill="#15363d"/>
-                </g>
-
-                <g class="mouth-radiant">
-                  <rect x="48" y="74" width="5" height="4" fill="#15363d"/>
-                  <rect x="53" y="78" width="14" height="5" fill="#15363d"/>
-                  <rect x="67" y="74" width="5" height="4" fill="#15363d"/>
-                  <rect x="36" y="74" width="5" height="5" fill="#ffafc2"/>
-                  <rect x="79" y="74" width="5" height="5" fill="#ffafc2"/>
-                </g>
-
-                <rect x="39" y="88" width="15" height="8" fill="#173c47"/>
-                <rect x="66" y="88" width="15" height="8" fill="#173c47"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="pet-message" id="petMessage">Estou aprendendo seus ritmos.</div>
-
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-head">
-              <span>♥ Vitalidade</span>
-              <b id="vitalityText">55</b>
-            </div>
-            <div class="meter"><i id="vitalityBar"></i></div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-head">
-              <span>◆ Vínculo</span>
-              <b id="bondText">0</b>
-            </div>
-            <div class="meter"><i id="bondBar"></i></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quick-actions">
-        <button class="quick smoke" id="smokeBtn">
-          <span class="quick-icon">+</span>
-          <span class="quick-title">Fumei agora</span>
-          <span class="quick-sub">registrar</span>
-        </button>
-
-        <button class="quick resist" id="resistBtn">
-          <span class="quick-icon">✦</span>
-          <span class="quick-title">Quis fumar,<br>mas não fumei</span>
-          <span class="quick-sub">+ energia</span>
-        </button>
-      </div>
-
-      <div class="today-card">
-        <div class="today-row">
-          <div>
-            <div class="day-label" id="todayLabel">Hoje</div>
-            <div class="count">
-              <span id="todayCount">0</span>
-              <small id="cigLabel">cigarros</small>
-            </div>
-          </div>
-
-          <div class="baseline">
-            <span id="baselineStatus">baseline em observação</span>
-            <strong id="baselineValue">—</strong>
-          </div>
-        </div>
-
-        <div class="today-foot">
-          <span id="lastTime">Nenhum cigarro registrado hoje</span>
-          <button class="tiny" id="closeDayBtn">Fechar o dia</button>
-        </div>
-
-        <div class="times" id="todayTimes"></div>
-      </div>
-
-      <div class="grid">
-        <div class="metric">
-          <div class="metric-k">Média 7 dias</div>
-          <div class="metric-v" id="avg7">—</div>
-          <div class="metric-s" id="trendText">estabelecendo referência</div>
-        </div>
-
-        <div class="metric">
-          <div class="metric-k">Vontades superadas</div>
-          <div class="metric-v" id="resistToday">0</div>
-          <div class="metric-s">hoje</div>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="secondary" id="undoBtn">Desfazer último evento</button>
-      </div>
-    </section>
-
-    <section id="history" class="tab">
-      <div class="panel">
-        <h2>Histórico</h2>
-        <div id="historyList"></div>
-      </div>
-    </section>
-
-    <section id="journey" class="tab">
-      <div class="journey-hero">
-        <div class="journey-title">JORNADA DO NIMBO</div>
-        <div class="xp-num"><span id="xpValue">0</span> XP</div>
-        <div class="xpbar"><i id="xpBar"></i></div>
-        <div class="xpnote" id="xpNote"></div>
-
-        <div class="evo-line">
-          <div class="evo">Nimbo</div>
-          <div class="evo">Curioso</div>
-          <div class="evo">Desperto</div>
-          <div class="evo">Forte</div>
-          <div class="evo">Livre</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>Poderes</h2>
-
-        <div class="power" id="powerMemory">
-          <div class="power-icon">M</div>
-          <div>
-            <div class="power-name">Memória</div>
-            <div class="power-desc">Feche 7 dias.</div>
-          </div>
-        </div>
-
-        <div class="power" id="powerPatience">
-          <div class="power-icon">P</div>
-          <div>
-            <div class="power-name">Paciência</div>
-            <div class="power-desc">Supere 5 vontades.</div>
-          </div>
-        </div>
-
-        <div class="power" id="powerBreath">
-          <div class="power-icon">F</div>
-          <div>
-            <div class="power-name">Fôlego</div>
-            <div class="power-desc">Reduza sua média em 10% vs. baseline.</div>
-          </div>
-        </div>
-
-        <div class="power" id="powerRecord">
-          <div class="power-icon">R</div>
-          <div>
-            <div class="power-name">Recorde</div>
-            <div class="power-desc">Alcance redução de 25% vs. baseline.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>Como funciona</h2>
-        <div class="empty">
-          <b>Vínculo</b> vem da consistência dos registros e dos dias fechados.
-          <b>Vitalidade</b> responde à redução e às vontades superadas.
-          Registrar um cigarro é neutro e não dá XP.
-          Evoluções conquistadas nunca são perdidas.
-        </div>
-      </div>
-    </section>
-
-    <section id="data" class="tab">
-      <div class="panel">
-        <h2>Seus dados</h2>
-
-        <div class="actions">
-          <button class="secondary" id="exportBtn">Exportar backup</button>
-          <label class="secondary" style="cursor:pointer">
-            Importar backup
-            <input type="file" id="importFile" accept=".json,application/json" hidden>
-          </label>
-        </div>
-
-        <div class="note">
-          Esta versão usa as mesmas chaves de armazenamento anteriores para preservar os registros existentes.
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>Resumo</h2>
-
-        <div class="history-row">
-          <div class="date-title">Cigarros registrados</div>
-          <div class="day-score"><strong id="totalSmokes">0</strong></div>
-        </div>
-
-        <div class="history-row">
-          <div class="date-title">Vontades superadas</div>
-          <div class="day-score"><strong id="totalResists">0</strong></div>
-        </div>
-
-        <div class="history-row">
-          <div class="date-title">Dias fechados</div>
-          <div class="day-score"><strong id="totalClosed">0</strong></div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>Manutenção</h2>
-        <button class="danger" id="clearBtn">Apagar todos os dados locais</button>
-      </div>
-    </section>
-  </main>
-
-  <div id="toast"></div>
-
-  <nav class="nav">
-    <div class="navin">
-      <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
-      <button data-tab="history"><span class="ico">▥</span>Histórico</button>
-      <button data-tab="journey"><span class="ico">✦</span>Jornada</button>
-      <button data-tab="data"><span class="ico">↥</span>Dados</button>
+<header>
+  <div>
+    <h1>Vou parar de fumar</h1>
+    <div class="subtitle">
+      Um registro de cada vez.
     </div>
-  </nav>
+  </div>
 
-  <script>
-    (() => {
-      // mesmas chaves para preservar histórico anterior
-      const SMOKE_KEY = 'vou_parar_de_fumar_records_v1';
-      const RESIST_KEY = 'vou_parar_de_fumar_resists_v1';
-      const CLOSED_KEY = 'vou_parar_de_fumar_day_closures_v1';
-      const GAME_KEY = 'vou_parar_de_fumar_game_v1';
+  <div class="badge">
+    NIMBO • v4
+  </div>
+</header>
 
-      const parse = (v, fallback) => {
-        try {
-          const x = JSON.parse(v);
-          return x ?? fallback;
-        } catch {
-          return fallback;
-        }
-      };
+<section
+  id="home"
+  class="tab active"
+>
 
-      const read = (k, fallback) => parse(localStorage.getItem(k), fallback);
-      const write = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+  <div class="habitat">
 
-      let smokes = read(SMOKE_KEY, []);
-      let resists = read(RESIST_KEY, []);
-      let closedDays = read(CLOSED_KEY, []);
-      let game = read(GAME_KEY, {
-        baseline: null,
-        baselineLocked: false,
-        bestReduction: 0,
-        maxLevel: 1
-      });
+    <div class="sky-cloud"></div>
+    <div class="sky-cloud two"></div>
 
-      const $ = id => document.getElementById(id);
-      const pad = n => String(n).padStart(2, '0');
-      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    <div class="grass"></div>
+    <div class="stone"></div>
 
-      const key = input => {
-        const d = new Date(input);
-        return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-      };
+    <div class="habitat-head">
 
-      const today = () => key(new Date());
+      <div>
+        <div class="pet-name">
+          NIMBO
+        </div>
 
-      const dayDate = k => {
-        const [y, m, d] = k.split('-').map(Number);
-        return new Date(y, m - 1, d, 12, 0, 0);
-      };
+        <div
+          class="pet-state"
+          id="petState"
+        >
+          atento
+        </div>
+      </div>
 
-      const time = iso =>
-        new Date(iso).toLocaleTimeString('pt-BR', {
-          hour: '2-digit',
-          minute: '2-digit'
-        });
+      <div
+        class="form-badge"
+        id="levelBadge"
+      >
+        FORMA 1
+      </div>
+    </div>
 
-      const dayText = k =>
-        dayDate(k).toLocaleDateString('pt-BR', {
-          weekday: 'short',
-          day: '2-digit',
-          month: 'short'
-        });
+    <div
+      class="pet-zone neutral"
+      id="petZone"
+      data-level="1"
+    >
 
-      const uuid = () =>
-        window.crypto && crypto.randomUUID
-          ? crypto.randomUUID()
-          : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      <div class="pet-bob">
+        <div class="pet-sway">
 
-      function toast(msg){
-        $('toast').textContent = msg;
-        $('toast').classList.add('show');
-        clearTimeout(window.__toast);
-        window.__toast = setTimeout(() => $('toast').classList.remove('show'), 1600);
-      }
+          <svg
+            class="pet-svg"
+            viewBox="0 0 120 120"
+            aria-label="Nimbo"
+          >
 
-      const smokeCount = k => smokes.filter(x => key(x.timestamp) === k).length;
-      const resistCount = k => resists.filter(x => key(x.timestamp) === k).length;
-      const isClosed = k => closedDays.some(x => x.date === k);
+            <rect
+              x="35"
+              y="99"
+              width="50"
+              height="7"
+              fill="rgba(0,0,0,.18)"
+            />
 
-      function observed(){
-        const s = new Set();
-        smokes.forEach(x => s.add(key(x.timestamp)));
-        resists.forEach(x => s.add(key(x.timestamp)));
-        closedDays.forEach(x => s.add(x.date));
-        return [...s].sort();
-      }
+            <g class="wing">
 
-      function last7(){
-        const arr = [];
-        for(let i = 6; i >= 0; i--){
-          const d = new Date();
-          d.setHours(12, 0, 0, 0);
-          d.setDate(d.getDate() - i);
-          arr.push(key(d));
-        }
-        return arr;
-      }
+              <rect
+                x="15"
+                y="56"
+                width="18"
+                height="14"
+                class="body-main"
+                fill="#4fca80"
+              />
 
-      function maybeBaseline(){
-        if(game.baselineLocked && typeof game.baseline === 'number') return;
+              <rect
+                x="87"
+                y="56"
+                width="18"
+                height="14"
+                class="body-main"
+                fill="#4fca80"
+              />
 
-        const days = observed().slice(0, 7);
-        if(!days.length) return;
+              <rect
+                x="10"
+                y="61"
+                width="9"
+                height="7"
+                class="body-light"
+                fill="#8bf1b0"
+              />
 
-        game.baseline = days.reduce((sum, k) => sum + smokeCount(k), 0) / days.length;
+              <rect
+                x="101"
+                y="61"
+                width="9"
+                height="7"
+                class="body-light"
+                fill="#8bf1b0"
+              />
 
-        if(days.length >= 7){
-          game.baselineLocked = true;
-        }
+            </g>
 
-        write(GAME_KEY, game);
-      }
+            <rect
+              x="38"
+              y="29"
+              width="13"
+              height="18"
+              class="body-light ear-extra"
+              fill="#8bf1b0"
+            />
 
-      function avg7(){
-        const ks = last7();
-        const known = ks.filter(k =>
-          smokeCount(k) > 0 ||
-          resistCount(k) > 0 ||
-          isClosed(k) ||
-          k === today()
+            <rect
+              x="69"
+              y="29"
+              width="13"
+              height="18"
+              class="body-light ear-extra"
+              fill="#8bf1b0"
+            />
+
+            <rect
+              x="31"
+              y="43"
+              width="58"
+              height="47"
+              class="body-main"
+              fill="#4fca80"
+            />
+
+            <rect
+              x="25"
+              y="53"
+              width="70"
+              height="28"
+              class="body-main"
+              fill="#4fca80"
+            />
+
+            <rect
+              x="37"
+              y="37"
+              width="46"
+              height="12"
+              class="body-light"
+              fill="#8bf1b0"
+            />
+
+            <rect
+              x="27"
+              y="56"
+              width="8"
+              height="18"
+              class="body-light"
+              fill="#8bf1b0"
+            />
+
+            <g class="accent2">
+
+              <rect
+                x="52"
+                y="26"
+                width="6"
+                height="9"
+                fill="#ffd66b"
+              />
+
+              <rect
+                x="64"
+                y="20"
+                width="6"
+                height="11"
+                fill="#ffd66b"
+              />
+
+            </g>
+
+            <g class="halo">
+
+              <rect
+                x="42"
+                y="13"
+                width="36"
+                height="5"
+                fill="#fff2a8"
+              />
+
+              <rect
+                x="37"
+                y="17"
+                width="5"
+                height="5"
+                fill="#fff2a8"
+              />
+
+              <rect
+                x="78"
+                y="17"
+                width="5"
+                height="5"
+                fill="#fff2a8"
+              />
+
+              <rect
+                class="spark"
+                x="24"
+                y="26"
+                width="5"
+                height="5"
+                fill="#fff2a8"
+              />
+
+              <rect
+                class="spark"
+                x="92"
+                y="31"
+                width="5"
+                height="5"
+                fill="#fff2a8"
+              />
+
+            </g>
+
+            <rect
+              class="eye"
+              x="43"
+              y="59"
+              width="9"
+              height="10"
+              fill="#15363d"
+            />
+
+            <rect
+              class="eye"
+              x="68"
+              y="59"
+              width="9"
+              height="10"
+              fill="#15363d"
+            />
+
+            <g class="mouth-neutral">
+              <rect
+                x="52"
+                y="77"
+                width="16"
+                height="4"
+                fill="#15363d"
+              />
+            </g>
+
+            <g class="mouth-tired">
+
+              <rect
+                x="52"
+                y="79"
+                width="16"
+                height="4"
+                fill="#15363d"
+              />
+
+              <rect
+                x="56"
+                y="75"
+                width="8"
+                height="4"
+                fill="#15363d"
+              />
+
+            </g>
+
+            <g class="mouth-happy">
+
+              <rect
+                x="50"
+                y="75"
+                width="5"
+                height="4"
+                fill="#15363d"
+              />
+
+              <rect
+                x="55"
+                y="79"
+                width="10"
+                height="4"
+                fill="#15363d"
+              />
+
+              <rect
+                x="65"
+                y="75"
+                width="5"
+                height="4"
+                fill="#15363d"
+              />
+
+            </g>
+
+            <g class="mouth-radiant">
+
+              <rect
+                x="48"
+                y="74"
+                width="5"
+                height="4"
+                fill="#15363d"
+              />
+
+              <rect
+                x="53"
+                y="78"
+                width="14"
+                height="5"
+                fill="#15363d"
+              />
+
+              <rect
+                x="67"
+                y="74"
+                width="5"
+                height="4"
+                fill="#15363d"
+              />
+
+              <rect
+                x="36"
+                y="74"
+                width="5"
+                height="5"
+                fill="#ffafc2"
+              />
+
+              <rect
+                x="79"
+                y="74"
+                width="5"
+                height="5"
+                fill="#ffafc2"
+              />
+
+            </g>
+
+            <rect
+              x="39"
+              y="88"
+              width="15"
+              height="8"
+              fill="#173c47"
+            />
+
+            <rect
+              x="66"
+              y="88"
+              width="15"
+              height="8"
+              fill="#173c47"
+            />
+
+          </svg>
+
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="pet-message"
+      id="petMessage"
+    >
+      Estou aprendendo seus ritmos.
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="stat-head">
+          <span>♥ Vitalidade</span>
+          <b id="vitalityText">55</b>
+        </div>
+
+        <div class="meter">
+          <i id="vitalityBar"></i>
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-head">
+          <span>◆ Vínculo</span>
+          <b id="bondText">0</b>
+        </div>
+
+        <div class="meter">
+          <i id="bondBar"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="quick-actions">
+
+    <button
+      class="quick smoke"
+      id="smokeBtn"
+    >
+
+      <span class="quick-icon">
+        +
+      </span>
+
+      <span class="quick-title">
+        Fumei agora
+      </span>
+
+      <span class="quick-sub">
+        registrar
+      </span>
+
+    </button>
+
+    <button
+      class="quick resist"
+      id="resistBtn"
+    >
+
+      <span class="quick-icon">
+        ✦
+      </span>
+
+      <span class="quick-title">
+        Quis fumar,<br>
+        mas não fumei
+      </span>
+
+      <span class="quick-sub">
+        + energia
+      </span>
+
+    </button>
+
+  </div>
+
+  <div class="today-card">
+
+    <div class="today-row">
+
+      <div>
+
+        <div
+          class="day-label"
+          id="todayLabel"
+        >
+          Hoje
+        </div>
+
+        <div class="count">
+
+          <span id="todayCount">
+            0
+          </span>
+
+          <small id="cigLabel">
+            cigarros
+          </small>
+
+        </div>
+
+      </div>
+
+      <div class="baseline">
+
+        <span id="baselineStatus">
+          baseline em observação
+        </span>
+
+        <strong id="baselineValue">
+          —
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="today-foot">
+
+      <span id="lastTime">
+        Nenhum cigarro registrado hoje
+      </span>
+
+      <button
+        class="tiny"
+        id="closeDayBtn"
+      >
+        Fechar o dia
+      </button>
+
+    </div>
+
+    <div
+      class="times"
+      id="todayTimes"
+    ></div>
+
+  </div>
+
+  <div class="grid">
+
+    <div class="metric">
+
+      <div class="metric-k">
+        Média 7 dias
+      </div>
+
+      <div
+        class="metric-v"
+        id="avg7"
+      >
+        —
+      </div>
+
+      <div
+        class="metric-s"
+        id="trendText"
+      >
+        estabelecendo referência
+      </div>
+
+    </div>
+
+    <div class="metric">
+
+      <div class="metric-k">
+        Vontades superadas
+      </div>
+
+      <div
+        class="metric-v"
+        id="resistToday"
+      >
+        0
+      </div>
+
+      <div class="metric-s">
+        hoje
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="actions">
+
+    <button
+      class="secondary"
+      id="undoBtn"
+    >
+      Desfazer último evento
+    </button>
+
+  </div>
+
+</section>
+
+<section
+  id="history"
+  class="tab"
+>
+
+  <div class="panel">
+
+    <h2>
+      Histórico
+    </h2>
+
+    <div id="historyList"></div>
+
+  </div>
+
+</section>
+
+<section
+  id="journey"
+  class="tab"
+>
+
+  <div class="journey-hero">
+
+    <div class="journey-title">
+      JORNADA DO NIMBO
+    </div>
+
+    <div class="xp-num">
+      <span id="xpValue">0</span>
+      XP
+    </div>
+
+    <div class="xpbar">
+      <i id="xpBar"></i>
+    </div>
+
+    <div
+      class="xpnote"
+      id="xpNote"
+    ></div>
+
+    <div class="evo-line">
+
+      <div class="evo">
+        Nimbo
+      </div>
+
+      <div class="evo">
+        Curioso
+      </div>
+
+      <div class="evo">
+        Desperto
+      </div>
+
+      <div class="evo">
+        Forte
+      </div>
+
+      <div class="evo">
+        Livre
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      Poderes
+    </h2>
+
+    <div
+      class="power"
+      id="powerMemory"
+    >
+
+      <div class="power-icon">
+        M
+      </div>
+
+      <div>
+
+        <div class="power-name">
+          Memória
+        </div>
+
+        <div class="power-desc">
+          Feche 7 dias.
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="power"
+      id="powerPatience"
+    >
+
+      <div class="power-icon">
+        P
+      </div>
+
+      <div>
+
+        <div class="power-name">
+          Paciência
+        </div>
+
+        <div class="power-desc">
+          Supere 5 vontades.
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="power"
+      id="powerBreath"
+    >
+
+      <div class="power-icon">
+        F
+      </div>
+
+      <div>
+
+        <div class="power-name">
+          Fôlego
+        </div>
+
+        <div class="power-desc">
+          Reduza sua média em 10% vs. baseline.
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="power"
+      id="powerRecord"
+    >
+
+      <div class="power-icon">
+        R
+      </div>
+
+      <div>
+
+        <div class="power-name">
+          Recorde
+        </div>
+
+        <div class="power-desc">
+          Alcance redução de 25% vs. baseline.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      Como funciona
+    </h2>
+
+    <div class="empty">
+
+      <b>Vínculo</b>
+      vem da consistência dos registros
+      e dos dias fechados.
+
+      <b>Vitalidade</b>
+      responde à redução e às vontades
+      superadas.
+
+      Registrar um cigarro é neutro
+      e não dá XP.
+
+      Evoluções conquistadas
+      nunca são perdidas.
+
+    </div>
+
+  </div>
+
+</section>
+
+<section
+  id="data"
+  class="tab"
+>
+
+  <div class="panel">
+
+    <h2>
+      Seus dados
+    </h2>
+
+    <div class="actions">
+
+      <button
+        class="secondary"
+        id="exportBtn"
+      >
+        Exportar backup
+      </button>
+
+      <label
+        class="secondary"
+        style="cursor:pointer"
+      >
+
+        Importar backup
+
+        <input
+          type="file"
+          id="importFile"
+          accept=".json,application/json"
+          hidden
+        >
+
+      </label>
+
+    </div>
+
+    <div class="note">
+
+      Seus registros continuam usando
+      as mesmas chaves de armazenamento
+      das versões anteriores.
+
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      Atualização
+    </h2>
+
+    <div class="actions">
+
+      <button
+        class="secondary"
+        id="updateBtn"
+      >
+        Verificar atualização
+      </button>
+
+    </div>
+
+    <div
+      class="note"
+      id="versionInfo"
+    >
+      Versão instalada: v4
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      Resumo
+    </h2>
+
+    <div class="history-row">
+
+      <div class="date-title">
+        Cigarros registrados
+      </div>
+
+      <div class="day-score">
+        <strong id="totalSmokes">0</strong>
+      </div>
+
+    </div>
+
+    <div class="history-row">
+
+      <div class="date-title">
+        Vontades superadas
+      </div>
+
+      <div class="day-score">
+        <strong id="totalResists">0</strong>
+      </div>
+
+    </div>
+
+    <div class="history-row">
+
+      <div class="date-title">
+        Dias fechados
+      </div>
+
+      <div class="day-score">
+        <strong id="totalClosed">0</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <h2>
+      Manutenção
+    </h2>
+
+    <button
+      class="danger"
+      id="clearBtn"
+    >
+      Apagar todos os dados locais
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+<div id="toast"></div>
+
+<nav class="nav">
+
+  <div class="navin">
+
+    <button
+      class="active"
+      data-tab="home"
+    >
+
+      <span class="ico">
+        ●
+      </span>
+
+      Hoje
+
+    </button>
+
+    <button
+      data-tab="history"
+    >
+
+      <span class="ico">
+        ▥
+      </span>
+
+      Histórico
+
+    </button>
+
+    <button
+      data-tab="journey"
+    >
+
+      <span class="ico">
+        ✦
+      </span>
+
+      Jornada
+
+    </button>
+
+    <button
+      data-tab="data"
+    >
+
+      <span class="ico">
+        ↥
+      </span>
+
+      Dados
+
+    </button>
+
+  </div>
+
+</nav>
+
+<script>
+(() => {
+
+  /* ===============================
+     CONTROLE DE VERSÃO / CACHE
+     =============================== */
+
+  const APP_VERSION = '4';
+
+  async function checkForUpdate({
+    manual = false
+  } = {}){
+
+    try{
+
+      const baseUrl =
+        window.location.origin +
+        window.location.pathname;
+
+      const checkUrl =
+        baseUrl +
+        '?versionCheck=' +
+        Date.now();
+
+      const response =
+        await fetch(
+          checkUrl,
+          {
+            cache:'no-store',
+            headers:{
+              'Cache-Control':'no-cache'
+            }
+          }
         );
 
-        if(!known.length) return null;
-
-        return known.reduce((sum, k) => sum + smokeCount(k), 0) / known.length;
+      if(!response.ok){
+        throw new Error(
+          'Falha ao consultar versão.'
+        );
       }
 
-      function reduction(){
-        if(!game.baselineLocked || !(game.baseline > 0)) return null;
-        const a = avg7();
-        return a === null ? null : ((game.baseline - a) / game.baseline) * 100;
+      const html =
+        await response.text();
+
+      const match =
+        html.match(
+          /<meta\s+name=["']app-version["']\s+content=["']([^"']+)["']/i
+        );
+
+      if(!match){
+        if(manual){
+          toast(
+            'Não consegui identificar a versão publicada.'
+          );
+        }
+
+        return;
       }
 
-      function bond(){
-        const ks = last7();
-        let covered = 0;
+      const remoteVersion =
+        String(match[1]).trim();
 
-        ks.forEach(k => {
-          if(isClosed(k) || smokeCount(k) > 0 || resistCount(k) > 0){
-            covered++;
+      if(
+        remoteVersion !== APP_VERSION
+      ){
+
+        if(manual){
+          toast(
+            'Nova versão encontrada. Atualizando…'
+          );
+        }
+
+        const freshUrl =
+          baseUrl +
+          '?v=' +
+          encodeURIComponent(remoteVersion) +
+          '&refresh=' +
+          Date.now();
+
+        setTimeout(() => {
+          window.location.replace(
+            freshUrl
+          );
+        }, manual ? 500 : 0);
+
+        return;
+      }
+
+      if(manual){
+        toast(
+          'Você já está na versão mais recente.'
+        );
+      }
+
+    } catch(error){
+
+      console.log(
+        'Update check:',
+        error
+      );
+
+      if(manual){
+        toast(
+          'Não consegui verificar agora.'
+        );
+      }
+
+    }
+  }
+
+  /*
+    Faz uma consulta sempre que o app
+    volta para primeiro plano.
+  */
+
+  window.addEventListener(
+    'pageshow',
+    () => {
+
+      setTimeout(
+        () => checkForUpdate(),
+        800
+      );
+
+    }
+  );
+
+  document.addEventListener(
+    'visibilitychange',
+    () => {
+
+      if(
+        document.visibilityState ===
+        'visible'
+      ){
+
+        setTimeout(
+          () => checkForUpdate(),
+          700
+        );
+
+      }
+
+    }
+  );
+
+
+  /* ===============================
+     DADOS DO APP
+     =============================== */
+
+  const SMOKE_KEY =
+    'vou_parar_de_fumar_records_v1';
+
+  const RESIST_KEY =
+    'vou_parar_de_fumar_resists_v1';
+
+  const CLOSED_KEY =
+    'vou_parar_de_fumar_day_closures_v1';
+
+  const GAME_KEY =
+    'vou_parar_de_fumar_game_v1';
+
+
+  const parse = (
+    value,
+    fallback
+  ) => {
+
+    try{
+
+      const parsed =
+        JSON.parse(value);
+
+      return (
+        parsed ??
+        fallback
+      );
+
+    } catch {
+
+      return fallback;
+
+    }
+
+  };
+
+
+  const read = (
+    key,
+    fallback
+  ) =>
+    parse(
+      localStorage.getItem(key),
+      fallback
+    );
+
+
+  const write = (
+    key,
+    value
+  ) =>
+    localStorage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
+
+  let smokes =
+    read(
+      SMOKE_KEY,
+      []
+    );
+
+
+  let resists =
+    read(
+      RESIST_KEY,
+      []
+    );
+
+
+  let closedDays =
+    read(
+      CLOSED_KEY,
+      []
+    );
+
+
+  let game =
+    read(
+      GAME_KEY,
+      {
+        baseline:null,
+        baselineLocked:false,
+        bestReduction:0,
+        maxLevel:1
+      }
+    );
+
+
+  /* ===============================
+     HELPERS
+     =============================== */
+
+  const $ =
+    id =>
+      document.getElementById(id);
+
+
+  const pad =
+    n =>
+      String(n)
+        .padStart(
+          2,
+          '0'
+        );
+
+
+  const clamp =
+    (
+      n,
+      min,
+      max
+    ) =>
+      Math.max(
+        min,
+        Math.min(
+          max,
+          n
+        )
+      );
+
+
+  const key =
+    input => {
+
+      const d =
+        new Date(input);
+
+      return (
+        `${d.getFullYear()}-` +
+        `${pad(d.getMonth()+1)}-` +
+        `${pad(d.getDate())}`
+      );
+
+    };
+
+
+  const today =
+    () =>
+      key(
+        new Date()
+      );
+
+
+  const dayDate =
+    k => {
+
+      const [
+        y,
+        m,
+        d
+      ] =
+        k
+          .split('-')
+          .map(Number);
+
+      return new Date(
+        y,
+        m-1,
+        d,
+        12,
+        0,
+        0
+      );
+
+    };
+
+
+  const time =
+    iso =>
+      new Date(iso)
+        .toLocaleTimeString(
+          'pt-BR',
+          {
+            hour:'2-digit',
+            minute:'2-digit'
           }
-        });
+        );
 
-        let score = Math.round((covered / 7) * 84);
-        const t = today();
 
-        if(isClosed(t)) score += 16;
-        else if(smokeCount(t) > 0 || resistCount(t) > 0) score += 8;
+  const dayText =
+    k =>
+      dayDate(k)
+        .toLocaleDateString(
+          'pt-BR',
+          {
+            weekday:'short',
+            day:'2-digit',
+            month:'short'
+          }
+        );
 
-        return clamp(score, 0, 100);
-      }
 
-      function vitality(){
-        const r = reduction();
-        const recentResists = last7().reduce((sum, k) => sum + resistCount(k), 0);
+  const uuid =
+    () =>
+      (
+        window.crypto &&
+        crypto.randomUUID
+      )
+      ?
+        crypto.randomUUID()
+      :
+        (
+          `${Date.now()}-` +
+          Math.random()
+            .toString(16)
+            .slice(2)
+        );
 
-        let score = r === null ? 55 : 52 + r * 0.85;
-        score += Math.min(recentResists * 2.3, 14);
 
-        return Math.round(clamp(score, 15, 100));
-      }
+  function toast(message){
 
-      function progress(){
-        const r = reduction();
+    $('toast').textContent =
+      message;
 
-        if(r !== null && r > game.bestReduction){
-          game.bestReduction = r;
+    $('toast')
+      .classList
+      .add('show');
+
+    clearTimeout(
+      window.__toast
+    );
+
+    window.__toast =
+      setTimeout(
+        () =>
+          $('toast')
+            .classList
+            .remove('show'),
+        1600
+      );
+
+  }
+
+
+  const smokeCount =
+    k =>
+      smokes
+        .filter(
+          x =>
+            key(x.timestamp) === k
+        )
+        .length;
+
+
+  const resistCount =
+    k =>
+      resists
+        .filter(
+          x =>
+            key(x.timestamp) === k
+        )
+        .length;
+
+
+  const isClosed =
+    k =>
+      closedDays
+        .some(
+          x =>
+            x.date === k
+        );
+
+
+  function observed(){
+
+    const set =
+      new Set();
+
+    smokes
+      .forEach(
+        x =>
+          set.add(
+            key(x.timestamp)
+          )
+      );
+
+    resists
+      .forEach(
+        x =>
+          set.add(
+            key(x.timestamp)
+          )
+      );
+
+    closedDays
+      .forEach(
+        x =>
+          set.add(
+            x.date
+          )
+      );
+
+    return [
+      ...set
+    ].sort();
+
+  }
+
+
+  function last7(){
+
+    const result =
+      [];
+
+    for(
+      let i=6;
+      i>=0;
+      i--
+    ){
+
+      const d =
+        new Date();
+
+      d.setHours(
+        12,
+        0,
+        0,
+        0
+      );
+
+      d.setDate(
+        d.getDate() - i
+      );
+
+      result.push(
+        key(d)
+      );
+
+    }
+
+    return result;
+
+  }
+
+
+  /* ===============================
+     BASELINE
+     =============================== */
+
+  function maybeBaseline(){
+
+    if(
+      game.baselineLocked &&
+      typeof game.baseline ===
+        'number'
+    ){
+      return;
+    }
+
+    const days =
+      observed()
+        .slice(
+          0,
+          7
+        );
+
+    if(
+      !days.length
+    ){
+      return;
+    }
+
+    game.baseline =
+      days
+        .reduce(
+          (
+            sum,
+            day
+          ) =>
+            sum +
+            smokeCount(day),
+          0
+        )
+      /
+      days.length;
+
+
+    if(
+      days.length >= 7
+    ){
+      game.baselineLocked =
+        true;
+    }
+
+    write(
+      GAME_KEY,
+      game
+    );
+
+  }
+
+
+  function avg7(){
+
+    const days =
+      last7();
+
+    const known =
+      days.filter(
+        day =>
+          smokeCount(day) > 0 ||
+          resistCount(day) > 0 ||
+          isClosed(day) ||
+          day === today()
+      );
+
+    if(
+      !known.length
+    ){
+      return null;
+    }
+
+    return (
+      known
+        .reduce(
+          (
+            sum,
+            day
+          ) =>
+            sum +
+            smokeCount(day),
+          0
+        )
+      /
+      known.length
+    );
+
+  }
+
+
+  function reduction(){
+
+    if(
+      !game.baselineLocked ||
+      !(game.baseline > 0)
+    ){
+      return null;
+    }
+
+    const current =
+      avg7();
+
+    if(
+      current === null
+    ){
+      return null;
+    }
+
+    return (
+      (
+        game.baseline -
+        current
+      )
+      /
+      game.baseline
+    )
+    *
+    100;
+
+  }
+
+
+  /* ===============================
+     ATRIBUTOS DO NIMBO
+     =============================== */
+
+  function bond(){
+
+    const days =
+      last7();
+
+    let covered =
+      0;
+
+    days.forEach(
+      day => {
+
+        if(
+          isClosed(day) ||
+          smokeCount(day) > 0 ||
+          resistCount(day) > 0
+        ){
+          covered++;
         }
 
-        const xp =
-          closedDays.length * 12 +
-          resists.length * 6 +
-          Math.round(Math.max(0, game.bestReduction || 0) * 3);
-
-        const thresholds = [0, 100, 250, 500, 850];
-        let lvl = 1;
-
-        thresholds.forEach((t, i) => {
-          if(xp >= t) lvl = i + 1;
-        });
-
-        game.maxLevel = Math.max(game.maxLevel || 1, lvl);
-        write(GAME_KEY, game);
-
-        return { xp, lvl: game.maxLevel, thresholds };
       }
+    );
 
-      function mood(v, b){
-        if(b < 25) return 'sleepy';
-        if(v < 35) return 'tired';
-        if(v < 58) return 'neutral';
-        if(v < 80) return 'happy';
-        return 'radiant';
-      }
+    let score =
+      Math.round(
+        (
+          covered /
+          7
+        )
+        *
+        84
+      );
 
-      function message(m, b){
-        if(!observed().length){
-          return 'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
+    const t =
+      today();
+
+    if(
+      isClosed(t)
+    ){
+      score += 16;
+    }
+    else if(
+      smokeCount(t) > 0 ||
+      resistCount(t) > 0
+    ){
+      score += 8;
+    }
+
+    return clamp(
+      score,
+      0,
+      100
+    );
+
+  }
+
+
+  function vitality(){
+
+    const r =
+      reduction();
+
+    const recentResists =
+      last7()
+        .reduce(
+          (
+            sum,
+            day
+          ) =>
+            sum +
+            resistCount(day),
+          0
+        );
+
+    let score =
+      r === null
+      ?
+        55
+      :
+        52 +
+        r * .85;
+
+
+    score +=
+      Math.min(
+        recentResists *
+        2.3,
+        14
+      );
+
+
+    return Math.round(
+      clamp(
+        score,
+        15,
+        100
+      )
+    );
+
+  }
+
+
+  function progress(){
+
+    const r =
+      reduction();
+
+
+    if(
+      r !== null &&
+      r > game.bestReduction
+    ){
+      game.bestReduction =
+        r;
+    }
+
+
+    const xp =
+      closedDays.length *
+      12
+      +
+      resists.length *
+      6
+      +
+      Math.round(
+        Math.max(
+          0,
+          game.bestReduction ||
+          0
+        )
+        *
+        3
+      );
+
+
+    const thresholds =
+      [
+        0,
+        100,
+        250,
+        500,
+        850
+      ];
+
+
+    let level =
+      1;
+
+
+    thresholds
+      .forEach(
+        (
+          threshold,
+          index
+        ) => {
+
+          if(
+            xp >= threshold
+          ){
+            level =
+              index + 1;
+          }
+
         }
+      );
 
-        if(!game.baselineLocked){
-          return `Observando seus primeiros dias: ${Math.min(observed().length, 7)}/7 para formar a baseline.`;
+
+    game.maxLevel =
+      Math.max(
+        game.maxLevel ||
+        1,
+        level
+      );
+
+
+    write(
+      GAME_KEY,
+      game
+    );
+
+
+    return {
+      xp,
+      level:
+        game.maxLevel,
+      thresholds
+    };
+
+  }
+
+
+  function mood(
+    vitalityValue,
+    bondValue
+  ){
+
+    if(
+      bondValue < 25
+    ){
+      return 'sleepy';
+    }
+
+    if(
+      vitalityValue < 35
+    ){
+      return 'tired';
+    }
+
+    if(
+      vitalityValue < 58
+    ){
+      return 'neutral';
+    }
+
+    if(
+      vitalityValue < 80
+    ){
+      return 'happy';
+    }
+
+    return 'radiant';
+
+  }
+
+
+  function message(
+    moodValue,
+    bondValue
+  ){
+
+    if(
+      !observed().length
+    ){
+      return (
+        'Oi. Eu sou o Nimbo. ' +
+        'Vamos descobrir seu ritmo juntos.'
+      );
+    }
+
+
+    if(
+      !game.baselineLocked
+    ){
+
+      return (
+        'Observando seus primeiros dias: ' +
+        `${Math.min(observed().length,7)}/7 ` +
+        'para formar a baseline.'
+      );
+
+    }
+
+
+    if(
+      bondValue < 25
+    ){
+
+      return (
+        'Fiquei sonolento sem notícias. ' +
+        'Um registro honesto já me ajuda a acordar.'
+      );
+
+    }
+
+
+    const messages =
+      {
+
+        tired:
+          'A semana apertou um pouco. ' +
+          'Eu continuo aqui — o histórico ainda vale.',
+
+        neutral:
+          'Estou acompanhando. ' +
+          'Manter o mapa dos seus dias vivo já importa.',
+
+        happy:
+          'Seu ritmo está mudando. ' +
+          'Estou ficando mais leve.',
+
+        radiant:
+          'Olha meu fôlego! ' +
+          'Seu progresso está aparecendo em mim.'
+
+      };
+
+
+    return messages[
+      moodValue
+    ];
+
+  }
+
+
+  function animatePet(
+    good
+  ){
+
+    const pet =
+      $('petZone');
+
+    pet
+      .classList
+      .remove(
+        'pop',
+        'shake'
+      );
+
+    void pet.offsetWidth;
+
+    pet
+      .classList
+      .add(
+        good
+        ?
+          'pop'
+        :
+          'shake'
+      );
+
+
+    setTimeout(
+      () =>
+        pet
+          .classList
+          .remove(
+            'pop',
+            'shake'
+          ),
+      500
+    );
+
+  }
+
+
+  /* ===============================
+     RENDER
+     =============================== */
+
+  function render(){
+
+    smokes.sort(
+      (
+        a,
+        b
+      ) =>
+        new Date(a.timestamp)
+        -
+        new Date(b.timestamp)
+    );
+
+
+    resists.sort(
+      (
+        a,
+        b
+      ) =>
+        new Date(a.timestamp)
+        -
+        new Date(b.timestamp)
+    );
+
+
+    maybeBaseline();
+
+
+    const t =
+      today();
+
+
+    const todaySmokes =
+      smokes
+        .filter(
+          x =>
+            key(x.timestamp) === t
+        );
+
+
+    const todayResists =
+      resists
+        .filter(
+          x =>
+            key(x.timestamp) === t
+        );
+
+
+    const vital =
+      vitality();
+
+
+    const bondValue =
+      bond();
+
+
+    const prog =
+      progress();
+
+
+    const moodValue =
+      mood(
+        vital,
+        bondValue
+      );
+
+
+    $('todayLabel').textContent =
+      new Date()
+        .toLocaleDateString(
+          'pt-BR',
+          {
+            weekday:'long',
+            day:'2-digit',
+            month:'long'
+          }
+        );
+
+
+    $('todayCount').textContent =
+      todaySmokes.length;
+
+
+    $('cigLabel').textContent =
+      todaySmokes.length === 1
+      ?
+        'cigarro'
+      :
+        'cigarros';
+
+
+    $('resistToday').textContent =
+      todayResists.length;
+
+
+    $('lastTime').textContent =
+      todaySmokes.length
+      ?
+        (
+          'Último: ' +
+          time(
+            todaySmokes[
+              todaySmokes.length - 1
+            ].timestamp
+          )
+        )
+      :
+        'Nenhum cigarro registrado hoje';
+
+
+    $('todayTimes').innerHTML =
+      [
+
+        ...todaySmokes.map(
+          x =>
+            `<span class="chip">` +
+            `${time(x.timestamp)} cig.` +
+            `</span>`
+        ),
+
+        ...todayResists.map(
+          x =>
+            `<span class="chip good">` +
+            `${time(x.timestamp)} ✦` +
+            `</span>`
+        )
+
+      ].join('');
+
+
+    $('closeDayBtn').textContent =
+      isClosed(t)
+      ?
+        'Dia fechado ✓'
+      :
+        'Fechar o dia';
+
+
+    $('closeDayBtn')
+      .classList
+      .toggle(
+        'closed',
+        isClosed(t)
+      );
+
+
+    $('baselineValue').textContent =
+      game.baseline === null
+      ?
+        '—'
+      :
+        (
+          game.baseline
+            .toFixed(1)
+            .replace('.',',')
+          +
+          '/dia'
+        );
+
+
+    $('baselineStatus').textContent =
+      game.baselineLocked
+      ?
+        'baseline fixa'
+      :
+        'baseline provisória';
+
+
+    const average =
+      avg7();
+
+
+    const reductionValue =
+      reduction();
+
+
+    $('avg7').textContent =
+      average === null
+      ?
+        '—'
+      :
+        average
+          .toFixed(1)
+          .replace('.',',');
+
+
+    $('trendText').textContent =
+      reductionValue === null
+      ?
+        (
+          `${Math.min(observed().length,7)}` +
+          '/7 dias observados'
+        )
+      :
+        (
+          (
+            reductionValue >= 0
+            ?
+              '↓'
+            :
+              '↑'
+          )
+          +
+          ' '
+          +
+          Math.abs(
+            reductionValue
+          ).toFixed(0)
+          +
+          '% vs baseline'
+        );
+
+
+    $('vitalityText').textContent =
+      vital;
+
+
+    $('bondText').textContent =
+      bondValue;
+
+
+    $('vitalityBar').style.width =
+      vital +
+      '%';
+
+
+    $('bondBar').style.width =
+      bondValue +
+      '%';
+
+
+    const stateNames =
+      {
+
+        sleepy:
+          'sonolento',
+
+        tired:
+          'cansado',
+
+        neutral:
+          'atento',
+
+        happy:
+          'animado',
+
+        radiant:
+          'radiante'
+
+      };
+
+
+    $('petState').textContent =
+      stateNames[
+        moodValue
+      ];
+
+
+    $('levelBadge').textContent =
+      `FORMA ${prog.level}`;
+
+
+    $('petMessage').textContent =
+      message(
+        moodValue,
+        bondValue
+      );
+
+
+    const pet =
+      $('petZone');
+
+
+    pet.dataset.level =
+      prog.level;
+
+
+    pet
+      .classList
+      .remove(
+        'sleepy',
+        'tired',
+        'neutral',
+        'happy',
+        'radiant'
+      );
+
+
+    pet
+      .classList
+      .add(
+        moodValue
+      );
+
+
+    $('xpValue').textContent =
+      prog.xp;
+
+
+    document
+      .querySelectorAll('.evo')
+      .forEach(
+        (
+          element,
+          index
+        ) => {
+
+          const number =
+            index + 1;
+
+          element
+            .classList
+            .toggle(
+              'done',
+              number < prog.level
+            );
+
+          element
+            .classList
+            .toggle(
+              'current',
+              number === prog.level
+            );
+
         }
+      );
 
-        if(b < 25){
-          return 'Fiquei sonolento sem notícias. Um registro honesto já me ajuda a acordar.';
-        }
 
-        return {
-          tired: 'A semana apertou um pouco. Eu continuo aqui — o histórico ainda vale.',
-          neutral: 'Estou acompanhando. Manter o mapa dos seus dias vivo já importa.',
-          happy: 'Seu ritmo está mudando. Estou ficando mais leve.',
-          radiant: 'Olha meu fôlego! Seu progresso está aparecendo em mim.'
-        }[m];
-      }
+    if(
+      prog.level >= 5
+    ){
 
-      function animatePet(good){
-        const pet = $('petZone');
-        pet.classList.remove('pop', 'shake');
-        void pet.offsetWidth;
-        pet.classList.add(good ? 'pop' : 'shake');
-        setTimeout(() => pet.classList.remove('pop', 'shake'), 500);
-      }
+      $('xpBar').style.width =
+        '100%';
 
-      function render(){
-        smokes.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-        resists.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+      $('xpNote').textContent =
+        'Nimbo alcançou sua forma máxima atual.';
 
-        maybeBaseline();
+    }
+    else{
 
-        const t = today();
-        const st = smokes.filter(x => key(x.timestamp) === t);
-        const rt = resists.filter(x => key(x.timestamp) === t);
+      const low =
+        prog.thresholds[
+          prog.level - 1
+        ];
 
-        const v = vitality();
-        const b = bond();
-        const p = progress();
-        const m = mood(v, b);
+      const high =
+        prog.thresholds[
+          prog.level
+        ];
 
-        $('todayLabel').textContent = new Date().toLocaleDateString('pt-BR', {
-          weekday: 'long',
-          day: '2-digit',
-          month: 'long'
-        });
 
-        $('todayCount').textContent = st.length;
-        $('cigLabel').textContent = st.length === 1 ? 'cigarro' : 'cigarros';
-        $('resistToday').textContent = rt.length;
+      const percentage =
+        clamp(
+          (
+            (
+              prog.xp -
+              low
+            )
+            /
+            (
+              high -
+              low
+            )
+          )
+          *
+          100,
+          0,
+          100
+        );
 
-        $('lastTime').textContent = st.length
-          ? `Último: ${time(st[st.length - 1].timestamp)}`
-          : 'Nenhum cigarro registrado hoje';
 
-        $('todayTimes').innerHTML = [
-          ...st.map(x => `<span class="chip">${time(x.timestamp)} cig.</span>`),
-          ...rt.map(x => `<span class="chip good">${time(x.timestamp)} ✦</span>`)
-        ].join('');
+      $('xpBar').style.width =
+        percentage +
+        '%';
 
-        $('closeDayBtn').textContent = isClosed(t) ? 'Dia fechado ✓' : 'Fechar o dia';
-        $('closeDayBtn').classList.toggle('closed', isClosed(t));
 
-        $('baselineValue').textContent =
-          game.baseline === null ? '—' : `${game.baseline.toFixed(1).replace('.', ',')}/dia`;
+      $('xpNote').textContent =
+        (
+          high -
+          prog.xp
+        )
+        +
+        ' XP para a próxima evolução.';
 
-        $('baselineStatus').textContent =
-          game.baselineLocked ? 'baseline fixa' : 'baseline provisória';
+    }
 
-        const a = avg7();
-        const r = reduction();
 
-        $('avg7').textContent = a === null ? '—' : a.toFixed(1).replace('.', ',');
-        $('trendText').textContent = r === null
-          ? `${Math.min(observed().length, 7)}/7 dias observados`
-          : `${r >= 0 ? '↓' : '↑'} ${Math.abs(r).toFixed(0)}% vs baseline`;
+    $('powerMemory')
+      .classList
+      .toggle(
+        'locked',
+        closedDays.length < 7
+      );
 
-        $('vitalityText').textContent = v;
-        $('bondText').textContent = b;
-        $('vitalityBar').style.width = v + '%';
-        $('bondBar').style.width = b + '%';
 
-        $('petState').textContent = {
-          sleepy:'sonolento',
-          tired:'cansado',
-          neutral:'atento',
-          happy:'animado',
-          radiant:'radiante'
-        }[m];
+    $('powerPatience')
+      .classList
+      .toggle(
+        'locked',
+        resists.length < 5
+      );
 
-        $('levelBadge').textContent = `FORMA ${p.lvl}`;
-        $('petMessage').textContent = message(m, b);
 
-        const pet = $('petZone');
-        pet.dataset.level = p.lvl;
-        pet.classList.remove('sleepy','tired','neutral','happy','radiant');
-        pet.classList.add(m);
+    $('powerBreath')
+      .classList
+      .toggle(
+        'locked',
+        !(game.bestReduction >= 10)
+      );
 
-        $('xpValue').textContent = p.xp;
 
-        document.querySelectorAll('.evo').forEach((el, i) => {
-          const n = i + 1;
-          el.classList.toggle('done', n < p.lvl);
-          el.classList.toggle('current', n === p.lvl);
-        });
+    $('powerRecord')
+      .classList
+      .toggle(
+        'locked',
+        !(game.bestReduction >= 25)
+      );
 
-        if(p.lvl >= 5){
-          $('xpBar').style.width = '100%';
-          $('xpNote').textContent = 'Nimbo alcançou sua forma máxima atual.';
-        } else {
-          const lo = p.thresholds[p.lvl - 1];
-          const hi = p.thresholds[p.lvl];
-          $('xpBar').style.width = clamp(((p.xp - lo) / (hi - lo)) * 100, 0, 100) + '%';
-          $('xpNote').textContent = `${hi - p.xp} XP para a próxima evolução.`;
-        }
 
-        $('powerMemory').classList.toggle('locked', closedDays.length < 7);
-        $('powerPatience').classList.toggle('locked', resists.length < 5);
-        $('powerBreath').classList.toggle('locked', !(game.bestReduction >= 10));
-        $('powerRecord').classList.toggle('locked', !(game.bestReduction >= 25));
+    const historyDays =
+      observed()
+        .sort()
+        .reverse();
 
-        const ks = observed().sort().reverse();
-        $('historyList').innerHTML = ks.length
-          ? ks.map(k => {
-              const s = smokeCount(k);
-              const rr = resistCount(k);
-              const times = smokes
-                .filter(x => key(x.timestamp) === k)
-                .map(x => time(x.timestamp));
+
+    $('historyList').innerHTML =
+      historyDays.length
+      ?
+        historyDays
+          .map(
+            day => {
+
+              const cigarettes =
+                smokeCount(day);
+
+              const resisted =
+                resistCount(day);
+
+              const times =
+                smokes
+                  .filter(
+                    x =>
+                      key(x.timestamp) === day
+                  )
+                  .map(
+                    x =>
+                      time(x.timestamp)
+                  );
+
 
               return `
                 <div class="history-row">
+
                   <div>
-                    <div class="date-title">${dayText(k)} ${isClosed(k) ? '✓' : ''}</div>
-                    <div class="date-sub">
-                      ${times.length ? times.join(' · ') : 'sem cigarros registrados'}
-                      ${rr ? `<br>✦ ${rr} vontade${rr > 1 ? 's' : ''} superada${rr > 1 ? 's' : ''}` : ''}
+
+                    <div class="date-title">
+
+                      ${dayText(day)}
+
+                      ${isClosed(day) ? '✓' : ''}
+
                     </div>
+
+                    <div class="date-sub">
+
+                      ${
+                        times.length
+                        ?
+                          times.join(' · ')
+                        :
+                          'sem cigarros registrados'
+                      }
+
+                      ${
+                        resisted
+                        ?
+                          (
+                            '<br>✦ ' +
+                            resisted +
+                            ' vontade' +
+                            (resisted > 1 ? 's' : '') +
+                            ' superada' +
+                            (resisted > 1 ? 's' : '')
+                          )
+                        :
+                          ''
+                      }
+
+                    </div>
+
                   </div>
+
                   <div class="day-score">
-                    <strong>${s}</strong>
-                    <span>cigarros</span>
+
+                    <strong>
+                      ${cigarettes}
+                    </strong>
+
+                    <span>
+                      cigarros
+                    </span>
+
                   </div>
+
                 </div>
               `;
-            }).join('')
-          : '<div class="empty">Seu histórico vai aparecer aqui conforme você registrar.</div>';
 
-        $('totalSmokes').textContent = smokes.length;
-        $('totalResists').textContent = resists.length;
-        $('totalClosed').textContent = closedDays.length;
-      }
+            }
+          )
+          .join('')
+      :
+        (
+          '<div class="empty">' +
+          'Seu histórico vai aparecer aqui ' +
+          'conforme você registrar.' +
+          '</div>'
+        );
 
-      function reopenTodayIfNeeded(){
-        const t = today();
-        if(isClosed(t)){
-          closedDays = closedDays.filter(x => x.date !== t);
-          write(CLOSED_KEY, closedDays);
+
+    $('totalSmokes').textContent =
+      smokes.length;
+
+
+    $('totalResists').textContent =
+      resists.length;
+
+
+    $('totalClosed').textContent =
+      closedDays.length;
+
+  }
+
+
+  /* ===============================
+     REGISTROS
+     =============================== */
+
+  function reopenTodayIfNeeded(){
+
+    const t =
+      today();
+
+    if(
+      isClosed(t)
+    ){
+
+      closedDays =
+        closedDays
+          .filter(
+            x =>
+              x.date !== t
+          );
+
+      write(
+        CLOSED_KEY,
+        closedDays
+      );
+
+    }
+
+  }
+
+
+  $('smokeBtn').onclick =
+    () => {
+
+      reopenTodayIfNeeded();
+
+      smokes.push(
+        {
+          id:uuid(),
+          timestamp:
+            new Date()
+              .toISOString()
         }
-      }
+      );
 
-      $('smokeBtn').onclick = () => {
-        reopenTodayIfNeeded();
-        smokes.push({
-          id: uuid(),
-          timestamp: new Date().toISOString()
-        });
-        write(SMOKE_KEY, smokes);
-        animatePet(false);
-        render();
-        toast('Cigarro registrado');
-      };
+      write(
+        SMOKE_KEY,
+        smokes
+      );
 
-      $('resistBtn').onclick = () => {
-        reopenTodayIfNeeded();
-        resists.push({
-          id: uuid(),
-          timestamp: new Date().toISOString()
-        });
-        write(RESIST_KEY, resists);
-        animatePet(true);
-        render();
-        toast('✦ Nimbo ganhou energia');
-      };
-
-      $('closeDayBtn').onclick = () => {
-        const t = today();
-
-        if(isClosed(t)){
-          if(confirm('Reabrir o dia de hoje?')){
-            closedDays = closedDays.filter(x => x.date !== t);
-            write(CLOSED_KEY, closedDays);
-            render();
-          }
-          return;
-        }
-
-        const s = smokeCount(t);
-        const r = resistCount(t);
-
-        if(confirm(`Fechar o dia com ${s} cigarro${s === 1 ? '' : 's'} e ${r} vontade${r === 1 ? '' : 's'} superada${r === 1 ? '' : 's'}?`)){
-          closedDays.push({
-            date: t,
-            closedAt: new Date().toISOString()
-          });
-          write(CLOSED_KEY, closedDays);
-          render();
-          animatePet(true);
-          toast('Dia fechado • + vínculo');
-        }
-      };
-
-      $('undoBtn').onclick = () => {
-        const events = [
-          ...smokes.map(x => ({...x, type:'smoke'})),
-          ...resists.map(x => ({...x, type:'resist'}))
-        ].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
-        if(!events.length){
-          toast('Não há evento para desfazer');
-          return;
-        }
-
-        const last = events[events.length - 1];
-
-        if(confirm(`Apagar o último evento das ${time(last.timestamp)}?`)){
-          if(last.type === 'smoke'){
-            smokes = smokes.filter(x => x.id !== last.id);
-            write(SMOKE_KEY, smokes);
-          } else {
-            resists = resists.filter(x => x.id !== last.id);
-            write(RESIST_KEY, resists);
-          }
-          render();
-          toast('Último evento removido');
-        }
-      };
-
-      $('exportBtn').onclick = () => {
-        const data = {
-          app: 'vou-parar-de-fumar',
-          version: 3,
-          exportedAt: new Date().toISOString(),
-          records: smokes,
-          resists,
-          closedDays,
-          game
-        };
-
-        const blob = new Blob([JSON.stringify(data, null, 2)], {
-          type:'application/json'
-        });
-
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `vou-parar-de-fumar-backup-${today()}.json`;
-        a.click();
-
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-        toast('Backup criado');
-      };
-
-      $('importFile').onchange = async e => {
-        const file = e.target.files[0];
-        if(!file) return;
-
-        try{
-          const data = JSON.parse(await file.text());
-          if(!Array.isArray(data.records)) throw new Error();
-
-          if(!confirm('Importar este backup e substituir os dados locais atuais?')){
-            e.target.value = '';
-            return;
-          }
-
-          smokes = data.records || [];
-          resists = Array.isArray(data.resists) ? data.resists : [];
-          closedDays = Array.isArray(data.closedDays) ? data.closedDays : [];
-          game = data.game || {
-            baseline: null,
-            baselineLocked: false,
-            bestReduction: 0,
-            maxLevel: 1
-          };
-
-          write(SMOKE_KEY, smokes);
-          write(RESIST_KEY, resists);
-          write(CLOSED_KEY, closedDays);
-          write(GAME_KEY, game);
-
-          render();
-          toast('Backup importado');
-        } catch {
-          alert('Não consegui ler esse backup.');
-        }
-
-        e.target.value = '';
-      };
-
-      $('clearBtn').onclick = () => {
-        if(confirm('Apagar TODOS os dados locais? Faça um backup antes se quiser guardar uma cópia.')){
-          smokes = [];
-          resists = [];
-          closedDays = [];
-          game = {
-            baseline: null,
-            baselineLocked: false,
-            bestReduction: 0,
-            maxLevel: 1
-          };
-
-          write(SMOKE_KEY, smokes);
-          write(RESIST_KEY, resists);
-          write(CLOSED_KEY, closedDays);
-          write(GAME_KEY, game);
-
-          render();
-        }
-      };
-
-      document.querySelectorAll('.nav button').forEach(btn => {
-        btn.onclick = () => {
-          document.querySelectorAll('.nav button').forEach(b => {
-            b.classList.toggle('active', b === btn);
-          });
-
-          document.querySelectorAll('.tab').forEach(section => {
-            section.classList.toggle('active', section.id === btn.dataset.tab);
-          });
-
-          window.scrollTo({ top:0, behavior:'smooth' });
-        };
-      });
+      animatePet(
+        false
+      );
 
       render();
-      setInterval(render, 60000);
-    })();
-  </script>
+
+      toast(
+        'Cigarro registrado'
+      );
+
+    };
+
+
+  $('resistBtn').onclick =
+    () => {
+
+      reopenTodayIfNeeded();
+
+      resists.push(
+        {
+          id:uuid(),
+          timestamp:
+            new Date()
+              .toISOString()
+        }
+      );
+
+      write(
+        RESIST_KEY,
+        resists
+      );
+
+      animatePet(
+        true
+      );
+
+      render();
+
+      toast(
+        '✦ Nimbo ganhou energia'
+      );
+
+    };
+
+
+  $('closeDayBtn').onclick =
+    () => {
+
+      const t =
+        today();
+
+
+      if(
+        isClosed(t)
+      ){
+
+        if(
+          confirm(
+            'Reabrir o dia de hoje?'
+          )
+        ){
+
+          closedDays =
+            closedDays
+              .filter(
+                x =>
+                  x.date !== t
+              );
+
+
+          write(
+            CLOSED_KEY,
+            closedDays
+          );
+
+
+          render();
+
+        }
+
+        return;
+
+      }
+
+
+      const cigarettes =
+        smokeCount(t);
+
+
+      const resisted =
+        resistCount(t);
+
+
+      const message =
+        (
+          'Fechar o dia com ' +
+          cigarettes +
+          ' cigarro' +
+          (
+            cigarettes === 1
+            ?
+              ''
+            :
+              's'
+          )
+          +
+          ' e ' +
+          resisted +
+          ' vontade' +
+          (
+            resisted === 1
+            ?
+              ''
+            :
+              's'
+          )
+          +
+          ' superada' +
+          (
+            resisted === 1
+            ?
+              ''
+            :
+              's'
+          )
+          +
+          '?'
+        );
+
+
+      if(
+        confirm(message)
+      ){
+
+        closedDays.push(
+          {
+            date:t,
+            closedAt:
+              new Date()
+                .toISOString()
+          }
+        );
+
+
+        write(
+          CLOSED_KEY,
+          closedDays
+        );
+
+
+        render();
+
+
+        animatePet(
+          true
+        );
+
+
+        toast(
+          'Dia fechado • + vínculo'
+        );
+
+      }
+
+    };
+
+
+  /* ===============================
+     DESFAZER
+     =============================== */
+
+  $('undoBtn').onclick =
+    () => {
+
+      const events =
+        [
+
+          ...smokes.map(
+            x =>
+              ({
+                ...x,
+                type:'smoke'
+              })
+          ),
+
+          ...resists.map(
+            x =>
+              ({
+                ...x,
+                type:'resist'
+              })
+          )
+
+        ]
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            new Date(a.timestamp)
+            -
+            new Date(b.timestamp)
+        );
+
+
+      if(
+        !events.length
+      ){
+
+        toast(
+          'Não há evento para desfazer'
+        );
+
+        return;
+
+      }
+
+
+      const last =
+        events[
+          events.length - 1
+        ];
+
+
+      if(
+        confirm(
+          'Apagar o último evento das ' +
+          time(last.timestamp) +
+          '?'
+        )
+      ){
+
+        if(
+          last.type === 'smoke'
+        ){
+
+          smokes =
+            smokes
+              .filter(
+                x =>
+                  x.id !== last.id
+              );
+
+
+          write(
+            SMOKE_KEY,
+            smokes
+          );
+
+        }
+        else{
+
+          resists =
+            resists
+              .filter(
+                x =>
+                  x.id !== last.id
+              );
+
+
+          write(
+            RESIST_KEY,
+            resists
+          );
+
+        }
+
+
+        render();
+
+
+        toast(
+          'Último evento removido'
+        );
+
+      }
+
+    };
+
+
+  /* ===============================
+     BACKUP
+     =============================== */
+
+  $('exportBtn').onclick =
+    () => {
+
+      const data =
+        {
+
+          app:
+            'vou-parar-de-fumar',
+
+          version:
+            4,
+
+          exportedAt:
+            new Date()
+              .toISOString(),
+
+          records:
+            smokes,
+
+          resists,
+
+          closedDays,
+
+          game
+
+        };
+
+
+      const blob =
+        new Blob(
+          [
+            JSON.stringify(
+              data,
+              null,
+              2
+            )
+          ],
+          {
+            type:
+              'application/json'
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+
+      const a =
+        document.createElement(
+          'a'
+        );
+
+
+      a.href =
+        url;
+
+
+      a.download =
+        (
+          'vou-parar-de-fumar-backup-' +
+          today() +
+          '.json'
+        );
+
+
+      a.click();
+
+
+      setTimeout(
+        () =>
+          URL.revokeObjectURL(
+            url
+          ),
+        1000
+      );
+
+
+      toast(
+        'Backup criado'
+      );
+
+    };
+
+
+  $('importFile').onchange =
+    async event => {
+
+      const file =
+        event.target.files[0];
+
+
+      if(
+        !file
+      ){
+        return;
+      }
+
+
+      try{
+
+        const data =
+          JSON.parse(
+            await file.text()
+          );
+
+
+        if(
+          !Array.isArray(
+            data.records
+          )
+        ){
+          throw new Error();
+        }
+
+
+        if(
+          !confirm(
+            'Importar este backup e substituir os dados locais atuais?'
+          )
+        ){
+
+          event.target.value =
+            '';
+
+          return;
+
+        }
+
+
+        smokes =
+          data.records ||
+          [];
+
+
+        resists =
+          Array.isArray(
+            data.resists
+          )
+          ?
+            data.resists
+          :
+            [];
+
+
+        closedDays =
+          Array.isArray(
+            data.closedDays
+          )
+          ?
+            data.closedDays
+          :
+            [];
+
+
+        game =
+          data.game ||
+          {
+            baseline:null,
+            baselineLocked:false,
+            bestReduction:0,
+            maxLevel:1
+          };
+
+
+        write(
+          SMOKE_KEY,
+          smokes
+        );
+
+
+        write(
+          RESIST_KEY,
+          resists
+        );
+
+
+        write(
+          CLOSED_KEY,
+          closedDays
+        );
+
+
+        write(
+          GAME_KEY,
+          game
+        );
+
+
+        render();
+
+
+        toast(
+          'Backup importado'
+        );
+
+      }
+      catch{
+
+        alert(
+          'Não consegui ler esse backup.'
+        );
+
+      }
+
+
+      event.target.value =
+        '';
+
+    };
+
+
+  /* ===============================
+     ATUALIZAÇÃO MANUAL
+     =============================== */
+
+  $('updateBtn').onclick =
+    () => {
+
+      toast(
+        'Verificando versão…'
+      );
+
+      checkForUpdate({
+        manual:true
+      });
+
+    };
+
+
+  /* ===============================
+     LIMPAR DADOS
+     =============================== */
+
+  $('clearBtn').onclick =
+    () => {
+
+      if(
+        confirm(
+          'Apagar TODOS os dados locais? Faça um backup antes se quiser guardar uma cópia.'
+        )
+      ){
+
+        smokes =
+          [];
+
+
+        resists =
+          [];
+
+
+        closedDays =
+          [];
+
+
+        game =
+          {
+            baseline:null,
+            baselineLocked:false,
+            bestReduction:0,
+            maxLevel:1
+          };
+
+
+        write(
+          SMOKE_KEY,
+          smokes
+        );
+
+
+        write(
+          RESIST_KEY,
+          resists
+        );
+
+
+        write(
+          CLOSED_KEY,
+          closedDays
+        );
+
+
+        write(
+          GAME_KEY,
+          game
+        );
+
+
+        render();
+
+      }
+
+    };
+
+
+  /* ===============================
+     NAVEGAÇÃO
+     =============================== */
+
+  document
+    .querySelectorAll(
+      '.nav button'
+    )
+    .forEach(
+      button => {
+
+        button.onclick =
+          () => {
+
+            document
+              .querySelectorAll(
+                '.nav button'
+              )
+              .forEach(
+                b =>
+                  b
+                    .classList
+                    .toggle(
+                      'active',
+                      b === button
+                    )
+              );
+
+
+            document
+              .querySelectorAll(
+                '.tab'
+              )
+              .forEach(
+                section =>
+                  section
+                    .classList
+                    .toggle(
+                      'active',
+                      section.id ===
+                      button.dataset.tab
+                    )
+              );
+
+
+            window.scrollTo(
+              {
+                top:0,
+                behavior:'smooth'
+              }
+            );
+
+          };
+
+      }
+    );
+
+
+  /* ===============================
+     START
+     =============================== */
+
+  $('versionInfo').textContent =
+    'Versão instalada: v' +
+    APP_VERSION;
+
+
+  render();
+
+
+  setInterval(
+    render,
+    60000
+  );
+
+
+  /*
+    Verificação adicional após
+    o primeiro carregamento.
+  */
+
+  setTimeout(
+    () =>
+      checkForUpdate(),
+    1500
+  );
+
+})();
+</script>
+
 </body>
 </html>
