@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.3.1">
+<meta name="app-version" content="7.3.2">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -831,6 +831,140 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .today-details>summary{padding:5px 0;font-size:8px}
 }
 
+/* =========================================================
+   V7.3.2 — HOME RESPONSIVA E FUNCIONAL
+   Mantém toda a área essencial da home antes dos detalhes.
+   ========================================================= */
+.home-header{
+  align-items:center;margin-bottom:9px
+}
+.home-header h1{font-size:22px;line-height:1.05}
+.home-header .subtitle{font-size:12px;line-height:1.25;margin-top:3px}
+.sync-stack{gap:0}.sync-stack .badge{padding:6px 8px;font-size:9px}
+.sync-meta{display:none}
+
+.habitat-v731{
+  height:380px;
+  height:clamp(330px,42svh,380px);
+  margin-bottom:9px;border-radius:24px
+}
+.habitat-head-v731{top:12px;left:14px;right:14px}
+.habitat-head-v731 .pet-name{font-size:13px}
+.habitat-head-v731 .pet-state{font-size:10px;margin-top:2px}
+.habitat-head-v731 .form-badge{font-size:9px;padding:6px 8px;border-radius:10px}
+
+.city-buildings.back{bottom:120px;height:175px;opacity:.66}
+.city-buildings.front{bottom:106px;height:135px;opacity:.88}
+.city-buildings.back .b1{height:82px}.city-buildings.back .b2{height:116px}.city-buildings.back .b3{height:150px}.city-buildings.back .b4{height:104px}.city-buildings.back .b5{height:162px}.city-buildings.back .b6{height:126px}.city-buildings.back .b7{height:92px}
+.city-buildings.front .f1{height:64px}.city-buildings.front .f2{height:91px}.city-buildings.front .f3{height:74px}.city-buildings.front .f4{height:102px}.city-buildings.front .f5{height:69px}
+.city-tree{bottom:104px;transform:scale(.72);transform-origin:bottom}
+.tree-right{transform:scale(.64)}
+.street-light{bottom:104px;height:54px;transform:scale(.86);transform-origin:bottom}
+.lamp2{height:60px}
+.city-road-v731{bottom:80px;height:44px}
+.city-road-v731 .road-line{top:22px}
+.traffic{bottom:8px;transform:scale(.86)}
+
+.speech-bubble{
+  top:47px;width:min(300px,84%);padding:9px 12px;border-radius:14px;
+  background:rgba(5,15,30,.94);border-color:rgba(176,216,250,.28);
+  color:#f3f8fc;font-size:13px;line-height:1.3;box-shadow:0 9px 24px rgba(0,0,0,.26)
+}
+.speech-bubble::after{bottom:-7px;border-width:7px;border-top-color:rgba(5,15,30,.94)}
+.pet-reaction-v731{
+  top:69px!important;width:min(300px,84%)!important;
+  font:700 12px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif!important;
+  padding:9px 12px!important;border-radius:14px!important
+}
+
+.pet-zone-v731{
+  top:clamp(140px,19svh,168px)!important;
+  width:clamp(116px,16.5svh,150px)!important;
+  height:clamp(116px,16.5svh,150px)!important
+}
+.pet-zone-v731 .pet-bob{
+  width:clamp(108px,15.5svh,142px);height:clamp(108px,15.5svh,142px)
+}
+.pet-zone-v731::before{width:96px;height:13px;bottom:8px}
+.pet-touch-hint-v731{display:none}
+
+.nimbo-icon-actions{
+  top:auto;bottom:80px;
+  grid-template-columns:repeat(5,44px);gap:8px
+}
+.nimbo-icon-btn{
+  width:44px;height:44px;border-radius:13px;font-size:20px;
+  background:rgba(7,21,41,.91);border-color:rgba(143,207,255,.42)
+}
+.nimbo-icon-btn:focus-visible,.quick:focus-visible,.close-day-card:focus-visible{
+  outline:3px solid rgba(255,214,107,.92);outline-offset:2px
+}
+
+.stats-v731{
+  left:10px;right:10px;bottom:8px;
+  grid-template-columns:1fr 1fr;gap:5px 7px
+}
+.stats-v731 .stat{
+  padding:5px 8px;border-radius:10px;background:rgba(5,16,31,.91)
+}
+.stats-v731 .stat-head{font-size:11px;line-height:1.15;margin-bottom:4px;gap:5px}
+.stats-v731 .meter{height:6px}
+
+.quick-actions-v731{gap:8px;margin:0 0 8px}
+.quick-actions-v731 .quick{
+  min-height:78px;border-radius:17px;padding:10px 8px
+}
+.quick-actions-v731 .quick-icon{font-size:21px;margin-bottom:3px}
+.quick-actions-v731 .quick-title{font-size:14px;line-height:1.15}
+.quick-actions-v731 .quick-sub{font-size:11px;line-height:1.2;margin-top:3px}
+
+.daily-summary-row{
+  grid-template-columns:1fr 1fr;gap:8px;margin:0 0 6px
+}
+.daily-summary-card{
+  min-height:78px;border-radius:16px;padding:10px 11px
+}
+.daily-summary-card .summary-icon{
+  top:9px;left:9px;width:29px;height:29px;font-size:15px
+}
+.summary-number{font-size:29px;margin:5px 0 6px 36px}
+.summary-label{font-size:12px;line-height:1.2}
+.summary-sub{font-size:10px;line-height:1.25;margin-top:4px}
+.close-day-card{
+  grid-column:1/-1;min-height:48px;padding:12px 52px 12px 14px;
+  display:flex;align-items:center;font-size:14px;line-height:1.2
+}
+.close-day-card::before{
+  left:auto;right:15px;top:50%;transform:translateY(-50%);font-size:20px
+}
+.close-day-card::after{content:none;display:none}
+.today-details>summary{padding:8px 0;font-size:11px}
+
+@media(max-width:360px){
+  .home-header h1{font-size:20px}.home-header .subtitle{font-size:11px}
+  .habitat-v731{height:330px}
+  .speech-bubble{width:80%;font-size:12px;padding:8px 10px}
+  .nimbo-icon-actions{grid-template-columns:repeat(5,40px);gap:5px}
+  .nimbo-icon-btn{width:40px;height:40px;font-size:18px}
+  .stats-v731 .stat-head{font-size:10px}
+  .quick-actions-v731 .quick-title{font-size:13px}
+  .quick-actions-v731 .quick-sub{font-size:10px}
+}
+
+@media(max-height:720px) and (max-width:500px){
+  .wrap{padding-top:calc(7px + env(safe-area-inset-top))}
+  .home-header{margin-bottom:7px}
+  .habitat-v731{height:330px;margin-bottom:7px}
+  .quick-actions-v731 .quick{min-height:70px}
+  .daily-summary-card{min-height:68px}
+  .close-day-card{min-height:44px}
+  .today-details>summary{padding:6px 0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .traffic,.pet-bob,.pet-sway,.pet-touch-hint{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -970,26 +1104,26 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
   <div id="homeResourceStrip" style="display:none"><span id="homeWoodValue">0</span><span id="homeStoneValue">0</span><span id="homeSeedsValue">0</span><span id="homePresenceValue">0</span></div>
 
-  <div class="daily-summary-row">
+  <div class="quick-actions quick-actions-v731">
+    <button class="quick smoke" id="smokeBtn" type="button" aria-label="Registrar que fumei agora"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
+    <button class="quick resist" id="resistBtn" type="button" aria-label="Registrar que quis fumar, mas não fumei"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Presença</span></button>
+  </div>
+
+  <div class="daily-summary-row" aria-label="Resumo de hoje">
     <div class="daily-summary-card smoke-summary">
-      <div class="summary-icon">🚬</div>
+      <div class="summary-icon" aria-hidden="true">🚬</div>
       <div class="summary-number" id="todayCount">0</div>
       <div class="summary-label"><span id="cigLabel">cigarros</span> hoje</div>
       <div class="summary-sub" id="lastTime">Nenhum registrado hoje</div>
       <div id="todayLabel" class="sr-only">Hoje</div>
     </div>
     <div class="daily-summary-card resist-summary">
-      <div class="summary-icon">🚭</div>
+      <div class="summary-icon" aria-hidden="true">🚭</div>
       <div class="summary-number" id="resistToday">0</div>
       <div class="summary-label">Vontades superadas</div>
       <div class="summary-sub good-text">hoje</div>
     </div>
     <button class="daily-summary-card close-day-card" id="closeDayBtn" type="button">Fechar o dia</button>
-  </div>
-
-  <div class="quick-actions quick-actions-v731">
-    <button class="quick smoke" id="smokeBtn"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
-    <button class="quick resist" id="resistBtn"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Presença</span></button>
   </div>
 
   <details class="today-details">
@@ -1251,7 +1385,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.3.1';
+  const APP_VERSION='7.3.2';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1744,7 +1878,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       updatedAt:new Date(Math.max(stateTime(local),stateTime(cloud),Date.now())).toISOString()
     });
 
-    capCommonResources?.();
+    let mergedCap=storageCapFor(merged.buildings.refuge.level);
+    if(merged.inventory.includes('return_stone'))mergedCap+=1500;
+    ['wood','stone','seeds'].forEach(resource=>{
+      merged.resources[resource]=Math.min(mergedCap,Math.max(0,Number(merged.resources[resource]||0)));
+    });
+    merged.resources.presence=Math.max(0,Number(merged.resources.presence||0));
     return merged;
   }
 
@@ -2688,15 +2827,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(f>=65)pet.classList.add('high-breath');
     if(r>=65)pet.classList.add('high-resilience');
     if(v<40)pet.classList.add('low-vitality');
-
-    const cap=Math.max(1,storageCap());
-    const wood=Number(vale.resources.wood||0)/cap;
-    const stone=Number(vale.resources.stone||0)/cap;
-    const seeds=Number(vale.resources.seeds||0)/cap;
-
-    $('petPropWood')?.classList.toggle('visible',wood>=.35);
-    $('petPropStone')?.classList.toggle('visible',stone>=.35);
-    $('petPropSeed')?.classList.toggle('visible',seeds>=.25);
   }
 
   function schedulePetIdle(){
