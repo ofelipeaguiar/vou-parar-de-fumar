@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.3">
+<meta name="app-version" content="7.3.1">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -768,6 +768,69 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .eyes-bored,.eyes-shocked,.eyes-confused,.mouth-shocked,.mouth-confused{display:none}
 @media(max-width:380px){.habitat-v73{height:408px}.habitat-v73 .pet-zone{width:184px;height:184px}.habitat-v73 .pet-bob{width:156px;height:156px}.mini-card{padding:12px 14px}.mini-v span{font-size:36px}.quick-actions-v73 .quick{min-height:98px}.care-btn{font-size:11px;padding:8px 6px}}
 
+
+/* =========================================================
+   V7.3.1 — HOME REFINADA (menu inferior preservado)
+   ========================================================= */
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.home-header{align-items:flex-start;margin-bottom:12px}.home-header h1{font-size:26px}.home-header .subtitle{font-size:13px;margin-top:5px}
+.sync-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px}.sync-stack .badge{padding:8px 10px}.sync-meta{font-size:9px;color:#7f93aa;white-space:nowrap}
+
+.habitat-v731{height:585px;margin-bottom:12px;border-radius:28px;border:1px solid rgba(112,194,255,.30);background:linear-gradient(180deg,#112f55 0%,#1d3d68 42%,#172d4e 68%,#0d1c32 100%);box-shadow:0 22px 60px rgba(0,0,0,.26);overflow:hidden}
+.habitat-v731::after{opacity:.06;background-size:10px 10px}
+.habitat-head-v731{top:18px;left:18px;right:18px}.habitat-head-v731 .pet-name{font-size:14px;color:#f0fbff}.habitat-head-v731 .pet-state{font-size:11px;color:#68ddff}.habitat-head-v731 .form-badge{font-size:10px;padding:8px 10px;background:rgba(8,20,39,.55);border-color:rgba(154,205,255,.24);border-radius:12px}
+
+.city-scene-v731{position:absolute;inset:0;z-index:0;overflow:hidden;background:linear-gradient(180deg,#1d3159 0%,#4a557c 35%,#bb6f76 69%,#263d58 70%)}
+.city-glow{position:absolute;left:50%;top:40px;width:250px;height:220px;transform:translateX(-50%);background:radial-gradient(circle,rgba(248,155,119,.30),rgba(101,96,145,.08) 52%,transparent 70%)}
+.city-stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(255,244,208,.75);box-shadow:0 0 5px rgba(255,226,170,.8)}
+.city-stars i:nth-child(1){left:18%;top:38px}.city-stars i:nth-child(2){left:36%;top:70px}.city-stars i:nth-child(3){left:64%;top:50px}.city-stars i:nth-child(4){left:79%;top:92px}.city-stars i:nth-child(5){left:52%;top:24px}
+.city-buildings{position:absolute;left:0;right:0;display:flex;align-items:flex-end;gap:5px;padding:0 8px}.city-buildings.back{bottom:192px;height:285px;opacity:.78}.city-buildings.front{bottom:164px;height:225px;opacity:.94;gap:8px;padding:0 12px}
+.bldg{display:block;position:relative;flex:1;min-width:34px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#31496c,#192c49);border:1px solid rgba(138,183,216,.10);box-shadow:inset 0 0 18px rgba(15,23,41,.45)}
+.bldg::after{content:'';position:absolute;inset:10px 7px 6px;background:repeating-linear-gradient(180deg,rgba(255,196,97,.68) 0 5px,transparent 5px 13px),repeating-linear-gradient(90deg,transparent 0 5px,rgba(255,213,130,.22) 5px 9px,transparent 9px 15px);opacity:.72}
+.city-buildings.back .b1{height:120px}.city-buildings.back .b2{height:170px}.city-buildings.back .b3{height:225px}.city-buildings.back .b4{height:155px}.city-buildings.back .b5{height:245px}.city-buildings.back .b6{height:190px}.city-buildings.back .b7{height:140px}
+.city-buildings.front .f1{height:92px}.city-buildings.front .f2{height:130px}.city-buildings.front .f3{height:105px}.city-buildings.front .f4{height:146px}.city-buildings.front .f5{height:100px}
+.city-tree{position:absolute;bottom:161px;width:58px;height:74px;border-radius:55% 45% 46% 54%;background:radial-gradient(circle at 50% 35%,#2d694f,#153c37 68%,transparent 70%);z-index:2}.city-tree::after{content:'';position:absolute;left:27px;bottom:-18px;width:5px;height:32px;background:#24302f}.tree-left{left:14px}.tree-right{right:22px;transform:scale(.85)}
+.street-light{position:absolute;bottom:157px;width:3px;height:72px;background:#283344;z-index:2}.street-light::before{content:'';position:absolute;left:-4px;top:-3px;width:11px;height:7px;border-radius:6px;background:#ffd676;box-shadow:0 0 14px rgba(255,193,86,.9)}.lamp1{left:31%}.lamp2{right:27%;height:82px}
+.city-road-v731{position:absolute;left:0;right:0;bottom:118px;height:64px;background:linear-gradient(180deg,#253447,#101a2a 66%,#0b1421);border-top:1px solid rgba(255,255,255,.06);z-index:2;overflow:hidden}.road-line{position:absolute;left:0;right:0;top:32px;height:2px;background:repeating-linear-gradient(90deg,rgba(255,217,117,.72) 0 24px,transparent 24px 43px)}
+.traffic{position:absolute;bottom:12px;display:block;border-radius:5px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));animation:cityDrive linear infinite}.traffic::before,.traffic::after{content:'';position:absolute;bottom:-3px;width:6px;height:6px;border-radius:50%;background:#101827}.traffic::before{left:4px}.traffic::after{right:4px}.traffic.car{width:31px;height:13px;background:#ef6464}.traffic.bus{width:50px;height:20px;background:#d8e6ef;border-radius:4px}.traffic.bus::after{box-shadow:-24px -10px 0 -2px rgba(67,101,135,.8)}.traffic.moto{width:20px;height:8px;background:#68a7ff}.car-a{left:-45px;animation-duration:12s;animation-delay:-4s}.bus-a{left:-70px;animation-duration:17s;animation-delay:-10s}.moto-a{left:-30px;animation-duration:8s;animation-delay:-2s}.car-b{left:-80px;animation-duration:14s;animation-delay:-12s;background:#82e3b5}@keyframes cityDrive{from{transform:translateX(0)}to{transform:translateX(710px)}}
+
+.pet-zone-v731{top:230px!important;width:198px!important;height:198px!important;z-index:4}.pet-zone-v731 .pet-bob{width:174px;height:174px}.pet-zone-v731::before{content:'';position:absolute;left:50%;bottom:17px;width:120px;height:18px;transform:translateX(-50%);border-radius:50%;background:rgba(5,11,20,.28);filter:blur(4px);z-index:-1}.pet-touch-hint-v731{position:absolute;z-index:5;left:50%;top:335px;transform:translateX(-50%);font-size:10px;color:rgba(220,234,246,.65);white-space:nowrap}
+.speech-bubble{position:absolute;z-index:6;left:50%;top:92px;transform:translateX(-50%);width:min(255px,70%);padding:11px 14px;border-radius:17px;background:rgba(7,18,35,.86);border:1px solid rgba(159,202,244,.18);box-shadow:0 12px 28px rgba(0,0,0,.22);color:#e8f1fa;text-align:center;font-size:12px;line-height:1.35}.speech-bubble::after{content:'';position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border:8px solid transparent;border-top-color:rgba(7,18,35,.86);border-bottom:0}.pet-reaction-v731{top:116px!important;width:min(255px,70%)!important;max-width:none!important;font:700 11px/1.35 var(--pixel)!important;padding:11px 14px!important;border-radius:17px!important}.pet-reaction-v731.show + .pet-touch-hint-v731{}
+
+.nimbo-icon-actions{position:absolute;z-index:7;left:50%;top:354px;transform:translateX(-50%);display:grid;grid-template-columns:repeat(5,48px);gap:9px}.nimbo-icon-btn{width:48px;height:48px;border-radius:14px;border:1px solid rgba(115,189,255,.38);background:rgba(10,27,50,.78);color:#eff8ff;font-size:21px;display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 7px 18px rgba(0,0,0,.18)}.nimbo-icon-btn:active{transform:translateY(1px) scale(.96);background:rgba(20,45,77,.90)}
+
+.stats-v731{position:absolute;z-index:6;left:14px;right:14px;bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.stats-v731 .stat{padding:9px 10px;border-radius:14px;background:rgba(7,20,37,.77);border:1px solid rgba(128,184,232,.20);backdrop-filter:blur(5px)}.stats-v731 .stat-head{font-size:10px;margin-bottom:6px}.stats-v731 .meter{height:8px}.stats-v731 #breathBar{background:var(--cyan)}.stats-v731 #resilienceBar{background:var(--yellow)}
+
+.daily-summary-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:0 0 10px}.daily-summary-card{min-width:0;min-height:102px;border-radius:20px;border:1px solid rgba(119,178,236,.22);background:linear-gradient(180deg,#13263f,#102038);padding:11px 11px;text-align:left;color:var(--text);position:relative;overflow:hidden}.daily-summary-card .summary-icon{position:absolute;top:10px;left:10px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(91,130,177,.18);font-size:16px}.summary-number{font-size:28px;font-weight:800;line-height:1;margin:7px 0 7px 39px}.summary-label{font-size:11px;font-weight:760;line-height:1.15}.summary-sub{font-size:9px;color:#8da1b8;margin-top:5px;line-height:1.2}.good-text{color:#63e59c}.close-day-card{padding:44px 10px 10px;background:linear-gradient(180deg,#153351,#102b48);font-size:15px;font-weight:800;line-height:1.15;cursor:pointer}.close-day-card::before{content:'☀';position:absolute;left:12px;top:11px;font-size:22px;color:#6eb6ff}.close-day-card::after{content:'Registrar e ver seu progresso';display:block;margin-top:6px;font-size:9px;font-weight:500;line-height:1.2;color:#8ea5bd}.close-day-card.closed{background:linear-gradient(180deg,#1e6548,#174934)}.close-day-card.closed::before{content:'✓';color:#75eea7}.close-day-card.closed::after{content:'Pronto por hoje'}
+
+.quick-actions-v731{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.quick-actions-v731 .quick{min-height:102px;border-radius:20px}.quick-actions-v731 .quick-icon{font-size:24px}.quick-actions-v731 .quick-title{font-size:15px}.quick-actions-v731 .quick-sub{font-size:10px}.quick-actions-v731 .resist{background:linear-gradient(145deg,#76f3a5,#42d879);box-shadow:0 10px 30px rgba(66,215,120,.15)}
+
+.today-details{margin-top:0;background:transparent}.today-details>summary{list-style:none;cursor:pointer;color:#7f93a9;font-size:10px;text-align:center;padding:8px 0}.today-details>summary::-webkit-details-marker{display:none}.today-details>summary::after{content:'  ›'}.today-details[open]>summary::after{content:'  ⌄'}.today-details .today-card{margin-top:0}
+
+.pet-zone.bored .mouth-neutral,.pet-zone.bored .mouth-happy,.pet-zone.bored .mouth-radiant,.pet-zone.bored .mouth-shocked,.pet-zone.bored .mouth-confused{display:none}.pet-zone.bored .mouth-tired,.pet-zone.bored .eyes-open{display:none}.pet-zone.bored .eyes-bored{display:block}.pet-zone.playful .mouth-neutral,.pet-zone.playful .mouth-tired,.pet-zone.playful .mouth-radiant,.pet-zone.playful .mouth-shocked,.pet-zone.playful .mouth-confused{display:none}.pet-zone.playful .mouth-happy{display:block}.pet-zone.playful .pet-bob{animation-duration:1.55s}.pet-zone.playful .blush{display:block}.pet-zone.confused .mouth-neutral,.pet-zone.confused .mouth-tired,.pet-zone.confused .mouth-happy,.pet-zone.confused .mouth-radiant,.pet-zone.confused .mouth-shocked{display:none}.pet-zone.confused .mouth-confused{display:block}.pet-zone.confused .eyes-open,.pet-zone.confused .eyes-bored,.pet-zone.confused .eyes-shocked{display:none}.pet-zone.confused .eyes-confused{display:block}.pet-zone.shocked .mouth-neutral,.pet-zone.shocked .mouth-tired,.pet-zone.shocked .mouth-happy,.pet-zone.shocked .mouth-radiant,.pet-zone.shocked .mouth-confused{display:none}.pet-zone.shocked .mouth-shocked{display:block}.pet-zone.shocked .eyes-open,.pet-zone.shocked .eyes-bored,.pet-zone.shocked .eyes-confused{display:none}.pet-zone.shocked .eyes-shocked{display:block}.pet-zone.shocked .sweat{display:block}.eyes-bored,.eyes-shocked,.eyes-confused,.mouth-shocked,.mouth-confused{display:none}
+
+@media(max-width:420px){.habitat-v731{height:565px}.pet-zone-v731{top:224px!important;width:188px!important;height:188px!important}.pet-zone-v731 .pet-bob{width:165px;height:165px}.pet-touch-hint-v731{top:328px}.nimbo-icon-actions{top:346px;grid-template-columns:repeat(5,45px);gap:7px}.nimbo-icon-btn{width:45px;height:45px;border-radius:13px;font-size:20px}.stats-v731{bottom:12px}.daily-summary-card{min-height:98px;padding:10px}.summary-number{font-size:26px}.summary-label{font-size:10px}.quick-actions-v731 .quick{min-height:96px}}
+@media(max-width:360px){.habitat-v731{height:550px}.speech-bubble{top:88px;font-size:11px}.pet-zone-v731{top:216px!important;width:176px!important;height:176px!important}.pet-zone-v731 .pet-bob{width:154px;height:154px}.pet-touch-hint-v731{top:310px}.nimbo-icon-actions{top:330px;grid-template-columns:repeat(5,41px);gap:6px}.nimbo-icon-btn{width:41px;height:41px;font-size:18px}.daily-summary-row{gap:6px}.daily-summary-card{min-height:94px;padding:9px}.summary-icon{transform:scale(.9)}.summary-number{font-size:24px}.summary-label{font-size:9.5px}.quick-actions-v731{gap:8px}.quick-actions-v731 .quick-title{font-size:14px}}
+
+
+/* Compactação automática para iPhones com viewport vertical menor. */
+@media (max-height:780px) and (max-width:500px){
+  .wrap{padding-top:calc(8px + env(safe-area-inset-top));padding-left:12px;padding-right:12px}
+  .home-header{margin-bottom:8px}.home-header h1{font-size:23px}.home-header .subtitle{font-size:11px;margin-top:3px}.sync-meta{font-size:8px}.sync-stack .badge{padding:6px 8px;font-size:9px}
+  .habitat-v731{height:330px;border-radius:24px;margin-bottom:8px}
+  .habitat-head-v731{top:12px;left:14px;right:14px}.habitat-head-v731 .pet-name{font-size:12px}.habitat-head-v731 .pet-state{font-size:9px}.habitat-head-v731 .form-badge{font-size:8px;padding:6px 8px}
+  .city-buildings.back{bottom:103px;height:178px}.city-buildings.front{bottom:91px;height:145px}.city-tree{bottom:90px;transform:scale(.68);transform-origin:bottom}.tree-right{transform:scale(.60)}.street-light{bottom:91px;height:48px;transform:scale(.8);transform-origin:bottom}.city-road-v731{bottom:72px;height:31px}.city-road-v731 .road-line{top:15px}.traffic{bottom:7px;transform:scale(.78)}
+  .speech-bubble{top:53px;width:min(220px,67%);padding:8px 10px;border-radius:13px;font-size:9.5px;line-height:1.25}
+  .pet-reaction-v731{top:74px!important;width:min(220px,67%)!important;font-size:9px!important;padding:8px 10px!important}
+  .pet-zone-v731{top:157px!important;width:128px!important;height:128px!important}.pet-zone-v731 .pet-bob{width:116px;height:116px}.pet-zone-v731::before{width:82px;height:11px;bottom:7px}
+  .pet-touch-hint-v731{top:211px;font-size:8px}
+  .nimbo-icon-actions{top:222px;grid-template-columns:repeat(5,34px);gap:7px}.nimbo-icon-btn{width:34px;height:34px;border-radius:10px;font-size:15px}
+  .stats-v731{left:10px;right:10px;bottom:8px;gap:5px}.stats-v731 .stat{padding:5px 7px;border-radius:10px}.stats-v731 .stat-head{font-size:8px;margin-bottom:3px}.stats-v731 .meter{height:5px}
+  .daily-summary-row{gap:6px;margin-bottom:7px}.daily-summary-card{min-height:70px;border-radius:15px;padding:7px 8px}.daily-summary-card .summary-icon{top:7px;left:7px;width:23px;height:23px;font-size:12px}.summary-number{font-size:20px;margin:5px 0 5px 28px}.summary-label{font-size:8.5px}.summary-sub{font-size:7.5px;margin-top:3px}.close-day-card{padding:29px 7px 7px;font-size:11px}.close-day-card::before{top:7px;left:8px;font-size:16px}.close-day-card::after{font-size:7px;margin-top:3px}
+  .quick-actions-v731{gap:7px;margin-bottom:4px}.quick-actions-v731 .quick{min-height:72px;border-radius:16px;padding:8px 6px}.quick-actions-v731 .quick-icon{font-size:18px;margin-bottom:2px}.quick-actions-v731 .quick-title{font-size:11px}.quick-actions-v731 .quick-sub{font-size:8px;margin-top:2px}
+  .today-details>summary{padding:5px 0;font-size:8px}
+}
+
 </style>
 </head>
 <body>
@@ -817,40 +880,38 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 </div>
 
 <main class="wrap">
-<header>
-  <div><h1>Vou parar de fumar</h1><div class="subtitle">Um registro de cada vez.</div></div>
-  <div class="badge offline" id="syncBadge">NIMBO • LOCAL</div>
+<header class="home-header">
+  <div><h1>Vou parar de fumar</h1><div class="subtitle">Um dia de cada vez.</div></div>
+  <div class="sync-stack">
+    <div class="badge offline" id="syncBadge">NIMBO • LOCAL</div>
+    <div class="sync-meta" id="syncMetaHome">modo local</div>
+  </div>
 </header>
 
 
 <section id="home" class="tab active">
 
-  <div class="habitat habitat-v71 habitat-v73" id="nimboHabitat">
-    <div class="city-scene" aria-hidden="true">
-      <div class="city-skyline">
-        <span class="tower t1"></span>
-        <span class="tower t2"></span>
-        <span class="tower t3"></span>
-        <span class="tower t4"></span>
-        <span class="tower t5"></span>
-        <span class="tower t6"></span>
+  <div class="habitat habitat-v731" id="nimboHabitat">
+    <div class="city-scene-v731" aria-hidden="true">
+      <div class="city-glow"></div>
+      <div class="city-stars"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="city-buildings back">
+        <span class="bldg b1"></span><span class="bldg b2"></span><span class="bldg b3"></span><span class="bldg b4"></span><span class="bldg b5"></span><span class="bldg b6"></span><span class="bldg b7"></span>
       </div>
-      <div class="city-road">
-        <span class="lane"></span>
-        <span class="vehicle car v1"></span>
-        <span class="vehicle bus v2"></span>
-        <span class="vehicle moto v3"></span>
-        <span class="vehicle car v4"></span>
+      <div class="city-buildings front">
+        <span class="bldg f1"></span><span class="bldg f2"></span><span class="bldg f3"></span><span class="bldg f4"></span><span class="bldg f5"></span>
+      </div>
+      <div class="city-tree tree-left"></div><div class="city-tree tree-right"></div>
+      <div class="street-light lamp1"></div><div class="street-light lamp2"></div>
+      <div class="city-road-v731"><span class="road-line"></span>
+        <span class="traffic car car-a"></span>
+        <span class="traffic bus bus-a"></span>
+        <span class="traffic moto moto-a"></span>
+        <span class="traffic car car-b"></span>
       </div>
     </div>
 
-    <div class="pet-resource-props" aria-hidden="true">
-      <div class="prop prop-wood" id="petPropWood">▰</div>
-      <div class="prop prop-stone" id="petPropStone">◆</div>
-      <div class="prop prop-seed" id="petPropSeed">✿</div>
-    </div>
-
-    <div class="habitat-head">
+    <div class="habitat-head habitat-head-v731">
       <div>
         <div class="pet-name">NIMBO</div>
         <div class="pet-state" id="petState">atento</div>
@@ -858,159 +919,91 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
       <div class="form-badge" id="levelBadge">FORMA 1</div>
     </div>
 
-    <button class="pet-zone neutral" id="petZone" data-level="1" type="button" aria-label="Interagir com Nimbo">
+    <div class="speech-bubble pet-message-v731" id="petMessage">Só mais um dia com você por aqui.</div>
+    <div class="pet-reaction pet-reaction-v731" id="petReaction" aria-live="polite"></div>
+
+    <button class="pet-zone pet-zone-v731 neutral" id="petZone" data-level="1" type="button" aria-label="Interagir com Nimbo">
       <div class="pet-bob"><div class="pet-sway">
         <svg class="pet-svg" viewBox="0 0 120 120" aria-label="Nimbo">
           <rect x="35" y="99" width="50" height="7" fill="rgba(0,0,0,.18)"/>
-
-          <g class="wind-lines">
-            <rect x="9" y="46" width="15" height="3" fill="#9deeff"/>
-            <rect x="5" y="53" width="11" height="3" fill="#9deeff"/>
-            <rect x="96" y="42" width="13" height="3" fill="#9deeff"/>
-          </g>
-
-          <g class="wing">
-            <rect x="15" y="56" width="18" height="14" class="body-main" fill="#4fca80"/>
-            <rect x="87" y="56" width="18" height="14" class="body-main" fill="#4fca80"/>
-            <rect x="10" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/>
-            <rect x="101" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/>
-          </g>
-
-          <rect x="38" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
-          <rect x="69" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
-
-          <rect x="31" y="43" width="58" height="47" class="body-main" fill="#4fca80"/>
-          <rect x="25" y="53" width="70" height="28" class="body-main" fill="#4fca80"/>
-          <rect x="37" y="37" width="46" height="12" class="body-light" fill="#8bf1b0"/>
-          <rect x="27" y="56" width="8" height="18" class="body-light" fill="#8bf1b0"/>
-
-          <g class="pet-arms">
-            <rect x="20" y="66" width="10" height="7" class="body-light" fill="#8bf1b0"/>
-            <rect x="90" y="66" width="10" height="7" class="body-light" fill="#8bf1b0"/>
-          </g>
-
-          <g class="accent2">
-            <rect x="52" y="26" width="6" height="9" fill="#ffd66b"/>
-            <rect x="64" y="20" width="6" height="11" fill="#ffd66b"/>
-          </g>
-
-          <g class="halo">
-            <rect x="42" y="13" width="36" height="5" fill="#fff2a8"/>
-            <rect x="37" y="17" width="5" height="5" fill="#fff2a8"/>
-            <rect x="78" y="17" width="5" height="5" fill="#fff2a8"/>
-            <rect class="spark" x="24" y="26" width="5" height="5" fill="#fff2a8"/>
-            <rect class="spark" x="92" y="31" width="5" height="5" fill="#fff2a8"/>
-          </g>
-
-          <g class="bravery-aura">
-            <rect x="21" y="49" width="4" height="31" fill="#ffe894"/>
-            <rect x="95" y="49" width="4" height="31" fill="#ffe894"/>
-            <rect x="28" y="37" width="5" height="5" fill="#ffe894"/>
-            <rect x="87" y="34" width="5" height="5" fill="#ffe894"/>
-          </g>
-
+          <g class="wind-lines"><rect x="9" y="46" width="15" height="3" fill="#9deeff"/><rect x="5" y="53" width="11" height="3" fill="#9deeff"/><rect x="96" y="42" width="13" height="3" fill="#9deeff"/></g>
+          <g class="wing"><rect x="15" y="56" width="18" height="14" class="body-main" fill="#4fca80"/><rect x="87" y="56" width="18" height="14" class="body-main" fill="#4fca80"/><rect x="10" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/><rect x="101" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/></g>
+          <rect x="38" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/><rect x="69" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
+          <rect x="31" y="43" width="58" height="47" class="body-main" fill="#4fca80"/><rect x="25" y="53" width="70" height="28" class="body-main" fill="#4fca80"/><rect x="37" y="37" width="46" height="12" class="body-light" fill="#8bf1b0"/><rect x="27" y="56" width="8" height="18" class="body-light" fill="#8bf1b0"/>
+          <g class="pet-arms"><rect x="20" y="66" width="10" height="7" class="body-light" fill="#8bf1b0"/><rect x="90" y="66" width="10" height="7" class="body-light" fill="#8bf1b0"/></g>
+          <g class="accent2"><rect x="52" y="26" width="6" height="9" fill="#ffd66b"/><rect x="64" y="20" width="6" height="11" fill="#ffd66b"/></g>
+          <g class="halo"><rect x="42" y="13" width="36" height="5" fill="#fff2a8"/><rect x="37" y="17" width="5" height="5" fill="#fff2a8"/><rect x="78" y="17" width="5" height="5" fill="#fff2a8"/><rect class="spark" x="24" y="26" width="5" height="5" fill="#fff2a8"/><rect class="spark" x="92" y="31" width="5" height="5" fill="#fff2a8"/></g>
+          <g class="bravery-aura"><rect x="21" y="49" width="4" height="31" fill="#ffe894"/><rect x="95" y="49" width="4" height="31" fill="#ffe894"/><rect x="28" y="37" width="5" height="5" fill="#ffe894"/><rect x="87" y="34" width="5" height="5" fill="#ffe894"/></g>
           <g class="eyes-open"><rect class="eye" x="43" y="59" width="9" height="10" fill="#15363d"/><rect class="eye" x="68" y="59" width="9" height="10" fill="#15363d"/></g>
           <g class="eyes-bored"><rect x="42" y="61" width="10" height="4" fill="#15363d"/><rect x="68" y="61" width="10" height="4" fill="#15363d"/></g>
           <g class="eyes-shocked"><rect x="42" y="57" width="10" height="12" fill="#15363d"/><rect x="68" y="57" width="10" height="12" fill="#15363d"/></g>
           <g class="eyes-confused"><rect x="42" y="60" width="10" height="7" fill="#15363d"/><rect x="68" y="58" width="10" height="7" fill="#15363d"/></g>
-
-          <g class="blush">
-            <rect x="34" y="72" width="7" height="4" fill="#ff9db2"/>
-            <rect x="79" y="72" width="7" height="4" fill="#ff9db2"/>
-          </g>
-
-          <g class="sweat">
-            <rect x="84" y="51" width="5" height="7" fill="#a7ebff"/>
-            <rect x="87" y="55" width="5" height="7" fill="#a7ebff"/>
-          </g>
-
+          <g class="blush"><rect x="34" y="72" width="7" height="4" fill="#ff9db2"/><rect x="79" y="72" width="7" height="4" fill="#ff9db2"/></g>
+          <g class="sweat"><rect x="84" y="51" width="5" height="7" fill="#a7ebff"/><rect x="87" y="55" width="5" height="7" fill="#a7ebff"/></g>
           <g class="mouth-neutral"><rect x="52" y="77" width="16" height="4" fill="#15363d"/></g>
           <g class="mouth-tired"><rect x="52" y="79" width="16" height="4" fill="#15363d"/><rect x="56" y="75" width="8" height="4" fill="#15363d"/></g>
           <g class="mouth-happy"><rect x="50" y="75" width="5" height="4" fill="#15363d"/><rect x="55" y="79" width="10" height="4" fill="#15363d"/><rect x="65" y="75" width="5" height="4" fill="#15363d"/></g>
           <g class="mouth-radiant"><rect x="48" y="74" width="5" height="4" fill="#15363d"/><rect x="53" y="78" width="14" height="5" fill="#15363d"/><rect x="67" y="74" width="5" height="4" fill="#15363d"/><rect x="36" y="74" width="5" height="5" fill="#ffafc2"/><rect x="79" y="74" width="5" height="5" fill="#ffafc2"/></g>
           <g class="mouth-shocked"><rect x="56" y="75" width="8" height="9" fill="#15363d"/></g>
           <g class="mouth-confused"><rect x="49" y="79" width="6" height="4" fill="#15363d"/><rect x="55" y="76" width="6" height="4" fill="#15363d"/><rect x="61" y="78" width="7" height="4" fill="#15363d"/></g>
-
-          <rect x="39" y="88" width="15" height="8" fill="#173c47"/>
-          <rect x="66" y="88" width="15" height="8" fill="#173c47"/>
+          <rect x="39" y="88" width="15" height="8" fill="#173c47"/><rect x="66" y="88" width="15" height="8" fill="#173c47"/>
         </svg>
       </div></div>
     </button>
+    <div class="pet-touch-hint pet-touch-hint-v731">Toque no Nimbo!</div>
 
-    <div class="pet-reaction" id="petReaction" aria-live="polite"></div>
-    <div class="pet-touch-hint">toque no Nimbo</div>
-    <div class="pet-message pet-message-v71" id="petMessage">Estou aprendendo seus ritmos.</div>
-
-    <div class="nimbo-care-toolbar">
-      <button class="care-btn" id="feedBtn" type="button"><span>🍎</span> Dar comida</button>
-      <button class="care-btn" id="bathBtn" type="button"><span>🫧</span> Dar banho</button>
-      <button class="care-btn" id="walkBtn" type="button"><span>🚶</span> Passear</button>
+    <div class="nimbo-icon-actions" aria-label="Ações com o Nimbo">
+      <button class="nimbo-icon-btn" id="feedBtn" type="button" aria-label="Dar comida" title="Dar comida">🍎</button>
+      <button class="nimbo-icon-btn" id="bathBtn" type="button" aria-label="Dar banho" title="Dar banho">🚿</button>
+      <button class="nimbo-icon-btn" id="walkBtn" type="button" aria-label="Passear" title="Passear">👟</button>
+      <button class="nimbo-icon-btn" id="playBtn" type="button" aria-label="Brincar" title="Brincar">🎮</button>
+      <button class="nimbo-icon-btn" id="affectionBtn" type="button" aria-label="Dar carinho" title="Dar carinho">♥</button>
     </div>
 
-    <div class="stats stats-v71 compact-home-stats">
-      <div class="stat">
-        <div class="stat-head"><span>♥ Vitalidade</span><b id="vitalityText">55</b></div>
-        <div class="meter"><i id="vitalityBar"></i></div>
+    <div class="stats stats-v731">
+      <div class="stat"><div class="stat-head"><span>♥ Vitalidade</span><b id="vitalityText">55</b></div><div class="meter"><i id="vitalityBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>◆ Vínculo</span><b id="bondText">0</b></div><div class="meter"><i id="bondBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>⚑ Fôlego</span><b id="breathText">50</b></div><div class="meter"><i id="breathBar"></i></div></div>
+      <div class="stat"><div class="stat-head"><span>🛡 Resiliência</span><b id="resilienceText">25</b></div><div class="meter"><i id="resilienceBar"></i></div></div>
+    </div>
+  </div>
+
+  <div id="homeResourceStrip" style="display:none"><span id="homeWoodValue">0</span><span id="homeStoneValue">0</span><span id="homeSeedsValue">0</span><span id="homePresenceValue">0</span></div>
+
+  <div class="daily-summary-row">
+    <div class="daily-summary-card smoke-summary">
+      <div class="summary-icon">🚬</div>
+      <div class="summary-number" id="todayCount">0</div>
+      <div class="summary-label"><span id="cigLabel">cigarros</span> hoje</div>
+      <div class="summary-sub" id="lastTime">Nenhum registrado hoje</div>
+      <div id="todayLabel" class="sr-only">Hoje</div>
+    </div>
+    <div class="daily-summary-card resist-summary">
+      <div class="summary-icon">🚭</div>
+      <div class="summary-number" id="resistToday">0</div>
+      <div class="summary-label">Vontades superadas</div>
+      <div class="summary-sub good-text">hoje</div>
+    </div>
+    <button class="daily-summary-card close-day-card" id="closeDayBtn" type="button">Fechar o dia</button>
+  </div>
+
+  <div class="quick-actions quick-actions-v731">
+    <button class="quick smoke" id="smokeBtn"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
+    <button class="quick resist" id="resistBtn"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Presença</span></button>
+  </div>
+
+  <details class="today-details">
+    <summary>Detalhes do dia</summary>
+    <div class="today-card today-card-compact">
+      <div class="today-row compact baseline-pack">
+        <div class="baseline"><span id="baselineStatus">baseline em observação</span><strong id="baselineValue">—</strong></div>
+        <div class="baseline"><span>Média 7 dias</span><strong id="avg7">—</strong></div>
       </div>
-      <div class="stat">
-        <div class="stat-head"><span>◆ Vínculo</span><b id="bondText">0</b></div>
-        <div class="meter"><i id="bondBar"></i></div>
-      </div>
-      <div class="stat">
-        <div class="stat-head"><span>🌬 Fôlego</span><b id="breathText">50</b></div>
-        <div class="meter"><i id="breathBar"></i></div>
-      </div>
-      <div class="stat">
-        <div class="stat-head"><span>🛡 Resiliência</span><b id="resilienceText">25</b></div>
-        <div class="meter"><i id="resilienceBar"></i></div>
-      </div>
+      <div class="trend-line" id="trendText">estabelecendo referência</div>
+      <div class="times times-compact" id="todayTimes"></div>
+      <div class="actions"><button class="secondary" id="undoBtn">Desfazer último evento</button></div>
     </div>
-  </div>
-
-  <div id="homeResourceStrip" style="display:none">
-    <span id="homeWoodValue">0</span>
-    <span id="homeStoneValue">0</span>
-    <span id="homeSeedsValue">0</span>
-    <span id="homePresenceValue">0</span>
-  </div>
-
-  <div class="quick-actions quick-actions-v71 quick-actions-v73">
-    <button class="quick smoke" id="smokeBtn">
-      <span class="quick-icon">+</span>
-      <span class="quick-title">Fumei agora</span>
-      <span class="quick-sub">registrar</span>
-    </button>
-    <button class="quick resist" id="resistBtn">
-      <span class="quick-icon">✦</span>
-      <span class="quick-title">Quis fumar,<br>mas não fumei</span>
-      <span class="quick-sub">+ Presença</span>
-    </button>
-  </div>
-
-  <div class="today-overview">
-    <div class="mini-card">
-      <div class="mini-k" id="todayLabel">Hoje</div>
-      <div class="mini-v"><span id="todayCount">0</span> <small id="cigLabel">cigarros</small></div>
-      <div class="mini-s" id="lastTime">Nenhum cigarro registrado hoje</div>
-    </div>
-    <div class="mini-card accent">
-      <div class="mini-k">Vontades superadas</div>
-      <div class="mini-v"><span id="resistToday">0</span> <small>hoje</small></div>
-      <div class="mini-s">cada escolha fortalece o Vale</div>
-    </div>
-    <button class="day-close-cta tiny" id="closeDayBtn">Fechar o dia</button>
-  </div>
-
-  <div class="today-card today-card-compact">
-    <div class="today-row compact baseline-pack">
-      <div class="baseline"><span id="baselineStatus">baseline em observação</span><strong id="baselineValue">—</strong></div>
-      <div class="baseline"><span>Média 7 dias</span><strong id="avg7">—</strong></div>
-    </div>
-    <div class="trend-line" id="trendText">estabelecendo referência</div>
-    <div class="times times-compact" id="todayTimes"></div>
-  </div>
-
-  <div class="actions"><button class="secondary" id="undoBtn">Desfazer último evento</button></div>
+  </details>
 </section>
 
 <section id="vale" class="tab">
@@ -1258,7 +1251,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.3';
+  const APP_VERSION='7.3.1';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1631,7 +1624,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       food:62,
       clean:58,
       joy:60,
-      lastCareAt:{feed:null,bath:null,walk:null},
+      lastCareAt:{feed:null,bath:null,walk:null,play:null,affection:null},
       lastMoodTick:new Date().toISOString(),
       moodTag:'neutral'
     };
@@ -1767,6 +1760,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     el.classList.remove('offline','syncing','error');
     if(state!=='ok')el.classList.add(state);
     el.textContent=text;
+    const meta=$('syncMetaHome');
+    if(meta){
+      meta.textContent=state==='ok'?'Sincronizado agora':state==='syncing'?'Sincronizando…':state==='offline'?'modo local':'falha ao sincronizar';
+    }
   }
 
   function updateLastSync(){
@@ -2795,6 +2792,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(kind==='feed'&&n.food>86){refuse=true;refuseReason='cheio';}
     if(kind==='bath'&&n.clean>84){refuse=true;refuseReason='limpo';}
     if(kind==='walk'&&(n.joy>84||lateHour)){refuse=true;refuseReason=lateHour?'sono':'quieto';}
+    if(kind==='play'&&(n.joy>90||lateHour)){refuse=true;refuseReason=lateHour?'sono':'quieto';}
+    if(kind==='affection'&&n.joy>94&&Math.random()<0.55){refuse=true;refuseReason='quieto';}
     if(lowBond&&Math.random()<0.22){refuse=true;refuseReason='distante';}
     if(tooSoon&&Math.random()<0.8){refuse=true;refuseReason='cedo';}
 
@@ -2802,7 +2801,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       const messages={
         feed:['agora não… tô sem fome.','depois eu aceito melhor.', 'quero só ficar quietinho agora.'],
         bath:['banho agora não. tô bem por enquanto.','depois. ainda tô limpo o bastante.'],
-        walk:['acho melhor não sair agora.','tô sem cabeça pra passeio nesse minuto.']
+        walk:['acho melhor não sair agora.','tô sem cabeça pra passeio nesse minuto.'],
+        play:['agora eu queria só observar a rua.','jogo depois? tô meio quieto.'],
+        affection:['ei… agora não.','fica aqui comigo sem apertar nada um pouquinho.']
       };
       setPetExpression(refuseReason==='sono'?'sleepy':(Math.random()<0.5?'confused':'bored'));
       petMotion('touch');
@@ -2815,7 +2816,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const gain={
       feed:{food:18,clean:-1,joy:5,expression:'happy',tone:'warm',lines:['nham. isso ajudou.','gostei desse lanche.','agora fiquei melhor.']},
       bath:{food:0,clean:20,joy:4,expression:'radiant',tone:'good',lines:['ahh. agora sim.','fiquei novinho.','a cabeça até clareou.']},
-      walk:{food:-2,clean:-1,joy:18,expression:'playful',tone:'good',lines:['vamos dar uma volta!','a cidade parece menos pesada andando com você.','isso me acordou bastante.']}
+      walk:{food:-2,clean:-1,joy:18,expression:'playful',tone:'good',lines:['vamos dar uma volta!','a cidade parece menos pesada andando com você.','isso me acordou bastante.']},
+      play:{food:-1,clean:-1,joy:12,expression:'playful',tone:'good',lines:['boa! de novo.','eu tava precisando disso.','essa eu ganhei, tá?']},
+      affection:{food:0,clean:0,joy:6,expression:'happy',tone:'warm',lines:['hm. gostei.','fica por aqui mais um pouco.','isso foi bom.']}
     }[kind];
 
     n.food=clamp(Number(n.food||0)+gain.food,10,100);
@@ -2827,9 +2830,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     write(VALE_KEY,vale);
 
     setPetExpression(gain.expression);
-    petMotion(kind==='walk'?'resist':'touch');
+    petMotion((kind==='walk'||kind==='play')?'resist':'touch');
     showPetReaction(gain.lines[Math.floor(Math.random()*gain.lines.length)],gain.tone,2200);
-    $('petMessage').textContent={feed:'Nimbo aceitou a comida e ficou um pouco mais presente.',bath:'Nimbo tomou banho e ficou mais leve.',walk:'Nimbo voltou do passeio com outra energia.'}[kind];
+    $('petMessage').textContent={feed:'Nimbo aceitou a comida e ficou um pouco mais presente.',bath:'Nimbo tomou banho e ficou mais leve.',walk:'Nimbo voltou do passeio com outra energia.',play:'Nimbo ficou mais animado depois de brincar.',affection:'Nimbo relaxou com o carinho.'}[kind];
     scheduleSync();
     render();
   }
@@ -3499,6 +3502,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('feedBtn').onclick=()=>performCare('feed');
   $('bathBtn').onclick=()=>performCare('bath');
   $('walkBtn').onclick=()=>performCare('walk');
+  $('playBtn').onclick=()=>performCare('play');
+  $('affectionBtn').onclick=()=>performCare('affection');
 
   document.querySelectorAll('[data-journey]').forEach(btn=>{
     btn.onclick=()=>{
