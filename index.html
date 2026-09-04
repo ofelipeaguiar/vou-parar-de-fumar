@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="6">
+<meta name="app-version" content="7">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -160,7 +160,7 @@ h1{font-size:23px;line-height:1.08;margin:0 0 4px;letter-spacing:-.55px}
 
 /* nav */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(5,13,25,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:7px 9px calc(7px + env(safe-area-inset-bottom))}
-.navin{max-width:600px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.nav button{background:transparent;border:0;color:#8998ad;padding:6px 3px;border-radius:10px;font-size:9px}.nav button.active{color:#aef5c2;background:rgba(98,233,143,.07)}.nav .ico{font:14px var(--pixel);display:block;margin-bottom:2px}
+.navin{max-width:600px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav button{background:transparent;border:0;color:#8998ad;padding:6px 3px;border-radius:10px;font-size:9px}.nav button.active{color:#aef5c2;background:rgba(98,233,143,.07)}.nav .ico{font:14px var(--pixel);display:block;margin-bottom:2px}
 section.tab{display:none}section.tab.active{display:block}
 #toast{position:fixed;z-index:30;left:50%;bottom:98px;transform:translateX(-50%) translateY(8px);max-width:calc(100vw - 30px);text-align:center;opacity:0;pointer-events:none;background:#eef8f4;color:#0b2a19;padding:9px 12px;border-radius:999px;font-size:10px;font-weight:800;transition:.2s}#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:350px){.quick-title{font-size:12px}.habitat{height:286px}.pet-zone{width:155px;height:155px}.pet-bob{width:140px;height:140px}}
@@ -205,6 +205,206 @@ section.tab{display:none}section.tab.active{display:block}
 .auth-link:active{opacity:.7}
 .auth-success{font-size:10px;color:#bdf5cd;line-height:1.45;min-height:14px;margin-top:10px}
 
+
+
+/* =========================================================
+   V7 — VALE DO NIMBO
+   ========================================================= */
+
+.world-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px
+}
+.world-resource{
+  min-width:0;background:rgba(16,29,50,.9);border:1px solid var(--line);
+  border-radius:12px;padding:8px 6px;text-align:center
+}
+.world-resource .ri{font-size:15px;display:block;margin-bottom:2px}
+.world-resource .rv{font:700 11px var(--pixel);white-space:nowrap}
+.world-resource .rk{font-size:8px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.vale-hero{
+  position:relative;overflow:hidden;border:1px solid rgba(98,233,143,.14);border-radius:22px;
+  background:
+    radial-gradient(circle at 80% 15%,rgba(255,214,107,.12),transparent 26%),
+    linear-gradient(180deg,#173952,#153948 45%,#173f36 46%,#102d28);
+  padding:16px;margin-bottom:11px
+}
+.vale-hero:after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.12;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:8px 8px
+}
+.vale-hero-content{position:relative;z-index:2}
+.vale-eyebrow{font:9px var(--pixel);color:#a8e8bd}
+.vale-title{font-size:22px;font-weight:800;letter-spacing:-.45px;margin:4px 0}
+.vale-copy{font-size:11px;line-height:1.5;color:#bed0d9;max-width:440px}
+.vale-quote{
+  margin-top:10px;border-left:2px solid rgba(255,214,107,.7);padding:7px 9px;
+  color:#eee5bd;font:10px/1.45 var(--pixel);background:rgba(5,15,25,.18)
+}
+
+.map-card{
+  background:#0d1b2e;border:1px solid var(--line);border-radius:22px;padding:12px;margin-bottom:11px
+}
+.map-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:9px}
+.map-title{font-size:14px;font-weight:800}
+.map-sub{font-size:9px;color:var(--muted);margin-top:3px}
+.production-pill{
+  border:1px solid rgba(98,233,143,.17);background:rgba(98,233,143,.06);
+  color:#bdf5cd;border-radius:999px;padding:6px 8px;font:8px var(--pixel);white-space:nowrap
+}
+.vale-map{
+  position:relative;height:430px;border-radius:17px;overflow:hidden;border:1px solid rgba(255,255,255,.07);
+  background:
+    radial-gradient(circle at 27% 18%,rgba(90,151,86,.65),transparent 17%),
+    radial-gradient(circle at 71% 62%,rgba(75,130,76,.5),transparent 18%),
+    linear-gradient(115deg,transparent 45%,rgba(82,156,194,.75) 46%,rgba(82,156,194,.75) 51%,transparent 52%),
+    linear-gradient(180deg,#365e40,#254d36 58%,#173b2f);
+}
+.vale-map:after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;
+  background-image:linear-gradient(rgba(0,0,0,.22) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px);background-size:7px 7px
+}
+.map-path{
+  position:absolute;z-index:1;background:rgba(213,190,132,.52);height:6px;transform-origin:left center;
+  border-radius:1px;box-shadow:0 2px 0 rgba(77,58,32,.25)
+}
+.fog{
+  position:absolute;z-index:3;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,219,222,.82),rgba(155,181,188,.63) 55%,rgba(123,151,161,.08) 72%,transparent 74%);
+  filter:blur(1px);pointer-events:none;transition:opacity .5s
+}
+.fog.hidden{opacity:0}
+.fog.f1{width:180px;height:150px;right:-30px;top:-25px}
+.fog.f2{width:200px;height:170px;left:-45px;bottom:-40px}
+.fog.f3{width:220px;height:180px;right:-50px;bottom:20px}
+
+.build-node{
+  position:absolute;z-index:4;transform:translate(-50%,-50%);border:0;background:transparent;color:var(--text);
+  width:82px;text-align:center;padding:0
+}
+.build-node .bi{
+  width:52px;height:52px;margin:auto;display:grid;place-items:center;font-size:25px;
+  border-radius:14px;background:rgba(10,25,34,.88);border:2px solid rgba(255,255,255,.13);
+  box-shadow:0 8px 20px rgba(0,0,0,.24);transition:.15s
+}
+.build-node:active .bi{transform:scale(.95)}
+.build-node.built .bi{border-color:rgba(98,233,143,.38);background:rgba(13,50,42,.93)}
+.build-node.available .bi{border-color:rgba(255,214,107,.48);box-shadow:0 0 0 3px rgba(255,214,107,.06),0 8px 20px rgba(0,0,0,.24)}
+.build-node.locked{opacity:.43;filter:grayscale(.65)}
+.build-node .bn{font-size:9px;font-weight:750;margin-top:5px;text-shadow:0 2px 4px rgba(0,0,0,.7)}
+.build-node .bl{font:7px var(--pixel);color:#c4d3d3;margin-top:2px}
+
+.future-region{
+  position:absolute;z-index:4;right:10px;top:10px;border:1px dashed rgba(255,255,255,.16);
+  background:rgba(5,15,25,.35);border-radius:11px;padding:7px 8px;color:#c5d1d9;font:8px var(--pixel)
+}
+.future-region.unlocked{border-style:solid;color:#dff6e6;border-color:rgba(98,233,143,.24);background:rgba(18,56,46,.55)}
+
+.vale-section-title{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 9px
+}
+.vale-section-title h2{font-size:14px;margin:0}
+.rate-note{font:8px var(--pixel);color:var(--muted)}
+
+.attr-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.attr-card{
+  border:1px solid var(--line);border-radius:16px;padding:12px;background:#101d32
+}
+.attr-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.attr-name{font-size:11px;font-weight:750}
+.attr-value{font:700 18px var(--pixel)}
+.attr-desc{font-size:9px;color:var(--muted);line-height:1.4;margin-top:5px}
+.attr-effect{font-size:8px;color:#bcecca;line-height:1.4;margin-top:7px}
+
+.journey-tabs{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px
+}
+.journey-tabs button{
+  border:1px solid var(--line);background:#101d32;color:#8796aa;border-radius:10px;padding:8px 3px;font-size:8px
+}
+.journey-tabs button.active{
+  color:#fff0ae;border-color:rgba(255,214,107,.25);background:rgba(255,214,107,.07)
+}
+.journey-pane{display:none}
+.journey-pane.active{display:block}
+
+.inventory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.item-card{
+  min-height:108px;border:1px solid var(--line);background:#101d32;border-radius:15px;padding:11px
+}
+.item-card.empty-item{opacity:.45;border-style:dashed}
+.item-icon{font-size:24px}
+.item-name{font-size:11px;font-weight:750;margin-top:6px}
+.item-rarity{font:7px var(--pixel);color:#c6b5ff;margin-top:3px}
+.item-desc{font-size:8px;color:var(--muted);line-height:1.4;margin-top:5px}
+.item-bonus{font-size:8px;color:#bcecca;line-height:1.35;margin-top:5px}
+
+.achievement-list,.chronicle-list{display:grid;gap:8px}
+.achievement{
+  border:1px solid var(--line);background:#101d32;border-radius:15px;padding:11px;
+  display:grid;grid-template-columns:39px 1fr auto;gap:9px;align-items:center
+}
+.achievement.secret-locked{opacity:.48}
+.ach-icon{
+  width:39px;height:39px;display:grid;place-items:center;border-radius:11px;
+  background:#172943;border:1px solid var(--line);font-size:19px
+}
+.ach-name{font-size:11px;font-weight:750}.ach-desc{font-size:8px;color:var(--muted);line-height:1.35;margin-top:3px}
+.ach-reward{font:7px var(--pixel);color:#e9d783;text-align:right}
+
+.chronicle{
+  border:1px solid var(--line);background:#101d32;border-radius:15px;padding:12px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;width:100%;color:var(--text)
+}
+.chronicle.locked{opacity:.42}
+.chronicle-kicker{font:7px var(--pixel);color:#cbbaff;margin-bottom:4px}
+.chronicle-name{font-size:12px;font-weight:760}
+.chronicle-arrow{font-size:18px;color:#7e8da0}
+
+.sheet-backdrop{
+  position:fixed;z-index:70;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;
+  backdrop-filter:blur(4px)
+}
+.sheet-backdrop.show{display:flex}
+.sheet{
+  width:100%;max-width:600px;margin:0 auto;background:#101b2d;border:1px solid rgba(255,255,255,.1);
+  border-radius:24px 24px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));
+  max-height:82vh;overflow:auto;box-shadow:0 -20px 70px rgba(0,0,0,.45)
+}
+.sheet-handle{width:42px;height:4px;border-radius:99px;background:#536176;margin:0 auto 14px}
+.sheet-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.sheet-icon{font-size:31px}
+.sheet-title{font-size:20px;font-weight:800;margin-top:2px}
+.sheet-level{font:9px var(--pixel);color:#9fb2c2;margin-top:4px}
+.sheet-copy{font-size:11px;line-height:1.55;color:#b8c6d2;margin:13px 0}
+.sheet-stats{display:grid;gap:6px;margin:10px 0}
+.sheet-line{
+  display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);
+  padding:7px 0;font-size:10px
+}
+.cost-row{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.cost-chip{font:9px var(--pixel);padding:7px 8px;border-radius:8px;background:#172943;border:1px solid var(--line)}
+.cost-chip.missing{color:#ffbaba;border-color:rgba(255,133,133,.24)}
+.upgrade-btn{
+  width:100%;border:0;border-radius:14px;padding:13px;background:linear-gradient(180deg,#66ec92,#46d77a);
+  color:#07351a;font-weight:850;margin-top:8px
+}
+.upgrade-btn:disabled{opacity:.38}
+.close-sheet{
+  border:1px solid var(--line);background:#18273f;color:var(--text);padding:8px 10px;border-radius:10px
+}
+.story-text{font-size:12px;line-height:1.72;color:#d0d9df;white-space:pre-line}
+.story-quote{
+  border-left:2px solid rgba(255,214,107,.65);padding:8px 10px;margin:14px 0;
+  font:10px/1.5 var(--pixel);color:#efe4b2;background:rgba(255,214,107,.04)
+}
+.lock-note{
+  font-size:9px;color:#d8c98c;background:rgba(255,214,107,.06);border:1px solid rgba(255,214,107,.13);
+  border-radius:10px;padding:9px;margin-top:10px
+}
 
 </style>
 </head>
@@ -352,24 +552,148 @@ section.tab{display:none}section.tab.active{display:block}
   <div class="actions"><button class="secondary" id="undoBtn">Desfazer último evento</button></div>
 </section>
 
+
+<section id="vale" class="tab">
+  <div class="vale-hero">
+    <div class="vale-hero-content">
+      <div class="vale-eyebrow">VALE DO NIMBO</div>
+      <div class="vale-title">Reconstruir o que depende de você.</div>
+      <div class="vale-copy">O Vale não é uma fuga da Cidade da Pressa. É um lugar de treino: cada construção recuperada representa uma capacidade que Nimbo aprende a levar de volta para a vida real.</div>
+      <div class="vale-quote">“Cuide daquilo que depende de você.”</div>
+    </div>
+  </div>
+
+  <div class="world-strip">
+    <div class="world-resource"><span class="ri">🪵</span><div class="rv" id="woodValue">0</div><div class="rk">Madeira</div></div>
+    <div class="world-resource"><span class="ri">🪨</span><div class="rv" id="stoneValue">0</div><div class="rk">Pedra</div></div>
+    <div class="world-resource"><span class="ri">🌱</span><div class="rv" id="seedsValue">0</div><div class="rk">Sementes</div></div>
+    <div class="world-resource"><span class="ri">✦</span><div class="rv" id="presenceValue">0</div><div class="rk">Presença</div></div>
+  </div>
+
+  <div class="map-card">
+    <div class="map-head">
+      <div>
+        <div class="map-title">Mapa do Vale</div>
+        <div class="map-sub">Toque em uma construção para ver sua função e melhorá-la.</div>
+      </div>
+      <div class="production-pill" id="productionSummary">produção parada</div>
+    </div>
+
+    <div class="vale-map" id="valeMap">
+      <div class="map-path" style="left:48%;top:53%;width:34%;transform:rotate(-27deg)"></div>
+      <div class="map-path" style="left:47%;top:52%;width:34%;transform:rotate(151deg)"></div>
+      <div class="map-path" style="left:49%;top:53%;width:27%;transform:rotate(87deg)"></div>
+      <div class="map-path" style="left:49%;top:52%;width:27%;transform:rotate(-90deg)"></div>
+
+      <button class="build-node" id="node-refuge" data-building="refuge" style="left:49%;top:53%">
+        <span class="bi">🏠</span><div class="bn">Refúgio</div><div class="bl"></div>
+      </button>
+
+      <button class="build-node" id="node-portico" data-building="portico" style="left:49%;top:23%">
+        <span class="bi">🏛️</span><div class="bn">Pórtico</div><div class="bl"></div>
+      </button>
+
+      <button class="build-node" id="node-garden" data-building="garden" style="left:23%;top:58%">
+        <span class="bi">🌾</span><div class="bn">Horta</div><div class="bl"></div>
+      </button>
+
+      <button class="build-node" id="node-sawmill" data-building="sawmill" style="left:24%;top:27%">
+        <span class="bi">🪚</span><div class="bn">Serraria</div><div class="bl"></div>
+      </button>
+
+      <button class="build-node" id="node-quarry" data-building="quarry" style="left:76%;top:65%">
+        <span class="bi">⛏️</span><div class="bn">Pedreira</div><div class="bl"></div>
+      </button>
+
+      <button class="build-node" id="node-cartography" data-building="cartography" style="left:76%;top:30%">
+        <span class="bi">🗺️</span><div class="bn">Cartografia</div><div class="bl"></div>
+      </button>
+
+      <div class="fog f1" id="fogNorth"></div>
+      <div class="fog f2" id="fogWest"></div>
+      <div class="fog f3" id="fogEast"></div>
+
+      <div class="future-region" id="futureRegion">🌫 Bosque do Intervalo</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="vale-section-title">
+      <h2>Economia do Vale</h2>
+      <span class="rate-note" id="storageText">armazenamento 300</span>
+    </div>
+    <div class="empty" id="economyText">Reconstrua a Horta, a Serraria e a Pedreira para gerar recursos ao longo do tempo. A Presença não é produzida por edifícios: ela vem da sua jornada real.</div>
+  </div>
+</section>
+
 <section id="history" class="tab"><div class="panel"><h2>Histórico</h2><div id="historyList"></div></div></section>
 
 <section id="journey" class="tab">
   <div class="journey-hero">
-    <div class="journey-title">JORNADA DO NIMBO</div><div class="xp-num"><span id="xpValue">0</span> XP</div>
-    <div class="xpbar"><i id="xpBar"></i></div><div class="xpnote" id="xpNote"></div>
-    <div class="evo-line"><div class="evo">Nimbo</div><div class="evo">Curioso</div><div class="evo">Desperto</div><div class="evo">Forte</div><div class="evo">Livre</div></div>
+    <div class="journey-title">JORNADA DO NIMBO</div>
+    <div class="xp-num"><span id="xpValue">0</span> XP</div>
+    <div class="xpbar"><i id="xpBar"></i></div>
+    <div class="xpnote" id="xpNote"></div>
+    <div class="evo-line">
+      <div class="evo">Nimbo</div><div class="evo">Curioso</div><div class="evo">Desperto</div><div class="evo">Forte</div><div class="evo">Livre</div>
+    </div>
   </div>
-  <div class="panel"><h2>Poderes</h2>
-    <div class="power" id="powerMemory"><div class="power-icon">M</div><div><div class="power-name">Memória</div><div class="power-desc">Feche 7 dias.</div></div></div>
-    <div class="power" id="powerPatience"><div class="power-icon">P</div><div><div class="power-name">Paciência</div><div class="power-desc">Supere 5 vontades.</div></div></div>
-    <div class="power" id="powerBreath"><div class="power-icon">F</div><div><div class="power-name">Fôlego</div><div class="power-desc">Reduza sua média em 10% vs. baseline.</div></div></div>
-    <div class="power" id="powerRecord"><div class="power-icon">R</div><div><div class="power-name">Recorde</div><div class="power-desc">Alcance redução de 25% vs. baseline.</div></div></div>
+
+  <div class="journey-tabs">
+    <button class="active" data-journey="attributes">Atributos</button>
+    <button data-journey="inventory">Inventário</button>
+    <button data-journey="achievements">Conquistas</button>
+    <button data-journey="chronicles">Crônicas</button>
   </div>
-  <div class="panel"><h2>Como funciona</h2><div class="empty"><b>Vínculo</b> vem da consistência dos registros e dos dias fechados. <b>Vitalidade</b> responde à redução e às vontades superadas. Registrar um cigarro é neutro e não dá XP. Evoluções conquistadas nunca são perdidas.</div></div>
+
+  <div class="journey-pane active" id="journey-attributes">
+    <div class="attr-grid">
+      <div class="attr-card">
+        <div class="attr-top"><span class="attr-name">❤️ Vitalidade</span><span class="attr-value" id="attrVitality">55</span></div>
+        <div class="attr-desc">Responde à tendência de redução do consumo.</div>
+        <div class="attr-effect">No Vale: aumenta a capacidade de produção.</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-top"><span class="attr-name">◆ Vínculo</span><span class="attr-value" id="attrBond">0</span></div>
+        <div class="attr-desc">Nasce da consistência dos registros e do retorno.</div>
+        <div class="attr-effect">No Vale: melhora a eficiência das construções.</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-top"><span class="attr-name">🌬️ Fôlego</span><span class="attr-value" id="attrBreath">50</span></div>
+        <div class="attr-desc">Acompanha o espaço que surge entre um cigarro e outro.</div>
+        <div class="attr-effect">No futuro: exploração, movimento e alcance.</div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-top"><span class="attr-name">🛡️ Resiliência</span><span class="attr-value" id="attrResilience">25</span></div>
+        <div class="attr-desc">Cresce quando uma vontade aparece e você consegue atravessá-la.</div>
+        <div class="attr-effect">No futuro: desafios e resistência em combate.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="journey-pane" id="journey-inventory">
+    <div class="panel">
+      <div class="vale-section-title"><h2>Relíquias e ferramentas</h2><span class="rate-note" id="inventoryCount">0 itens</span></div>
+      <div class="inventory-grid" id="inventoryGrid"></div>
+    </div>
+  </div>
+
+  <div class="journey-pane" id="journey-achievements">
+    <div class="panel">
+      <div class="vale-section-title"><h2>Conquistas</h2><span class="rate-note" id="achievementCount">0 descobertas</span></div>
+      <div class="achievement-list" id="achievementList"></div>
+    </div>
+  </div>
+
+  <div class="journey-pane" id="journey-chronicles">
+    <div class="panel">
+      <div class="vale-section-title"><h2>Crônicas do Vale</h2><span class="rate-note" id="chronicleCount">1 capítulo</span></div>
+      <div class="chronicle-list" id="chronicleList"></div>
+    </div>
+  </div>
 </section>
 
-<section id="data" class="tab">
+<section id="more" class="tab">
   <div class="panel">
     <h2>Conta e sincronização</h2>
     <div class="account-row">
@@ -385,7 +709,7 @@ section.tab{display:none}section.tab.active{display:block}
   <div class="panel"><h2>Seus dados</h2><div class="actions">
     <button class="secondary" id="exportBtn">Exportar backup</button>
     <label class="secondary" style="cursor:pointer">Importar backup<input type="file" id="importFile" accept=".json,application/json" hidden></label>
-  </div><div class="note">O app mantém uma cópia local e sincroniza eventos, fechamentos de dia e progresso do Nimbo com seu Supabase.</div></div>
+  </div><div class="note">O app mantém uma cópia local e sincroniza eventos, fechamentos de dia, progresso do Nimbo e o estado do Vale com seu Supabase.</div></div>
 
   <div class="panel"><h2>Resumo</h2>
     <div class="history-row"><div class="date-title">Cigarros registrados</div><div class="day-score"><strong id="totalSmokes">0</strong></div></div>
@@ -396,7 +720,7 @@ section.tab{display:none}section.tab.active{display:block}
   <div class="panel">
     <h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
-    <div class="note">Versão instalada: v6</div>
+    <div class="note">Versão instalada: v7</div>
   </div>
 
   <div class="panel">
@@ -407,17 +731,54 @@ section.tab{display:none}section.tab.active{display:block}
 </section>
 </main>
 
+
+<div class="sheet-backdrop" id="buildingBackdrop">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <div>
+        <div class="sheet-icon" id="buildingSheetIcon">🏠</div>
+        <div class="sheet-title" id="buildingSheetTitle">Refúgio</div>
+        <div class="sheet-level" id="buildingSheetLevel">NÍVEL 1</div>
+      </div>
+      <button class="close-sheet" id="closeBuildingSheet">Fechar</button>
+    </div>
+    <div class="sheet-copy" id="buildingSheetCopy"></div>
+    <div class="sheet-stats" id="buildingSheetStats"></div>
+    <div class="cost-row" id="buildingCostRow"></div>
+    <div class="lock-note" id="buildingRequirement" style="display:none"></div>
+    <button class="upgrade-btn" id="upgradeBuildingBtn">Construir</button>
+  </div>
+</div>
+
+<div class="sheet-backdrop" id="storyBackdrop">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <div>
+        <div class="sheet-icon">📜</div>
+        <div class="sheet-title" id="storyTitle">Crônica</div>
+        <div class="sheet-level" id="storyKicker"></div>
+      </div>
+      <button class="close-sheet" id="closeStorySheet">Fechar</button>
+    </div>
+    <div class="story-quote" id="storyQuote"></div>
+    <div class="story-text" id="storyText"></div>
+  </div>
+</div>
+
 <div id="toast"></div>
 <nav class="nav"><div class="navin">
 <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
-<button data-tab="history"><span class="ico">▥</span>Histórico</button>
+<button data-tab="vale"><span class="ico">⌂</span>Vale</button>
 <button data-tab="journey"><span class="ico">✦</span>Jornada</button>
-<button data-tab="data"><span class="ico">↥</span>Dados</button>
+<button data-tab="history"><span class="ico">▥</span>Histórico</button>
+<button data-tab="more"><span class="ico">⚙</span>Mais</button>
 </div></nav>
 
 <script>
 (() => {
-  const APP_VERSION='6';
+  const APP_VERSION='7';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -428,6 +789,7 @@ section.tab{display:none}section.tab.active{display:block}
   const DELETIONS_KEY='vou_parar_de_fumar_pending_deletions_v1';
   const LAST_SYNC_KEY='vou_parar_de_fumar_last_sync_v1';
   const OWNER_KEY='vou_parar_de_fumar_local_owner_v1';
+  const VALE_KEY='vou_parar_de_fumar_vale_v1';
 
   // Capturado antes de o supabase-js processar e limpar tokens do redirect.
   const INITIAL_URL=window.location.href;
@@ -443,6 +805,7 @@ section.tab{display:none}section.tab.active{display:block}
   let closedDays=read(CLOSED_KEY,[]);
   let pendingDeletes=read(DELETIONS_KEY,[]);
   let game=read(GAME_KEY,{baseline:null,baselineLocked:false,bestReduction:0,maxLevel:1});
+  let vale=normalizeValeState(read(VALE_KEY,null));
 
   let sb=null;
   let currentUser=null;
@@ -457,6 +820,369 @@ section.tab{display:none}section.tab.active{display:block}
   const time=iso=>new Date(iso).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   const dayText=k=>dayDate(k).toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
   const uuid=()=>window.crypto&&crypto.randomUUID?crypto.randomUUID():`${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+  const BUILDINGS={
+    refuge:{
+      name:'Refúgio',icon:'🏠',
+      desc:'A primeira casa de Nimbo no Vale. Não serve para fugir da cidade: serve para lembrar que descanso também pode existir sem automatismo.',
+      max:5,
+      effect:l=>`Armazenamento: ${storageCapFor(l)} de cada recurso comum.`,
+      requirement:()=>({ok:true,text:''}),
+      cost:l=>[
+        null,
+        {wood:80,stone:40,seeds:0,presence:0},
+        {wood:160,stone:90,seeds:20,presence:2},
+        {wood:280,stone:170,seeds:60,presence:4},
+        {wood:450,stone:300,seeds:120,presence:7}
+      ][l]||null
+    },
+    portico:{
+      name:'Pórtico',icon:'🏛️',
+      desc:'Nas ruínas do Pórtico, Nimbo encontra textos antigos sobre escolha, impressão e disciplina. Cada nível recupera parte das Crônicas.',
+      max:4,
+      effect:l=>l?`Crônicas e regiões narrativas: nível ${l}.`:'Desbloqueia as primeiras Crônicas do Vale.',
+      requirement:()=>({ok:true,text:''}),
+      cost:l=>[
+        {wood:45,stone:25,seeds:0,presence:0},
+        {wood:110,stone:70,seeds:25,presence:2},
+        {wood:220,stone:140,seeds:60,presence:4},
+        {wood:380,stone:260,seeds:100,presence:7}
+      ][l]||null
+    },
+    garden:{
+      name:'Horta da Presença',icon:'🌾',
+      desc:'Uma horta abandonada que volta a produzir quando Nimbo cuida do que está diante dele. Produz Sementes ao longo do tempo.',
+      max:5,
+      effect:l=>l?`Produção-base: ${6*l} sementes/hora.`:'Produz Sementes.',
+      requirement:()=>({ok:true,text:''}),
+      cost:l=>[
+        {wood:35,stone:10,seeds:0,presence:0},
+        {wood:75,stone:25,seeds:20,presence:1},
+        {wood:140,stone:60,seeds:55,presence:2},
+        {wood:250,stone:110,seeds:100,presence:4},
+        {wood:390,stone:190,seeds:180,presence:6}
+      ][l]||null
+    },
+    sawmill:{
+      name:'Serraria do Bosque',icon:'🪚',
+      desc:'Nimbo reaprende a transformar o que encontra em material para construir. Produz Madeira.',
+      max:5,
+      effect:l=>l?`Produção-base: ${8*l} madeira/hora.`:'Produz Madeira.',
+      requirement:()=>vale.buildings.portico.level>=1
+        ?{ok:true,text:''}
+        :{ok:false,text:'Reconstrua o Pórtico no nível 1 para abrir o caminho do bosque.'},
+      cost:l=>[
+        {wood:55,stone:25,seeds:15,presence:0},
+        {wood:105,stone:45,seeds:30,presence:1},
+        {wood:190,stone:90,seeds:65,presence:2},
+        {wood:310,stone:150,seeds:120,presence:4},
+        {wood:480,stone:240,seeds:190,presence:6}
+      ][l]||null
+    },
+    quarry:{
+      name:'Pedreira do Obstáculo',icon:'⛏️',
+      desc:'A pedra do Vale não desaparece quando Nimbo deseja. Ele aprende a trabalhar com o obstáculo que existe, não com o que gostaria que existisse. Produz Pedra.',
+      max:5,
+      effect:l=>l?`Produção-base: ${6*l} pedra/hora.`:'Produz Pedra.',
+      requirement:()=>vale.buildings.refuge.level>=2
+        ?{ok:true,text:''}
+        :{ok:false,text:'Eleve o Refúgio ao nível 2. Nimbo precisa de abrigo antes de trabalhar na pedreira.'},
+      cost:l=>[
+        {wood:90,stone:35,seeds:20,presence:1},
+        {wood:150,stone:85,seeds:40,presence:2},
+        {wood:250,stone:150,seeds:80,presence:3},
+        {wood:390,stone:240,seeds:140,presence:5},
+        {wood:580,stone:360,seeds:220,presence:8}
+      ][l]||null
+    },
+    cartography:{
+      name:'Casa da Cartografia',icon:'🗺️',
+      desc:'Mapas não removem a Névoa, mas ajudam Nimbo a atravessá-la. A Cartografia revela regiões futuras do Vale.',
+      max:3,
+      effect:l=>l?`Regiões reveladas: ${l}.`:'Revela o Bosque do Intervalo.',
+      requirement:()=>vale.buildings.portico.level>=2&&bond()>=40
+        ?{ok:true,text:''}
+        :{ok:false,text:'Requer Pórtico nível 2 e Vínculo 40. O mapa só faz sentido quando Nimbo conhece o próprio caminho.'},
+      cost:l=>[
+        {wood:140,stone:100,seeds:70,presence:4},
+        {wood:260,stone:190,seeds:120,presence:6},
+        {wood:440,stone:320,seeds:210,presence:9}
+      ][l]||null
+    }
+  };
+
+  const ITEMS={
+    interval_clock:{
+      icon:'⌚',name:'Relógio do Intervalo',rarity:'RELÍQUIA',
+      desc:'Um relógio que não mede urgência. Mede espaço.',
+      bonus:'+5% na produção passiva do Vale.'
+    },
+    fog_lantern:{
+      icon:'🏮',name:'Lanterna da Névoa',rarity:'FERRAMENTA',
+      desc:'Ilumina alguns passos, nunca o caminho inteiro.',
+      bonus:'Reduz em 10% os custos comuns da Cartografia.'
+    },
+    return_stone:{
+      icon:'🪨',name:'Pedra do Retorno',rarity:'RELÍQUIA',
+      desc:'Encontrada ao lado de uma ponte que parecia abandonada.',
+      bonus:'+50 de armazenamento de Madeira, Pedra e Sementes.'
+    },
+    portico_fragment:{
+      icon:'🏛️',name:'Fragmento do Pórtico',rarity:'MEMÓRIA',
+      desc:'Uma pequena pedra marcada com a frase: “A impressão não é uma ordem.”',
+      bonus:'Item narrativo.'
+    }
+  };
+
+  const CHRONICLES={
+    prologue:{
+      kicker:'PRÓLOGO',
+      name:'Cinco minutos',
+      quote:'O cigarro era só a chave da porta.',
+      text:`No começo, Nimbo não queria parar de fumar. Queria apenas cinco minutos.
+
+Cinco minutos sem telefone. Cinco minutos sem reunião. Cinco minutos sem alguém esperando alguma coisa dele.
+
+O cigarro era uma pausa legítima em uma cidade que parecia não admitir pausas. Até o dia em que Nimbo percebeu que já não sabia abrir essa porta sem ele.
+
+Não havia um grande momento de revelação. Apenas uma pergunta pequena:
+
+“Se eu preciso de uma pausa, por que a pausa precisa sempre ter a mesma forma?”`
+    },
+    street:{
+      kicker:'CAPÍTULO I',
+      name:'A rua que não estava lá',
+      quote:'Nem tudo o que aparece diante de nós exige uma resposta imediata.',
+      text:`Em uma tarde comum, Nimbo saiu do prédio como fazia tantas outras vezes.
+
+Buzinas. Mensagens. Gente atravessando antes do sinal. A cidade parecia empurrar todos na mesma direção.
+
+Ele virou por uma rua estreita que jurava nunca ter visto.
+
+No fim dela havia um pórtico antigo, cercado por hera e névoa. Nimbo atravessou.
+
+Do outro lado não havia silêncio completo. Havia vento, água distante e um terreno abandonado.
+
+No centro das ruínas, uma inscrição:
+
+“Cuide daquilo que depende de você.”
+
+Nimbo ainda não sabia o que aquilo significava.`
+    },
+    portico:{
+      kicker:'CAPÍTULO II',
+      name:'Sob o Pórtico',
+      quote:'A vontade pode chegar sem pedir permissão. O que vem depois ainda pode ser treinado.',
+      text:`Nimbo limpou as primeiras pedras do Pórtico.
+
+Entre elas encontrou fragmentos de um ensinamento antigo: existe aquilo que acontece conosco e existe aquilo que fazemos com o que acontece.
+
+A pressa da cidade não dependia dele.
+
+A ansiedade nem sempre dependia dele.
+
+Uma vontade súbita de fumar também podia simplesmente aparecer.
+
+Mas observar, esperar alguns minutos, registrar e escolher de novo — isso ainda pertencia a ele.
+
+Nimbo percebeu que o Vale não estava pedindo que ele deixasse de sentir.
+
+Estava ensinando que sentir não era o mesmo que obedecer.`
+    },
+    fog:{
+      kicker:'CAPÍTULO III',
+      name:'A primeira Névoa',
+      quote:'Ver com clareza não elimina o caminho. Apenas permite atravessá-lo.',
+      text:`Quando as primeiras construções voltaram a funcionar, Nimbo acreditou que a Névoa desapareceria.
+
+Não desapareceu.
+
+Ela recuava em alguns lugares e voltava em outros.
+
+Foi então que Nimbo entendeu: a Névoa não era o cigarro. Era o automatismo.
+
+Ela surgia toda vez que uma reação parecia inevitável.
+
+O trabalho do Vale não era destruí-la para sempre. Era aprender a reconhecê-la antes de entrar nela.
+
+Algumas manhãs seriam claras.
+
+Outras não.
+
+O caminho continuava existindo nos dois casos.`
+    },
+    obstacle:{
+      kicker:'CAPÍTULO IV',
+      name:'O obstáculo',
+      quote:'O caminho não desaparece quando o dia sai do plano.',
+      text:`Houve um dia em que Nimbo fumou mais do que esperava.
+
+Por algumas horas, teve a sensação de que todo o trabalho anterior havia sido apagado.
+
+Ao voltar ao Vale, encontrou a Pedreira.
+
+Uma enorme rocha bloqueava o caminho.
+
+Nimbo tentou empurrá-la. Nada.
+
+Então encontrou ferramentas antigas e começou a trabalhar a pedra.
+
+O obstáculo não saiu do caminho.
+
+Virou material para o próprio caminho.
+
+Nimbo voltou à cidade no dia seguinte.`
+    },
+    return:{
+      kicker:'CRÔNICA SECRETA',
+      name:'O Retorno',
+      quote:'Disciplina talvez não seja nunca abandonar o caminho. Talvez seja saber encontrá-lo novamente.',
+      text:`O Vale ficou alguns dias sem ouvir os passos de Nimbo.
+
+Quando ele voltou, esperava encontrar portas fechadas.
+
+Encontrou uma ponte inacabada.
+
+Não havia punição. Nenhuma placa contando os dias ausentes.
+
+Apenas madeira, pedra e espaço para continuar.
+
+Nimbo colocou a primeira tábua.
+
+Às vezes, voltar era a própria prática.`
+    },
+    bridge:{
+      kicker:'CAPÍTULO V',
+      name:'Além da Névoa',
+      quote:'Um mapa não controla o mundo. Ele apenas ajuda a escolher o próximo passo.',
+      text:`A Casa da Cartografia revelou uma região que antes parecia apenas uma massa branca.
+
+Bosque do Intervalo.
+
+Nimbo marcou o caminho, mas percebeu que o mapa ainda tinha grandes áreas vazias.
+
+Pela primeira vez, isso não o incomodou.
+
+Não precisava conhecer todo o Vale.
+
+Precisava apenas saber qual era o próximo lugar possível.
+
+Ao longe, do outro lado das montanhas, ainda se via a Cidade da Pressa.
+
+Ela continuava lá.
+
+E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro.`
+    }
+  };
+
+  const ACHIEVEMENTS=[
+    {
+      id:'first_record',icon:'✎',name:'Primeiro registro',secret:false,
+      desc:'Faça seu primeiro registro no Nimbo.',rewardPresence:1,
+      condition:()=>smokes.length+resists.length>=1
+    },
+    {
+      id:'first_resist',icon:'✦',name:'A primeira pausa',secret:false,
+      desc:'Atravesse uma vontade sem fumar.',rewardPresence:2,item:'interval_clock',
+      condition:()=>resists.length>=1
+    },
+    {
+      id:'seven_closed',icon:'🏛️',name:'Sob o Pórtico',secret:false,
+      desc:'Feche sete dias de jornada.',rewardPresence:4,item:'portico_fragment',
+      condition:()=>closedDays.length>=7
+    },
+    {
+      id:'ten_resists',icon:'🛡️',name:'Não é uma ordem',secret:false,
+      desc:'Registre dez vontades atravessadas.',rewardPresence:5,
+      condition:()=>resists.length>=10
+    },
+    {
+      id:'later_morning',icon:'🌅',name:'Amanhecer',secret:true,
+      desc:'Seu primeiro cigarro passou a acontecer mais tarde que sua referência.',rewardPresence:3,
+      condition:()=>firstCigImprovement()>=30
+    },
+    {
+      id:'long_gap',icon:'🌬️',name:'Um pouco de espaço',secret:true,
+      desc:'Crie um intervalo muito maior entre dois cigarros.',rewardPresence:3,item:'fog_lantern',
+      condition:()=>hasLongGapAchievement()
+    },
+    {
+      id:'still_here',icon:'🌉',name:'Ainda aqui',secret:true,
+      desc:'Retorne ao Vale depois de alguns dias longe.',rewardPresence:5,item:'return_stone',
+      condition:()=>!!vale.returnedAfterGap
+    },
+    {
+      id:'obstacle',icon:'⛏️',name:'O obstáculo',secret:true,
+      desc:'Depois de um dia acima da sua referência, continue registrando no dia seguinte.',rewardPresence:5,
+      condition:()=>hasObstacleAchievement()
+    },
+    {
+      id:'refuge2',icon:'🏠',name:'Casa acesa',secret:false,
+      desc:'Eleve o Refúgio ao nível 2.',rewardPresence:2,
+      condition:()=>vale.buildings.refuge.level>=2
+    },
+    {
+      id:'portico2',icon:'🏛️',name:'As quatro colunas',secret:false,
+      desc:'Eleve o Pórtico ao nível 2.',rewardPresence:3,
+      condition:()=>vale.buildings.portico.level>=2
+    },
+    {
+      id:'cartography1',icon:'🗺️',name:'Além da Névoa',secret:false,
+      desc:'Reconstrua a Casa da Cartografia.',rewardPresence:5,
+      condition:()=>vale.buildings.cartography.level>=1
+    },
+    {
+      id:'thirty_days',icon:'🕯️',name:'Trinta amanheceres',secret:true,
+      desc:'Registre trinta dias diferentes da jornada.',rewardPresence:8,
+      condition:()=>observed().length>=30
+    }
+  ];
+
+  function defaultValeState(){
+    const historicalPresence=Math.min(18,closedDays.length*2+resists.length);
+    return{
+      version:1,
+      resources:{wood:125,stone:80,seeds:55,presence:historicalPresence},
+      buildings:{
+        refuge:{level:1},
+        portico:{level:0},
+        garden:{level:0},
+        sawmill:{level:0},
+        quarry:{level:0},
+        cartography:{level:0}
+      },
+      inventory:[],
+      achievements:[],
+      chronicles:['prologue'],
+      baselines:{intervalMinutes:null,firstCigMinute:null},
+      lastProductionAt:new Date().toISOString(),
+      lastVisitAt:null,
+      returnedAfterGap:false,
+      updatedAt:new Date().toISOString()
+    };
+  }
+
+  function normalizeValeState(raw){
+    const d=defaultValeState();
+    if(!raw||typeof raw!=='object')return d;
+    return{
+      ...d,...raw,
+      resources:{...d.resources,...(raw.resources||{})},
+      buildings:{
+        refuge:{...d.buildings.refuge,...(raw.buildings?.refuge||{})},
+        portico:{...d.buildings.portico,...(raw.buildings?.portico||{})},
+        garden:{...d.buildings.garden,...(raw.buildings?.garden||{})},
+        sawmill:{...d.buildings.sawmill,...(raw.buildings?.sawmill||{})},
+        quarry:{...d.buildings.quarry,...(raw.buildings?.quarry||{})},
+        cartography:{...d.buildings.cartography,...(raw.buildings?.cartography||{})}
+      },
+      inventory:Array.isArray(raw.inventory)?raw.inventory:[],
+      achievements:Array.isArray(raw.achievements)?raw.achievements:[],
+      chronicles:Array.isArray(raw.chronicles)?raw.chronicles:['prologue'],
+      baselines:{...d.baselines,...(raw.baselines||{})}
+    };
+  }
+
 
   function toast(msg){
     $('toast').textContent=msg;
@@ -497,6 +1223,7 @@ section.tab{display:none}section.tab.active{display:block}
     closedDays=[];
     pendingDeletes=[];
     game={baseline:null,baselineLocked:false,bestReduction:0,maxLevel:1};
+      vale=defaultValeState();
 
     write(SMOKE_KEY,smokes);
     write(RESIST_KEY,resists);
@@ -504,6 +1231,8 @@ section.tab{display:none}section.tab.active{display:block}
     write(GAME_KEY,game);
     write(DELETIONS_KEY,pendingDeletes);
     localStorage.removeItem(LAST_SYNC_KEY);
+    localStorage.removeItem(VALE_KEY);
+    vale=defaultValeState();
   }
 
   function bindLocalCacheToUser(userId){
@@ -566,6 +1295,7 @@ section.tab{display:none}section.tab.active{display:block}
     game.baseline=days.reduce((s,k)=>s+smokeCount(k),0)/days.length;
     if(days.length>=7)game.baselineLocked=true;
     write(GAME_KEY,game);
+    write(VALE_KEY,vale);
   }
 
   function avg7(){
@@ -597,6 +1327,386 @@ section.tab{display:none}section.tab.active{display:block}
     let v=r===null?55:52+r*.85;
     v+=Math.min(recent*2.3,14);
     return Math.round(clamp(v,15,100));
+  }
+
+  function daySmokeTimes(day){
+    return smokes
+      .filter(x=>key(x.timestamp)===day)
+      .map(x=>new Date(x.timestamp))
+      .sort((a,b)=>a-b);
+  }
+
+  function averageIntervalsForDays(days){
+    const gaps=[];
+    days.forEach(day=>{
+      const times=daySmokeTimes(day);
+      for(let i=1;i<times.length;i++){
+        gaps.push((times[i]-times[i-1])/60000);
+      }
+    });
+    return gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:null;
+  }
+
+  function firstCigAverageForDays(days){
+    const mins=[];
+    days.forEach(day=>{
+      const times=daySmokeTimes(day);
+      if(times.length)mins.push(times[0].getHours()*60+times[0].getMinutes());
+    });
+    return mins.length?mins.reduce((a,b)=>a+b,0)/mins.length:null;
+  }
+
+  function ensureValeBaselines(){
+    const days=observed().slice(0,7);
+    if(vale.baselines.intervalMinutes===null&&days.length>=3){
+      const v=averageIntervalsForDays(days);
+      if(v!==null)vale.baselines.intervalMinutes=Math.round(v);
+    }
+    if(vale.baselines.firstCigMinute===null&&days.length>=3){
+      const v=firstCigAverageForDays(days);
+      if(v!==null)vale.baselines.firstCigMinute=Math.round(v);
+    }
+    write(VALE_KEY,vale);
+  }
+
+  function breath(){
+    ensureValeBaselines();
+    const recent=last7();
+    const current=averageIntervalsForDays(recent);
+    const base=vale.baselines.intervalMinutes;
+    if(current===null||base===null||base<=0)return 50;
+    return Math.round(clamp(50+((current-base)/base)*65,20,100));
+  }
+
+  function resilience(){
+    const recentResists=last7().reduce((s,k)=>s+resistCount(k),0);
+    const daysWithResist=last7().filter(k=>resistCount(k)>0).length;
+    return Math.round(clamp(25+recentResists*7+daysWithResist*4,20,100));
+  }
+
+  function firstCigImprovement(){
+    ensureValeBaselines();
+    const current=firstCigAverageForDays(last7());
+    const base=vale.baselines.firstCigMinute;
+    return current===null||base===null?0:current-base;
+  }
+
+  function maxGapMinutes(){
+    let max=0;
+    observed().forEach(day=>{
+      const times=daySmokeTimes(day);
+      for(let i=1;i<times.length;i++){
+        max=Math.max(max,(times[i]-times[i-1])/60000);
+      }
+    });
+    return max;
+  }
+
+  function hasLongGapAchievement(){
+    ensureValeBaselines();
+    const base=vale.baselines.intervalMinutes;
+    const maxGap=maxGapMinutes();
+    if(base===null)return maxGap>=150;
+    return maxGap>=Math.max(120,base+45);
+  }
+
+  function hasObstacleAchievement(){
+    if(!(game.baselineLocked&&game.baseline>0))return false;
+    const days=observed().sort();
+    for(const day of days){
+      if(smokeCount(day)>game.baseline*1.2){
+        const d=dayDate(day);d.setDate(d.getDate()+1);
+        const next=key(d);
+        if(smokeCount(next)>0||resistCount(next)>0||isClosed(next))return true;
+      }
+    }
+    return false;
+  }
+
+  function storageCap(){
+    let cap=storageCapFor(vale.buildings.refuge.level);
+    if(vale.inventory.includes('return_stone'))cap+=50;
+    return cap;
+  }
+
+  function storageCapFor(level){
+    return 300+Math.max(0,level-1)*150;
+  }
+
+  function productionFactor(){
+    let factor=.68+(vitality()/260)+(bond()/420);
+    if(vale.inventory.includes('interval_clock'))factor*=1.05;
+    return factor;
+  }
+
+  function productionRates(){
+    const factor=productionFactor();
+    return{
+      wood:8*vale.buildings.sawmill.level*factor,
+      stone:6*vale.buildings.quarry.level*factor,
+      seeds:6*vale.buildings.garden.level*factor
+    };
+  }
+
+  function collectValeProduction(force=false){
+    const now=Date.now();
+    const last=new Date(vale.lastProductionAt||now).getTime();
+    if(!Number.isFinite(last)){vale.lastProductionAt=new Date().toISOString();return}
+    const hours=Math.min(12,Math.max(0,(now-last)/3600000));
+    if(!force&&hours<1/60)return;
+
+    const rates=productionRates();
+    const cap=storageCap();
+
+    vale.resources.wood=Math.min(cap,Number(vale.resources.wood||0)+rates.wood*hours);
+    vale.resources.stone=Math.min(cap,Number(vale.resources.stone||0)+rates.stone*hours);
+    vale.resources.seeds=Math.min(cap,Number(vale.resources.seeds||0)+rates.seeds*hours);
+    vale.lastProductionAt=new Date(now).toISOString();
+    vale.updatedAt=new Date(now).toISOString();
+    write(VALE_KEY,vale);
+  }
+
+  function markValeChanged(){
+    vale.updatedAt=new Date().toISOString();
+    write(VALE_KEY,vale);
+    renderVale();
+    renderJourneyV7();
+    scheduleSync();
+  }
+
+  function addPresence(amount,reason=''){
+    vale.resources.presence=Math.max(0,Number(vale.resources.presence||0)+amount);
+    vale.updatedAt=new Date().toISOString();
+    write(VALE_KEY,vale);
+    if(amount>0&&reason)toast(`✦ +${amount} Presença • ${reason}`);
+  }
+
+  function itemCostAdjusted(buildingId,cost){
+    if(!cost)return null;
+    const c={...cost};
+    if(buildingId==='cartography'&&vale.inventory.includes('fog_lantern')){
+      c.wood=Math.ceil(c.wood*.9);
+      c.stone=Math.ceil(c.stone*.9);
+      c.seeds=Math.ceil(c.seeds*.9);
+    }
+    return c;
+  }
+
+  function canPay(cost){
+    if(!cost)return false;
+    return ['wood','stone','seeds','presence'].every(k=>Number(vale.resources[k]||0)>=Number(cost[k]||0));
+  }
+
+  function payCost(cost){
+    ['wood','stone','seeds','presence'].forEach(k=>{
+      vale.resources[k]=Math.max(0,Number(vale.resources[k]||0)-Number(cost[k]||0));
+    });
+  }
+
+  function chronicleUnlocked(id){
+    return vale.chronicles.includes(id);
+  }
+
+  function unlockChronicle(id){
+    if(CHRONICLES[id]&&!vale.chronicles.includes(id)){
+      vale.chronicles.push(id);
+    }
+  }
+
+  function grantItem(id){
+    if(ITEMS[id]&&!vale.inventory.includes(id))vale.inventory.push(id);
+  }
+
+  function checkStoryUnlocks(){
+    if(smokes.length+resists.length>=1)unlockChronicle('street');
+    if(vale.buildings.portico.level>=1)unlockChronicle('portico');
+    if(vale.buildings.garden.level>=1||vale.buildings.sawmill.level>=1)unlockChronicle('fog');
+    if(vale.achievements.includes('obstacle'))unlockChronicle('obstacle');
+    if(vale.achievements.includes('still_here'))unlockChronicle('return');
+    if(vale.buildings.cartography.level>=1)unlockChronicle('bridge');
+  }
+
+  function checkAchievements({notify=true}={}){
+    const newly=[];
+    ACHIEVEMENTS.forEach(a=>{
+      if(!vale.achievements.includes(a.id)&&a.condition()){
+        vale.achievements.push(a.id);
+        if(a.rewardPresence)vale.resources.presence=Number(vale.resources.presence||0)+a.rewardPresence;
+        if(a.item)grantItem(a.item);
+        newly.push(a);
+      }
+    });
+    checkStoryUnlocks();
+    if(newly.length){
+      vale.updatedAt=new Date().toISOString();
+      write(VALE_KEY,vale);
+      if(notify){
+        const a=newly[0];
+        toast(`Conquista: ${a.name}${newly.length>1?` +${newly.length-1}`:''}`);
+      }
+    }
+    return newly;
+  }
+
+  function noteValeVisit(){
+    const now=Date.now();
+    const prev=vale.lastVisitAt?new Date(vale.lastVisitAt).getTime():null;
+    if(prev&&observed().length&&now-prev>=48*3600000){
+      vale.returnedAfterGap=true;
+    }
+    vale.lastVisitAt=new Date(now).toISOString();
+    vale.updatedAt=new Date(now).toISOString();
+    write(VALE_KEY,vale);
+  }
+
+  function buildingState(id){
+    const def=BUILDINGS[id];
+    const state=vale.buildings[id];
+    const req=def.requirement();
+    const nextCost=itemCostAdjusted(id,def.cost(state.level));
+    const maxed=state.level>=def.max;
+    return{def,state,req,nextCost,maxed};
+  }
+
+  function renderValeMap(){
+    Object.keys(BUILDINGS).forEach(id=>{
+      const node=$(`node-${id}`);
+      if(!node)return;
+      const {state,req,maxed}=buildingState(id);
+      node.classList.remove('built','available','locked');
+      if(state.level>0)node.classList.add('built');
+      else if(req.ok)node.classList.add('available');
+      else node.classList.add('locked');
+      node.querySelector('.bl').textContent=state.level>0?`NV ${state.level}`:(req.ok?'CONSTRUIR':'BLOQUEADO');
+    });
+
+    $('fogWest').classList.toggle('hidden',vale.buildings.portico.level>=1);
+    $('fogEast').classList.toggle('hidden',vale.buildings.refuge.level>=2);
+    $('fogNorth').classList.toggle('hidden',vale.buildings.cartography.level>=1);
+
+    $('futureRegion').classList.toggle('unlocked',vale.buildings.cartography.level>=1);
+    $('futureRegion').textContent=vale.buildings.cartography.level>=1
+      ?'🌲 Bosque do Intervalo • revelado'
+      :'🌫 Bosque do Intervalo';
+  }
+
+  function renderVale(){
+    collectValeProduction();
+
+    const cap=storageCap();
+    $('woodValue').textContent=Math.floor(vale.resources.wood);
+    $('stoneValue').textContent=Math.floor(vale.resources.stone);
+    $('seedsValue').textContent=Math.floor(vale.resources.seeds);
+    $('presenceValue').textContent=Math.floor(vale.resources.presence);
+    $('storageText').textContent=`armazenamento ${cap}`;
+
+    const rates=productionRates();
+    const total=rates.wood+rates.stone+rates.seeds;
+    $('productionSummary').textContent=total>0
+      ?`+${Math.floor(rates.wood)}🪵 +${Math.floor(rates.stone)}🪨 +${Math.floor(rates.seeds)}🌱 /h`
+      :'produção parada';
+
+    $('economyText').innerHTML=`Vitalidade e Vínculo influenciam a eficiência das construções. Produção atual: <b>${Math.round(productionFactor()*100)}%</b> da base do Vale. A Presença só vem de registros significativos, dias fechados, retorno e conquistas.`;
+    renderValeMap();
+  }
+
+  function renderJourneyV7(){
+    const v=vitality(),b=bond(),f=breath(),r=resilience();
+    $('attrVitality').textContent=v;
+    $('attrBond').textContent=b;
+    $('attrBreath').textContent=f;
+    $('attrResilience').textContent=r;
+
+    const inv=vale.inventory.map(id=>ITEMS[id]).filter(Boolean);
+    $('inventoryCount').textContent=`${inv.length} ${inv.length===1?'item':'itens'}`;
+    $('inventoryGrid').innerHTML=inv.length
+      ?inv.map(item=>`<div class="item-card"><div class="item-icon">${item.icon}</div><div class="item-name">${item.name}</div><div class="item-rarity">${item.rarity}</div><div class="item-desc">${item.desc}</div><div class="item-bonus">${item.bonus}</div></div>`).join('')
+      :'<div class="item-card empty-item"><div class="item-icon">?</div><div class="item-name">Nenhuma relíquia ainda</div><div class="item-desc">Algumas conquistas secretas deixam objetos no Vale.</div></div>';
+
+    const unlocked=ACHIEVEMENTS.filter(a=>vale.achievements.includes(a.id));
+    $('achievementCount').textContent=`${unlocked.length}/${ACHIEVEMENTS.length} descobertas`;
+    $('achievementList').innerHTML=ACHIEVEMENTS.map(a=>{
+      const got=vale.achievements.includes(a.id);
+      if(!got&&a.secret){
+        return `<div class="achievement secret-locked"><div class="ach-icon">?</div><div><div class="ach-name">???</div><div class="ach-desc">Conquista secreta.</div></div><div class="ach-reward">?</div></div>`;
+      }
+      return `<div class="achievement ${got?'':'secret-locked'}"><div class="ach-icon">${got?a.icon:'○'}</div><div><div class="ach-name">${a.name}</div><div class="ach-desc">${a.desc}</div></div><div class="ach-reward">${got?'✓':a.rewardPresence?`+${a.rewardPresence} ✦`:''}</div></div>`;
+    }).join('');
+
+    const order=['prologue','street','portico','fog','obstacle','return','bridge'];
+    const unlockedChron=order.filter(id=>chronicleUnlocked(id));
+    $('chronicleCount').textContent=`${unlockedChron.length} ${unlockedChron.length===1?'capítulo':'capítulos'}`;
+    $('chronicleList').innerHTML=order.map(id=>{
+      const c=CHRONICLES[id],open=chronicleUnlocked(id);
+      return `<button class="chronicle ${open?'':'locked'}" data-chronicle="${id}" ${open?'':'disabled'}><div><div class="chronicle-kicker">${open?c.kicker:'BLOQUEADO'}</div><div class="chronicle-name">${open?c.name:'???'}</div></div><div class="chronicle-arrow">${open?'›':'🔒'}</div></button>`;
+    }).join('');
+
+    document.querySelectorAll('[data-chronicle]').forEach(btn=>{
+      btn.onclick=()=>openChronicle(btn.dataset.chronicle);
+    });
+  }
+
+  let activeBuildingId=null;
+
+  function openBuilding(id){
+    activeBuildingId=id;
+    const {def,state,req,nextCost,maxed}=buildingState(id);
+    $('buildingSheetIcon').textContent=def.icon;
+    $('buildingSheetTitle').textContent=def.name;
+    $('buildingSheetLevel').textContent=state.level?`NÍVEL ${state.level}`:'AINDA NÃO CONSTRUÍDO';
+    $('buildingSheetCopy').textContent=def.desc;
+    $('buildingSheetStats').innerHTML=`<div class="sheet-line"><span>Função</span><strong>${def.effect(state.level)}</strong></div><div class="sheet-line"><span>Nível máximo</span><strong>${def.max}</strong></div>`;
+
+    $('buildingRequirement').style.display=req.ok?'none':'block';
+    $('buildingRequirement').textContent=req.text||'';
+
+    if(maxed){
+      $('buildingCostRow').innerHTML='';
+      $('upgradeBuildingBtn').textContent='Máximo alcançado';
+      $('upgradeBuildingBtn').disabled=true;
+    }else{
+      const labels={wood:'🪵',stone:'🪨',seeds:'🌱',presence:'✦'};
+      $('buildingCostRow').innerHTML=Object.entries(nextCost||{})
+        .filter(([,v])=>v>0)
+        .map(([k,v])=>`<span class="cost-chip ${vale.resources[k]<v?'missing':''}">${labels[k]} ${v}</span>`).join('');
+      $('upgradeBuildingBtn').textContent=state.level?'Melhorar construção':'Construir';
+      $('upgradeBuildingBtn').disabled=!req.ok||!canPay(nextCost);
+    }
+
+    $('buildingBackdrop').classList.add('show');
+  }
+
+  function closeBuilding(){
+    $('buildingBackdrop').classList.remove('show');
+    activeBuildingId=null;
+  }
+
+  function upgradeActiveBuilding(){
+    if(!activeBuildingId)return;
+    const {state,req,nextCost,maxed}=buildingState(activeBuildingId);
+    if(maxed||!req.ok||!canPay(nextCost))return;
+
+    payCost(nextCost);
+    state.level+=1;
+    checkAchievements({notify:false});
+    checkStoryUnlocks();
+    markValeChanged();
+    openBuilding(activeBuildingId);
+    toast(`${BUILDINGS[activeBuildingId].name} • nível ${state.level}`);
+  }
+
+  function openChronicle(id){
+    const c=CHRONICLES[id];
+    if(!c||!chronicleUnlocked(id))return;
+    $('storyTitle').textContent=c.name;
+    $('storyKicker').textContent=c.kicker;
+    $('storyQuote').textContent=c.quote;
+    $('storyText').textContent=c.text;
+    $('storyBackdrop').classList.add('show');
+  }
+
+  function closeStory(){
+    $('storyBackdrop').classList.remove('show');
   }
 
   function progress(){
@@ -698,10 +1808,6 @@ section.tab{display:none}section.tab.active{display:block}
       $('xpNote').textContent=`${hi-p.xp} XP para a próxima evolução.`;
     }
 
-    $('powerMemory').classList.toggle('locked',closedDays.length<7);
-    $('powerPatience').classList.toggle('locked',resists.length<5);
-    $('powerBreath').classList.toggle('locked',!(game.bestReduction>=10));
-    $('powerRecord').classList.toggle('locked',!(game.bestReduction>=25));
 
     const ks=observed().sort().reverse();
     $('historyList').innerHTML=ks.length?ks.map(k=>{
@@ -713,6 +1819,9 @@ section.tab{display:none}section.tab.active{display:block}
     $('totalSmokes').textContent=smokes.length;
     $('totalResists').textContent=resists.length;
     $('totalClosed').textContent=closedDays.length;
+    checkAchievements({notify:false});
+    renderVale();
+    renderJourneyV7();
     updateLastSync();
   }
 
@@ -784,18 +1893,31 @@ section.tab{display:none}section.tab.active{display:block}
     },{onConflict:'user_id'});
 
     if(gameError)throw gameError;
+
+    vale.updatedAt=new Date().toISOString();
+    write(VALE_KEY,vale);
+
+    const {error:valeError}=await sb.from('vale_state').upsert({
+      user_id:currentUser.id,
+      state:vale,
+      updated_at:vale.updatedAt
+    },{onConflict:'user_id'});
+
+    if(valeError)throw valeError;
   }
 
   async function pullCloud(){
-    const [evRes,clRes,gameRes]=await Promise.all([
+    const [evRes,clRes,gameRes,valeRes]=await Promise.all([
       sb.from('events').select('local_id,event_type,occurred_at').order('occurred_at',{ascending:true}),
       sb.from('day_closures').select('day,closed_at').order('day',{ascending:true}),
-      sb.from('game_state').select('baseline,baseline_locked,best_reduction,max_level').maybeSingle()
+      sb.from('game_state').select('baseline,baseline_locked,best_reduction,max_level').maybeSingle(),
+      sb.from('vale_state').select('state,updated_at').maybeSingle()
     ]);
 
     if(evRes.error)throw evRes.error;
     if(clRes.error)throw clRes.error;
     if(gameRes.error)throw gameRes.error;
+    if(valeRes.error)throw valeRes.error;
 
     smokes=(evRes.data||[])
       .filter(x=>x.event_type==='cigarette')
@@ -815,6 +1937,18 @@ section.tab{display:none}section.tab.active{display:block}
         maxLevel:Number(gameRes.data.max_level||1)
       };
     }
+
+    if(valeRes.data?.state){
+      const cloudVale=normalizeValeState(valeRes.data.state);
+      const cloudTime=new Date(valeRes.data.updated_at||cloudVale.updatedAt||0).getTime();
+      const localTime=new Date(vale.updatedAt||0).getTime();
+      if(cloudTime>=localTime){
+        vale=cloudVale;
+      }
+    }
+
+    checkAchievements({notify:false});
+    checkStoryUnlocks();
 
     write(SMOKE_KEY,smokes);
     write(RESIST_KEY,resists);
@@ -879,6 +2013,7 @@ section.tab{display:none}section.tab.active{display:block}
     animatePet(false);
     render();
     toast('Cigarro registrado');
+    checkAchievements();
     scheduleSync();
   };
 
@@ -888,7 +2023,9 @@ section.tab{display:none}section.tab.active{display:block}
     write(RESIST_KEY,resists);
     animatePet(true);
     render();
-    toast('✦ Nimbo ganhou energia');
+    addPresence(1,'vontade atravessada');
+    checkAchievements();
+    render();
     scheduleSync();
   };
 
@@ -912,7 +2049,9 @@ section.tab{display:none}section.tab.active{display:block}
       write(CLOSED_KEY,closedDays);
       render();
       animatePet(true);
-      toast('Dia fechado • + vínculo');
+      addPresence(2,'dia fechado');
+      checkAchievements();
+      render();
       scheduleSync();
     }
   };
@@ -947,7 +2086,7 @@ section.tab{display:none}section.tab.active{display:block}
   };
 
   $('exportBtn').onclick=()=>{
-    const data={app:'vou-parar-de-fumar',version:6,exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game};
+    const data={app:'vou-parar-de-fumar',version:7,exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game,vale};
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;
@@ -974,12 +2113,14 @@ section.tab{display:none}section.tab.active{display:block}
       resists=Array.isArray(d.resists)?d.resists:[];
       closedDays=Array.isArray(d.closedDays)?d.closedDays:[];
       game=d.game||{baseline:null,baselineLocked:false,bestReduction:0,maxLevel:1};
+      vale=normalizeValeState(d.vale||null);
       pendingDeletes=[];
 
       write(SMOKE_KEY,smokes);
       write(RESIST_KEY,resists);
       write(CLOSED_KEY,closedDays);
       write(GAME_KEY,game);
+      write(VALE_KEY,vale);
       write(DELETIONS_KEY,pendingDeletes);
 
       render();
@@ -1008,10 +2149,12 @@ section.tab{display:none}section.tab.active{display:block}
       const r1=await sb.from('events').delete().eq('user_id',currentUser.id);
       const r2=await sb.from('day_closures').delete().eq('user_id',currentUser.id);
       const r3=await sb.from('game_state').delete().eq('user_id',currentUser.id);
+      const r4=await sb.from('vale_state').delete().eq('user_id',currentUser.id);
 
       if(r1.error)throw r1.error;
       if(r2.error)throw r2.error;
       if(r3.error)throw r3.error;
+      if(r4.error)throw r4.error;
 
       smokes=[];
       resists=[];
@@ -1023,6 +2166,7 @@ section.tab{display:none}section.tab.active{display:block}
       write(RESIST_KEY,resists);
       write(CLOSED_KEY,closedDays);
       write(GAME_KEY,game);
+      write(VALE_KEY,vale);
       write(DELETIONS_KEY,pendingDeletes);
       localStorage.removeItem(LAST_SYNC_KEY);
 
@@ -1040,6 +2184,8 @@ section.tab{display:none}section.tab.active{display:block}
     currentUser=user;
     bindLocalCacheToUser(user.id);
     ensureLocalIds();
+    vale=normalizeValeState(vale);
+    write(VALE_KEY,vale);
 
     $('passwordScreen').classList.remove('show');
     $('authScreen').classList.remove('show');
@@ -1217,14 +2363,42 @@ section.tab{display:none}section.tab.active{display:block}
 
   $('updateBtn').onclick=()=>checkForUpdate({manual:true});
 
+
+  document.querySelectorAll('[data-building]').forEach(btn=>{
+    btn.onclick=()=>openBuilding(btn.dataset.building);
+  });
+
+  $('closeBuildingSheet').onclick=closeBuilding;
+  $('buildingBackdrop').onclick=e=>{if(e.target===$('buildingBackdrop'))closeBuilding()};
+  $('upgradeBuildingBtn').onclick=upgradeActiveBuilding;
+
+  $('closeStorySheet').onclick=closeStory;
+  $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
+
+  document.querySelectorAll('[data-journey]').forEach(btn=>{
+    btn.onclick=()=>{
+      document.querySelectorAll('[data-journey]').forEach(b=>b.classList.toggle('active',b===btn));
+      document.querySelectorAll('.journey-pane').forEach(p=>p.classList.toggle('active',p.id===`journey-${btn.dataset.journey}`));
+    };
+  });
+
   document.querySelectorAll('.nav button').forEach(btn=>btn.onclick=()=>{
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));
     document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id===btn.dataset.tab));
+    if(btn.dataset.tab==='vale'){
+      collectValeProduction(true);
+      renderVale();
+      scheduleSync();
+    }
+    if(btn.dataset.tab==='journey')renderJourneyV7();
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
   async function start(){
     ensureLocalIds();
+    noteValeVisit();
+    ensureValeBaselines();
+    checkAchievements({notify:false});
     render();
 
     if(!window.supabase){
