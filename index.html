@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.1">
+<meta name="app-version" content="7.2">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -587,6 +587,137 @@ section.tab{display:none}section.tab.active{display:block}
   .home-resource-title{display:none}
 }
 
+
+/* =========================================================
+   V7.2 — CIDADE DO VALE + TESOURARIA
+   ========================================================= */
+body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+.nav{padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+.navin{grid-template-columns:repeat(3,1fr)!important;gap:3px 5px!important}
+.nav button{min-height:43px;padding:5px 3px!important;position:relative}
+.nav .ico{font-size:13px!important}
+
+.vale-screen-head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px
+}
+.vale-screen-head h2{font-size:20px;letter-spacing:-.35px;margin:0}
+.vale-screen-head p{font-size:10px;line-height:1.45;color:var(--muted);margin:4px 0 0;max-width:380px}
+.vale-stoic-mark{
+  flex:0 0 auto;border:1px solid rgba(255,214,107,.18);background:rgba(255,214,107,.05);
+  color:#e9dda9;border-radius:10px;padding:7px 8px;font:7px/1.35 var(--pixel);max-width:110px;text-align:center
+}
+
+.city-builder-card{padding:10px!important}
+.city-builder-card .map-head{padding:1px 2px 0}
+.vale-map-v72{height:455px!important;border-radius:16px!important}
+.map-settlement-layer{z-index:2!important}
+.city-building{
+  position:absolute;z-index:2;transform:translate(-50%,-50%);width:25px;height:25px;border:0;padding:0;
+  border-radius:6px;background:rgba(10,25,34,.76);display:grid;place-items:center;font-size:17px;
+  box-shadow:0 3px 8px rgba(0,0,0,.26);transition:.13s;border:1px solid rgba(255,255,255,.07)
+}
+.city-building:active{transform:translate(-50%,-50%) scale(.9)}
+.city-building.unique{width:34px;height:34px;font-size:23px;border-color:rgba(255,214,107,.18)}
+.city-building.selected{outline:2px solid rgba(255,214,107,.75);outline-offset:2px}
+.city-building .city-count{
+  position:absolute;right:-7px;top:-7px;min-width:16px;height:16px;border-radius:999px;padding:0 4px;
+  background:#0e1a2b;border:1px solid rgba(255,255,255,.18);color:#e6edf2;font:7px var(--pixel);display:grid;place-items:center
+}
+.city-cluster-more{
+  position:absolute;z-index:2;transform:translate(-50%,-50%);border-radius:999px;padding:4px 6px;
+  background:#0b1728;border:1px solid rgba(255,255,255,.15);font:7px var(--pixel);color:#d6e1e5
+}
+
+.building-palette-wrap{margin-top:10px}
+.building-palette-title{font:7px var(--pixel);color:var(--muted);margin:0 2px 6px}
+.building-palette{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:5px
+}
+.building-choice{
+  position:relative;min-width:0;height:55px;border:1px solid var(--line);background:#172640;color:#d7e1ea;
+  border-radius:11px;padding:5px 2px;display:grid;place-items:center
+}
+.building-choice .choice-icon{font-size:21px;line-height:1}
+.building-choice .choice-count{font:7px var(--pixel);color:#a8b7c7;margin-top:2px}
+.building-choice.selected{
+  border-color:rgba(255,214,107,.48);background:linear-gradient(180deg,rgba(145,105,0,.64),rgba(91,68,10,.7));color:#fff3b8
+}
+.building-choice.locked{opacity:.45;filter:grayscale(.65)}
+.building-choice .choice-dot{
+  position:absolute;right:4px;top:4px;width:7px;height:7px;border-radius:50%;background:#52db7e;display:none
+}
+.building-choice.available .choice-dot{display:block}
+
+.building-detail-panel{
+  margin-top:8px;border:1px solid var(--line);background:#101d32;border-radius:16px;padding:13px
+}
+.building-detail-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.building-detail-left{display:flex;gap:10px;align-items:center;min-width:0}
+.building-detail-icon{font-size:28px}
+.building-detail-name{font-size:14px;font-weight:800}
+.building-detail-count{font:8px var(--pixel);color:#a8b7c7;margin-top:3px}
+.building-detail-effect{font-size:10px;color:#c4d2dd;line-height:1.45;margin-top:9px}
+.building-detail-desc{font-size:9px;color:var(--muted);line-height:1.45;margin-top:7px}
+.building-detail-footer{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-top:10px}
+.building-costs{display:flex;gap:5px;flex-wrap:wrap}
+.building-cost{
+  border:1px solid var(--line);background:#172943;border-radius:8px;padding:6px 7px;font:8px var(--pixel);white-space:nowrap
+}
+.building-cost.missing{color:#ffb7b7;border-color:rgba(255,133,133,.22)}
+.build-more-btn{
+  min-width:106px;border:0;border-radius:12px;background:linear-gradient(180deg,#66ec92,#46d77a);
+  color:#07351a;font-size:11px;font-weight:850;padding:11px 12px
+}
+.build-more-btn:disabled{opacity:.35}
+.building-requirement{
+  margin-top:8px;padding:8px 9px;border-radius:9px;border:1px solid rgba(255,214,107,.13);
+  background:rgba(255,214,107,.05);color:#dfd29a;font-size:8px;line-height:1.4
+}
+
+.resources-head{
+  background:linear-gradient(145deg,rgba(114,222,241,.08),rgba(16,29,50,.96));border:1px solid rgba(114,222,241,.13);
+  border-radius:18px;padding:14px;margin-bottom:10px
+}
+.resources-kicker{font:8px var(--pixel);color:#9bddea}
+.resources-title{font-size:20px;font-weight:800;margin:4px 0}
+.resources-copy{font-size:10px;line-height:1.45;color:var(--muted)}
+.resources-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.resources-summary-box{background:#0e1a2d;border:1px solid var(--line);border-radius:11px;padding:9px}
+.resources-summary-k{font-size:8px;color:var(--muted)}
+.resources-summary-v{font:700 16px var(--pixel);margin-top:3px;color:#dce8ee}
+.resource-list{display:grid;gap:9px}
+.resource-card-v72{
+  background:#101d32;border:1px solid var(--line);border-radius:18px;padding:13px
+}
+.resource-main-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.resource-icon-big{font-size:27px;width:35px;text-align:center}
+.resource-name-big{font-size:15px;font-weight:800}
+.resource-rate{font:700 11px var(--pixel);color:#6ee79a;text-align:right}
+.resource-rate.static{color:#cdb8ff}
+.resource-balance{font:8px var(--pixel);color:#a8b7c7;margin-top:3px}
+.resource-progress{height:8px;border-radius:999px;background:#091522;overflow:hidden;margin:9px 0 8px}
+.resource-progress i{display:block;height:100%;background:linear-gradient(90deg,#5375d6,#72def1);border-radius:999px}
+.resource-progress.presence i{background:linear-gradient(90deg,#8e70d8,#c4aaff)}
+.resource-time{font-size:8px;color:#7fe69e;margin-top:3px}
+.flow-lines{display:grid;gap:4px;margin-top:8px}
+.flow-line{display:grid;grid-template-columns:18px 1fr;gap:5px;font-size:9px;line-height:1.35;color:#b8c6d2}
+.flow-line.plus .flow-sign{color:#62e98f}.flow-line.minus .flow-sign{color:#ff8d73}.flow-line.info .flow-sign{color:#72def1}
+.resource-uses{font-size:8px;color:#7f8fa4;margin-top:8px;border-top:1px solid var(--line);padding-top:7px}
+.behavior-economy{
+  border:1px solid rgba(98,233,143,.12);background:rgba(98,233,143,.04);border-radius:16px;padding:12px;margin-top:10px
+}
+.behavior-economy h3{font-size:12px;margin:0 0 7px}
+.behavior-economy-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.055);font-size:9px}
+.behavior-economy-row:last-child{border-bottom:0}
+.behavior-economy-row span:last-child{font:8px var(--pixel);color:#baf2cb;text-align:right}
+
+@media(max-width:380px){
+  .building-palette{grid-template-columns:repeat(3,1fr)}
+  .building-choice{height:48px}
+  .building-detail-footer{grid-template-columns:1fr}
+  .build-more-btn{width:100%}
+}
+
 </style>
 </head>
 <body>
@@ -762,7 +893,7 @@ section.tab{display:none}section.tab.active{display:block}
   </div>
 
   <button class="home-resource-strip" id="homeResourceStrip" type="button">
-    <span class="home-resource-title">VALE</span>
+    <span class="home-resource-title">RECURSOS</span>
     <span class="home-resource"><b>🪵</b><strong id="homeWoodValue">0</strong></span>
     <span class="home-resource"><b>🪨</b><strong id="homeStoneValue">0</strong></span>
     <span class="home-resource"><b>🌱</b><strong id="homeSeedsValue">0</strong></span>
@@ -804,13 +935,12 @@ section.tab{display:none}section.tab.active{display:block}
 </section>
 
 <section id="vale" class="tab">
-  <div class="vale-hero">
-    <div class="vale-hero-content">
-      <div class="vale-eyebrow">VALE DO NIMBO</div>
-      <div class="vale-title">Reconstruir o que depende de você.</div>
-      <div class="vale-copy">O Vale não é uma fuga da Cidade da Pressa. É um lugar de treino: cada construção recuperada representa uma capacidade que Nimbo aprende a levar de volta para a vida real.</div>
-      <div class="vale-quote">“Cuide daquilo que depende de você.”</div>
+  <div class="vale-screen-head">
+    <div>
+      <h2>Vale do Nimbo</h2>
+      <p>Construa uma cidade viva. Estruturas produtivas podem ser repetidas: cada nova construção aparece no mapa e acelera a economia.</p>
     </div>
+    <div class="vale-stoic-mark">O próximo passo<br>é o que existe agora.</div>
   </div>
 
   <div class="world-strip">
@@ -820,62 +950,79 @@ section.tab{display:none}section.tab.active{display:block}
     <div class="world-resource"><span class="ri">✦</span><div class="rv" id="presenceValue">0</div><div class="rk">Presença</div></div>
   </div>
 
-  <div class="map-card dynamic-map">
+  <div class="map-card city-builder-card">
     <div class="map-head">
       <div>
-        <div class="map-title">Mapa do Vale</div>
-        <div class="map-sub">Toque em uma construção para ver sua função e melhorá-la.</div>
+        <div class="map-title">Cidade do Vale</div>
+        <div class="map-sub" id="cityMapSubtitle">As construções aparecem fisicamente conforme o Vale cresce.</div>
       </div>
       <div class="production-pill" id="productionSummary">produção parada</div>
     </div>
 
-    <div class="vale-map" id="valeMap">
+    <div class="vale-map vale-map-v72" id="valeMap">
       <div class="map-settlement-layer" id="mapSettlementLayer"></div>
       <div class="map-life-layer" id="mapLifeLayer"></div>
       <div class="map-nimbo" id="mapNimbo" aria-hidden="true"></div>
-      <div class="map-path" style="left:48%;top:53%;width:34%;transform:rotate(-27deg)"></div>
-      <div class="map-path" style="left:47%;top:52%;width:34%;transform:rotate(151deg)"></div>
-      <div class="map-path" style="left:49%;top:53%;width:27%;transform:rotate(87deg)"></div>
-      <div class="map-path" style="left:49%;top:52%;width:27%;transform:rotate(-90deg)"></div>
-
-      <button class="build-node" id="node-refuge" data-building="refuge" style="left:49%;top:53%">
-        <span class="bi">🏠</span><div class="bn">Refúgio</div><div class="bl"></div>
-      </button>
-
-      <button class="build-node" id="node-portico" data-building="portico" style="left:49%;top:23%">
-        <span class="bi">🏛️</span><div class="bn">Pórtico</div><div class="bl"></div>
-      </button>
-
-      <button class="build-node" id="node-garden" data-building="garden" style="left:23%;top:58%">
-        <span class="bi">🌾</span><div class="bn">Horta</div><div class="bl"></div>
-      </button>
-
-      <button class="build-node" id="node-sawmill" data-building="sawmill" style="left:24%;top:27%">
-        <span class="bi">🪚</span><div class="bn">Serraria</div><div class="bl"></div>
-      </button>
-
-      <button class="build-node" id="node-quarry" data-building="quarry" style="left:76%;top:65%">
-        <span class="bi">⛏️</span><div class="bn">Pedreira</div><div class="bl"></div>
-      </button>
-
-      <button class="build-node" id="node-cartography" data-building="cartography" style="left:76%;top:30%">
-        <span class="bi">🗺️</span><div class="bn">Cartografia</div><div class="bl"></div>
-      </button>
-
+      <div class="map-path" style="left:48%;top:51%;width:36%;transform:rotate(-28deg)"></div>
+      <div class="map-path" style="left:47%;top:52%;width:36%;transform:rotate(151deg)"></div>
+      <div class="map-path" style="left:49%;top:52%;width:29%;transform:rotate(88deg)"></div>
+      <div class="map-path" style="left:49%;top:51%;width:28%;transform:rotate(-90deg)"></div>
       <div class="fog f1" id="fogNorth"></div>
       <div class="fog f2" id="fogWest"></div>
       <div class="fog f3" id="fogEast"></div>
-
       <div class="future-region" id="futureRegion">🌫 Bosque do Intervalo</div>
+    </div>
+
+    <div class="building-palette-wrap">
+      <div class="building-palette-title">CONSTRUIR / GERENCIAR</div>
+      <div class="building-palette" id="buildingPalette">
+        <button class="building-choice" data-building="refuge"><span class="choice-dot"></span><span class="choice-icon">🏠</span><span class="choice-count">x1</span></button>
+        <button class="building-choice" data-building="portico"><span class="choice-dot"></span><span class="choice-icon">🏛️</span><span class="choice-count">N0</span></button>
+        <button class="building-choice" data-building="garden"><span class="choice-dot"></span><span class="choice-icon">🌾</span><span class="choice-count">x0</span></button>
+        <button class="building-choice" data-building="sawmill"><span class="choice-dot"></span><span class="choice-icon">🪚</span><span class="choice-count">x0</span></button>
+        <button class="building-choice" data-building="quarry"><span class="choice-dot"></span><span class="choice-icon">⛏️</span><span class="choice-count">x0</span></button>
+        <button class="building-choice" data-building="cartography"><span class="choice-dot"></span><span class="choice-icon">🗺️</span><span class="choice-count">N0</span></button>
+      </div>
+    </div>
+
+    <div class="building-detail-panel" id="buildingDetailPanel">
+      <div class="building-detail-head">
+        <div class="building-detail-left">
+          <div class="building-detail-icon" id="buildingDetailIcon">🏠</div>
+          <div><div class="building-detail-name" id="buildingDetailName">Abrigos</div><div class="building-detail-count" id="buildingDetailCount">1 construção</div></div>
+        </div>
+        <div class="production-pill" id="buildingDetailProduction">armazenamento</div>
+      </div>
+      <div class="building-detail-effect" id="buildingDetailEffect"></div>
+      <div class="building-detail-desc" id="buildingDetailDesc"></div>
+      <div class="building-requirement" id="buildingDetailRequirement" style="display:none"></div>
+      <div class="building-detail-footer">
+        <div class="building-costs" id="buildingDetailCosts"></div>
+        <button class="build-more-btn" id="buildMoreBtn">Construir +1</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resources" class="tab">
+  <div class="resources-head">
+    <div class="resources-kicker">TESOURARIA DO VALE</div>
+    <div class="resources-title">Recursos em movimento</div>
+    <div class="resources-copy">A cidade produz continuamente. Vitalidade e Vínculo aumentam a eficiência; ações conscientes na vida real dão impulsos à economia sem recompensar o ato de fumar.</div>
+    <div class="resources-summary">
+      <div class="resources-summary-box"><div class="resources-summary-k">Eficiência produtiva</div><div class="resources-summary-v" id="resourceEfficiency">100%</div></div>
+      <div class="resources-summary-box"><div class="resources-summary-k">Armazenamento comum</div><div class="resources-summary-v" id="resourceStorage">4k</div></div>
     </div>
   </div>
 
-  <div class="panel">
-    <div class="vale-section-title">
-      <h2>Economia do Vale</h2>
-      <span class="rate-note" id="storageText">armazenamento 300</span>
-    </div>
-    <div class="empty" id="economyText">Reconstrua a Horta, a Serraria e a Pedreira para gerar recursos ao longo do tempo. A Presença não é produzida por edifícios: ela vem da sua jornada real.</div>
+  <div class="resource-list" id="resourceList"></div>
+
+  <div class="behavior-economy">
+    <h3>O que sua jornada movimenta</h3>
+    <div class="behavior-economy-row"><span>Primeiro registro consciente do dia</span><span>+35 🪵 · +25 🪨 · +35 🌱</span></div>
+    <div class="behavior-economy-row"><span>Quis fumar, mas não fumei</span><span>+1 ✦ · +20 🪵 · +15 🪨 · +25 🌱</span></div>
+    <div class="behavior-economy-row"><span>Fechar o dia</span><span>+2 ✦ · +60 🪵 · +45 🪨 · +60 🌱</span></div>
+    <div class="behavior-economy-row"><span>Fumei agora</span><span>registro neutro · sem punição</span></div>
   </div>
 </section>
 
@@ -973,7 +1120,7 @@ section.tab{display:none}section.tab.active{display:block}
   <div class="panel">
     <h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
-    <div class="note">Versão instalada: v7.1</div>
+    <div class="note">Versão instalada: v7.2</div>
   </div>
 
   <div class="panel">
@@ -1024,6 +1171,7 @@ section.tab{display:none}section.tab.active{display:block}
 <nav class="nav"><div class="navin">
 <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
 <button data-tab="vale"><span class="ico">⌂</span>Vale</button>
+<button data-tab="resources"><span class="ico">▤</span>Recursos</button>
 <button data-tab="journey"><span class="ico">✦</span>Jornada<span class="nav-badge" id="journeyNavBadge">0</span></button>
 <button data-tab="history"><span class="ico">▥</span>Histórico</button>
 <button data-tab="more"><span class="ico">⚙</span>Mais</button>
@@ -1031,7 +1179,7 @@ section.tab{display:none}section.tab.active{display:block}
 
 <script>
 (() => {
-  const APP_VERSION='7.1';
+  const APP_VERSION='7.2';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1074,92 +1222,100 @@ section.tab{display:none}section.tab.active{display:block}
   const dayText=k=>dayDate(k).toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
   const uuid=()=>window.crypto&&crypto.randomUUID?crypto.randomUUID():`${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
+  function formatCompact(value){
+    const n=Number(value||0),a=Math.abs(n);
+    if(a<1000)return String(Math.round(n));
+    if(a<1e6){const v=n/1e3;return `${v<10?v.toFixed(1):Math.round(v)}k`;}
+    if(a<1e9){const v=n/1e6;return `${v<10?v.toFixed(1):Math.round(v)}m`;}
+    const v=n/1e9;return `${v<10?v.toFixed(1):Math.round(v)}b`;
+  }
+
+  function formatRate(value){
+    const n=Number(value||0);
+    if(n<1&&n>0)return n.toFixed(1);
+    return formatCompact(n);
+  }
+
+  function formatMinutes(minutes){
+    if(!Number.isFinite(minutes)||minutes<0)return '—';
+    if(minutes<1)return '<1 min';
+    if(minutes<60)return `${Math.ceil(minutes)} min`;
+    if(minutes<1440)return `${(minutes/60).toFixed(minutes<180?1:0)} h`;
+    return `${(minutes/1440).toFixed(1)} d`;
+  }
+
+
+  function roundCost(v){return Math.max(0,Math.round(v/5)*5)}
+
+  function scaledCost(base,growth,index){
+    const mult=Math.pow(growth,Math.max(0,index));
+    const out={};
+    Object.entries(base).forEach(([k,v])=>out[k]=roundCost(v*mult));
+    return out;
+  }
+
   const BUILDINGS={
     refuge:{
-      name:'Refúgio',icon:'🏠',
-      desc:'A primeira casa de Nimbo no Vale. Não serve para fugir da cidade: serve para lembrar que descanso também pode existir sem automatismo.',
-      max:5,
-      effect:l=>`Armazenamento: ${storageCapFor(l)} de cada recurso comum.`,
+      name:'Abrigo',plural:'Abrigos',icon:'🏠',repeatable:true,
+      desc:'Casas pequenas ao redor do Refúgio original. Mais Abrigos aumentam o espaço de armazenamento e fazem a cidade crescer visualmente.',
+      max:24,
+      effect:l=>`${l} ${l===1?'abrigo':'abrigos'} • capacidade comum ${formatCompact(storageCapFor(l))}.`,
       requirement:()=>({ok:true,text:''}),
-      cost:l=>[
-        null,
-        {wood:80,stone:40,seeds:0,presence:0},
-        {wood:160,stone:90,seeds:20,presence:2},
-        {wood:280,stone:170,seeds:60,presence:4},
-        {wood:450,stone:300,seeds:120,presence:7}
-      ][l]||null
+      cost:l=>scaledCost({wood:180,stone:95,seeds:20,presence:0},1.38,Math.max(0,l-1))
     },
     portico:{
-      name:'Pórtico',icon:'🏛️',
-      desc:'Nas ruínas do Pórtico, Nimbo encontra textos antigos sobre escolha, impressão e disciplina. Cada nível recupera parte das Crônicas.',
+      name:'Pórtico',plural:'Pórtico',icon:'🏛️',repeatable:false,
+      desc:'O centro filosófico do Vale. Seus níveis restauram Crônicas, melhoram a eficiência da cidade e abrem novos caminhos.',
       max:4,
-      effect:l=>l?`Crônicas e regiões narrativas: nível ${l}.`:'Desbloqueia as primeiras Crônicas do Vale.',
+      effect:l=>l?`Nível ${l} • +${l*4}% de eficiência da cidade.`:'Desbloqueia as primeiras Crônicas e a Serraria.',
       requirement:()=>({ok:true,text:''}),
       cost:l=>[
-        {wood:45,stone:25,seeds:0,presence:0},
-        {wood:110,stone:70,seeds:25,presence:2},
-        {wood:220,stone:140,seeds:60,presence:4},
-        {wood:380,stone:260,seeds:100,presence:7}
+        {wood:80,stone:50,seeds:0,presence:0},
+        {wood:260,stone:160,seeds:70,presence:2},
+        {wood:560,stone:360,seeds:180,presence:4},
+        {wood:1100,stone:760,seeds:360,presence:7}
       ][l]||null
     },
     garden:{
-      name:'Horta da Presença',icon:'🌾',
-      desc:'Uma horta abandonada que volta a produzir quando Nimbo cuida do que está diante dele. Produz Sementes ao longo do tempo.',
-      max:5,
-      effect:l=>l?`Produção-base: ${6*l} sementes/hora.`:'Produz Sementes.',
+      name:'Horta',plural:'Hortas',icon:'🌾',repeatable:true,
+      desc:'Cada Horta produz Sementes continuamente. É a construção produtiva mais acessível para colocar a economia em movimento.',
+      max:30,
+      effect:l=>l?`${l} ${l===1?'horta':'hortas'} • base ${formatRate(5*l)}/min de Sementes.`:'Produz Sementes.',
       requirement:()=>({ok:true,text:''}),
-      cost:l=>[
-        {wood:35,stone:10,seeds:0,presence:0},
-        {wood:75,stone:25,seeds:20,presence:1},
-        {wood:140,stone:60,seeds:55,presence:2},
-        {wood:250,stone:110,seeds:100,presence:4},
-        {wood:390,stone:190,seeds:180,presence:6}
-      ][l]||null
+      cost:l=>scaledCost({wood:90,stone:30,seeds:10,presence:0},1.34,l)
     },
     sawmill:{
-      name:'Serraria do Bosque',icon:'🪚',
-      desc:'Nimbo reaprende a transformar o que encontra em material para construir. Produz Madeira.',
-      max:5,
-      effect:l=>l?`Produção-base: ${8*l} madeira/hora.`:'Produz Madeira.',
+      name:'Serraria',plural:'Serrarias',icon:'🪚',repeatable:true,
+      desc:'Transforma o Bosque em Madeira de construção. Cada nova Serraria aumenta diretamente a produção por minuto.',
+      max:30,
+      effect:l=>l?`${l} ${l===1?'serraria':'serrarias'} • base ${formatRate(6*l)}/min de Madeira.`:'Produz Madeira.',
       requirement:()=>vale.buildings.portico.level>=1
         ?{ok:true,text:''}
-        :{ok:false,text:'Reconstrua o Pórtico no nível 1 para abrir o caminho do bosque.'},
-      cost:l=>[
-        {wood:55,stone:25,seeds:15,presence:0},
-        {wood:105,stone:45,seeds:30,presence:1},
-        {wood:190,stone:90,seeds:65,presence:2},
-        {wood:310,stone:150,seeds:120,presence:4},
-        {wood:480,stone:240,seeds:190,presence:6}
-      ][l]||null
+        :{ok:false,text:'Construa o Pórtico nível 1 para abrir o caminho do bosque.'},
+      cost:l=>scaledCost({wood:150,stone:55,seeds:25,presence:0},1.36,l)
     },
     quarry:{
-      name:'Pedreira do Obstáculo',icon:'⛏️',
-      desc:'A pedra do Vale não desaparece quando Nimbo deseja. Ele aprende a trabalhar com o obstáculo que existe, não com o que gostaria que existisse. Produz Pedra.',
-      max:5,
-      effect:l=>l?`Produção-base: ${6*l} pedra/hora.`:'Produz Pedra.',
+      name:'Pedreira',plural:'Pedreiras',icon:'⛏️',repeatable:true,
+      desc:'Produz Pedra para as estruturas mais pesadas. O obstáculo vira material para o próprio caminho.',
+      max:30,
+      effect:l=>l?`${l} ${l===1?'pedreira':'pedreiras'} • base ${formatRate(5*l)}/min de Pedra.`:'Produz Pedra.',
       requirement:()=>vale.buildings.refuge.level>=2
         ?{ok:true,text:''}
-        :{ok:false,text:'Eleve o Refúgio ao nível 2. Nimbo precisa de abrigo antes de trabalhar na pedreira.'},
-      cost:l=>[
-        {wood:90,stone:35,seeds:20,presence:1},
-        {wood:150,stone:85,seeds:40,presence:2},
-        {wood:250,stone:150,seeds:80,presence:3},
-        {wood:390,stone:240,seeds:140,presence:5},
-        {wood:580,stone:360,seeds:220,presence:8}
-      ][l]||null
+        :{ok:false,text:'Construa um segundo Abrigo. A Pedreira exige uma cidade minimamente preparada.'},
+      cost:l=>scaledCost({wood:190,stone:90,seeds:30,presence:0},1.37,l)
     },
     cartography:{
-      name:'Casa da Cartografia',icon:'🗺️',
-      desc:'Mapas não removem a Névoa, mas ajudam Nimbo a atravessá-la. A Cartografia revela regiões futuras do Vale.',
+      name:'Cartografia',plural:'Cartografia',icon:'🗺️',repeatable:false,
+      desc:'A Casa da Cartografia revela regiões da Névoa. É uma construção única e avança por níveis.',
       max:3,
-      effect:l=>l?`Regiões reveladas: ${l}.`:'Revela o Bosque do Intervalo.',
+      effect:l=>l?`Nível ${l} • ${l} ${l===1?'região revelada':'regiões reveladas'}.`:'Revela o Bosque do Intervalo.',
       requirement:()=>vale.buildings.portico.level>=2&&bond()>=40
         ?{ok:true,text:''}
-        :{ok:false,text:'Requer Pórtico nível 2 e Vínculo 40. O mapa só faz sentido quando Nimbo conhece o próprio caminho.'},
+        :{ok:false,text:'Requer Pórtico nível 2 e Vínculo 40.'},
       cost:l=>[
-        {wood:140,stone:100,seeds:70,presence:4},
-        {wood:260,stone:190,seeds:120,presence:6},
-        {wood:440,stone:320,seeds:210,presence:9}
+        {wood:350,stone:260,seeds:180,presence:4},
+        {wood:850,stone:620,seeds:420,presence:6},
+        {wood:1700,stone:1250,seeds:820,presence:9}
       ][l]||null
     }
   };
@@ -1178,7 +1334,7 @@ section.tab{display:none}section.tab.active{display:block}
     return_stone:{
       icon:'🪨',name:'Pedra do Retorno',rarity:'RELÍQUIA',
       desc:'Encontrada ao lado de uma ponte que parecia abandonada.',
-      bonus:'+50 de armazenamento de Madeira, Pedra e Sementes.'
+      bonus:'+1,5k de armazenamento de Madeira, Pedra e Sementes.'
     },
     portico_fragment:{
       icon:'🏛️',name:'Fragmento do Pórtico',rarity:'MEMÓRIA',
@@ -1394,8 +1550,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function defaultValeState(){
     const historicalPresence=Math.min(18,closedDays.length*2+resists.length);
     return{
-      version:2,
-      resources:{wood:125,stone:80,seeds:55,presence:historicalPresence},
+      version:3,
+      economyVersion:2,
+      resources:{wood:700,stone:500,seeds:450,presence:historicalPresence},
       buildings:{
         refuge:{level:1},
         portico:{level:0},
@@ -1409,6 +1566,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       chronicles:['prologue'],
       readChronicles:[],
       seenAchievements:[],
+      dailyAwarenessRewards:[],
       baselines:{intervalMinutes:null,firstCigMinute:null},
       lastProductionAt:new Date().toISOString(),
       lastVisitAt:null,
@@ -1420,7 +1578,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function normalizeValeState(raw){
     const d=defaultValeState();
     if(!raw||typeof raw!=='object')return d;
-    return{
+
+    const out={
       ...d,...raw,
       resources:{...d.resources,...(raw.resources||{})},
       buildings:{
@@ -1436,8 +1595,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       chronicles:Array.isArray(raw.chronicles)?raw.chronicles:['prologue'],
       readChronicles:Array.isArray(raw.readChronicles)?raw.readChronicles:[],
       seenAchievements:Array.isArray(raw.seenAchievements)?raw.seenAchievements:[],
+      dailyAwarenessRewards:Array.isArray(raw.dailyAwarenessRewards)?raw.dailyAwarenessRewards:[],
       baselines:{...d.baselines,...(raw.baselines||{})}
     };
+
+    // Migração única da economia V7/V7.1 para a economia acelerada V7.2.
+    if(Number(raw.economyVersion||1)<2){
+      out.resources.wood=Math.max(700,Number(out.resources.wood||0)*3);
+      out.resources.stone=Math.max(500,Number(out.resources.stone||0)*3);
+      out.resources.seeds=Math.max(450,Number(out.resources.seeds||0)*3);
+      out.economyVersion=2;
+      out.version=3;
+      out.lastProductionAt=new Date().toISOString();
+      out.updatedAt=new Date().toISOString();
+    }
+
+    return out;
   }
 
 
@@ -1685,45 +1858,74 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function storageCap(){
     let cap=storageCapFor(vale.buildings.refuge.level);
-    if(vale.inventory.includes('return_stone'))cap+=50;
+    if(vale.inventory.includes('return_stone'))cap+=1500;
     return cap;
   }
 
-  function storageCapFor(level){
-    return 300+Math.max(0,level-1)*150;
+  function storageCapFor(count){
+    return 4000+Math.max(0,Number(count||1)-1)*2500;
   }
 
   function productionFactor(){
-    let factor=.68+(vitality()/260)+(bond()/420);
+    const attributes=.9+(vitality()/250)+(bond()/320);
+    const city=1+Math.max(0,vale.buildings.refuge.level-1)*.015+vale.buildings.portico.level*.04;
+    let factor=attributes*city;
     if(vale.inventory.includes('interval_clock'))factor*=1.05;
-    return factor;
+    return clamp(factor,.85,2.4);
   }
 
+  // Valores por MINUTO. A V7.2 acelera deliberadamente o city builder.
   function productionRates(){
     const factor=productionFactor();
     return{
-      wood:8*vale.buildings.sawmill.level*factor,
-      stone:6*vale.buildings.quarry.level*factor,
-      seeds:6*vale.buildings.garden.level*factor
+      wood:6*vale.buildings.sawmill.level*factor,
+      stone:5*vale.buildings.quarry.level*factor,
+      seeds:5*vale.buildings.garden.level*factor
     };
+  }
+
+  function capCommonResources(){
+    const cap=storageCap();
+    vale.resources.wood=Math.min(cap,Math.max(0,Number(vale.resources.wood||0)));
+    vale.resources.stone=Math.min(cap,Math.max(0,Number(vale.resources.stone||0)));
+    vale.resources.seeds=Math.min(cap,Math.max(0,Number(vale.resources.seeds||0)));
+    vale.resources.presence=Math.max(0,Number(vale.resources.presence||0));
   }
 
   function collectValeProduction(force=false){
     const now=Date.now();
     const last=new Date(vale.lastProductionAt||now).getTime();
     if(!Number.isFinite(last)){vale.lastProductionAt=new Date().toISOString();return}
-    const hours=Math.min(12,Math.max(0,(now-last)/3600000));
-    if(!force&&hours<1/60)return;
+
+    const minutes=Math.min(720,Math.max(0,(now-last)/60000));
+    if(!force&&minutes<.08)return;
 
     const rates=productionRates();
-    const cap=storageCap();
+    vale.resources.wood=Number(vale.resources.wood||0)+rates.wood*minutes;
+    vale.resources.stone=Number(vale.resources.stone||0)+rates.stone*minutes;
+    vale.resources.seeds=Number(vale.resources.seeds||0)+rates.seeds*minutes;
+    capCommonResources();
 
-    vale.resources.wood=Math.min(cap,Number(vale.resources.wood||0)+rates.wood*hours);
-    vale.resources.stone=Math.min(cap,Number(vale.resources.stone||0)+rates.stone*hours);
-    vale.resources.seeds=Math.min(cap,Number(vale.resources.seeds||0)+rates.seeds*hours);
     vale.lastProductionAt=new Date(now).toISOString();
     vale.updatedAt=new Date(now).toISOString();
     write(VALE_KEY,vale);
+  }
+
+  function addResourceBurst(bundle,reason=''){
+    Object.entries(bundle||{}).forEach(([k,v])=>{
+      vale.resources[k]=Number(vale.resources[k]||0)+Number(v||0);
+    });
+    capCommonResources();
+    vale.updatedAt=new Date().toISOString();
+    write(VALE_KEY,vale);
+    if(reason)toast(reason);
+  }
+
+  function claimDailyAwarenessReward(day=today()){
+    if(vale.dailyAwarenessRewards.includes(day))return false;
+    vale.dailyAwarenessRewards.push(day);
+    addResourceBurst({wood:35,stone:25,seeds:35},'Vale acordou • recursos do primeiro registro do dia');
+    return true;
   }
 
   function markValeChanged(){
@@ -1884,23 +2086,21 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   const DISTRICT_BUILDINGS=new Set(['refuge','garden','sawmill','quarry']);
 
-  const DISTRICT_POSITIONS={
-    refuge:[[43,49],[56,49],[42,58],[57,59]],
-    garden:[[16,52],[27,51],[16,64],[28,65]],
-    sawmill:[[16,21],[29,21],[16,33],[30,34]],
-    quarry:[[68,61],[81,59],[68,71],[82,72]],
-    portico:[[43,16],[56,16],[42,27]],
-    cartography:[[69,23],[82,22]]
+  const CITY_ZONES={
+    refuge:{x:37,y:43,cols:5,dx:5.0,dy:5.2,icons:['🏠','🏡','🏠','🏘️']},
+    garden:{x:8,y:57,cols:4,dx:5.0,dy:5.0,icons:['🌱','🌾','🌿','🌱']},
+    sawmill:{x:8,y:20,cols:4,dx:5.0,dy:5.1,icons:['🪵','🛖','🪚','🪵']},
+    quarry:{x:70,y:58,cols:4,dx:5.0,dy:5.0,icons:['🪨','⛏️','🪨','🛖']}
   };
 
-  const DISTRICT_ICONS={
-    refuge:['🏠','🏡','🏚️','🏠'],
-    garden:['🌱','🌾','🌿','🌱'],
-    sawmill:['🪵','🛖','🪵','🪚'],
-    quarry:['🪨','⛏️','🪨','🛖'],
-    portico:['🏺','🏛️','🗿'],
-    cartography:['⛺','📍']
-  };
+  function cityPos(id,index){
+    const z=CITY_ZONES[id];
+    if(!z)return[50,50];
+    const col=index%z.cols,row=Math.floor(index/z.cols);
+    const jitterX=((index*7)%3-1)*.6;
+    const jitterY=((index*5)%3-1)*.5;
+    return[z.x+col*z.dx+jitterX,z.y+row*z.dy+jitterY];
+  }
 
   function renderValeSettlement(){
     const layer=$('mapSettlementLayer');
@@ -1910,65 +2110,100 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const parts=[];
     const dots=[];
 
-    Object.entries(vale.buildings).forEach(([id,state])=>{
-      const level=Math.max(0,Number(state.level||0));
-      if(!level)return;
+    DISTRICT_BUILDINGS.forEach(id=>{
+      const count=Math.max(0,Number(vale.buildings[id]?.level||0));
+      const z=CITY_ZONES[id];
+      const visible=Math.min(count,24);
 
-      const positions=DISTRICT_POSITIONS[id]||[];
-      const icons=DISTRICT_ICONS[id]||[BUILDINGS[id]?.icon||'•'];
-
-      // The main tappable node represents the first structure.
-      // Additional levels become visible structures around it.
-      const extras=Math.max(0,level-1);
-
-      for(let i=0;i<extras&&i<positions.length;i++){
-        const [left,top]=positions[i];
-        parts.push(`<div class="mini-building" style="left:${left}%;top:${top}%">${icons[i%icons.length]}</div>`);
+      for(let i=0;i<visible;i++){
+        const [left,top]=cityPos(id,i);
+        const icon=z.icons[i%z.icons.length];
+        const selected=activeBuildingId===id?' selected':'';
+        parts.push(`<button class="city-building${selected}" data-map-building="${id}" style="left:${left}%;top:${top}%">${icon}</button>`);
       }
 
-      // Active productive districts get small points of life around them.
-      if(['garden','sawmill','quarry'].includes(id)){
-        const base={
-          garden:[22,58],
-          sawmill:[24,27],
-          quarry:[76,65]
-        }[id];
+      if(count>visible){
+        const [left,top]=cityPos(id,visible-1);
+        parts.push(`<div class="city-cluster-more" style="left:${left+4}%;top:${top+4}%">+${count-visible}</div>`);
+      }
 
-        for(let i=0;i<Math.min(3,level);i++){
-          const dx=(i-1)*4;
-          const dy=(i%2?3:-2);
-          dots.push(`<span class="life-dot" style="left:${base[0]+dx}%;top:${base[1]+dy}%;animation-delay:${i*.35}s"></span>`);
+      if(['garden','sawmill','quarry'].includes(id)&&count>0){
+        const [bx,by]=cityPos(id,0);
+        for(let i=0;i<Math.min(4,count);i++){
+          dots.push(`<span class="life-dot" style="left:${bx+i*2.4}%;top:${by+7+(i%2)*2}%;animation-delay:${i*.28}s"></span>`);
         }
       }
     });
 
+    // Construções únicas permanecem como marcos grandes no mapa.
+    if(vale.buildings.portico.level>0){
+      parts.push(`<button class="city-building unique${activeBuildingId==='portico'?' selected':''}" data-map-building="portico" style="left:50%;top:22%">🏛️<span class="city-count">N${vale.buildings.portico.level}</span></button>`);
+    }
+    if(vale.buildings.cartography.level>0){
+      parts.push(`<button class="city-building unique${activeBuildingId==='cartography'?' selected':''}" data-map-building="cartography" style="left:80%;top:30%">🗺️<span class="city-count">N${vale.buildings.cartography.level}</span></button>`);
+    }
+
     layer.innerHTML=parts.join('');
     life.innerHTML=dots.join('');
+
+    layer.querySelectorAll('[data-map-building]').forEach(btn=>{
+      btn.onclick=()=>openBuilding(btn.dataset.mapBuilding);
+    });
+  }
+
+  function renderBuildingPalette(){
+    document.querySelectorAll('.building-choice[data-building]').forEach(btn=>{
+      const id=btn.dataset.building;
+      const {def,state,req,maxed}=buildingState(id);
+      const repeat=!!def.repeatable;
+      btn.classList.toggle('selected',activeBuildingId===id);
+      btn.classList.toggle('locked',!req.ok&&state.level===0);
+      btn.classList.toggle('available',req.ok&&!maxed&&canPay(itemCostAdjusted(id,def.cost(state.level))));
+      const count=btn.querySelector('.choice-count');
+      if(count)count.textContent=repeat?`x${state.level}`:`N${state.level}`;
+    });
+  }
+
+  function renderBuildingDetail(id=activeBuildingId){
+    if(!id||!BUILDINGS[id])id='refuge';
+    activeBuildingId=id;
+    const {def,state,req,nextCost,maxed}=buildingState(id);
+    const repeat=!!def.repeatable;
+
+    $('buildingDetailIcon').textContent=def.icon;
+    $('buildingDetailName').textContent=repeat?def.plural:def.name;
+    $('buildingDetailCount').textContent=repeat
+      ?`${state.level} ${state.level===1?'construção':'construções'}`
+      :`nível ${state.level}/${def.max}`;
+    $('buildingDetailEffect').textContent=def.effect(state.level);
+    $('buildingDetailDesc').textContent=def.desc;
+
+    const badge=$('buildingDetailProduction');
+    if(id==='sawmill')badge.textContent=`+${formatRate(productionRates().wood)}/min total`;
+    else if(id==='quarry')badge.textContent=`+${formatRate(productionRates().stone)}/min total`;
+    else if(id==='garden')badge.textContent=`+${formatRate(productionRates().seeds)}/min total`;
+    else if(id==='refuge')badge.textContent=`cap ${formatCompact(storageCap())}`;
+    else badge.textContent=repeat?'distrito':`nível ${state.level}`;
+
+    const reqBox=$('buildingDetailRequirement');
+    reqBox.style.display=req.ok?'none':'block';
+    reqBox.textContent=req.text||'';
+
+    const labels={wood:'🪵',stone:'🪨',seeds:'🌱',presence:'✦'};
+    $('buildingDetailCosts').innerHTML=maxed?'':Object.entries(nextCost||{})
+      .filter(([,v])=>v>0)
+      .map(([k,v])=>`<span class="building-cost ${vale.resources[k]<v?'missing':''}">${labels[k]} ${formatCompact(v)}</span>`).join('');
+
+    const button=$('buildMoreBtn');
+    if(maxed){
+      button.textContent='Máximo alcançado';button.disabled=true;
+    }else{
+      button.textContent=repeat?(state.level?'Construir +1':'Construir'):(state.level?'Melhorar':'Construir');
+      button.disabled=!req.ok||!canPay(nextCost);
+    }
   }
 
   function renderValeMap(){
-    Object.keys(BUILDINGS).forEach(id=>{
-      const node=$(`node-${id}`);
-      if(!node)return;
-
-      const {state,req}=buildingState(id);
-      node.classList.remove('built','available','locked','district');
-
-      if(DISTRICT_BUILDINGS.has(id))node.classList.add('district');
-
-      if(state.level>0)node.classList.add('built');
-      else if(req.ok)node.classList.add('available');
-      else node.classList.add('locked');
-
-      if(state.level>0){
-        node.querySelector('.bl').textContent=DISTRICT_BUILDINGS.has(id)
-          ?`x${state.level}`
-          :`NV ${state.level}`;
-      }else{
-        node.querySelector('.bl').textContent=req.ok?'CONSTRUIR':'BLOQUEADO';
-      }
-    });
-
     $('fogWest').classList.toggle('hidden',vale.buildings.portico.level>=1);
     $('fogEast').classList.toggle('hidden',vale.buildings.refuge.level>=2);
     $('fogNorth').classList.toggle('hidden',vale.buildings.cartography.level>=1);
@@ -1979,33 +2214,105 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       :'🌫 Bosque do Intervalo';
 
     renderValeSettlement();
+    renderBuildingPalette();
+    renderBuildingDetail(activeBuildingId);
   }
 
   function renderVale(){
     collectValeProduction();
-
     const cap=storageCap();
-    $('woodValue').textContent=Math.floor(vale.resources.wood);
-    $('stoneValue').textContent=Math.floor(vale.resources.stone);
-    $('seedsValue').textContent=Math.floor(vale.resources.seeds);
-    $('presenceValue').textContent=Math.floor(vale.resources.presence);
 
-    if($('homeWoodValue'))$('homeWoodValue').textContent=Math.floor(vale.resources.wood);
-    if($('homeStoneValue'))$('homeStoneValue').textContent=Math.floor(vale.resources.stone);
-    if($('homeSeedsValue'))$('homeSeedsValue').textContent=Math.floor(vale.resources.seeds);
-    if($('homePresenceValue'))$('homePresenceValue').textContent=Math.floor(vale.resources.presence);
+    $('woodValue').textContent=formatCompact(vale.resources.wood);
+    $('stoneValue').textContent=formatCompact(vale.resources.stone);
+    $('seedsValue').textContent=formatCompact(vale.resources.seeds);
+    $('presenceValue').textContent=formatCompact(vale.resources.presence);
 
-    $('storageText').textContent=`armazenamento ${cap}`;
+    if($('homeWoodValue'))$('homeWoodValue').textContent=formatCompact(vale.resources.wood);
+    if($('homeStoneValue'))$('homeStoneValue').textContent=formatCompact(vale.resources.stone);
+    if($('homeSeedsValue'))$('homeSeedsValue').textContent=formatCompact(vale.resources.seeds);
+    if($('homePresenceValue'))$('homePresenceValue').textContent=formatCompact(vale.resources.presence);
 
     const rates=productionRates();
     const total=rates.wood+rates.stone+rates.seeds;
     $('productionSummary').textContent=total>0
-      ?`+${Math.floor(rates.wood)}🪵 +${Math.floor(rates.stone)}🪨 +${Math.floor(rates.seeds)}🌱 /h`
+      ?`+${formatRate(total)}/min`
       :'produção parada';
 
-    $('economyText').innerHTML=`Vitalidade e Vínculo influenciam a eficiência das construções. Produção atual: <b>${Math.round(productionFactor()*100)}%</b> da base do Vale. A Presença só vem de registros significativos, dias fechados, retorno e conquistas.`;
+    if($('cityMapSubtitle')){
+      const buildings=vale.buildings.refuge.level+vale.buildings.garden.level+vale.buildings.sawmill.level+vale.buildings.quarry.level;
+      $('cityMapSubtitle').textContent=`${buildings} estruturas no Vale • capacidade ${formatCompact(cap)} por recurso comum.`;
+    }
+
     renderValeMap();
+    renderResources();
     applyPetVisualState(vitality(),bond(),breath(),resilience());
+  }
+
+  function resourceTimeToFull(current,cap,rate){
+    if(rate<=0)return 'sem produção';
+    if(current>=cap-.5)return 'armazenamento cheio';
+    return `cheio em ${formatMinutes((cap-current)/rate)}`;
+  }
+
+  function renderResources(){
+    if(!$('resourceList'))return;
+    collectValeProduction();
+
+    const cap=storageCap(),rates=productionRates(),eff=productionFactor();
+    $('resourceEfficiency').textContent=`${Math.round(eff*100)}%`;
+    $('resourceStorage').textContent=formatCompact(cap);
+
+    const cards=[
+      {
+        id:'wood',icon:'🪵',name:'Madeira',current:vale.resources.wood,cap,rate:rates.wood,
+        sources:[
+          `+ ${formatRate(rates.wood)}/min de ${vale.buildings.sawmill.level} ${vale.buildings.sawmill.level===1?'Serraria':'Serrarias'}`,
+          `Eficiência dos atributos: ${Math.round(eff*100)}%`
+        ],
+        uses:'Usada em praticamente todas as construções, principalmente Abrigos, Pórtico e expansão produtiva.'
+      },
+      {
+        id:'stone',icon:'🪨',name:'Pedra',current:vale.resources.stone,cap,rate:rates.stone,
+        sources:[
+          `+ ${formatRate(rates.stone)}/min de ${vale.buildings.quarry.level} ${vale.buildings.quarry.level===1?'Pedreira':'Pedreiras'}`,
+          `Eficiência dos atributos: ${Math.round(eff*100)}%`
+        ],
+        uses:'Usada em construções permanentes, Cartografia, Pórtico e infraestrutura.'
+      },
+      {
+        id:'seeds',icon:'🌱',name:'Sementes',current:vale.resources.seeds,cap,rate:rates.seeds,
+        sources:[
+          `+ ${formatRate(rates.seeds)}/min de ${vale.buildings.garden.level} ${vale.buildings.garden.level===1?'Horta':'Hortas'}`,
+          `Eficiência dos atributos: ${Math.round(eff*100)}%`
+        ],
+        uses:'Usadas para novas áreas produtivas, Cartografia e futuras regiões naturais.'
+      },
+      {
+        id:'presence',icon:'✦',name:'Presença',current:vale.resources.presence,cap:null,rate:null,
+        sources:[
+          '+ 1 ao atravessar uma vontade',
+          '+ 2 ao fechar o dia',
+          'Conquistas e marcos também concedem Presença'
+        ],
+        uses:'Recurso raro. Não é produzido passivamente e desbloqueia avanços narrativos e construções especiais.'
+      }
+    ];
+
+    $('resourceList').innerHTML=cards.map(r=>{
+      const pct=r.cap?clamp(r.current/r.cap*100,0,100):Math.min(100,Math.sqrt(Math.max(0,r.current))*12);
+      const rateText=r.rate===null?'jornada':`+${formatRate(r.rate)}/min`;
+      const timeText=r.cap?resourceTimeToFull(r.current,r.cap,r.rate):'sem limite de armazenamento';
+      return `<div class="resource-card-v72">
+        <div class="resource-main-row">
+          <div class="resource-icon-big">${r.icon}</div>
+          <div><div class="resource-name-big">${r.name}</div><div class="resource-balance">${formatCompact(r.current)}${r.cap?` / ${formatCompact(r.cap)}`:''}</div><div class="resource-time">${timeText}</div></div>
+          <div class="resource-rate ${r.rate===null?'static':''}">${rateText}</div>
+        </div>
+        <div class="resource-progress ${r.id==='presence'?'presence':''}"><i style="width:${pct}%"></i></div>
+        <div class="flow-lines">${r.sources.map((x,i)=>`<div class="flow-line ${i===0?'plus':'info'}"><span class="flow-sign">${i===0?'+':'•'}</span><span>${x}</span></div>`).join('')}</div>
+        <div class="resource-uses">${r.uses}</div>
+      </div>`;
+    }).join('');
   }
 
   function renderJourneyV7(){
@@ -2068,39 +2375,16 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     renderJourneyNotifications();
   }
 
-  let activeBuildingId=null;
+  let activeBuildingId='refuge';
 
   function openBuilding(id){
+    if(!BUILDINGS[id])return;
     activeBuildingId=id;
-    const {def,state,req,nextCost,maxed}=buildingState(id);
-    $('buildingSheetIcon').textContent=def.icon;
-    $('buildingSheetTitle').textContent=def.name;
-    $('buildingSheetLevel').textContent=state.level?(DISTRICT_BUILDINGS.has(id)?`DISTRITO • ${state.level} ESTRUTURA${state.level===1?'':'S'}`:`NÍVEL ${state.level}`):'AINDA NÃO CONSTRUÍDO';
-    $('buildingSheetCopy').textContent=def.desc;
-    $('buildingSheetStats').innerHTML=`<div class="sheet-line"><span>Função</span><strong>${def.effect(state.level)}</strong></div><div class="sheet-line"><span>${DISTRICT_BUILDINGS.has(id)?'Estruturas máximas':'Nível máximo'}</span><strong>${def.max}</strong></div>`;
-
-    $('buildingRequirement').style.display=req.ok?'none':'block';
-    $('buildingRequirement').textContent=req.text||'';
-
-    if(maxed){
-      $('buildingCostRow').innerHTML='';
-      $('upgradeBuildingBtn').textContent='Máximo alcançado';
-      $('upgradeBuildingBtn').disabled=true;
-    }else{
-      const labels={wood:'🪵',stone:'🪨',seeds:'🌱',presence:'✦'};
-      $('buildingCostRow').innerHTML=Object.entries(nextCost||{})
-        .filter(([,v])=>v>0)
-        .map(([k,v])=>`<span class="cost-chip ${vale.resources[k]<v?'missing':''}">${labels[k]} ${v}</span>`).join('');
-      $('upgradeBuildingBtn').textContent=state.level?(DISTRICT_BUILDINGS.has(id)?'Adicionar estrutura':'Melhorar construção'):'Construir';
-      $('upgradeBuildingBtn').disabled=!req.ok||!canPay(nextCost);
-    }
-
-    $('buildingBackdrop').classList.add('show');
+    renderValeMap();
   }
 
   function closeBuilding(){
-    $('buildingBackdrop').classList.remove('show');
-    activeBuildingId=null;
+    if($('buildingBackdrop'))$('buildingBackdrop').classList.remove('show');
   }
 
   function upgradeActiveBuilding(){
@@ -2113,8 +2397,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     checkAchievements({notify:false});
     checkStoryUnlocks();
     markValeChanged();
-    openBuilding(activeBuildingId);
-    toast(DISTRICT_BUILDINGS.has(activeBuildingId)?`${BUILDINGS[activeBuildingId].name} • ${state.level} estruturas`:`${BUILDINGS[activeBuildingId].name} • nível ${state.level}`);
+    renderVale();
+    toast(BUILDINGS[activeBuildingId].repeatable
+      ?`${BUILDINGS[activeBuildingId].plural} • ${state.level} construções`
+      :`${BUILDINGS[activeBuildingId].name} • nível ${state.level}`);
   }
 
   function openChronicle(id){
@@ -2561,6 +2847,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     reopenTodayIfNeeded();
     smokes.push({id:uuid(),timestamp:new Date().toISOString()});
     write(SMOKE_KEY,smokes);
+    claimDailyAwarenessReward(today());
     animatePet(false);
     render();
     toast('Cigarro registrado');
@@ -2572,11 +2859,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     reopenTodayIfNeeded();
     resists.push({id:uuid(),timestamp:new Date().toISOString()});
     write(RESIST_KEY,resists);
+    claimDailyAwarenessReward(today());
     animatePet(true);
-    render();
     addPresence(1,'vontade atravessada');
-    checkAchievements();
+    addResourceBurst({wood:20,stone:15,seeds:25});
     render();
+    checkAchievements();
     scheduleSync();
   };
 
@@ -2601,6 +2889,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       render();
       reactPet('close');
       addPresence(2,'dia fechado');
+      addResourceBurst({wood:60,stone:45,seeds:60});
       checkAchievements();
       render();
       scheduleSync();
@@ -2637,7 +2926,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   };
 
   $('exportBtn').onclick=()=>{
-    const data={app:'vou-parar-de-fumar',version:'7.1',exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game,vale};
+    const data={app:'vou-parar-de-fumar',version:'7.2',exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game,vale};
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;
@@ -2712,6 +3001,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       closedDays=[];
       pendingDeletes=[];
       game={baseline:null,baselineLocked:false,bestReduction:0,maxLevel:1};
+      vale=defaultValeState();
 
       write(SMOKE_KEY,smokes);
       write(RESIST_KEY,resists);
@@ -2922,6 +3212,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('closeBuildingSheet').onclick=closeBuilding;
   $('buildingBackdrop').onclick=e=>{if(e.target===$('buildingBackdrop'))closeBuilding()};
   $('upgradeBuildingBtn').onclick=upgradeActiveBuilding;
+  $('buildMoreBtn').onclick=upgradeActiveBuilding;
 
   $('closeStorySheet').onclick=closeStory;
   $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
@@ -2929,8 +3220,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('petZone').onclick=()=>reactPet('touch');
 
   $('homeResourceStrip').onclick=()=>{
-    const valeBtn=document.querySelector('.nav button[data-tab="vale"]');
-    if(valeBtn)valeBtn.click();
+    const resourceBtn=document.querySelector('.nav button[data-tab="resources"]');
+    if(resourceBtn)resourceBtn.click();
   };
 
   document.querySelectorAll('[data-journey]').forEach(btn=>{
@@ -2952,6 +3243,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       collectValeProduction(true);
       renderVale();
       scheduleSync();
+    }
+    if(btn.dataset.tab==='resources'){
+      collectValeProduction(true);
+      renderResources();
     }
     if(btn.dataset.tab==='journey'){
       renderJourneyV7();
@@ -3041,6 +3336,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   setInterval(render,60000);
+  setInterval(()=>{
+    collectValeProduction(true);
+    renderVale();
+    const active=document.querySelector('.tab.active')?.id;
+    if(active==='resources')renderResources();
+  },5000);
   start();
 })();
 </script>
