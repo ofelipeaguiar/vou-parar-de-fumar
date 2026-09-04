@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.2">
+<meta name="app-version" content="7.3">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -718,6 +718,56 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .build-more-btn{width:100%}
 }
 
+
+/* V7.3 — HOME / NIMBO */
+.home-resource-strip{display:none!important}
+.habitat-v73{height:430px;overflow:hidden;background:radial-gradient(circle at 50% 24%,rgba(72,135,178,.35),transparent 38%),linear-gradient(180deg,#0e2344 0%,#13395d 38%,#15304f 62%,#132746 100%)}
+.habitat-v73 .grass,.habitat-v73 .stone{display:none}
+.city-scene{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:30px}
+.city-skyline{position:absolute;left:0;right:0;bottom:144px;height:136px;display:flex;align-items:flex-end;gap:8px;padding:0 14px;opacity:.42}
+.city-skyline .tower{display:block;flex:1;border-radius:10px 10px 0 0;background:linear-gradient(180deg,rgba(210,235,255,.24),rgba(64,102,140,.72));position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.03) inset}
+.city-skyline .tower::after{content:'';position:absolute;inset:10px 6px 8px;background:repeating-linear-gradient(180deg,rgba(255,222,132,.15) 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,rgba(255,222,132,.12) 0 4px,transparent 4px 12px)}
+.city-skyline .t1{height:66px}.city-skyline .t2{height:88px}.city-skyline .t3{height:118px}.city-skyline .t4{height:94px}.city-skyline .t5{height:126px}.city-skyline .t6{height:74px}
+.city-road{position:absolute;left:0;right:0;bottom:118px;height:28px;background:linear-gradient(180deg,rgba(21,31,48,.82),rgba(10,18,32,.95));border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.03)}
+.city-road .lane{position:absolute;left:0;right:0;top:12px;height:2px;background:repeating-linear-gradient(90deg,rgba(246,216,117,.8) 0 18px,transparent 18px 34px);opacity:.6}
+.vehicle{position:absolute;bottom:4px;display:block;border-radius:5px;opacity:.95;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));animation:driveRoad linear infinite}
+.vehicle::before,.vehicle::after{content:'';position:absolute;bottom:-2px;width:5px;height:5px;border-radius:50%;background:#141d2b}
+.vehicle::before{left:3px}.vehicle::after{right:3px}
+.vehicle.car{width:26px;height:11px;background:#7ce8b0}.vehicle.bus{width:34px;height:13px;background:#ffd66b}.vehicle.moto{width:18px;height:8px;background:#8bd9ff}
+.vehicle.v1{left:-40px;animation-duration:11s;animation-delay:-1s;top:auto}
+.vehicle.v2{left:-60px;animation-duration:16s;animation-delay:-6s}
+.vehicle.v3{left:-30px;animation-duration:8.5s;animation-delay:-3s}
+.vehicle.v4{left:-70px;animation-duration:13.5s;animation-delay:-9s}
+@keyframes driveRoad{from{transform:translateX(0)}to{transform:translateX(430px)}}
+.habitat-v73 .pet-zone{top:64px;width:200px;height:200px;background:radial-gradient(circle at 50% 34%,rgba(255,255,255,.11),rgba(255,255,255,.03) 46%,rgba(0,0,0,0) 67%)}
+.habitat-v73 .pet-bob{width:168px;height:168px}
+.habitat-v73 .pet-message{left:18px;right:18px;bottom:118px;min-height:48px;padding:12px 14px;font-size:12px;line-height:1.35;background:rgba(6,14,28,.42);backdrop-filter:blur(5px)}
+.nimbo-care-toolbar{position:absolute;left:14px;right:14px;bottom:74px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;z-index:4}
+.care-btn{border:1px solid rgba(123,223,188,.22);background:rgba(10,24,44,.58);color:#def5ff;border-radius:14px;padding:9px 8px;font:600 12px/1.1 var(--font);display:flex;align-items:center;justify-content:center;gap:6px;backdrop-filter:blur(5px)}
+.care-btn span{font-size:15px}
+.compact-home-stats{bottom:10px;left:12px;right:12px;gap:8px}
+.compact-home-stats .stat{padding:10px 11px;border-radius:16px;background:rgba(8,20,34,.46)}
+.compact-home-stats .stat-head{font-size:11px}.compact-home-stats .meter{height:9px}
+.quick-actions-v73{margin-top:12px;gap:12px}.quick-actions-v73 .quick{min-height:104px}
+.today-overview{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;align-items:stretch}
+.mini-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;min-height:110px}
+.mini-card.accent{background:linear-gradient(180deg,rgba(19,36,59,.95),rgba(18,42,72,.95));box-shadow:inset 0 0 0 1px rgba(105,202,255,.08)}
+.mini-k{font:500 12px/1.2 var(--font);color:var(--muted);margin-bottom:6px;text-transform:none}.mini-v{font:800 17px/1 var(--font);display:flex;gap:6px;align-items:flex-end}.mini-v span{font-size:40px;line-height:.9}.mini-v small{font-size:13px;color:#dcecf6}.mini-s{font:500 11px/1.35 var(--font);color:var(--muted);margin-top:8px}
+.day-close-cta{grid-column:1/-1;border-radius:18px;padding:14px 16px;background:rgba(28,52,86,.98);border:1px solid rgba(121,221,182,.18);font-weight:800;color:#f3fbff}
+.day-close-cta.closed{background:linear-gradient(180deg,#2f7a58,#245945)}
+.today-card-compact{margin-top:12px;padding:14px 16px 16px}.baseline-pack{gap:12px;align-items:center}.baseline-pack .baseline{min-width:0;flex:1}.trend-line{margin-top:10px;font:500 12px/1.3 var(--font);color:#9eb4c8}.times-compact{margin-top:10px;max-height:68px;overflow:auto;padding-right:4px}
+.actions{margin-top:12px}
+.pet-zone.bored .mouth-neutral,.pet-zone.bored .mouth-happy,.pet-zone.bored .mouth-radiant,.pet-zone.bored .mouth-shocked,.pet-zone.bored .mouth-confused{display:none}
+.pet-zone.bored .mouth-tired,.pet-zone.bored .eyes-open{display:none}.pet-zone.bored .eyes-bored{display:block}
+.pet-zone.playful .mouth-neutral,.pet-zone.playful .mouth-tired,.pet-zone.playful .mouth-radiant,.pet-zone.playful .mouth-shocked,.pet-zone.playful .mouth-confused{display:none}
+.pet-zone.playful .mouth-happy{display:block}.pet-zone.playful .pet-bob{animation-duration:1.55s}.pet-zone.playful .blush{display:block}.pet-zone.playful .body-main{filter:saturate(1.08) brightness(1.05)}
+.pet-zone.confused .mouth-neutral,.pet-zone.confused .mouth-tired,.pet-zone.confused .mouth-happy,.pet-zone.confused .mouth-radiant,.pet-zone.confused .mouth-shocked{display:none}
+.pet-zone.confused .mouth-confused{display:block}.pet-zone.confused .eyes-open,.pet-zone.confused .eyes-bored,.pet-zone.confused .eyes-shocked{display:none}.pet-zone.confused .eyes-confused{display:block}
+.pet-zone.shocked .mouth-neutral,.pet-zone.shocked .mouth-tired,.pet-zone.shocked .mouth-happy,.pet-zone.shocked .mouth-radiant,.pet-zone.shocked .mouth-confused{display:none}
+.pet-zone.shocked .mouth-shocked{display:block}.pet-zone.shocked .eyes-open,.pet-zone.shocked .eyes-bored,.pet-zone.shocked .eyes-confused{display:none}.pet-zone.shocked .eyes-shocked{display:block}.pet-zone.shocked .sweat{display:block}
+.eyes-bored,.eyes-shocked,.eyes-confused,.mouth-shocked,.mouth-confused{display:none}
+@media(max-width:380px){.habitat-v73{height:408px}.habitat-v73 .pet-zone{width:184px;height:184px}.habitat-v73 .pet-bob{width:156px;height:156px}.mini-card{padding:12px 14px}.mini-v span{font-size:36px}.quick-actions-v73 .quick{min-height:98px}.care-btn{font-size:11px;padding:8px 6px}}
+
 </style>
 </head>
 <body>
@@ -775,9 +825,24 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <section id="home" class="tab active">
 
-  <div class="habitat habitat-v71" id="nimboHabitat">
-    <div class="sky-cloud"></div><div class="sky-cloud two"></div>
-    <div class="grass"></div><div class="stone"></div>
+  <div class="habitat habitat-v71 habitat-v73" id="nimboHabitat">
+    <div class="city-scene" aria-hidden="true">
+      <div class="city-skyline">
+        <span class="tower t1"></span>
+        <span class="tower t2"></span>
+        <span class="tower t3"></span>
+        <span class="tower t4"></span>
+        <span class="tower t5"></span>
+        <span class="tower t6"></span>
+      </div>
+      <div class="city-road">
+        <span class="lane"></span>
+        <span class="vehicle car v1"></span>
+        <span class="vehicle bus v2"></span>
+        <span class="vehicle moto v3"></span>
+        <span class="vehicle car v4"></span>
+      </div>
+    </div>
 
     <div class="pet-resource-props" aria-hidden="true">
       <div class="prop prop-wood" id="petPropWood">▰</div>
@@ -844,8 +909,10 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
             <rect x="87" y="34" width="5" height="5" fill="#ffe894"/>
           </g>
 
-          <rect class="eye" x="43" y="59" width="9" height="10" fill="#15363d"/>
-          <rect class="eye" x="68" y="59" width="9" height="10" fill="#15363d"/>
+          <g class="eyes-open"><rect class="eye" x="43" y="59" width="9" height="10" fill="#15363d"/><rect class="eye" x="68" y="59" width="9" height="10" fill="#15363d"/></g>
+          <g class="eyes-bored"><rect x="42" y="61" width="10" height="4" fill="#15363d"/><rect x="68" y="61" width="10" height="4" fill="#15363d"/></g>
+          <g class="eyes-shocked"><rect x="42" y="57" width="10" height="12" fill="#15363d"/><rect x="68" y="57" width="10" height="12" fill="#15363d"/></g>
+          <g class="eyes-confused"><rect x="42" y="60" width="10" height="7" fill="#15363d"/><rect x="68" y="58" width="10" height="7" fill="#15363d"/></g>
 
           <g class="blush">
             <rect x="34" y="72" width="7" height="4" fill="#ff9db2"/>
@@ -861,6 +928,8 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
           <g class="mouth-tired"><rect x="52" y="79" width="16" height="4" fill="#15363d"/><rect x="56" y="75" width="8" height="4" fill="#15363d"/></g>
           <g class="mouth-happy"><rect x="50" y="75" width="5" height="4" fill="#15363d"/><rect x="55" y="79" width="10" height="4" fill="#15363d"/><rect x="65" y="75" width="5" height="4" fill="#15363d"/></g>
           <g class="mouth-radiant"><rect x="48" y="74" width="5" height="4" fill="#15363d"/><rect x="53" y="78" width="14" height="5" fill="#15363d"/><rect x="67" y="74" width="5" height="4" fill="#15363d"/><rect x="36" y="74" width="5" height="5" fill="#ffafc2"/><rect x="79" y="74" width="5" height="5" fill="#ffafc2"/></g>
+          <g class="mouth-shocked"><rect x="56" y="75" width="8" height="9" fill="#15363d"/></g>
+          <g class="mouth-confused"><rect x="49" y="79" width="6" height="4" fill="#15363d"/><rect x="55" y="76" width="6" height="4" fill="#15363d"/><rect x="61" y="78" width="7" height="4" fill="#15363d"/></g>
 
           <rect x="39" y="88" width="15" height="8" fill="#173c47"/>
           <rect x="66" y="88" width="15" height="8" fill="#173c47"/>
@@ -872,7 +941,13 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
     <div class="pet-touch-hint">toque no Nimbo</div>
     <div class="pet-message pet-message-v71" id="petMessage">Estou aprendendo seus ritmos.</div>
 
-    <div class="stats stats-v71">
+    <div class="nimbo-care-toolbar">
+      <button class="care-btn" id="feedBtn" type="button"><span>🍎</span> Dar comida</button>
+      <button class="care-btn" id="bathBtn" type="button"><span>🫧</span> Dar banho</button>
+      <button class="care-btn" id="walkBtn" type="button"><span>🚶</span> Passear</button>
+    </div>
+
+    <div class="stats stats-v71 compact-home-stats">
       <div class="stat">
         <div class="stat-head"><span>♥ Vitalidade</span><b id="vitalityText">55</b></div>
         <div class="meter"><i id="vitalityBar"></i></div>
@@ -892,16 +967,14 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
     </div>
   </div>
 
-  <button class="home-resource-strip" id="homeResourceStrip" type="button">
-    <span class="home-resource-title">RECURSOS</span>
-    <span class="home-resource"><b>🪵</b><strong id="homeWoodValue">0</strong></span>
-    <span class="home-resource"><b>🪨</b><strong id="homeStoneValue">0</strong></span>
-    <span class="home-resource"><b>🌱</b><strong id="homeSeedsValue">0</strong></span>
-    <span class="home-resource presence"><b>✦</b><strong id="homePresenceValue">0</strong></span>
-    <span class="home-resource-arrow">›</span>
-  </button>
+  <div id="homeResourceStrip" style="display:none">
+    <span id="homeWoodValue">0</span>
+    <span id="homeStoneValue">0</span>
+    <span id="homeSeedsValue">0</span>
+    <span id="homePresenceValue">0</span>
+  </div>
 
-  <div class="quick-actions quick-actions-v71">
+  <div class="quick-actions quick-actions-v71 quick-actions-v73">
     <button class="quick smoke" id="smokeBtn">
       <span class="quick-icon">+</span>
       <span class="quick-title">Fumei agora</span>
@@ -914,21 +987,27 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
     </button>
   </div>
 
-  <div class="today-card">
-    <div class="today-row">
-      <div>
-        <div class="day-label" id="todayLabel">Hoje</div>
-        <div class="count"><span id="todayCount">0</span> <small id="cigLabel">cigarros</small></div>
-      </div>
-      <div class="baseline"><span id="baselineStatus">baseline em observação</span><strong id="baselineValue">—</strong></div>
+  <div class="today-overview">
+    <div class="mini-card">
+      <div class="mini-k" id="todayLabel">Hoje</div>
+      <div class="mini-v"><span id="todayCount">0</span> <small id="cigLabel">cigarros</small></div>
+      <div class="mini-s" id="lastTime">Nenhum cigarro registrado hoje</div>
     </div>
-    <div class="today-foot"><span id="lastTime">Nenhum cigarro registrado hoje</span><button class="tiny" id="closeDayBtn">Fechar o dia</button></div>
-    <div class="times" id="todayTimes"></div>
+    <div class="mini-card accent">
+      <div class="mini-k">Vontades superadas</div>
+      <div class="mini-v"><span id="resistToday">0</span> <small>hoje</small></div>
+      <div class="mini-s">cada escolha fortalece o Vale</div>
+    </div>
+    <button class="day-close-cta tiny" id="closeDayBtn">Fechar o dia</button>
   </div>
 
-  <div class="grid">
-    <div class="metric"><div class="metric-k">Média 7 dias</div><div class="metric-v" id="avg7">—</div><div class="metric-s" id="trendText">estabelecendo referência</div></div>
-    <div class="metric"><div class="metric-k">Vontades superadas</div><div class="metric-v" id="resistToday">0</div><div class="metric-s">hoje</div></div>
+  <div class="today-card today-card-compact">
+    <div class="today-row compact baseline-pack">
+      <div class="baseline"><span id="baselineStatus">baseline em observação</span><strong id="baselineValue">—</strong></div>
+      <div class="baseline"><span>Média 7 dias</span><strong id="avg7">—</strong></div>
+    </div>
+    <div class="trend-line" id="trendText">estabelecendo referência</div>
+    <div class="times times-compact" id="todayTimes"></div>
   </div>
 
   <div class="actions"><button class="secondary" id="undoBtn">Desfazer último evento</button></div>
@@ -1179,7 +1258,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.2';
+  const APP_VERSION='7.3';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1547,6 +1626,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
   ];
 
+  function defaultNimboState(){
+    return{
+      food:62,
+      clean:58,
+      joy:60,
+      lastCareAt:{feed:null,bath:null,walk:null},
+      lastMoodTick:new Date().toISOString(),
+      moodTag:'neutral'
+    };
+  }
+
   function defaultValeState(){
     const historicalPresence=Math.min(18,closedDays.length*2+resists.length);
     return{
@@ -1568,6 +1658,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       seenAchievements:[],
       dailyAwarenessRewards:[],
       baselines:{intervalMinutes:null,firstCigMinute:null},
+      nimbo:defaultNimboState(),
       lastProductionAt:new Date().toISOString(),
       lastVisitAt:null,
       returnedAfterGap:false,
@@ -1596,7 +1687,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       readChronicles:Array.isArray(raw.readChronicles)?raw.readChronicles:[],
       seenAchievements:Array.isArray(raw.seenAchievements)?raw.seenAchievements:[],
       dailyAwarenessRewards:Array.isArray(raw.dailyAwarenessRewards)?raw.dailyAwarenessRewards:[],
-      baselines:{...d.baselines,...(raw.baselines||{})}
+      baselines:{...d.baselines,...(raw.baselines||{})},
+      nimbo:{...defaultNimboState(),...(raw.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(raw.nimbo?.lastCareAt||{})}}
     };
 
     // Migração única da economia V7/V7.1 para a economia acelerada V7.2.
@@ -1613,6 +1705,55 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return out;
   }
 
+  function stateTime(state){
+    const t=new Date(state?.updatedAt||0).getTime();
+    return Number.isFinite(t)?t:0;
+  }
+
+  function uniq(arr){
+    return [...new Set((arr||[]).filter(Boolean))];
+  }
+
+  function mergeValeStates(localRaw,cloudRaw,{preferCloud=false}={}){
+    const local=normalizeValeState(localRaw);
+    const cloud=normalizeValeState(cloudRaw);
+    const localIsPrimary=preferCloud?false:stateTime(local)>=stateTime(cloud);
+    const primary=localIsPrimary?local:cloud;
+    const secondary=localIsPrimary?cloud:local;
+
+    const merged=normalizeValeState({
+      ...primary,
+      version:Math.max(Number(local.version||0),Number(cloud.version||0),3),
+      economyVersion:Math.max(Number(local.economyVersion||0),Number(cloud.economyVersion||0),2),
+      resources:{...primary.resources},
+      buildings:{
+        refuge:{level:Math.max(Number(local.buildings.refuge.level||0),Number(cloud.buildings.refuge.level||0))},
+        portico:{level:Math.max(Number(local.buildings.portico.level||0),Number(cloud.buildings.portico.level||0))},
+        garden:{level:Math.max(Number(local.buildings.garden.level||0),Number(cloud.buildings.garden.level||0))},
+        sawmill:{level:Math.max(Number(local.buildings.sawmill.level||0),Number(cloud.buildings.sawmill.level||0))},
+        quarry:{level:Math.max(Number(local.buildings.quarry.level||0),Number(cloud.buildings.quarry.level||0))},
+        cartography:{level:Math.max(Number(local.buildings.cartography.level||0),Number(cloud.buildings.cartography.level||0))}
+      },
+      inventory:uniq([...(local.inventory||[]),...(cloud.inventory||[])]),
+      achievements:uniq([...(local.achievements||[]),...(cloud.achievements||[])]),
+      chronicles:uniq([...(local.chronicles||[]),...(cloud.chronicles||[])]),
+      readChronicles:uniq([...(local.readChronicles||[]),...(cloud.readChronicles||[])]),
+      seenAchievements:uniq([...(local.seenAchievements||[]),...(cloud.seenAchievements||[])]),
+      dailyAwarenessRewards:uniq([...(local.dailyAwarenessRewards||[]),...(cloud.dailyAwarenessRewards||[])]),
+      baselines:{
+        intervalMinutes:primary.baselines.intervalMinutes??secondary.baselines.intervalMinutes??null,
+        firstCigMinute:primary.baselines.firstCigMinute??secondary.baselines.firstCigMinute??null
+      },
+      nimbo:{...defaultNimboState(),...(primary.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(primary.nimbo?.lastCareAt||{})}},
+      lastProductionAt:primary.lastProductionAt||secondary.lastProductionAt||new Date().toISOString(),
+      lastVisitAt:primary.lastVisitAt||secondary.lastVisitAt||null,
+      returnedAfterGap:!!local.returnedAfterGap||!!cloud.returnedAfterGap,
+      updatedAt:new Date(Math.max(stateTime(local),stateTime(cloud),Date.now())).toISOString()
+    });
+
+    capCommonResources?.();
+    return merged;
+  }
 
   function toast(msg){
     $('toast').textContent=msg;
@@ -1874,7 +2015,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return clamp(factor,.85,2.4);
   }
 
-  // Valores por MINUTO. A V7.2 acelera deliberadamente o city builder.
+  // Valores por MINUTO. A V7.3 acelera deliberadamente o city builder e melhora a presença do Nimbo.
   function productionRates(){
     const factor=productionFactor();
     return{
@@ -2488,6 +2629,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const v=vitality(),b=bond(),f=breath(),r=resilience();
 
     if(kind==='smoke'){
+      setPetExpression('confused');
       const lines=[
         'Anotei. Continuamos daqui.',
         'Tudo bem. O importante é continuar vendo com clareza.',
@@ -2498,6 +2640,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
 
     if(kind==='resist'){
+      setPetExpression('radiant');
       const lines=[
         '✦ Eu senti essa escolha.',
         'Um pouco mais de espaço.',
@@ -2508,11 +2651,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
 
     if(kind==='close'){
+      setPetExpression('happy');
       showPetReaction('Dia guardado no Vale. Amanhã a gente continua.','warm',2500);
       return;
     }
 
     if(kind==='touch'){
+      setPetExpression(Math.random()<0.22?'playful':'neutral');
       let lines;
       if(v<40){
         lines=['Hoje eu tô mais quieto. Fica aqui um pouco.','Nem todo dia precisa ser forte.'];
@@ -2530,6 +2675,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
 
     if(kind==='idle'){
+      setPetExpression(Math.random()<0.5?'bored':'neutral');
       const lines=b>=60
         ?['…','♪','✦']
         :v<40?['…','zzz','…']:['…','✦','♪'];
@@ -2567,6 +2713,127 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     },delay);
   }
 
+  function ensureNimbo(){
+    vale.nimbo={...defaultNimboState(),...(vale.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(vale.nimbo?.lastCareAt||{})}};
+    return vale.nimbo;
+  }
+
+  function decayNimboNeeds(){
+    const n=ensureNimbo();
+    const now=Date.now();
+    const last=new Date(n.lastMoodTick||now).getTime();
+    const hours=Math.min(24,Math.max(0,(now-last)/3600000));
+    if(hours<0.08)return n;
+    n.food=clamp(Number(n.food||0)-hours*2.1,15,100);
+    n.clean=clamp(Number(n.clean||0)-hours*1.6,15,100);
+    n.joy=clamp(Number(n.joy||0)-hours*1.8,15,100);
+    n.lastMoodTick=new Date(now).toISOString();
+    vale.updatedAt=new Date(now).toISOString();
+    write(VALE_KEY,vale);
+    return n;
+  }
+
+  function careCooldown(kind){
+    const n=ensureNimbo();
+    const last=n.lastCareAt?.[kind];
+    if(!last)return Infinity;
+    return (Date.now()-new Date(last).getTime())/60000;
+  }
+
+  function determineNimboExpression(v,b,f,r){
+    const n=decayNimboNeeds();
+    const avg=(Number(n.food||0)+Number(n.clean||0)+Number(n.joy||0))/3;
+    let expression='neutral';
+    let moodTag='atento';
+
+    if(avg<30||b<22){expression='sleepy'; moodTag='sonolento';}
+    else if(v<38||n.clean<28){expression='tired'; moodTag='cansado';}
+    else if(n.joy<35){expression='bored'; moodTag='entediado';}
+    else if(f>74&&n.joy>60){expression='playful'; moodTag='animado';}
+    else if(r>76&&avg>65){expression='radiant'; moodTag='radiante';}
+    else if(avg>70){expression='happy'; moodTag='bem humorado';}
+
+    if((Number(n.food||0)<24||Number(n.clean||0)<24||Number(n.joy||0)<24) && expression!=='sleepy'){
+      moodTag='impaciente';
+    }
+
+    n.moodTag=moodTag;
+    return {expression,moodTag,needs:n};
+  }
+
+  function ambientNimboLine(){
+    const n=ensureNimbo();
+    if(!observed().length)return 'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
+    if(!game.baselineLocked)return `Observando seus primeiros dias: ${Math.min(observed().length,7)}/7 para formar a baseline.`;
+    if(n.food<28)return 'Tô com fome de pausa. Um lanche ou um registro honesto já me anima.';
+    if(n.clean<28)return 'A cidade cola em mim. Um banho rápido me ajuda a clarear.';
+    if(n.joy<30)return 'Topa um passeio curto? Eu fico melhor quando a gente se move.';
+    const lines=[
+      'Entre uma pressão e outra, ainda existe espaço para respirar.',
+      'A cidade segue correndo. A nossa prática é não correr atrás dela o tempo todo.',
+      'Nem toda vontade manda. Algumas apenas passam pela avenida.',
+      'Você registra. Eu transformo isso em mapa.'
+    ];
+    return lines[Math.floor(Math.random()*lines.length)];
+  }
+
+  function setPetExpression(expr){
+    const pet=$('petZone');
+    if(!pet)return;
+    ['sleepy','tired','neutral','happy','radiant','bored','playful','confused','shocked'].forEach(c=>pet.classList.remove(c));
+    pet.classList.add(expr);
+  }
+
+  function performCare(kind){
+    const n=decayNimboNeeds();
+    const lowBond=bond()<25;
+    const tooSoon=careCooldown(kind)<18;
+    const lateHour=new Date().getHours()>=22;
+    let refuse=false;
+    let refuseReason='';
+
+    if(kind==='feed'&&n.food>86){refuse=true;refuseReason='cheio';}
+    if(kind==='bath'&&n.clean>84){refuse=true;refuseReason='limpo';}
+    if(kind==='walk'&&(n.joy>84||lateHour)){refuse=true;refuseReason=lateHour?'sono':'quieto';}
+    if(lowBond&&Math.random()<0.22){refuse=true;refuseReason='distante';}
+    if(tooSoon&&Math.random()<0.8){refuse=true;refuseReason='cedo';}
+
+    if(refuse){
+      const messages={
+        feed:['agora não… tô sem fome.','depois eu aceito melhor.', 'quero só ficar quietinho agora.'],
+        bath:['banho agora não. tô bem por enquanto.','depois. ainda tô limpo o bastante.'],
+        walk:['acho melhor não sair agora.','tô sem cabeça pra passeio nesse minuto.']
+      };
+      setPetExpression(refuseReason==='sono'?'sleepy':(Math.random()<0.5?'confused':'bored'));
+      petMotion('touch');
+      showPetReaction(messages[kind][Math.floor(Math.random()*messages[kind].length)],'calm',2200);
+      $('petMessage').textContent='Nimbo também tem hora e humor próprios.';
+      render();
+      return;
+    }
+
+    const gain={
+      feed:{food:18,clean:-1,joy:5,expression:'happy',tone:'warm',lines:['nham. isso ajudou.','gostei desse lanche.','agora fiquei melhor.']},
+      bath:{food:0,clean:20,joy:4,expression:'radiant',tone:'good',lines:['ahh. agora sim.','fiquei novinho.','a cabeça até clareou.']},
+      walk:{food:-2,clean:-1,joy:18,expression:'playful',tone:'good',lines:['vamos dar uma volta!','a cidade parece menos pesada andando com você.','isso me acordou bastante.']}
+    }[kind];
+
+    n.food=clamp(Number(n.food||0)+gain.food,10,100);
+    n.clean=clamp(Number(n.clean||0)+gain.clean,10,100);
+    n.joy=clamp(Number(n.joy||0)+gain.joy,10,100);
+    n.lastCareAt[kind]=new Date().toISOString();
+    n.lastMoodTick=new Date().toISOString();
+    vale.updatedAt=new Date().toISOString();
+    write(VALE_KEY,vale);
+
+    setPetExpression(gain.expression);
+    petMotion(kind==='walk'?'resist':'touch');
+    showPetReaction(gain.lines[Math.floor(Math.random()*gain.lines.length)],gain.tone,2200);
+    $('petMessage').textContent={feed:'Nimbo aceitou a comida e ficou um pouco mais presente.',bath:'Nimbo tomou banho e ficou mais leve.',walk:'Nimbo voltou do passeio com outra energia.'}[kind];
+    scheduleSync();
+    render();
+  }
+
 
   function render(){
     smokes.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
@@ -2577,6 +2844,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const st=smokes.filter(x=>key(x.timestamp)===t);
     const rt=resists.filter(x=>key(x.timestamp)===t);
     const v=vitality(),b=bond(),f=breath(),rr=resilience(),p=progress(),m=mood(v,b);
+    const nimbo=determineNimboExpression(v,b,f,rr);
 
     $('todayLabel').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
     $('todayCount').textContent=st.length;
@@ -2607,18 +2875,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     $('breathBar').style.width=f+'%';
     $('resilienceBar').style.width=rr+'%';
 
-    $('homeWoodValue').textContent=Math.floor(vale.resources.wood||0);
-    $('homeStoneValue').textContent=Math.floor(vale.resources.stone||0);
-    $('homeSeedsValue').textContent=Math.floor(vale.resources.seeds||0);
-    $('homePresenceValue').textContent=Math.floor(vale.resources.presence||0);
-    $('petState').textContent={sleepy:'sonolento',tired:'cansado',neutral:'atento',happy:'animado',radiant:'radiante'}[m];
+    if($('homeWoodValue'))$('homeWoodValue').textContent=Math.floor(vale.resources.wood||0);
+    if($('homeStoneValue'))$('homeStoneValue').textContent=Math.floor(vale.resources.stone||0);
+    if($('homeSeedsValue'))$('homeSeedsValue').textContent=Math.floor(vale.resources.seeds||0);
+    if($('homePresenceValue'))$('homePresenceValue').textContent=Math.floor(vale.resources.presence||0);
+    $('petState').textContent=nimbo.moodTag;
     $('levelBadge').textContent=`FORMA ${p.level}`;
-    $('petMessage').textContent=message(m,b);
+    if(!$('petReaction').classList.contains('show'))$('petMessage').textContent=ambientNimboLine();
 
     const pet=$('petZone');
     pet.dataset.level=p.level;
-    pet.classList.remove('sleepy','tired','neutral','happy','radiant');
-    pet.classList.add(m);
+    setPetExpression(nimbo.expression);
     applyPetVisualState(v,b,f,rr);
 
     $('xpValue').textContent=p.xp;
@@ -2724,7 +2991,16 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     if(gameError)throw gameError;
 
-    vale.updatedAt=new Date().toISOString();
+    let mergedVale=normalizeValeState(vale);
+    const remoteValeRes=await sb.from('vale_state').select('state,updated_at').maybeSingle();
+    if(remoteValeRes.error && remoteValeRes.error.code!=='PGRST116')throw remoteValeRes.error;
+    if(remoteValeRes.data?.state){
+      const remoteVale=normalizeValeState({...remoteValeRes.data.state,updatedAt:remoteValeRes.data.updated_at||remoteValeRes.data.state.updatedAt});
+      mergedVale=mergeValeStates(mergedVale,remoteVale);
+    }
+
+    mergedVale.updatedAt=new Date().toISOString();
+    vale=mergedVale;
     write(VALE_KEY,vale);
 
     const {error:valeError}=await sb.from('vale_state').upsert({
@@ -2769,12 +3045,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
 
     if(valeRes.data?.state){
-      const cloudVale=normalizeValeState(valeRes.data.state);
-      const cloudTime=new Date(valeRes.data.updated_at||cloudVale.updatedAt||0).getTime();
-      const localTime=new Date(vale.updatedAt||0).getTime();
-      if(forceVale||cloudTime>=localTime){
-        vale=cloudVale;
-      }
+      const cloudVale=normalizeValeState({...valeRes.data.state,updatedAt:valeRes.data.updated_at||valeRes.data.state.updatedAt});
+      vale=mergeValeStates(vale,cloudVale,{preferCloud:!!forceVale});
     }
 
     checkAchievements({notify:false});
@@ -3219,10 +3491,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   $('petZone').onclick=()=>reactPet('touch');
 
-  $('homeResourceStrip').onclick=()=>{
+  if($('homeResourceStrip'))$('homeResourceStrip').onclick=()=>{
     const resourceBtn=document.querySelector('.nav button[data-tab="resources"]');
     if(resourceBtn)resourceBtn.click();
   };
+
+  $('feedBtn').onclick=()=>performCare('feed');
+  $('bathBtn').onclick=()=>performCare('bath');
+  $('walkBtn').onclick=()=>performCare('walk');
 
   document.querySelectorAll('[data-journey]').forEach(btn=>{
     btn.onclick=()=>{
@@ -3261,6 +3537,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   async function start(){
     ensureLocalIds();
+    ensureNimbo();
     noteValeVisit();
     ensureValeBaselines();
     checkAchievements({notify:false});
@@ -3336,6 +3613,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   setInterval(render,60000);
+  setInterval(()=>{
+    if(currentUser&&navigator.onLine&&document.visibilityState==='visible'&&!syncing)syncAll();
+  },30000);
   setInterval(()=>{
     collectValeProduction(true);
     renderVale();
