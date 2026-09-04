@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="5">
+<meta name="app-version" content="6">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -198,6 +198,14 @@ section.tab{display:none}section.tab.active{display:block}
 .account-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}
 .account-email{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+.auth-link{
+  width:100%;border:0;background:transparent;color:#9fdab4;
+  font-size:11px;padding:10px 4px 0;text-align:center
+}
+.auth-link:active{opacity:.7}
+.auth-success{font-size:10px;color:#bdf5cd;line-height:1.45;min-height:14px;margin-top:10px}
+
+
 </style>
 </head>
 <body>
@@ -206,7 +214,7 @@ section.tab{display:none}section.tab.active{display:block}
   <div class="auth-card">
     <div class="auth-pet">NIMBO • NUVEM</div>
     <h2>Entrar no seu app</h2>
-    <p>No primeiro login, o histórico que já está neste iPhone será enviado para sua conta no Supabase. Depois, o app continua mantendo uma cópia local e sincroniza com a nuvem.</p>
+    <p>Entre com a conta do Nimbo. A sessão fica salva neste aparelho e seus registros são sincronizados com sua conta no Supabase.</p>
 
     <form id="loginForm">
       <div class="field">
@@ -214,11 +222,34 @@ section.tab{display:none}section.tab.active{display:block}
         <input id="emailInput" type="email" autocomplete="email" required>
       </div>
       <div class="field">
-        <label for="passwordInput">Senha do usuário do app</label>
+        <label for="passwordInput">Senha</label>
         <input id="passwordInput" type="password" autocomplete="current-password" required>
       </div>
       <button class="login-btn" id="loginBtn" type="submit">Entrar</button>
+      <button class="auth-link" id="forgotBtn" type="button">Esqueci minha senha</button>
       <div class="auth-error" id="authError"></div>
+      <div class="auth-success" id="authSuccess"></div>
+    </form>
+  </div>
+</div>
+
+<div class="auth-screen" id="passwordScreen">
+  <div class="auth-card">
+    <div class="auth-pet" id="passwordPetTitle">NIMBO • BEM-VINDO</div>
+    <h2 id="passwordTitle">Crie sua senha</h2>
+    <p id="passwordHelp">Seu convite foi aceito. Defina uma senha para entrar no Nimbo nas próximas vezes.</p>
+
+    <form id="passwordForm">
+      <div class="field">
+        <label for="newPasswordInput">Nova senha</label>
+        <input id="newPasswordInput" type="password" autocomplete="new-password" minlength="8" required>
+      </div>
+      <div class="field">
+        <label for="confirmPasswordInput">Confirme a nova senha</label>
+        <input id="confirmPasswordInput" type="password" autocomplete="new-password" minlength="8" required>
+      </div>
+      <button class="login-btn" id="savePasswordBtn" type="submit">Salvar senha e entrar</button>
+      <div class="auth-error" id="passwordError"></div>
     </form>
   </div>
 </div>
@@ -365,7 +396,7 @@ section.tab{display:none}section.tab.active{display:block}
   <div class="panel">
     <h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
-    <div class="note">Versão instalada: v5</div>
+    <div class="note">Versão instalada: v6</div>
   </div>
 
   <div class="panel">
@@ -386,7 +417,7 @@ section.tab{display:none}section.tab.active{display:block}
 
 <script>
 (() => {
-  const APP_VERSION='5';
+  const APP_VERSION='6';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -396,6 +427,12 @@ section.tab{display:none}section.tab.active{display:block}
   const GAME_KEY='vou_parar_de_fumar_game_v1';
   const DELETIONS_KEY='vou_parar_de_fumar_pending_deletions_v1';
   const LAST_SYNC_KEY='vou_parar_de_fumar_last_sync_v1';
+  const OWNER_KEY='vou_parar_de_fumar_local_owner_v1';
+
+  // Capturado antes de o supabase-js processar e limpar tokens do redirect.
+  const INITIAL_URL=window.location.href;
+  const INVITE_HINT=/(?:[?#&])type=invite(?:&|$)/i.test(INITIAL_URL);
+  const RECOVERY_HINT=/(?:[?#&])type=recovery(?:&|$)/i.test(INITIAL_URL);
 
   const parse=(v,f)=>{try{const x=JSON.parse(v);return x??f}catch{return f}};
   const read=(k,f)=>parse(localStorage.getItem(k),f);
@@ -451,6 +488,45 @@ section.tab{display:none}section.tab.active{display:block}
       write(SMOKE_KEY,smokes);
       write(RESIST_KEY,resists);
     }
+  }
+
+
+  function resetLocalAppCache(){
+    smokes=[];
+    resists=[];
+    closedDays=[];
+    pendingDeletes=[];
+    game={baseline:null,baselineLocked:false,bestReduction:0,maxLevel:1};
+
+    write(SMOKE_KEY,smokes);
+    write(RESIST_KEY,resists);
+    write(CLOSED_KEY,closedDays);
+    write(GAME_KEY,game);
+    write(DELETIONS_KEY,pendingDeletes);
+    localStorage.removeItem(LAST_SYNC_KEY);
+  }
+
+  function bindLocalCacheToUser(userId){
+    const owner=localStorage.getItem(OWNER_KEY);
+
+    // A v5 não possuía OWNER_KEY. No primeiro upgrade, os dados locais existentes
+    // são vinculados ao usuário que já estava autenticado naquele aparelho.
+    if(!owner){
+      localStorage.setItem(OWNER_KEY,userId);
+      return;
+    }
+
+    // Evita que uma segunda conta, no mesmo aparelho, herde e envie dados da primeira.
+    if(owner!==userId){
+      resetLocalAppCache();
+      localStorage.setItem(OWNER_KEY,userId);
+    }
+  }
+
+  function cleanAuthUrl(){
+    try{
+      window.history.replaceState({},document.title,window.location.pathname);
+    }catch{}
   }
 
   function addPendingDelete(type,value){
@@ -871,7 +947,7 @@ section.tab{display:none}section.tab.active{display:block}
   };
 
   $('exportBtn').onclick=()=>{
-    const data={app:'vou-parar-de-fumar',version:5,exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game};
+    const data={app:'vou-parar-de-fumar',version:6,exportedAt:new Date().toISOString(),records:smokes,resists,closedDays,game};
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;
@@ -962,17 +1038,46 @@ section.tab{display:none}section.tab.active{display:block}
 
   async function showLoggedIn(user){
     currentUser=user;
+    bindLocalCacheToUser(user.id);
+    ensureLocalIds();
+
+    $('passwordScreen').classList.remove('show');
     $('authScreen').classList.remove('show');
     $('accountEmail').textContent=user.email||'Conta conectada';
     setSyncState('syncing','CONECTANDO…');
     render();
+
     await syncAll();
   }
 
   function showLogin(){
     currentUser=null;
+    $('passwordScreen').classList.remove('show');
     $('authScreen').classList.add('show');
+    $('authError').textContent='';
+    $('authSuccess').textContent='';
     setSyncState('offline','NIMBO • LOCAL');
+  }
+
+  function showPasswordSetup(mode,user){
+    currentUser=user||currentUser;
+    $('authScreen').classList.remove('show');
+    $('passwordScreen').classList.add('show');
+    $('passwordError').textContent='';
+    $('newPasswordInput').value='';
+    $('confirmPasswordInput').value='';
+
+    if(mode==='recovery'){
+      $('passwordPetTitle').textContent='NIMBO • RECUPERAÇÃO';
+      $('passwordTitle').textContent='Crie uma nova senha';
+      $('passwordHelp').textContent='Você abriu um link de recuperação. Defina sua nova senha para voltar ao Nimbo.';
+      $('savePasswordBtn').textContent='Atualizar senha e entrar';
+    }else{
+      $('passwordPetTitle').textContent='NIMBO • BEM-VINDO';
+      $('passwordTitle').textContent='Crie sua senha';
+      $('passwordHelp').textContent='Seu convite foi aceito. Defina uma senha para entrar no Nimbo nas próximas vezes.';
+      $('savePasswordBtn').textContent='Salvar senha e entrar';
+    }
   }
 
   $('loginForm').addEventListener('submit',async e=>{
@@ -984,6 +1089,7 @@ section.tab{display:none}section.tab.active{display:block}
     }
 
     $('authError').textContent='';
+    $('authSuccess').textContent='';
     $('loginBtn').disabled=true;
     $('loginBtn').textContent='Entrando…';
 
@@ -998,15 +1104,92 @@ section.tab{display:none}section.tab.active{display:block}
       await showLoggedIn(data.user);
     }catch(e){
       console.error(e);
-      $('authError').textContent='Não consegui entrar. Confira o e-mail e a senha que você definiu para esse usuário.';
+      $('authError').textContent='Não consegui entrar. Confira seu e-mail e sua senha.';
     }finally{
       $('loginBtn').disabled=false;
       $('loginBtn').textContent='Entrar';
     }
   });
 
+  $('forgotBtn').onclick=async()=>{
+    if(!sb)return;
+
+    const email=$('emailInput').value.trim();
+    $('authError').textContent='';
+    $('authSuccess').textContent='';
+
+    if(!email){
+      $('authError').textContent='Digite seu e-mail acima primeiro.';
+      return;
+    }
+
+    try{
+      const redirectTo=window.location.origin+window.location.pathname;
+      const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});
+      if(error)throw error;
+
+      $('authSuccess').textContent='Enviei um link de recuperação para seu e-mail.';
+    }catch(e){
+      console.error(e);
+      $('authError').textContent='Não consegui enviar o link de recuperação agora.';
+    }
+  };
+
+  $('passwordForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+
+    const password=$('newPasswordInput').value;
+    const confirmation=$('confirmPasswordInput').value;
+
+    $('passwordError').textContent='';
+
+    if(password.length<8){
+      $('passwordError').textContent='Use pelo menos 8 caracteres.';
+      return;
+    }
+
+    if(password!==confirmation){
+      $('passwordError').textContent='As duas senhas não são iguais.';
+      return;
+    }
+
+    $('savePasswordBtn').disabled=true;
+    const previousText=$('savePasswordBtn').textContent;
+    $('savePasswordBtn').textContent='Salvando…';
+
+    try{
+      const {data,error}=await sb.auth.updateUser({password});
+      if(error)throw error;
+
+      cleanAuthUrl();
+
+      const user=data.user||currentUser||(await sb.auth.getUser()).data.user;
+      if(!user)throw new Error('Sessão não encontrada.');
+
+      $('newPasswordInput').value='';
+      $('confirmPasswordInput').value='';
+
+      await showLoggedIn(user);
+      toast('Senha salva. Bem-vindo ao Nimbo.');
+    }catch(e){
+      console.error(e);
+      $('passwordError').textContent='Não consegui salvar sua senha. Se o convite tiver expirado, peça um novo convite.';
+    }finally{
+      $('savePasswordBtn').disabled=false;
+      $('savePasswordBtn').textContent=previousText;
+    }
+  });
+
   $('logoutBtn').onclick=async()=>{
     if(!sb)return;
+
+    // Evita sair com registros recentes ainda não enviados.
+    if(!navigator.onLine){
+      alert('Você está sem internet. Para evitar perder registros ainda não sincronizados, conecte-se antes de sair da conta.');
+      return;
+    }
+
+    await syncAll({showToast:false});
     await sb.auth.signOut();
     showLogin();
   };
@@ -1052,7 +1235,29 @@ section.tab{display:none}section.tab.active{display:block}
     }
 
     sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{
-      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
+      auth:{
+        persistSession:true,
+        autoRefreshToken:true,
+        detectSessionInUrl:true
+      }
+    });
+
+    // PASSWORD_RECOVERY é emitido quando o usuário volta pelo link enviado por e-mail.
+    sb.auth.onAuthStateChange((event,session)=>{
+      if(event==='SIGNED_OUT'){
+        showLogin();
+        return;
+      }
+
+      if(event==='PASSWORD_RECOVERY'&&session?.user){
+        showPasswordSetup('recovery',session.user);
+        return;
+      }
+
+      if(event==='SIGNED_IN'&&session?.user){
+        currentUser=session.user;
+        $('accountEmail').textContent=session.user.email||'Conta conectada';
+      }
     });
 
     const {data:{session},error}=await sb.auth.getSession();
@@ -1064,18 +1269,18 @@ section.tab{display:none}section.tab.active{display:block}
     }
 
     if(session?.user){
-      await showLoggedIn(session.user);
+      // O link padrão de convite confirma o e-mail e devolve uma sessão no redirect.
+      // A v6 intercepta esse primeiro acesso para o convidado escolher a própria senha.
+      if(INVITE_HINT){
+        showPasswordSetup('invite',session.user);
+      }else if(RECOVERY_HINT){
+        showPasswordSetup('recovery',session.user);
+      }else{
+        await showLoggedIn(session.user);
+      }
     }else{
       showLogin();
     }
-
-    sb.auth.onAuthStateChange((event,session)=>{
-      if(event==='SIGNED_OUT')showLogin();
-      if(event==='SIGNED_IN'&&session?.user){
-        currentUser=session.user;
-        $('accountEmail').textContent=session.user.email||'Conta conectada';
-      }
-    });
 
     window.addEventListener('online',()=>syncAll());
     window.addEventListener('offline',()=>setSyncState('offline','NIMBO • OFFLINE'));
@@ -1083,7 +1288,7 @@ section.tab{display:none}section.tab.active{display:block}
     document.addEventListener('visibilitychange',()=>{
       if(document.visibilityState==='visible'){
         checkForUpdate();
-        if(currentUser)syncAll();
+        if(currentUser&&!$('passwordScreen').classList.contains('show'))syncAll();
       }
     });
 
