@@ -3,79 +3,901 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#07111f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Parar de fumar">
+  <meta name="apple-mobile-web-app-title" content="Vou parar">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <title>Vou parar de fumar</title>
+
   <style>
     :root{
-      --bg:#0b1020;--card:#141b2d;--card2:#1b2439;--text:#f8fafc;
-      --muted:#94a3b8;--accent:#22c55e;--accent2:#16a34a;--danger:#ef4444;
-      --line:rgba(255,255,255,.08);
+      --bg:#07111f;
+      --card:#101d32;
+      --card2:#17263e;
+      --text:#f7fafc;
+      --muted:#91a0b5;
+      --line:rgba(255,255,255,.085);
+      --green:#62e98f;
+      --green2:#42d778;
+      --cyan:#72def1;
+      --yellow:#ffd66b;
+      --purple:#b69cff;
+      --pixel:"Courier New",ui-monospace,SFMono-Regular,Menlo,monospace;
     }
+
     *{box-sizing:border-box}
-    html{background:var(--bg)}
+    html{
+      background:var(--bg);
+      scroll-behavior:smooth;
+    }
+
     body{
-      margin:0;min-height:100vh;background:
-      radial-gradient(circle at top right,rgba(34,197,94,.08),transparent 35%),
-      linear-gradient(180deg,#0b1020,#0e1528);
-      color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-      "Segoe UI",Roboto,Arial,sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom));
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 50% -8%,rgba(98,233,143,.09),transparent 30%),
+        linear-gradient(180deg,#07111f,#0a1427 58%,#07101d);
+      padding-bottom:calc(88px + env(safe-area-inset-bottom));
+      -webkit-tap-highlight-color:transparent;
     }
-    button,input{font:inherit}
-    .wrap{max-width:560px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 16px 18px}
-    header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}
-    h1{font-size:25px;line-height:1.1;margin:0 0 5px;letter-spacing:-.4px}
-    .subtitle{font-size:13px;color:var(--muted)}
-    .badge{font-size:11px;color:#bbf7d0;border:1px solid rgba(34,197,94,.25);
-      background:rgba(34,197,94,.08);padding:7px 9px;border-radius:999px;white-space:nowrap}
-    .hero{background:linear-gradient(145deg,rgba(34,197,94,.16),rgba(20,27,45,.95));
-      border:1px solid var(--line);border-radius:26px;padding:22px;margin-bottom:14px}
-    .day{font-size:13px;color:var(--muted);text-transform:capitalize}
-    .count{font-size:74px;line-height:1;font-weight:800;letter-spacing:-4px;margin:10px 0 0}
-    .label{font-size:16px;color:#cbd5e1;margin-bottom:20px}
-    .mainbtn{width:100%;border:0;background:var(--accent);color:#052e16;font-weight:800;
-      padding:18px 16px;border-radius:18px;font-size:18px;box-shadow:0 8px 30px rgba(34,197,94,.16)}
-    .mainbtn:active{transform:scale(.985)}
-    .last{display:flex;justify-content:space-between;gap:10px;margin-top:14px;color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-    .card,.panel{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:16px}
-    .card .k{font-size:12px;color:var(--muted);margin-bottom:7px}
-    .card .v{font-size:23px;font-weight:750}
-    .panel{margin-bottom:14px}
-    .panel h2{font-size:16px;margin:0 0 13px}
-    .history-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}
-    .history-row:last-child{border-bottom:0}
-    .date-title{font-size:14px}
-    .date-sub{font-size:12px;color:var(--muted);margin-top:3px}
-    .day-total{font-size:21px;font-weight:750}
-    .empty{padding:12px 0;color:var(--muted);font-size:14px;line-height:1.5}
-    .actions{display:flex;gap:10px;flex-wrap:wrap}
-    .secondary,.danger{border:1px solid var(--line);background:var(--card2);color:var(--text);
-      padding:11px 13px;border-radius:13px;font-size:13px;font-weight:650}
-    .danger{color:#fecaca}
-    .note{font-size:12px;line-height:1.5;color:var(--muted);margin-top:12px}
+
+    button,input{
+      font:inherit;
+    }
+
+    button{
+      touch-action:manipulation;
+      cursor:pointer;
+    }
+
+    .wrap{
+      max-width:600px;
+      margin:auto;
+      padding:calc(14px + env(safe-area-inset-top)) 14px 20px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      margin-bottom:11px;
+    }
+
+    h1{
+      font-size:23px;
+      line-height:1.08;
+      margin:0 0 4px;
+      letter-spacing:-.55px;
+    }
+
+    .subtitle{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .badge{
+      font:10px var(--pixel);
+      color:#bdf5cd;
+      border:1px solid rgba(98,233,143,.23);
+      background:rgba(98,233,143,.065);
+      padding:7px 8px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    /* HABITAT */
+    .habitat{
+      position:relative;
+      overflow:hidden;
+      height:300px;
+      border-radius:25px;
+      margin-bottom:10px;
+      border:1px solid rgba(114,222,241,.16);
+      background:
+        linear-gradient(180deg,#12324c 0%,#102b43 66%,#103c34 66%,#0c302b 100%);
+      box-shadow:0 18px 55px rgba(0,0,0,.23);
+    }
+
+    .habitat::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.14;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size:8px 8px;
+    }
+
+    .habitat-head{
+      position:absolute;
+      z-index:4;
+      top:15px;
+      left:16px;
+      right:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+    }
+
+    .pet-name{
+      font:700 13px var(--pixel);
+      color:#e0ffea;
+    }
+
+    .pet-state{
+      font:10px var(--pixel);
+      color:#94deb0;
+      margin-top:3px;
+    }
+
+    .form-badge{
+      font:10px var(--pixel);
+      color:#d8f3fb;
+      background:rgba(5,15,25,.26);
+      border:1px solid rgba(255,255,255,.11);
+      padding:6px 8px;
+      border-radius:8px;
+    }
+
+    .sky-cloud{
+      position:absolute;
+      z-index:1;
+      top:73px;
+      left:25px;
+      width:38px;
+      height:10px;
+      background:#bce7ef;
+      opacity:.13;
+      box-shadow:10px -7px 0 #bce7ef,23px 0 0 #bce7ef;
+    }
+
+    .sky-cloud.two{
+      left:auto;
+      right:28px;
+      top:88px;
+      transform:scale(.65);
+      opacity:.10;
+    }
+
+    .grass{
+      position:absolute;
+      z-index:1;
+      bottom:19px;
+      left:22px;
+      width:7px;
+      height:18px;
+      background:#52c97a;
+      box-shadow:7px 6px 0 #6cdf8e,-7px 8px 0 #44b96c;
+    }
+
+    .stone{
+      position:absolute;
+      z-index:1;
+      bottom:19px;
+      right:24px;
+      width:20px;
+      height:7px;
+      background:#53736e;
+      box-shadow:6px -5px 0 #698985;
+    }
+
+    .pet-zone{
+      position:absolute;
+      z-index:3;
+      left:50%;
+      top:45%;
+      width:170px;
+      height:170px;
+      transform:translate(-50%,-50%);
+      display:grid;
+      place-items:center;
+    }
+
+    .pet-bob{
+      width:150px;
+      height:150px;
+      animation:bob 2.4s ease-in-out infinite;
+      transform-origin:50% 82%;
+    }
+
+    .pet-sway{
+      width:100%;
+      height:100%;
+      animation:sway 5s ease-in-out infinite;
+    }
+
+    .pet-svg{
+      width:100%;
+      height:100%;
+      overflow:visible;
+      filter:drop-shadow(0 14px 9px rgba(0,0,0,.22));
+      shape-rendering:crispEdges;
+    }
+
+    .pet-svg *{
+      shape-rendering:crispEdges;
+    }
+
+    .pet-svg .eye{
+      transform-box:fill-box;
+      transform-origin:center;
+      animation:blink 5.5s infinite;
+    }
+
+    .pet-svg .spark{
+      animation:sparkle 1.6s ease-in-out infinite;
+      transform-box:fill-box;
+      transform-origin:center;
+    }
+
+    .pet-svg .accent2{
+      display:none;
+    }
+
+    .pet-zone[data-level="2"] .ear-extra{
+      display:block;
+    }
+
+    .pet-zone[data-level="3"] .accent2,
+    .pet-zone[data-level="4"] .accent2,
+    .pet-zone[data-level="5"] .accent2{
+      display:block;
+    }
+
+    .pet-zone[data-level="4"] .wing,
+    .pet-zone[data-level="5"] .wing{
+      display:block;
+    }
+
+    .pet-zone[data-level="5"] .halo{
+      display:block;
+    }
+
+    .ear-extra,.wing,.halo{
+      display:none;
+    }
+
+    .pet-zone.happy .mouth-neutral,
+    .pet-zone.happy .mouth-tired,
+    .pet-zone.happy .mouth-radiant{
+      display:none;
+    }
+
+    .pet-zone.happy .mouth-happy{
+      display:block;
+    }
+
+    .pet-zone.radiant .mouth-neutral,
+    .pet-zone.radiant .mouth-tired,
+    .pet-zone.radiant .mouth-happy{
+      display:none;
+    }
+
+    .pet-zone.radiant .mouth-radiant{
+      display:block;
+    }
+
+    .pet-zone.tired .mouth-neutral,
+    .pet-zone.tired .mouth-happy,
+    .pet-zone.tired .mouth-radiant{
+      display:none;
+    }
+
+    .pet-zone.tired .mouth-tired{
+      display:block;
+    }
+
+    .pet-zone.sleepy .eye{
+      animation:none;
+      transform:scaleY(.18);
+    }
+
+    .pet-zone.sleepy .mouth-neutral,
+    .pet-zone.sleepy .mouth-happy,
+    .pet-zone.sleepy .mouth-radiant{
+      display:none;
+    }
+
+    .pet-zone.sleepy .mouth-tired{
+      display:block;
+    }
+
+    .mouth-happy,.mouth-tired,.mouth-radiant{
+      display:none;
+    }
+
+    .pet-zone.tired .body-main,
+    .pet-zone.sleepy .body-main{
+      fill:#71888b;
+    }
+
+    .pet-zone.tired .body-light,
+    .pet-zone.sleepy .body-light{
+      fill:#9fb0ae;
+    }
+
+    .pet-zone[data-level="3"] .body-main{fill:#45c9bf}
+    .pet-zone[data-level="3"] .body-light{fill:#83eee1}
+
+    .pet-zone[data-level="4"] .body-main{fill:#52afe6}
+    .pet-zone[data-level="4"] .body-light{fill:#8bd9ff}
+
+    .pet-zone[data-level="5"] .body-main{fill:#a084ef}
+    .pet-zone[data-level="5"] .body-light{fill:#d5c6ff}
+
+    .pet-zone.radiant .pet-bob{
+      animation-duration:1.65s;
+    }
+
+    .pet-zone.tired .pet-bob{
+      animation-duration:3.5s;
+    }
+
+    .pet-zone.sleepy .pet-bob{
+      animation-duration:4.5s;
+      opacity:.86;
+    }
+
+    @keyframes bob{
+      0%,100%{transform:translateY(2px)}
+      50%{transform:translateY(-9px)}
+    }
+
+    @keyframes sway{
+      0%,100%{transform:rotate(-1.5deg)}
+      50%{transform:rotate(1.5deg)}
+    }
+
+    @keyframes blink{
+      0%,44%,48%,100%{transform:scaleY(1)}
+      45%,47%{transform:scaleY(.1)}
+    }
+
+    @keyframes sparkle{
+      0%,100%{opacity:.45;transform:scale(.7)}
+      50%{opacity:1;transform:scale(1.25)}
+    }
+
+    @keyframes petPop{
+      0%{transform:translate(-50%,-50%) scale(1)}
+      35%{transform:translate(-50%,-56%) scale(1.08)}
+      100%{transform:translate(-50%,-50%) scale(1)}
+    }
+
+    @keyframes petShake{
+      0%,100%{transform:translate(-50%,-50%)}
+      25%{transform:translate(calc(-50% - 5px),-50%)}
+      75%{transform:translate(calc(-50% + 5px),-50%)}
+    }
+
+    .pet-zone.pop{
+      animation:petPop .45s ease;
+    }
+
+    .pet-zone.shake{
+      animation:petShake .32s ease;
+    }
+
+    .pet-message{
+      position:absolute;
+      z-index:4;
+      left:50%;
+      bottom:56px;
+      transform:translateX(-50%);
+      width:calc(100% - 32px);
+      max-width:390px;
+      font:10px/1.4 var(--pixel);
+      color:#d8edf2;
+      text-align:center;
+      background:rgba(5,15,25,.48);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:9px;
+      padding:7px 9px;
+    }
+
+    .stats{
+      position:absolute;
+      z-index:4;
+      left:16px;
+      right:16px;
+      bottom:12px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .stat{
+      background:rgba(5,15,25,.42);
+      border:1px solid rgba(255,255,255,.075);
+      border-radius:11px;
+      padding:8px;
+    }
+
+    .stat-head{
+      display:flex;
+      justify-content:space-between;
+      font-size:10px;
+      color:#d3dfe8;
+      margin-bottom:5px;
+    }
+
+    .meter{
+      height:6px;
+      background:#09131f;
+      border-radius:2px;
+      overflow:hidden;
+    }
+
+    .meter i{
+      display:block;
+      width:0;
+      height:100%;
+      background:var(--green);
+      transition:width .45s;
+    }
+
+    #bondBar{
+      background:var(--cyan);
+    }
+
+    /* QUICK ACTIONS */
+    .quick-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+      margin-bottom:10px;
+    }
+
+    .quick{
+      min-height:86px;
+      border-radius:17px;
+      border:1px solid var(--line);
+      padding:12px 9px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-weight:800;
+    }
+
+    .quick:active{
+      transform:scale(.98);
+    }
+
+    .quick.smoke{
+      background:#1a2941;
+      color:#f0f4f8;
+    }
+
+    .quick.resist{
+      background:linear-gradient(180deg,#66ec92,#46d77a);
+      color:#07351a;
+      border-color:transparent;
+    }
+
+    .quick-icon{
+      font:22px var(--pixel);
+      line-height:1;
+      margin-bottom:5px;
+    }
+
+    .quick-title{
+      font-size:13px;
+      line-height:1.15;
+    }
+
+    .quick-sub{
+      font-size:9px;
+      font-weight:550;
+      opacity:.68;
+      margin-top:4px;
+      line-height:1.2;
+    }
+
+    .today-card,
+    .panel{
+      background:rgba(16,29,50,.93);
+      border:1px solid var(--line);
+      border-radius:19px;
+      padding:14px;
+      margin-bottom:11px;
+    }
+
+    .today-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+    }
+
+    .day-label{
+      text-transform:capitalize;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .count{
+      font-size:38px;
+      font-weight:800;
+      letter-spacing:-1.5px;
+      line-height:1;
+      margin-top:3px;
+    }
+
+    .count small{
+      font-size:12px;
+      font-weight:500;
+      color:#cbd5e1;
+      letter-spacing:0;
+    }
+
+    .baseline{
+      text-align:right;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.4;
+    }
+
+    .baseline strong{
+      display:block;
+      color:#e7f4fb;
+      font-size:12px;
+      margin-top:2px;
+    }
+
+    .today-foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .tiny{
+      border:1px solid var(--line);
+      background:transparent;
+      color:#ced7e2;
+      padding:6px 8px;
+      border-radius:8px;
+      font-size:10px;
+    }
+
+    .tiny.closed{
+      color:#bdf8ce;
+      border-color:rgba(98,233,143,.24);
+    }
+
+    .times{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:8px;
+    }
+
+    .chip{
+      font:9px var(--pixel);
+      padding:5px 7px;
+      border-radius:6px;
+      background:#172943;
+      border:1px solid var(--line);
+      color:#c9d7e5;
+    }
+
+    .chip.good{
+      color:#c7f8d5;
+      background:rgba(66,215,120,.10);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+      margin-bottom:11px;
+    }
+
+    .metric{
+      background:#101d32;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px;
+    }
+
+    .metric-k{
+      font-size:10px;
+      color:var(--muted);
+    }
+
+    .metric-v{
+      font-size:20px;
+      font-weight:760;
+      margin-top:4px;
+    }
+
+    .metric-s{
+      font-size:9px;
+      color:var(--muted);
+      margin-top:3px;
+    }
+
+    .panel h2{
+      font-size:14px;
+      margin:0 0 10px;
+    }
+
+    .history-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+      padding:10px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .history-row:last-child{
+      border-bottom:0;
+    }
+
+    .date-title{
+      font-size:12px;
+      text-transform:capitalize;
+    }
+
+    .date-sub{
+      font-size:9px;
+      color:var(--muted);
+      margin-top:3px;
+      line-height:1.5;
+    }
+
+    .day-score{
+      text-align:right;
+    }
+
+    .day-score strong{
+      display:block;
+      font-size:18px;
+    }
+
+    .day-score span{
+      font-size:8px;
+      color:var(--muted);
+    }
+
+    .empty{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.55;
+      padding:7px 0;
+    }
+
+    .actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .secondary,
+    .danger{
+      border:1px solid var(--line);
+      background:#18273f;
+      color:var(--text);
+      padding:10px 11px;
+      border-radius:11px;
+      font-size:11px;
+      font-weight:650;
+    }
+
+    .danger{
+      color:#ffd1d1;
+    }
+
+    .note{
+      font-size:9px;
+      line-height:1.55;
+      color:var(--muted);
+      margin-top:10px;
+    }
+
+    /* JOURNEY */
+    .journey-hero{
+      background:linear-gradient(145deg,rgba(182,156,255,.12),rgba(16,29,50,.94));
+      border:1px solid rgba(182,156,255,.16);
+      border-radius:19px;
+      padding:14px;
+      margin-bottom:11px;
+    }
+
+    .journey-title{
+      font:11px var(--pixel);
+      color:#dcd1ff;
+    }
+
+    .xp-num{
+      font-size:28px;
+      font-weight:800;
+      margin:6px 0;
+    }
+
+    .xpbar{
+      height:8px;
+      background:#0b1523;
+      border-radius:3px;
+      overflow:hidden;
+    }
+
+    .xpbar i{
+      display:block;
+      height:100%;
+      background:var(--purple);
+      width:0;
+    }
+
+    .xpnote{
+      font-size:9px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    .evo-line{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:4px;
+      margin-top:12px;
+    }
+
+    .evo{
+      font:7px var(--pixel);
+      text-align:center;
+      color:#728299;
+      padding:7px 2px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      background:#0d192b;
+    }
+
+    .evo.done{
+      color:#c8f8d7;
+      border-color:rgba(98,233,143,.2);
+      background:rgba(98,233,143,.06);
+    }
+
+    .evo.current{
+      color:#fff4be;
+      border-color:rgba(255,214,107,.3);
+      background:rgba(255,214,107,.08);
+    }
+
+    .power{
+      display:flex;
+      gap:9px;
+      align-items:center;
+      padding:9px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .power:last-child{
+      border-bottom:0;
+    }
+
+    .power-icon{
+      width:31px;
+      height:31px;
+      display:grid;
+      place-items:center;
+      border-radius:8px;
+      background:#172943;
+      border:1px solid var(--line);
+      font:13px var(--pixel);
+    }
+
+    .power.locked{
+      opacity:.36;
+      filter:grayscale(1);
+    }
+
+    .power-name{
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .power-desc{
+      font-size:9px;
+      color:var(--muted);
+      margin-top:2px;
+      line-height:1.35;
+    }
+
+    /* NAV */
     .nav{
-      position:fixed;left:0;right:0;bottom:0;background:rgba(10,15,28,.90);
-      backdrop-filter:blur(18px);border-top:1px solid var(--line);
-      padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:20;
+      background:rgba(5,13,25,.92);
+      backdrop-filter:blur(18px);
+      border-top:1px solid var(--line);
+      padding:7px 9px calc(7px + env(safe-area-inset-bottom));
     }
-    .navin{max-width:560px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-    .nav button{background:transparent;border:0;color:var(--muted);padding:8px 4px;border-radius:12px;font-size:11px}
-    .nav button.active{color:#86efac;background:rgba(34,197,94,.08)}
-    .nav .ico{font-size:20px;display:block;margin-bottom:2px}
-    section.tab{display:none}
-    section.tab.active{display:block}
-    #toast{position:fixed;left:50%;bottom:105px;transform:translateX(-50%) translateY(10px);
-      opacity:0;pointer-events:none;background:#e2e8f0;color:#0f172a;padding:10px 14px;border-radius:999px;
-      font-size:13px;font-weight:700;transition:.2s;white-space:nowrap;z-index:4}
-    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    .time-list{display:flex;flex-wrap:wrap;gap:8px}
-    .time-chip{font-size:12px;background:var(--card2);border:1px solid var(--line);padding:7px 9px;border-radius:999px;color:#cbd5e1}
+
+    .navin{
+      max-width:600px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:4px;
+    }
+
+    .nav button{
+      background:transparent;
+      border:0;
+      color:#8998ad;
+      padding:6px 3px;
+      border-radius:10px;
+      font-size:9px;
+    }
+
+    .nav button.active{
+      color:#aef5c2;
+      background:rgba(98,233,143,.07);
+    }
+
+    .nav .ico{
+      font:14px var(--pixel);
+      display:block;
+      margin-bottom:2px;
+    }
+
+    section.tab{
+      display:none;
+    }
+
+    section.tab.active{
+      display:block;
+    }
+
+    #toast{
+      position:fixed;
+      z-index:30;
+      left:50%;
+      bottom:98px;
+      transform:translateX(-50%) translateY(8px);
+      max-width:calc(100vw - 30px);
+      text-align:center;
+      opacity:0;
+      pointer-events:none;
+      background:#eef8f4;
+      color:#0b2a19;
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+      transition:.2s;
+    }
+
+    #toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    @media(max-width:350px){
+      .quick-title{font-size:12px}
+      .habitat{height:286px}
+      .pet-zone{width:155px;height:155px}
+      .pet-bob{width:140px;height:140px}
+    }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <header>
@@ -83,40 +905,166 @@
         <h1>Vou parar de fumar</h1>
         <div class="subtitle">Um registro de cada vez.</div>
       </div>
-      <div class="badge">modo local</div>
+      <div class="badge">NIMBO • LOCAL</div>
     </header>
 
     <section id="home" class="tab active">
-      <div class="hero">
-        <div class="day" id="todayLabel">Hoje</div>
-        <div class="count" id="todayCount">0</div>
-        <div class="label" id="cigLabel">cigarros hoje</div>
-        <button class="mainbtn" id="smokeBtn">+ Fumei agora</button>
-        <div class="last">
-          <span id="lastTime">Nenhum registro hoje</span>
-          <span id="sinceLast"></span>
+      <div class="habitat">
+        <div class="sky-cloud"></div>
+        <div class="sky-cloud two"></div>
+        <div class="grass"></div>
+        <div class="stone"></div>
+
+        <div class="habitat-head">
+          <div>
+            <div class="pet-name">NIMBO</div>
+            <div class="pet-state" id="petState">atento</div>
+          </div>
+          <div class="form-badge" id="levelBadge">FORMA 1</div>
         </div>
+
+        <div class="pet-zone neutral" id="petZone" data-level="1">
+          <div class="pet-bob">
+            <div class="pet-sway">
+              <svg class="pet-svg" viewBox="0 0 120 120" aria-label="Nimbo">
+                <rect x="35" y="99" width="50" height="7" fill="rgba(0,0,0,.18)"/>
+
+                <g class="wing">
+                  <rect x="15" y="56" width="18" height="14" class="body-main" fill="#4fca80"/>
+                  <rect x="87" y="56" width="18" height="14" class="body-main" fill="#4fca80"/>
+                  <rect x="10" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/>
+                  <rect x="101" y="61" width="9" height="7" class="body-light" fill="#8bf1b0"/>
+                </g>
+
+                <rect x="38" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
+                <rect x="69" y="29" width="13" height="18" class="body-light ear-extra" fill="#8bf1b0"/>
+
+                <rect x="31" y="43" width="58" height="47" class="body-main" fill="#4fca80"/>
+                <rect x="25" y="53" width="70" height="28" class="body-main" fill="#4fca80"/>
+                <rect x="37" y="37" width="46" height="12" class="body-light" fill="#8bf1b0"/>
+                <rect x="27" y="56" width="8" height="18" class="body-light" fill="#8bf1b0"/>
+
+                <g class="accent2">
+                  <rect x="52" y="26" width="6" height="9" fill="#ffd66b"/>
+                  <rect x="64" y="20" width="6" height="11" fill="#ffd66b"/>
+                </g>
+
+                <g class="halo">
+                  <rect x="42" y="13" width="36" height="5" fill="#fff2a8"/>
+                  <rect x="37" y="17" width="5" height="5" fill="#fff2a8"/>
+                  <rect x="78" y="17" width="5" height="5" fill="#fff2a8"/>
+                  <rect class="spark" x="24" y="26" width="5" height="5" fill="#fff2a8"/>
+                  <rect class="spark" x="92" y="31" width="5" height="5" fill="#fff2a8"/>
+                </g>
+
+                <rect class="eye" x="43" y="59" width="9" height="10" fill="#15363d"/>
+                <rect class="eye" x="68" y="59" width="9" height="10" fill="#15363d"/>
+
+                <g class="mouth-neutral">
+                  <rect x="52" y="77" width="16" height="4" fill="#15363d"/>
+                </g>
+
+                <g class="mouth-tired">
+                  <rect x="52" y="79" width="16" height="4" fill="#15363d"/>
+                  <rect x="56" y="75" width="8" height="4" fill="#15363d"/>
+                </g>
+
+                <g class="mouth-happy">
+                  <rect x="50" y="75" width="5" height="4" fill="#15363d"/>
+                  <rect x="55" y="79" width="10" height="4" fill="#15363d"/>
+                  <rect x="65" y="75" width="5" height="4" fill="#15363d"/>
+                </g>
+
+                <g class="mouth-radiant">
+                  <rect x="48" y="74" width="5" height="4" fill="#15363d"/>
+                  <rect x="53" y="78" width="14" height="5" fill="#15363d"/>
+                  <rect x="67" y="74" width="5" height="4" fill="#15363d"/>
+                  <rect x="36" y="74" width="5" height="5" fill="#ffafc2"/>
+                  <rect x="79" y="74" width="5" height="5" fill="#ffafc2"/>
+                </g>
+
+                <rect x="39" y="88" width="15" height="8" fill="#173c47"/>
+                <rect x="66" y="88" width="15" height="8" fill="#173c47"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="pet-message" id="petMessage">Estou aprendendo seus ritmos.</div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-head">
+              <span>♥ Vitalidade</span>
+              <b id="vitalityText">55</b>
+            </div>
+            <div class="meter"><i id="vitalityBar"></i></div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-head">
+              <span>◆ Vínculo</span>
+              <b id="bondText">0</b>
+            </div>
+            <div class="meter"><i id="bondBar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button class="quick smoke" id="smokeBtn">
+          <span class="quick-icon">+</span>
+          <span class="quick-title">Fumei agora</span>
+          <span class="quick-sub">registrar</span>
+        </button>
+
+        <button class="quick resist" id="resistBtn">
+          <span class="quick-icon">✦</span>
+          <span class="quick-title">Quis fumar,<br>mas não fumei</span>
+          <span class="quick-sub">+ energia</span>
+        </button>
+      </div>
+
+      <div class="today-card">
+        <div class="today-row">
+          <div>
+            <div class="day-label" id="todayLabel">Hoje</div>
+            <div class="count">
+              <span id="todayCount">0</span>
+              <small id="cigLabel">cigarros</small>
+            </div>
+          </div>
+
+          <div class="baseline">
+            <span id="baselineStatus">baseline em observação</span>
+            <strong id="baselineValue">—</strong>
+          </div>
+        </div>
+
+        <div class="today-foot">
+          <span id="lastTime">Nenhum cigarro registrado hoje</span>
+          <button class="tiny" id="closeDayBtn">Fechar o dia</button>
+        </div>
+
+        <div class="times" id="todayTimes"></div>
       </div>
 
       <div class="grid">
-        <div class="card">
-          <div class="k">Média últimos 7 dias</div>
-          <div class="v" id="avg7">—</div>
+        <div class="metric">
+          <div class="metric-k">Média 7 dias</div>
+          <div class="metric-v" id="avg7">—</div>
+          <div class="metric-s" id="trendText">estabelecendo referência</div>
         </div>
-        <div class="card">
-          <div class="k">Total registrado</div>
-          <div class="v" id="totalCount">0</div>
-        </div>
-      </div>
 
-      <div class="panel">
-        <h2>Horários de hoje</h2>
-        <div id="todayTimes" class="time-list"></div>
-        <div id="noTimes" class="empty">Quando você registrar um cigarro, o horário aparece aqui.</div>
+        <div class="metric">
+          <div class="metric-k">Vontades superadas</div>
+          <div class="metric-v" id="resistToday">0</div>
+          <div class="metric-s">hoje</div>
+        </div>
       </div>
 
       <div class="actions">
-        <button class="secondary" id="undoBtn">Desfazer último registro</button>
+        <button class="secondary" id="undoBtn">Desfazer último evento</button>
       </div>
     </section>
 
@@ -127,9 +1075,73 @@
       </div>
     </section>
 
+    <section id="journey" class="tab">
+      <div class="journey-hero">
+        <div class="journey-title">JORNADA DO NIMBO</div>
+        <div class="xp-num"><span id="xpValue">0</span> XP</div>
+        <div class="xpbar"><i id="xpBar"></i></div>
+        <div class="xpnote" id="xpNote"></div>
+
+        <div class="evo-line">
+          <div class="evo">Nimbo</div>
+          <div class="evo">Curioso</div>
+          <div class="evo">Desperto</div>
+          <div class="evo">Forte</div>
+          <div class="evo">Livre</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Poderes</h2>
+
+        <div class="power" id="powerMemory">
+          <div class="power-icon">M</div>
+          <div>
+            <div class="power-name">Memória</div>
+            <div class="power-desc">Feche 7 dias.</div>
+          </div>
+        </div>
+
+        <div class="power" id="powerPatience">
+          <div class="power-icon">P</div>
+          <div>
+            <div class="power-name">Paciência</div>
+            <div class="power-desc">Supere 5 vontades.</div>
+          </div>
+        </div>
+
+        <div class="power" id="powerBreath">
+          <div class="power-icon">F</div>
+          <div>
+            <div class="power-name">Fôlego</div>
+            <div class="power-desc">Reduza sua média em 10% vs. baseline.</div>
+          </div>
+        </div>
+
+        <div class="power" id="powerRecord">
+          <div class="power-icon">R</div>
+          <div>
+            <div class="power-name">Recorde</div>
+            <div class="power-desc">Alcance redução de 25% vs. baseline.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Como funciona</h2>
+        <div class="empty">
+          <b>Vínculo</b> vem da consistência dos registros e dos dias fechados.
+          <b>Vitalidade</b> responde à redução e às vontades superadas.
+          Registrar um cigarro é neutro e não dá XP.
+          Evoluções conquistadas nunca são perdidas.
+        </div>
+      </div>
+    </section>
+
     <section id="data" class="tab">
       <div class="panel">
         <h2>Seus dados</h2>
+
         <div class="actions">
           <button class="secondary" id="exportBtn">Exportar backup</button>
           <label class="secondary" style="cursor:pointer">
@@ -137,14 +1149,34 @@
             <input type="file" id="importFile" accept=".json,application/json" hidden>
           </label>
         </div>
+
         <div class="note">
-          Nesta primeira versão os registros ficam armazenados neste navegador. Quando conectarmos o Supabase,
-          migraremos o histórico para a nuvem. O backup permite guardar uma cópia independente enquanto isso.
+          Esta versão usa as mesmas chaves de armazenamento anteriores para preservar os registros existentes.
         </div>
       </div>
+
+      <div class="panel">
+        <h2>Resumo</h2>
+
+        <div class="history-row">
+          <div class="date-title">Cigarros registrados</div>
+          <div class="day-score"><strong id="totalSmokes">0</strong></div>
+        </div>
+
+        <div class="history-row">
+          <div class="date-title">Vontades superadas</div>
+          <div class="day-score"><strong id="totalResists">0</strong></div>
+        </div>
+
+        <div class="history-row">
+          <div class="date-title">Dias fechados</div>
+          <div class="day-score"><strong id="totalClosed">0</strong></div>
+        </div>
+      </div>
+
       <div class="panel">
         <h2>Manutenção</h2>
-        <button class="danger" id="clearBtn">Apagar todos os registros</button>
+        <button class="danger" id="clearBtn">Apagar todos os dados locais</button>
       </div>
     </section>
   </main>
@@ -155,134 +1187,543 @@
     <div class="navin">
       <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
       <button data-tab="history"><span class="ico">▥</span>Histórico</button>
+      <button data-tab="journey"><span class="ico">✦</span>Jornada</button>
       <button data-tab="data"><span class="ico">↥</span>Dados</button>
     </div>
   </nav>
 
-<script>
-(() => {
-  const KEY = 'vou_parar_de_fumar_records_v1';
-  const getRecords = () => {
-    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
-    catch { return []; }
-  };
-  const saveRecords = r => localStorage.setItem(KEY, JSON.stringify(r));
-  let records = getRecords();
+  <script>
+    (() => {
+      // mesmas chaves para preservar histórico anterior
+      const SMOKE_KEY = 'vou_parar_de_fumar_records_v1';
+      const RESIST_KEY = 'vou_parar_de_fumar_resists_v1';
+      const CLOSED_KEY = 'vou_parar_de_fumar_day_closures_v1';
+      const GAME_KEY = 'vou_parar_de_fumar_game_v1';
 
-  const $ = id => document.getElementById(id);
-  const pad = n => String(n).padStart(2,'0');
-  const localDateKey = date => {
-    const d = new Date(date);
-    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-  };
-  const todayKey = () => localDateKey(new Date());
-  const timeText = iso => new Date(iso).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  const dateText = key => {
-    const [y,m,d] = key.split('-').map(Number);
-    return new Date(y,m-1,d).toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
-  };
-  const toast = msg => {
-    $('toast').textContent = msg; $('toast').classList.add('show');
-    clearTimeout(window.__t); window.__t=setTimeout(()=>$('toast').classList.remove('show'),1600);
-  };
+      const parse = (v, fallback) => {
+        try {
+          const x = JSON.parse(v);
+          return x ?? fallback;
+        } catch {
+          return fallback;
+        }
+      };
 
-  function render(){
-    records.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
-    const today = todayKey();
-    const todayRecs = records.filter(r => localDateKey(r.timestamp)===today);
+      const read = (k, fallback) => parse(localStorage.getItem(k), fallback);
+      const write = (k, v) => localStorage.setItem(k, JSON.stringify(v));
 
-    $('todayLabel').textContent = new Date().toLocaleDateString('pt-BR',
-      {weekday:'long',day:'2-digit',month:'long'});
-    $('todayCount').textContent = todayRecs.length;
-    $('cigLabel').textContent = todayRecs.length === 1 ? 'cigarro hoje' : 'cigarros hoje';
-    $('totalCount').textContent = records.length;
+      let smokes = read(SMOKE_KEY, []);
+      let resists = read(RESIST_KEY, []);
+      let closedDays = read(CLOSED_KEY, []);
+      let game = read(GAME_KEY, {
+        baseline: null,
+        baselineLocked: false,
+        bestReduction: 0,
+        maxLevel: 1
+      });
 
-    if(todayRecs.length){
-      const last = todayRecs[todayRecs.length-1];
-      $('lastTime').textContent = `Último: ${timeText(last.timestamp)}`;
-      const mins = Math.max(0,Math.floor((Date.now()-new Date(last.timestamp))/60000));
-      $('sinceLast').textContent = mins < 60 ? `há ${mins} min` : `há ${Math.floor(mins/60)}h${pad(mins%60)}`;
-    } else {
-      $('lastTime').textContent='Nenhum registro hoje';
-      $('sinceLast').textContent='';
-    }
+      const $ = id => document.getElementById(id);
+      const pad = n => String(n).padStart(2, '0');
+      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
-    $('todayTimes').innerHTML = todayRecs.map(r=>`<span class="time-chip">${timeText(r.timestamp)}</span>`).join('');
-    $('noTimes').style.display = todayRecs.length ? 'none' : 'block';
+      const key = input => {
+        const d = new Date(input);
+        return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+      };
 
-    // average over last 7 calendar days including today
-    let counts=[];
-    for(let i=0;i<7;i++){
-      const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()-i);
-      const k=localDateKey(d);
-      counts.push(records.filter(r=>localDateKey(r.timestamp)===k).length);
-    }
-    const hasAny = counts.some(n=>n>0);
-    $('avg7').textContent = hasAny ? (counts.reduce((a,b)=>a+b,0)/7).toFixed(1).replace('.',',') : '—';
+      const today = () => key(new Date());
 
-    const grouped = {};
-    records.forEach(r => {
-      const k=localDateKey(r.timestamp);
-      (grouped[k] ||= []).push(r);
-    });
-    const keys=Object.keys(grouped).sort().reverse();
-    $('historyList').innerHTML = keys.length ? keys.map(k=>{
-      const arr=grouped[k];
-      const first=timeText(arr[0].timestamp), last=timeText(arr[arr.length-1].timestamp);
-      return `<div class="history-row"><div><div class="date-title">${dateText(k)}</div>
-        <div class="date-sub">${first}${arr.length>1?' → '+last:''}</div></div>
-        <div class="day-total">${arr.length}</div></div>`;
-    }).join('') : `<div class="empty">Seu histórico vai aparecer aqui conforme você registrar.</div>`;
-  }
+      const dayDate = k => {
+        const [y, m, d] = k.split('-').map(Number);
+        return new Date(y, m - 1, d, 12, 0, 0);
+      };
 
-  $('smokeBtn').addEventListener('click',()=>{
-    records.push({id:crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(), timestamp:new Date().toISOString()});
-    saveRecords(records); render(); toast('Registrado');
-  });
+      const time = iso =>
+        new Date(iso).toLocaleTimeString('pt-BR', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
 
-  $('undoBtn').addEventListener('click',()=>{
-    if(!records.length){ toast('Não há registro para desfazer'); return; }
-    const last = records[records.length-1];
-    if(confirm(`Apagar o registro das ${timeText(last.timestamp)}?`)){
-      records.pop(); saveRecords(records); render(); toast('Registro removido');
-    }
-  });
+      const dayText = k =>
+        dayDate(k).toLocaleDateString('pt-BR', {
+          weekday: 'short',
+          day: '2-digit',
+          month: 'short'
+        });
 
-  $('exportBtn').addEventListener('click',()=>{
-    const payload={app:'vou-parar-de-fumar',version:1,exportedAt:new Date().toISOString(),records};
-    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a'); a.href=url;
-    a.download=`vou-parar-de-fumar-backup-${todayKey()}.json`; a.click();
-    setTimeout(()=>URL.revokeObjectURL(url),1000); toast('Backup criado');
-  });
+      const uuid = () =>
+        window.crypto && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
-  $('importFile').addEventListener('change', async e=>{
-    const f=e.target.files[0]; if(!f) return;
-    try{
-      const data=JSON.parse(await f.text());
-      if(!Array.isArray(data.records)) throw new Error();
-      if(!confirm(`Importar ${data.records.length} registros e substituir os dados atuais?`)) return;
-      records=data.records; saveRecords(records); render(); toast('Backup importado');
-    }catch{ alert('Não consegui ler esse backup.'); }
-    e.target.value='';
-  });
+      function toast(msg){
+        $('toast').textContent = msg;
+        $('toast').classList.add('show');
+        clearTimeout(window.__toast);
+        window.__toast = setTimeout(() => $('toast').classList.remove('show'), 1600);
+      }
 
-  $('clearBtn').addEventListener('click',()=>{
-    if(confirm('Apagar TODOS os registros deste aparelho? Esta ação não pode ser desfeita sem um backup.')){
-      records=[]; saveRecords(records); render(); toast('Registros apagados');
-    }
-  });
+      const smokeCount = k => smokes.filter(x => key(x.timestamp) === k).length;
+      const resistCount = k => resists.filter(x => key(x.timestamp) === k).length;
+      const isClosed = k => closedDays.some(x => x.date === k);
 
-  document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));
-    document.querySelectorAll('section.tab').forEach(s=>s.classList.toggle('active',s.id===btn.dataset.tab));
-    window.scrollTo({top:0,behavior:'smooth'});
-  }));
+      function observed(){
+        const s = new Set();
+        smokes.forEach(x => s.add(key(x.timestamp)));
+        resists.forEach(x => s.add(key(x.timestamp)));
+        closedDays.forEach(x => s.add(x.date));
+        return [...s].sort();
+      }
 
-  render();
-  setInterval(render,60000);
-})();
-</script>
+      function last7(){
+        const arr = [];
+        for(let i = 6; i >= 0; i--){
+          const d = new Date();
+          d.setHours(12, 0, 0, 0);
+          d.setDate(d.getDate() - i);
+          arr.push(key(d));
+        }
+        return arr;
+      }
+
+      function maybeBaseline(){
+        if(game.baselineLocked && typeof game.baseline === 'number') return;
+
+        const days = observed().slice(0, 7);
+        if(!days.length) return;
+
+        game.baseline = days.reduce((sum, k) => sum + smokeCount(k), 0) / days.length;
+
+        if(days.length >= 7){
+          game.baselineLocked = true;
+        }
+
+        write(GAME_KEY, game);
+      }
+
+      function avg7(){
+        const ks = last7();
+        const known = ks.filter(k =>
+          smokeCount(k) > 0 ||
+          resistCount(k) > 0 ||
+          isClosed(k) ||
+          k === today()
+        );
+
+        if(!known.length) return null;
+
+        return known.reduce((sum, k) => sum + smokeCount(k), 0) / known.length;
+      }
+
+      function reduction(){
+        if(!game.baselineLocked || !(game.baseline > 0)) return null;
+        const a = avg7();
+        return a === null ? null : ((game.baseline - a) / game.baseline) * 100;
+      }
+
+      function bond(){
+        const ks = last7();
+        let covered = 0;
+
+        ks.forEach(k => {
+          if(isClosed(k) || smokeCount(k) > 0 || resistCount(k) > 0){
+            covered++;
+          }
+        });
+
+        let score = Math.round((covered / 7) * 84);
+        const t = today();
+
+        if(isClosed(t)) score += 16;
+        else if(smokeCount(t) > 0 || resistCount(t) > 0) score += 8;
+
+        return clamp(score, 0, 100);
+      }
+
+      function vitality(){
+        const r = reduction();
+        const recentResists = last7().reduce((sum, k) => sum + resistCount(k), 0);
+
+        let score = r === null ? 55 : 52 + r * 0.85;
+        score += Math.min(recentResists * 2.3, 14);
+
+        return Math.round(clamp(score, 15, 100));
+      }
+
+      function progress(){
+        const r = reduction();
+
+        if(r !== null && r > game.bestReduction){
+          game.bestReduction = r;
+        }
+
+        const xp =
+          closedDays.length * 12 +
+          resists.length * 6 +
+          Math.round(Math.max(0, game.bestReduction || 0) * 3);
+
+        const thresholds = [0, 100, 250, 500, 850];
+        let lvl = 1;
+
+        thresholds.forEach((t, i) => {
+          if(xp >= t) lvl = i + 1;
+        });
+
+        game.maxLevel = Math.max(game.maxLevel || 1, lvl);
+        write(GAME_KEY, game);
+
+        return { xp, lvl: game.maxLevel, thresholds };
+      }
+
+      function mood(v, b){
+        if(b < 25) return 'sleepy';
+        if(v < 35) return 'tired';
+        if(v < 58) return 'neutral';
+        if(v < 80) return 'happy';
+        return 'radiant';
+      }
+
+      function message(m, b){
+        if(!observed().length){
+          return 'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
+        }
+
+        if(!game.baselineLocked){
+          return `Observando seus primeiros dias: ${Math.min(observed().length, 7)}/7 para formar a baseline.`;
+        }
+
+        if(b < 25){
+          return 'Fiquei sonolento sem notícias. Um registro honesto já me ajuda a acordar.';
+        }
+
+        return {
+          tired: 'A semana apertou um pouco. Eu continuo aqui — o histórico ainda vale.',
+          neutral: 'Estou acompanhando. Manter o mapa dos seus dias vivo já importa.',
+          happy: 'Seu ritmo está mudando. Estou ficando mais leve.',
+          radiant: 'Olha meu fôlego! Seu progresso está aparecendo em mim.'
+        }[m];
+      }
+
+      function animatePet(good){
+        const pet = $('petZone');
+        pet.classList.remove('pop', 'shake');
+        void pet.offsetWidth;
+        pet.classList.add(good ? 'pop' : 'shake');
+        setTimeout(() => pet.classList.remove('pop', 'shake'), 500);
+      }
+
+      function render(){
+        smokes.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        resists.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+        maybeBaseline();
+
+        const t = today();
+        const st = smokes.filter(x => key(x.timestamp) === t);
+        const rt = resists.filter(x => key(x.timestamp) === t);
+
+        const v = vitality();
+        const b = bond();
+        const p = progress();
+        const m = mood(v, b);
+
+        $('todayLabel').textContent = new Date().toLocaleDateString('pt-BR', {
+          weekday: 'long',
+          day: '2-digit',
+          month: 'long'
+        });
+
+        $('todayCount').textContent = st.length;
+        $('cigLabel').textContent = st.length === 1 ? 'cigarro' : 'cigarros';
+        $('resistToday').textContent = rt.length;
+
+        $('lastTime').textContent = st.length
+          ? `Último: ${time(st[st.length - 1].timestamp)}`
+          : 'Nenhum cigarro registrado hoje';
+
+        $('todayTimes').innerHTML = [
+          ...st.map(x => `<span class="chip">${time(x.timestamp)} cig.</span>`),
+          ...rt.map(x => `<span class="chip good">${time(x.timestamp)} ✦</span>`)
+        ].join('');
+
+        $('closeDayBtn').textContent = isClosed(t) ? 'Dia fechado ✓' : 'Fechar o dia';
+        $('closeDayBtn').classList.toggle('closed', isClosed(t));
+
+        $('baselineValue').textContent =
+          game.baseline === null ? '—' : `${game.baseline.toFixed(1).replace('.', ',')}/dia`;
+
+        $('baselineStatus').textContent =
+          game.baselineLocked ? 'baseline fixa' : 'baseline provisória';
+
+        const a = avg7();
+        const r = reduction();
+
+        $('avg7').textContent = a === null ? '—' : a.toFixed(1).replace('.', ',');
+        $('trendText').textContent = r === null
+          ? `${Math.min(observed().length, 7)}/7 dias observados`
+          : `${r >= 0 ? '↓' : '↑'} ${Math.abs(r).toFixed(0)}% vs baseline`;
+
+        $('vitalityText').textContent = v;
+        $('bondText').textContent = b;
+        $('vitalityBar').style.width = v + '%';
+        $('bondBar').style.width = b + '%';
+
+        $('petState').textContent = {
+          sleepy:'sonolento',
+          tired:'cansado',
+          neutral:'atento',
+          happy:'animado',
+          radiant:'radiante'
+        }[m];
+
+        $('levelBadge').textContent = `FORMA ${p.lvl}`;
+        $('petMessage').textContent = message(m, b);
+
+        const pet = $('petZone');
+        pet.dataset.level = p.lvl;
+        pet.classList.remove('sleepy','tired','neutral','happy','radiant');
+        pet.classList.add(m);
+
+        $('xpValue').textContent = p.xp;
+
+        document.querySelectorAll('.evo').forEach((el, i) => {
+          const n = i + 1;
+          el.classList.toggle('done', n < p.lvl);
+          el.classList.toggle('current', n === p.lvl);
+        });
+
+        if(p.lvl >= 5){
+          $('xpBar').style.width = '100%';
+          $('xpNote').textContent = 'Nimbo alcançou sua forma máxima atual.';
+        } else {
+          const lo = p.thresholds[p.lvl - 1];
+          const hi = p.thresholds[p.lvl];
+          $('xpBar').style.width = clamp(((p.xp - lo) / (hi - lo)) * 100, 0, 100) + '%';
+          $('xpNote').textContent = `${hi - p.xp} XP para a próxima evolução.`;
+        }
+
+        $('powerMemory').classList.toggle('locked', closedDays.length < 7);
+        $('powerPatience').classList.toggle('locked', resists.length < 5);
+        $('powerBreath').classList.toggle('locked', !(game.bestReduction >= 10));
+        $('powerRecord').classList.toggle('locked', !(game.bestReduction >= 25));
+
+        const ks = observed().sort().reverse();
+        $('historyList').innerHTML = ks.length
+          ? ks.map(k => {
+              const s = smokeCount(k);
+              const rr = resistCount(k);
+              const times = smokes
+                .filter(x => key(x.timestamp) === k)
+                .map(x => time(x.timestamp));
+
+              return `
+                <div class="history-row">
+                  <div>
+                    <div class="date-title">${dayText(k)} ${isClosed(k) ? '✓' : ''}</div>
+                    <div class="date-sub">
+                      ${times.length ? times.join(' · ') : 'sem cigarros registrados'}
+                      ${rr ? `<br>✦ ${rr} vontade${rr > 1 ? 's' : ''} superada${rr > 1 ? 's' : ''}` : ''}
+                    </div>
+                  </div>
+                  <div class="day-score">
+                    <strong>${s}</strong>
+                    <span>cigarros</span>
+                  </div>
+                </div>
+              `;
+            }).join('')
+          : '<div class="empty">Seu histórico vai aparecer aqui conforme você registrar.</div>';
+
+        $('totalSmokes').textContent = smokes.length;
+        $('totalResists').textContent = resists.length;
+        $('totalClosed').textContent = closedDays.length;
+      }
+
+      function reopenTodayIfNeeded(){
+        const t = today();
+        if(isClosed(t)){
+          closedDays = closedDays.filter(x => x.date !== t);
+          write(CLOSED_KEY, closedDays);
+        }
+      }
+
+      $('smokeBtn').onclick = () => {
+        reopenTodayIfNeeded();
+        smokes.push({
+          id: uuid(),
+          timestamp: new Date().toISOString()
+        });
+        write(SMOKE_KEY, smokes);
+        animatePet(false);
+        render();
+        toast('Cigarro registrado');
+      };
+
+      $('resistBtn').onclick = () => {
+        reopenTodayIfNeeded();
+        resists.push({
+          id: uuid(),
+          timestamp: new Date().toISOString()
+        });
+        write(RESIST_KEY, resists);
+        animatePet(true);
+        render();
+        toast('✦ Nimbo ganhou energia');
+      };
+
+      $('closeDayBtn').onclick = () => {
+        const t = today();
+
+        if(isClosed(t)){
+          if(confirm('Reabrir o dia de hoje?')){
+            closedDays = closedDays.filter(x => x.date !== t);
+            write(CLOSED_KEY, closedDays);
+            render();
+          }
+          return;
+        }
+
+        const s = smokeCount(t);
+        const r = resistCount(t);
+
+        if(confirm(`Fechar o dia com ${s} cigarro${s === 1 ? '' : 's'} e ${r} vontade${r === 1 ? '' : 's'} superada${r === 1 ? '' : 's'}?`)){
+          closedDays.push({
+            date: t,
+            closedAt: new Date().toISOString()
+          });
+          write(CLOSED_KEY, closedDays);
+          render();
+          animatePet(true);
+          toast('Dia fechado • + vínculo');
+        }
+      };
+
+      $('undoBtn').onclick = () => {
+        const events = [
+          ...smokes.map(x => ({...x, type:'smoke'})),
+          ...resists.map(x => ({...x, type:'resist'}))
+        ].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+        if(!events.length){
+          toast('Não há evento para desfazer');
+          return;
+        }
+
+        const last = events[events.length - 1];
+
+        if(confirm(`Apagar o último evento das ${time(last.timestamp)}?`)){
+          if(last.type === 'smoke'){
+            smokes = smokes.filter(x => x.id !== last.id);
+            write(SMOKE_KEY, smokes);
+          } else {
+            resists = resists.filter(x => x.id !== last.id);
+            write(RESIST_KEY, resists);
+          }
+          render();
+          toast('Último evento removido');
+        }
+      };
+
+      $('exportBtn').onclick = () => {
+        const data = {
+          app: 'vou-parar-de-fumar',
+          version: 3,
+          exportedAt: new Date().toISOString(),
+          records: smokes,
+          resists,
+          closedDays,
+          game
+        };
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], {
+          type:'application/json'
+        });
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `vou-parar-de-fumar-backup-${today()}.json`;
+        a.click();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        toast('Backup criado');
+      };
+
+      $('importFile').onchange = async e => {
+        const file = e.target.files[0];
+        if(!file) return;
+
+        try{
+          const data = JSON.parse(await file.text());
+          if(!Array.isArray(data.records)) throw new Error();
+
+          if(!confirm('Importar este backup e substituir os dados locais atuais?')){
+            e.target.value = '';
+            return;
+          }
+
+          smokes = data.records || [];
+          resists = Array.isArray(data.resists) ? data.resists : [];
+          closedDays = Array.isArray(data.closedDays) ? data.closedDays : [];
+          game = data.game || {
+            baseline: null,
+            baselineLocked: false,
+            bestReduction: 0,
+            maxLevel: 1
+          };
+
+          write(SMOKE_KEY, smokes);
+          write(RESIST_KEY, resists);
+          write(CLOSED_KEY, closedDays);
+          write(GAME_KEY, game);
+
+          render();
+          toast('Backup importado');
+        } catch {
+          alert('Não consegui ler esse backup.');
+        }
+
+        e.target.value = '';
+      };
+
+      $('clearBtn').onclick = () => {
+        if(confirm('Apagar TODOS os dados locais? Faça um backup antes se quiser guardar uma cópia.')){
+          smokes = [];
+          resists = [];
+          closedDays = [];
+          game = {
+            baseline: null,
+            baselineLocked: false,
+            bestReduction: 0,
+            maxLevel: 1
+          };
+
+          write(SMOKE_KEY, smokes);
+          write(RESIST_KEY, resists);
+          write(CLOSED_KEY, closedDays);
+          write(GAME_KEY, game);
+
+          render();
+        }
+      };
+
+      document.querySelectorAll('.nav button').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('.nav button').forEach(b => {
+            b.classList.toggle('active', b === btn);
+          });
+
+          document.querySelectorAll('.tab').forEach(section => {
+            section.classList.toggle('active', section.id === btn.dataset.tab);
+          });
+
+          window.scrollTo({ top:0, behavior:'smooth' });
+        };
+      });
+
+      render();
+      setInterval(render, 60000);
+    })();
+  </script>
 </body>
 </html>
