@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.6">
+<meta name="app-version" content="7.5.7">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1428,8 +1428,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .fountain-bowl{position:absolute;left:24px;top:-20px;width:38px;height:16px;border-radius:40% 40% 50% 50%;border-top:4px solid #e0d9b9;background:linear-gradient(#8eb9b3,#9cae96);z-index:4}
 .v75-plaza{background:repeating-conic-gradient(from 15deg,#bcb69a 0deg 29deg,#9e9f8444 30deg 31deg),#c7c0a0;border:5px solid #b0ac8b;box-shadow:0 5px 0 #8b967c;border-radius:45%}
 /* Navigation */
-.vale-district-nav{display:flex;gap:6px;margin:0 0 8px}.vale-district-nav button{flex:1;min-height:44px;border:1px solid #344d58;border-radius:11px;background:#112635;color:#aabfc5;font:600 12px var(--font)}
-.vale-district-nav button.active{background:#28463e;border-color:#9ac7a0;color:#f0edcf}.vale-district-nav button:focus-visible,.v75-place:focus-visible{outline:3px solid #edd79a;outline-offset:3px}
+.v75-place:focus-visible{outline:3px solid #edd79a;outline-offset:3px}
 .vale-v75-controls{top:auto;bottom:10px;right:10px;transform:none;display:flex;gap:5px}.vale-v75-controls button{width:44px;height:44px;min-width:44px;min-height:44px;font-size:23px;border-radius:12px}
 .vale-v75-zoom{right:auto;left:10px;bottom:10px}
 .vale-v75-card,.vale-v75-card.show{grid-template-columns:1fr;gap:8px;border-color:#627f65;border-left:3px solid #bbce96;padding:13px 14px}
@@ -1439,10 +1438,22 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .v75-place.selected .v75-hit::before{content:'';position:absolute;bottom:20px;left:50%;width:142px;height:55px;transform:translateX(-50%);border:3px solid #e0d99f;border-radius:50%;background:#d8e8af15;box-shadow:0 0 15px #d5dfa637;pointer-events:none}
 .v75-place.selected .v75-building{filter:drop-shadow(0 0 3px #e4dfaa88) drop-shadow(4px 8px 3px #1b382c55)}
 .v75-place:not(.selected) .v75-name small,.v75-place:not(.selected) .v75-state{display:none}.v75-place .v75-name{font-size:13px;white-space:nowrap}.v75-place.selected{z-index:8}
-/* Reserve room for the shortcuts and district card on compact phones. */
+/* Reserve room for the district card on compact phones. */
 .vale-v75-viewport{height:clamp(260px,calc(100svh - 390px),470px)}
 @media(max-width:380px){.vale-v75-viewport{height:clamp(230px,calc(100svh - 405px),420px)}}
 
+/* V7.5.7 — mapa ocupa o espaço restante, com cartão acima da navegação. */
+#vale .vale-v75-head{margin-bottom:7px;min-height:30px}
+#vale .vale-v75-presence{padding:7px 11px}
+#vale .vale-v75-shell{padding:7px;margin-bottom:0}
+#vale .vale-v75-viewport{height:var(--vale-map-height,clamp(220px,calc(100svh - 330px),620px))}
+#vale .vale-v75-card{margin-top:7px;padding:11px 13px;gap:5px}
+#vale .vale-v75-card-title{font-size:14px;line-height:1.2}
+#vale .vale-v75-card-sub{line-height:1.4}
+#vale .vale-v75-card-meta{margin-top:6px;font-size:12px;line-height:1.35}
+#vale .vale-progress{margin-top:6px}
+#vale .vale-place-description{margin-top:6px;font-size:11px;line-height:1.35}
+#vale .vale-availability{font-size:10px;line-height:1.3}
 </style>
 </head>
 <body>
@@ -1619,11 +1630,6 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   </div>
 
   <div class="vale-v75-shell">
-    <div class="vale-district-nav" aria-label="Localizar distrito">
-      <button type="button" data-vale-shortcut="winds">Torre</button>
-      <button type="button" data-vale-shortcut="portico">Pórtico</button>
-      <button type="button" data-vale-shortcut="traversal">Oficina</button>
-    </div>
     <div class="vale-v75-viewport" id="valeViewport" aria-label="Mapa explorável do Vale do Nimbo">
       <div class="vale-v75-world" id="valeWorld">
         <svg class="vale-v75-roads" viewBox="0 0 1600 1400" aria-hidden="true">
@@ -1822,7 +1828,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.6').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.7').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -3773,12 +3779,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax',String(target||100));bar.setAttribute('aria-valuenow',String(target?Math.min(count,target):100));
     $('valeProgressFill').style.width=`${pct}%`;
     $('valePlaceDescription').textContent={winds:'Aqui, cada vontade atravessada dá altura à Torre dos Ventos.',portico:'O Pórtico guarda a memória dos dias que você confirmou.',traversal:'Sua presença revela uma oficina para construir novos caminhos.'}[d.id];
-    document.querySelectorAll('[data-vale-shortcut]').forEach(btn=>{
-      const selected=btn.dataset.valeShortcut===d.id;
-      btn.classList.toggle('active',selected);btn.setAttribute('aria-pressed',String(selected));
-    });
     const action=$('valeCardAction');
     action.textContent=d.unlocked?'Atividade em breve':'Lugar ainda bloqueado';
+    scheduleValeLayout();
   }
 
   function selectValePlaceV75(id){
@@ -3786,11 +3789,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     activeValePlace=id;renderValePlacesV75();renderValeCardV75();
   }
 
-  document.querySelectorAll('[data-vale-shortcut]').forEach(btn=>btn.onclick=()=>{
-    selectValePlaceV75(btn.dataset.valeShortcut);
-    focusValePlaceV752(btn.dataset.valeShortcut);
-    applyValeCameraV75({save:true});
-  });
 
   function cameraBoundsV75(x,y,zoom){
     const vp=$('valeViewport');if(!vp)return{x,y};
@@ -3913,9 +3911,47 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     },2100);
   }
 
+  let valeLayoutFrame=0;
+  function fitValeLayout(){
+    if(!$('vale').classList.contains('active'))return;
+    const viewport=$('valeViewport'),card=$('valePlaceCard'),nav=document.querySelector('.nav');
+    if(!viewport||!card||!nav)return;
+    // Use document position: scrolling must not make the map grow on every update.
+    const top=viewport.getBoundingClientRect().top+window.scrollY;
+    const visibleBottom=window.visualViewport?window.visualViewport.height+window.visualViewport.offsetTop:window.innerHeight;
+    const bottom=Math.min(nav.getBoundingClientRect().top,visibleBottom);
+    const cardStyle=getComputedStyle(card);
+    const cardHeight=card.getBoundingClientRect().height;
+    const cardMargin=parseFloat(cardStyle.marginTop)||0;
+    const shellStyle=getComputedStyle(viewport.parentElement);
+    const shellBottom=(parseFloat(shellStyle.paddingBottom)||0)+(parseFloat(shellStyle.borderBottomWidth)||0);
+    const available=Math.floor(bottom-top-cardHeight-cardMargin-shellBottom-12);
+    // On very short screens keep a usable map and allow normal page scrolling.
+    const height=Math.max(180,available);
+    const oldHeight=viewport.clientHeight;
+    if(Math.abs(oldHeight-height)>1){
+      viewport.style.setProperty('--vale-map-height',`${height}px`);
+      if(valeCameraReady){
+        valeCamera.y+=(viewport.clientHeight-oldHeight)/2;
+        applyValeCameraV75();
+      }
+    }
+  }
+
+  function scheduleValeLayout(){
+    cancelAnimationFrame(valeLayoutFrame);
+    valeLayoutFrame=requestAnimationFrame(fitValeLayout);
+  }
+  window.addEventListener('resize',scheduleValeLayout);
+  if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleValeLayout);
+  if(window.ResizeObserver){
+    const layoutObserver=new ResizeObserver(scheduleValeLayout);
+    [$('valePlaceCard'),document.querySelector('header'),document.querySelector('.nav')].filter(Boolean).forEach(el=>layoutObserver.observe(el));
+  }
+
   function renderValeMap(){
     ensureValeProgressionV752();renderValeSceneryV75();renderValePlacesV75();renderValeCardV75();bindValeMapV75();
-    requestAnimationFrame(()=>initValeCameraV75());
+    requestAnimationFrame(()=>{fitValeLayout();initValeCameraV75()});
   }
 
   function renderVale(){
