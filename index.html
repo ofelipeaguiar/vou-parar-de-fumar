@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.2">
+<meta name="app-version" content="7.5.3">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1690,7 +1690,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   <div class="panel">
     <h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
-    <div class="note">Versão instalada: v7.4.1</div>
+    <div class="note" id="installedVersion">Versão instalada: —</div>
   </div>
 
   <div class="panel">
@@ -1748,7 +1748,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.5.2';
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.3').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1782,6 +1782,8 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   let syncing=false;
 
   const $=id=>document.getElementById(id);
+  const installedVersionEl=$('installedVersion');
+  if(installedVersionEl)installedVersionEl.textContent=`Versão instalada: v${APP_VERSION}`;
   const pad=n=>String(n).padStart(2,'0');
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
   const key=x=>{const d=new Date(x);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`};
@@ -3538,7 +3540,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
      Presença cumulativa + distritos em estágios + descoberta.
      ========================================================= */
   const VALE_WORLD_W=1600,VALE_WORLD_H=1400;
-  const VALE_ZOOM_MIN=.65,VALE_ZOOM_MAX=1.35,VALE_ZOOM_STEP=.15;
+  const VALE_ZOOM_MIN=.35,VALE_ZOOM_MAX=1.35,VALE_ZOOM_STEP=.10;
   let valeCamera={x:0,y:0,zoom:1};
   let valeCameraReady=false;
   let activeValePlace='winds';
@@ -3744,8 +3746,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function cameraBoundsV75(x,y,zoom){
     const vp=$('valeViewport');if(!vp)return{x,y};
     const w=vp.clientWidth,h=vp.clientHeight;
-    const minX=Math.min(0,w-VALE_WORLD_W*zoom),minY=Math.min(0,h-VALE_WORLD_H*zoom);
-    return{x:clamp(x,minX,0),y:clamp(y,minY,0)};
+    const scaledW=VALE_WORLD_W*zoom,scaledH=VALE_WORLD_H*zoom;
+
+    // Em zooms bem abertos o mundo pode ficar menor que o viewport em um dos eixos.
+    // Nesse caso centralizamos o mapa em vez de prendê-lo no canto superior/esquerdo.
+    const boundedX=scaledW<=w?(w-scaledW)/2:clamp(x,w-scaledW,0);
+    const boundedY=scaledH<=h?(h-scaledH)/2:clamp(y,h-scaledH,0);
+    return{x:boundedX,y:boundedY};
   }
 
   function applyValeCameraV75({save=false}={}){
