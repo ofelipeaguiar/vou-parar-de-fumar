@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.6.0">
+<meta name="app-version" content="7.6.1">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1781,7 +1781,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.6.0').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.6.1').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1819,9 +1819,66 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   if(installedVersionEl)installedVersionEl.textContent=`Versão instalada: v${APP_VERSION}`;
   const pad=n=>String(n).padStart(2,'0');
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-  const key=x=>{const d=new Date(x);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`};
-  const today=()=>key(new Date());
+
+  // V7.6.1 — o dia natural do app vai de 05:00 até 04:59 do dia seguinte.
+  // O fechamento manual pode antecipar o início do próximo dia de contagem.
+  const APP_DAY_CUTOFF_HOUR=5;
+  const APP_DAY_RE=/^\d{4}-\d{2}-\d{2}$/;
+
+  function key(x){
+    const d=new Date(x);
+    d.setHours(d.getHours()-APP_DAY_CUTOFF_HOUR);
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  }
+
   const dayDate=k=>{const[y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d,12,0,0)};
+
+  function appDayStart(k){
+    const[y,m,d]=k.split('-').map(Number);
+    return new Date(y,m-1,d,APP_DAY_CUTOFF_HOUR,0,0,0);
+  }
+
+  function addAppDays(k,amount=1){
+    const d=dayDate(k);
+    d.setDate(d.getDate()+amount);
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  }
+
+  function validAppDay(value){
+    return typeof value==='string'&&APP_DAY_RE.test(value);
+  }
+
+  function eventDay(event){
+    return validAppDay(event?.day)?event.day:key(event?.timestamp||new Date());
+  }
+
+  // O dia ativo é inferido de dados que já sincronizam: relógio, eventos e fechamentos.
+  // Assim não existe um cursor separado que possa divergir entre aparelhos.
+  function today(){
+    let active=key(new Date());
+
+    [...smokes,...resists].forEach(event=>{
+      const d=eventDay(event);
+      if(d>active)active=d;
+    });
+
+    closedDays.forEach(closure=>{
+      if(!validAppDay(closure?.date))return;
+      const next=addAppDays(closure.date,1);
+      if(next>active)active=next;
+    });
+
+    return active;
+  }
+
+  // Para métricas de horário, 00:00–04:59 continuam sendo o fim do dia anterior.
+  function minuteInAppDay(value){
+    const d=new Date(value);
+    let minutes=d.getHours()*60+d.getMinutes();
+    if(d.getHours()<APP_DAY_CUTOFF_HOUR)minutes+=24*60;
+    return minutes;
+  }
+
   const time=iso=>new Date(iso).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   const dayText=k=>dayDate(k).toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
   const uuid=()=>window.crypto&&crypto.randomUUID?crypto.randomUUID():`${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -2402,6 +2459,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let changed=false;
     [...smokes,...resists].forEach(x=>{
       if(!x.id){x.id=uuid();changed=true}
+      // Migração V7.6.1: registros antigos passam a ter um dia lógico explícito.
+      // Se não houver override anterior, a classificação usa o corte natural das 05:00.
+      if(!validAppDay(x.day)){x.day=key(x.timestamp);changed=true}
     });
     if(changed){
       write(SMOKE_KEY,smokes);
@@ -2461,25 +2521,25 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
   }
 
-  const smokeCount=k=>smokes.filter(x=>key(x.timestamp)===k).length;
-  const resistCount=k=>resists.filter(x=>key(x.timestamp)===k).length;
+  const smokeCount=k=>smokes.filter(x=>eventDay(x)===k).length;
+  const resistCount=k=>resists.filter(x=>eventDay(x)===k).length;
   const isClosed=k=>closedDays.some(x=>x.date===k);
 
   function observed(){
     const s=new Set();
-    smokes.forEach(x=>s.add(key(x.timestamp)));
-    resists.forEach(x=>s.add(key(x.timestamp)));
+    smokes.forEach(x=>s.add(eventDay(x)));
+    resists.forEach(x=>s.add(eventDay(x)));
     closedDays.forEach(x=>s.add(x.date));
     return[...s].sort();
   }
 
   function last7(){
     const a=[];
+    const anchor=dayDate(today());
     for(let i=6;i>=0;i--){
-      const d=new Date();
-      d.setHours(12,0,0,0);
+      const d=new Date(anchor);
       d.setDate(d.getDate()-i);
-      a.push(key(d));
+      a.push(`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`);
     }
     return a;
   }
@@ -2497,8 +2557,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function avg7(){
-    const first=new Date();first.setHours(12,0,0,0);first.setDate(first.getDate()-7);
-    const known=completedDays().filter(d=>d>=key(first));
+    const first=dayDate(today());
+    first.setDate(first.getDate()-7);
+    const firstKey=`${first.getFullYear()}-${pad(first.getMonth()+1)}-${pad(first.getDate())}`;
+    const known=completedDays().filter(d=>d>=firstKey);
     return known.length?known.reduce((sum,d)=>sum+smokeCount(d),0)/known.length:null;
   }
 
@@ -2527,7 +2589,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function daySmokeTimes(day){
     return smokes
-      .filter(x=>key(x.timestamp)===day)
+      .filter(x=>eventDay(x)===day)
       .map(x=>new Date(x.timestamp))
       .sort((a,b)=>a-b);
   }
@@ -2546,8 +2608,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function firstCigAverageForDays(days){
     const mins=[];
     days.forEach(day=>{
-      const times=daySmokeTimes(day);
-      if(times.length)mins.push(times[0].getHours()*60+times[0].getMinutes());
+      // Um dia pode ter começado manualmente antes das 05:00 do seu calendário.
+      // Esses registros contam normalmente, mas não entram na métrica de "primeiro cigarro"
+      // para evitar uma melhora/piora artificial causada apenas pelo fechamento antecipado.
+      const nominalStart=appDayStart(day).getTime();
+      const times=daySmokeTimes(day).filter(d=>d.getTime()>=nominalStart);
+      if(times.length)mins.push(minuteInAppDay(times[0]));
     });
     return mins.length?mins.reduce((a,b)=>a+b,0)/mins.length:null;
   }
@@ -3960,12 +4026,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     maybeBaseline();
 
     const t=today();
-    const st=smokes.filter(x=>key(x.timestamp)===t);
-    const rt=resists.filter(x=>key(x.timestamp)===t);
+    const st=smokes.filter(x=>eventDay(x)===t);
+    const rt=resists.filter(x=>eventDay(x)===t);
     const v=vitality(),b=bond(),f=breath(),rr=resilience(),p=progress(),m=mood(v,b);
     const nimbo=determineNimboExpression(v,b,f,rr);
 
-    $('todayLabel').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
+    $('todayLabel').textContent=dayDate(t).toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
     $('todayCount').textContent=st.length;
     $('cigLabel').textContent=st.length===1?'cigarro':'cigarros';
     $('resistToday').textContent=rt.length;
@@ -4050,8 +4116,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const ks=observed().sort().reverse();
     $('historyList').innerHTML=ks.length?ks.map(k=>{
       const s=smokeCount(k),rr=resistCount(k);
-      const times=smokes.filter(x=>key(x.timestamp)===k).map(x=>time(x.timestamp));
-      return `<div class="history-row"><div><div class="date-title">${dayText(k)} ${isClosed(k)?'✓ Fechado':k<today()?'• Em aberto':'• Hoje'}</div><div class="date-sub">${times.length?times.join(' · '):'sem cigarros registrados'}${rr?`<br>✦ ${rr} vontade${rr>1?'s':''} superada${rr>1?'s':''} · ${resists.filter(x=>key(x.timestamp)===k).map(x=>time(x.timestamp)).join(' · ')}`:''}</div></div><div class="day-score"><strong>${s}</strong><span>cigarros</span><button type="button" class="secondary history-close" ${isClosed(k)?`data-reopen-day="${k}"`:`data-close-day="${k}"`}>${isClosed(k)?'Reabrir':'Fechar dia'}</button></div></div>`;
+      const times=smokes.filter(x=>eventDay(x)===k).map(x=>time(x.timestamp));
+      return `<div class="history-row"><div><div class="date-title">${dayText(k)} ${isClosed(k)?'✓ Fechado':k<today()?'• Em aberto':'• Hoje'}</div><div class="date-sub">${times.length?times.join(' · '):'sem cigarros registrados'}${rr?`<br>✦ ${rr} vontade${rr>1?'s':''} superada${rr>1?'s':''} · ${resists.filter(x=>eventDay(x)===k).map(x=>time(x.timestamp)).join(' · ')}`:''}</div></div><div class="day-score"><strong>${s}</strong><span>cigarros</span><button type="button" class="secondary history-close" ${isClosed(k)?`data-reopen-day="${k}"`:`data-close-day="${k}"`}>${isClosed(k)?'Reabrir':'Fechar dia'}</button></div></div>`;
     }).join(''):'<div class="empty">Seu histórico vai aparecer aqui conforme você registrar.</div>';
 
     $('totalSmokes').textContent=smokes.length;
@@ -4099,9 +4165,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function stateSignature(value){
     return JSON.stringify(value,(key,val)=>key==='updatedAt'||key==='updated_at'?undefined:val);
   }
+  function eventSyncSignature(event){
+    return `${event.timestamp}|${eventDay(event)}`;
+  }
   function hasPendingSync(){
     return pendingDeletes.length>0||
-      [...smokes,...resists].some(x=>syncAck.events[x.id]!==x.timestamp)||
+      [...smokes,...resists].some(x=>syncAck.events[x.id]!==eventSyncSignature(x))||
       closedDays.some(x=>syncAck.closures[x.date]!==x.closedAt)||
       syncAck.game!==stateSignature(game)||syncAck.vale!==stateSignature(vale);
   }
@@ -4115,22 +4184,23 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         local_id:x.id,
         event_type:'cigarette',
         occurred_at:x.timestamp,
-        metadata:{}
+        metadata:{app_day:eventDay(x)}
       })),
       ...resists.map(x=>({
         user_id:currentUser.id,
         local_id:x.id,
         event_type:'resisted_cigarette',
         occurred_at:x.timestamp,
-        metadata:{}
+        metadata:{app_day:eventDay(x)}
       }))
     ];
 
-    const changedEvents=eventRows.filter(row=>syncAck.events[row.local_id]!==row.occurred_at);
+    const rowSignature=row=>`${row.occurred_at}|${row.metadata?.app_day||''}`;
+    const changedEvents=eventRows.filter(row=>syncAck.events[row.local_id]!==rowSignature(row));
     if(changedEvents.length){
       const {error}=await sb.from('events').upsert(changedEvents,{onConflict:'user_id,local_id'});
       if(error)throw error;
-      changedEvents.forEach(row=>syncAck.events[row.local_id]=row.occurred_at);saveSyncAck();
+      changedEvents.forEach(row=>syncAck.events[row.local_id]=rowSignature(row));saveSyncAck();
     }
 
     if(closedDays.length){
@@ -4213,7 +4283,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   async function pullCloud({forceVale=false,snapshot=syncSnapshot()}={}){
     const [evRes,clRes,gameRes,valeRes]=await Promise.all([
-      fetchAllRows('events','local_id,event_type,occurred_at','occurred_at'),
+      fetchAllRows('events','local_id,event_type,occurred_at,metadata','occurred_at'),
       fetchAllRows('day_closures','day,closed_at','day'),
       sb.from('game_state').select('baseline,baseline_locked,best_reduction,max_level').maybeSingle(),
       sb.from('vale_state').select('state,updated_at').maybeSingle()
@@ -4226,14 +4296,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     const cloudSmokes=(evRes.data||[])
       .filter(x=>x.event_type==='cigarette')
-      .map(x=>({id:x.local_id||uuid(),timestamp:x.occurred_at}));
+      .map(x=>({
+        id:x.local_id||uuid(),
+        timestamp:x.occurred_at,
+        day:validAppDay(x.metadata?.app_day)?x.metadata.app_day:key(x.occurred_at)
+      }));
 
     const cloudResists=(evRes.data||[])
       .filter(x=>x.event_type==='resisted_cigarette')
-      .map(x=>({id:x.local_id||uuid(),timestamp:x.occurred_at}));
+      .map(x=>({
+        id:x.local_id||uuid(),
+        timestamp:x.occurred_at,
+        day:validAppDay(x.metadata?.app_day)?x.metadata.app_day:key(x.occurred_at)
+      }));
 
     const cloudClosed=(clRes.data||[]).map(x=>({date:x.day,closedAt:x.closed_at}));
-    syncAck.events=Object.fromEntries([...cloudSmokes,...cloudResists].map(x=>[x.id,x.timestamp]));
+    syncAck.events=Object.fromEntries([...cloudSmokes,...cloudResists].map(x=>[x.id,eventSyncSignature(x)]));
     syncAck.closures=Object.fromEntries(cloudClosed.map(x=>[x.date,x.closedAt]));
     const deletions=[...snapshot.deletes,...pendingDeletes];
     smokes=reconcileRows(cloudSmokes,smokes,snapshot.smokes,'id','event',deletions);
@@ -4324,20 +4402,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     window.__syncTimer=setTimeout(()=>{window.__syncDue=0;window.__syncUrgent=false;syncAll()},Math.max(0,next-Date.now()));
   }
 
-  function reopenTodayIfNeeded(){
-    const t=today();
-    if(isClosed(t)){
-      closedDays=closedDays.filter(x=>x.date!==t);
-      write(CLOSED_KEY,closedDays);
-      addPendingDelete('closure',t);
-    }
-  }
-
   $('smokeBtn').onclick=()=>{
-    reopenTodayIfNeeded();
-    smokes.push({id:uuid(),timestamp:new Date().toISOString()});
+    const day=today();
+    smokes.push({id:uuid(),timestamp:new Date().toISOString(),day});
     write(SMOKE_KEY,smokes);
-    claimDailyAwarenessReward(today());
+    claimDailyAwarenessReward(day);
     animatePet(false);
     render();
     toast('Cigarro registrado');
@@ -4346,10 +4415,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   };
 
   $('resistBtn').onclick=()=>{
-    reopenTodayIfNeeded();
-    resists.push({id:uuid(),timestamp:new Date().toISOString()});
+    const day=today();
+    resists.push({id:uuid(),timestamp:new Date().toISOString(),day});
     write(RESIST_KEY,resists);
-    claimDailyAwarenessReward(today());
+    claimDailyAwarenessReward(day);
     animatePet(true);
     addPresence(1,'vontade atravessada');
     render();
@@ -4358,8 +4427,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   };
 
   function closeRecordedDay(day){
-    if(day>today()||isClosed(day))return;
-    if(!confirm(`Fechar ${dayText(day)} com ${smokeCount(day)} cigarros e ${resistCount(day)} vontades superadas? Confirme apenas se os registros desse dia estão completos.`))return;
+    const activeBefore=today();
+    if(day>activeBefore||isClosed(day))return;
+    const closesActiveDay=day===activeBefore;
+    const nextDay=addAppDays(day,1);
+    const nextNote=closesActiveDay?`\n\nDepois de fechar, a contagem passa imediatamente para ${dayText(nextDay)}, mesmo antes das 05h.`:'';
+    if(!confirm(`Fechar ${dayText(day)} com ${smokeCount(day)} cigarros e ${resistCount(day)} vontades superadas? Confirme apenas se os registros desse dia estão completos.${nextNote}`))return;
     closedDays.push({date:day,closedAt:new Date().toISOString()});
     write(CLOSED_KEY,closedDays);
     vale.closureRewards=vale.closureRewards||[];
@@ -4368,6 +4441,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       addPresence(2,'dia fechado');
     }
     reactPet('close');render();checkAchievements();scheduleSync();
+    if(closesActiveDay)toast(`Dia fechado • nova contagem: ${dayText(today())}`);
   }
 
   function reopenRecordedDay(day){
@@ -4376,7 +4450,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     write(CLOSED_KEY,closedDays);addPendingDelete('closure',day);render();scheduleSync();
   }
 
-  $('closeDayBtn').onclick=()=>isClosed(today())?reopenRecordedDay(today()):closeRecordedDay(today());
+  $('closeDayBtn').onclick=()=>closeRecordedDay(today());
   $('historyList').onclick=e=>{
     const btn=e.target.closest('[data-close-day],[data-reopen-day]');
     if(!btn)return;
@@ -4387,8 +4461,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   $('undoBtn').onclick=()=>{
     const events=[
-      ...smokes.filter(x=>key(x.timestamp)===today()).map(x=>({...x,type:'smoke'})),
-      ...resists.filter(x=>key(x.timestamp)===today()).map(x=>({...x,type:'resist'}))
+      ...smokes.filter(x=>eventDay(x)===today()).map(x=>({...x,type:'smoke'})),
+      ...resists.filter(x=>eventDay(x)===today()).map(x=>({...x,type:'resist'}))
     ].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
 
     if(!events.length){
