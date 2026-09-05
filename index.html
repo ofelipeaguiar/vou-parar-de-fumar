@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.6.1">
+<meta name="app-version" content="7.6.2">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1462,6 +1462,13 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 #journey details{border-bottom:1px solid #30454b;padding:4px 0}#journey summary{cursor:pointer;min-height:48px;padding:14px 0;font-size:14px;color:#d5dfd4}#journey summary span{float:right;color:#b6c6cc}#journey textarea{width:100%;background:#132735;border:1px solid #47616a;border-radius:10px;padding:12px;color:#e8ece3;font:16px/1.5 inherit;resize:vertical}#jPlanForm label{display:block;font-size:13px;color:#bdcfcc;margin:12px 0}#jPlanForm textarea{font-size:16px;font-family:inherit;line-height:1.5;margin-top:6px}.j-memory p{font-size:14px;line-height:1.6;color:#bbcdd1}.j-memory small{color:#adc4c4}.j-attribute{display:flex;justify-content:space-between;font-size:14px}
 .j-dialog{color:#ebefe6;background:#102431;border:1px solid #47616a;border-radius:22px;padding:0;width:min(94vw,570px);max-height:88svh}.j-dialog::backdrop{background:#020a14d9}.j-dialog header{position:sticky;top:0;z-index:1;background:#102431;align-items:center;padding:12px 18px;margin:0;border-bottom:1px solid #345059}.j-dialog header span{font-size:11px;color:#b8cec9}.j-dialog header button{background:none;color:#e5ebdc;border:0;width:44px;height:44px;font-size:21px}.j-reader-content{padding:10px 22px 24px}.j-reader-content h2{font:400 30px/1.15 Georgia,serif}.j-reader-content p{font-size:17px;line-height:1.75;color:#d9e3df}.j-reader-content small{font-size:11px;line-height:1.5;color:#aec2c8}.j-reader-content a{color:#d6e2b7}.j-reader-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}.j-reader-actions button{min-height:44px;background:#dce3c5;border:0;border-radius:9px;padding:10px 14px;color:#1f3932}#jReaderPrompt{border-left:2px solid #cad6a8;margin-top:20px;padding:10px 14px;font-size:15px;line-height:1.5}#journey [hidden]{display:none!important}#journey button:focus-visible{outline:2px solid #ead7a2;outline-offset:2px}
 
+
+/* 7.6.2 — hierarquia compacta, estados explícitos e novidades diretamente acessíveis */
+.j-compact-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 11px}.j-compact-head h2{font-size:21px;letter-spacing:-.5px;margin:0}.j-compact-head>span{font-size:12px;color:#aabfc6}.j-xp-panel{background:#162338;border:1px solid #344059;border-radius:14px;padding:12px 14px}.j-xp-caption{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#d2c8ed}.j-xp-caption span:first-child{font-size:17px;font-weight:700;color:#f2eff9}.j-xp-track{height:7px;background:#0b1727;border-radius:6px;overflow:hidden;margin:9px 0 0}.j-xp-track i{display:block;height:100%;background:linear-gradient(90deg,#a991e2,#c7b5f0);border-radius:6px}.j-xp-panel p{font-size:11px;line-height:1.4;color:#bdc4d7;margin:8px 0 0}.j-tabs{margin:8px 0 14px}.j-tabs button{font-size:12px}.j-feature{padding:18px}.j-feature h3{font-size:25px;margin:12px 0}.j-feature p{font-size:12px}.j-moment{margin-bottom:10px}
+.j-catalog-head h3,.j-inbox h3{font-size:18px;margin:0 0 6px}.j-catalog-head p,.j-inbox>p{font-size:12px;color:#b5c8cf;line-height:1.5;margin:0 0 13px}.j-filter-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.j-filter-row button{border:1px solid #38525e;border-radius:9px;min-height:44px;background:#112631;color:#bfcdd5;padding:8px 10px;font-size:12px}.j-filter-row button[aria-pressed="true"]{border-color:#c1d0a4;background:#30473f;color:#eaf0d8}.j-topic-label{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:#b7c8ce}.j-topic-label select{font-size:16px;padding:10px;border-radius:9px;background:#132735;color:#dce6df;border:1px solid #3e5863;max-width:80%}
+#journey .j-row{border:1px solid #2d4554;border-radius:12px;padding:13px 14px;margin:8px 0;background:#112330}#journey .j-row strong{font-size:15px;line-height:1.4}#journey .j-row small{font-size:11px;margin-bottom:7px}#journey .j-row .j-state-label{font-size:12px;font-weight:600;margin-top:9px}#journey .j-reading-unread{border-left:3px solid #d1d9a5;background:#1a3038}#journey .j-reading-unread .j-state-label{color:#e8e9b8}#journey .j-reading-progress{border-left:3px solid #b3a0df}#journey .j-reading-progress .j-state-label{color:#d3c2ee}#journey .j-reading-done{background:#0e202c}#journey .j-reading-done .j-state-label{color:#acccb9}#journey .j-reading-locked{background:#0c1b26;color:#abbac4}#journey .j-reading-locked span{color:#afbec5}
+.j-inbox{padding:14px;border:1px solid #5c6f59;border-radius:15px;background:#142b31;margin-bottom:12px}.j-inbox:has(.j-row){border-color:#98aa7f}.j-history-jumps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}.j-history-jumps button{min-height:44px;padding:8px 12px;border:1px solid #3a5360;border-radius:9px;background:#122936;color:#d5dfd1;font-size:12px}.j-achievement-new{border-left:3px solid #d5b66f!important}.j-plan-hint{display:block;color:#aebfc8;font-size:12px;line-height:1.5;margin-top:5px}.j-empty{border:1px dashed #405a68;border-radius:12px;padding:20px;font-size:13px;line-height:1.5;color:#bdcbd3}#jPlanForm a{color:#d9e3b8}#jStories,#jAchievements,#jPlan{scroll-margin-top:14px}
+
 </style>
 </head>
 <body>
@@ -1687,8 +1694,8 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 <section id="history" class="tab"><div class="panel"><h2>Histórico</h2><div id="historyList"></div></div></section>
 
 <section id="journey" class="tab">
-<div class="j-head"><div><span class="j-kicker">SEU CAMINHO COM O NIMBO</span><h2>Jornada</h2><p>Entender, descobrir e continuar.</p></div><span class="j-orb">✦</span></div>
-<div class="j-evolution"><span id="jEvolution"></span><span id="jNext"></span></div>
+<div class="j-compact-head"><h2>Jornada</h2><span id="jEvolution"></span></div>
+<div class="j-xp-panel"><div class="j-xp-caption"><span id="jXpCaption"></span><span id="jXpTarget"></span></div><div class="j-xp-track" id="jXpTrack" role="progressbar" aria-label="XP para a próxima evolução"><i id="jXpFill"></i></div><p id="jNext"></p></div>
 <nav class="j-tabs" aria-label="Seções da Jornada"><button data-jview="daily" class="active">Para você <b id="jDailyBadge"></b></button><button data-jview="explore">Explorar <b id="jExploreBadge"></b></button><button data-jview="history">Minha história <b id="jHistoryBadge"></b></button></nav>
 <div id="jDaily"></div><div id="jExplore" hidden></div><div id="jHistory" hidden></div>
 <div class="j-essential"><button data-jread="pause">Uma pausa agora</button><button data-jread="support">Encontrar tratamento</button></div>
@@ -1781,7 +1788,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.6.1').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.6.2').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1820,7 +1827,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   const pad=n=>String(n).padStart(2,'0');
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
-  // V7.6.1 — o dia natural do app vai de 05:00 até 04:59 do dia seguinte.
+  // V7.6.2 — o dia natural do app vai de 05:00 até 04:59 do dia seguinte.
   // O fechamento manual pode antecipar o início do próximo dia de contagem.
   const APP_DAY_CUTOFF_HOUR=5;
   const APP_DAY_RE=/^\d{4}-\d{2}-\d{2}$/;
@@ -2459,7 +2466,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let changed=false;
     [...smokes,...resists].forEach(x=>{
       if(!x.id){x.id=uuid();changed=true}
-      // Migração V7.6.1: registros antigos passam a ter um dia lógico explícito.
+      // Migração V7.6.2: registros antigos passam a ter um dia lógico explícito.
       // Se não houver override anterior, a classificação usa o corte natural das 05:00.
       if(!validAppDay(x.day)){x.day=key(x.timestamp);changed=true}
     });
@@ -3136,11 +3143,35 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(changed){vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale)}
     return j;
   }
+  function jReadStatus(id){const j=ensureJourney();return !jAccessible(id)?'locked':j.completed.includes(id)?'done':j.seen.includes(id)?'progress':'unread'}
   function jCard(id){
     const c=jContent(id);if(!c)return '';
-    const j=ensureJourney(),accessible=jAccessible(id),seen=j.seen.includes(id),done=j.completed.includes(id);
+    const j=ensureJourney(),status=jReadStatus(id),accessible=status!=='locked';
+    const states={unread:['●','Não lido'],progress:['◔','Em leitura'],done:['✓','Lido'],locked:['◇','Bloqueado']};
+    const [icon,label]=states[status];
     const requirement=id.startsWith('c:')?J_STORY_XP[id.slice(2)]:c.xp;
-    return `<button class="j-row ${accessible?'':'j-locked'}" ${accessible?`data-jread="${id}"`:'disabled'}><small>${jEsc(c.kind)} ${accessible&&!seen?'<b class="j-new">NOVO</b>':''}</small><strong>${jEsc(c.title)}</strong><span>${accessible?(done?'✓ Leitura concluída':seen?'Continuar leitura →':'Abrir leitura →'):`${requirement} XP${c.attr?' ou avanço em '+({bond:'Vínculo',resilience:'Resiliência',breath:'Fôlego',vitality:'Vitalidade'}[c.attr[0]])+' a '+c.attr[1]+' com 7 dias completos':''}`}</span></button>`;
+    const minutes=Math.max(1,Math.ceil(c.body.split(/\s+/).length/180));
+    return `<button class="j-row j-reading-${status}" ${accessible?`data-jread="${id}"`:'disabled'}><small>${jEsc(c.kind)} · ${minutes} min</small><strong>${jEsc(c.title)}</strong><span class="j-state-label">${icon} ${label}${j.bookmarks[id]?.value?' · Salvo':''}</span>${accessible?'':`<span>${requirement} XP${c.attr?' ou '+({bond:'Vínculo',resilience:'Resiliência',breath:'Fôlego',vitality:'Vitalidade'}[c.attr[0]])+' '+c.attr[1]+' com 7 dias completos':''}</span>`}</button>`;
+  }
+  let jExploreStatus='all',jExploreKind='all',jStoryStatus='all';
+  function jRenderExplore(){
+    const j=ensureJourney();
+    const filtered=J_CONTENT.filter(c=>(jExploreKind==='all'||c.kind===jExploreKind)&&(jExploreStatus==='all'||(jExploreStatus==='saved'?j.bookmarks[c.id]?.value:jReadStatus(c.id)===jExploreStatus)));
+    const rank={unread:0,progress:1,done:2,locked:3};
+    filtered.sort((a,b)=>rank[jReadStatus(a.id)]-rank[jReadStatus(b.id)]||a.xp-b.xp);
+    $('jExplore').innerHTML=`<div class="j-catalog-head"><h3>Biblioteca de apoio</h3><p>Práticas, saúde e relatos reais. As crônicas estão em Minha história.</p></div><div class="j-filter-row" aria-label="Filtrar por leitura">${[['all','Todos'],['unread','Não lidos'],['progress','Em leitura'],['done','Lidos'],['saved','Salvos']].map(([id,title])=>`<button data-jfilter="${id}" aria-pressed="${jExploreStatus===id}">${title}</button>`).join('')}</div><label class="j-topic-label" for="jTopic">Tema<select id="jTopic"><option value="all">Todos os temas</option>${['Apoio prático','Saúde','Relato real','Encontrar apoio'].map(k=>`<option value="${k}">${k}</option>`).join('')}</select></label><p class="j-note" aria-live="polite">${filtered.length} leitura${filtered.length===1?'':'s'} nesta seleção · ${J_CONTENT.filter(c=>jAccessible(c.id)).length} de ${J_CONTENT.length} liberadas</p><div class="j-catalog-list">${filtered.map(c=>jCard(c.id)).join('')||'<div class="j-empty">Nenhuma leitura nesta seleção. Experimente outro filtro.</div>'}</div>`;
+    $('jTopic').value=jExploreKind;
+  }
+  function jInbox(){
+    const j=ensureJourney(),stories=j.unlocked.filter(id=>id.startsWith('c:')&&!j.seen.includes(id)),ach=unseenAchievementIds().filter(id=>ACHIEVEMENTS.some(a=>a.id===id));
+    const count=stories.length+ach.length;
+    return `<section class="j-inbox" aria-label="Novidades de Minha história"><h3>${count?`${count} novidade${count===1?'':'s'} para você`:'Tudo visto por aqui'}</h3><p>${count?'Abra diretamente o que acabou de descobrir.':'As crônicas não concluídas continuam na lista de leituras.'}</p>${stories.map(jCard).join('')}${ach.map(id=>{const a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row j-achievement-new" data-jachievement="${id}"><small>CONQUISTA · NOVA</small><strong>${jEsc(a.name)}</strong><span>${jEsc(a.desc)}</span><span>Reconhecer conquista ✓</span></button>`}).join('')}</section>`;
+  }
+  function jRenderStories(){
+    const ids=Object.keys(J_STORY_XP).sort((a,b)=>J_STORY_XP[a]-J_STORY_XP[b]).map(id=>'c:'+id);
+    const shown=ids.filter(id=>jAccessible(id)&&(jStoryStatus==='all'||(jStoryStatus==='pending'?jReadStatus(id)!=='done':jReadStatus(id)===jStoryStatus)));
+    $('jStoriesList').innerHTML=shown.map(jCard).join('')||'<p class="j-note">Nenhuma crônica nesta seleção.</p>';
+    document.querySelectorAll('[data-jstoryfilter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.jstoryfilter===jStoryStatus)));
   }
   function jBadges(){
     const j=ensureJourney();const fresh=j.unlocked.filter(id=>!j.seen.includes(id));
@@ -3155,19 +3186,31 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function renderJourneyV7(){
     if(jPlanDirty||document.activeElement?.closest('#jPlanForm')||$('jReader')?.open){jBadges();return}
     const j=refreshJourney(),xp=progress().xp;
-    $('jEvolution').textContent=`Nimbo · forma ${progress().level} · ${xp} XP`;
+    const p=progress(),level=p.level,lo=p.thresholds[level-1],hi=p.thresholds[level];
+    $('jEvolution').textContent=`Nimbo · forma ${level}`;
+    $('jXpCaption').textContent=`${xp} XP`;
+    $('jXpTarget').textContent=hi?`${Math.max(0,hi-xp)} para evoluir`:'Forma máxima atual';
+    $('jXpFill').style.width=(hi?clamp((xp-lo)/(hi-lo)*100,0,100):100)+'%';
+    $('jXpTrack').setAttribute('aria-valuemin',String(lo));$('jXpTrack').setAttribute('aria-valuemax',String(hi||Math.max(xp,lo)));$('jXpTrack').setAttribute('aria-valuenow',String(hi?clamp(xp,lo,hi):Math.max(xp,lo)));
     const next=[...J_CONTENT.map(c=>({id:c.id,xp:c.xp})),...Object.entries(J_STORY_XP).map(([id,xp])=>({id:'c:'+id,xp}))].filter(c=>!jAccessible(c.id)).sort((a,b)=>a.xp-b.xp)[0];
-    $('jNext').textContent=next?`${Math.max(0,next.xp-xp)} XP para a próxima descoberta`:'Primeiro acervo descoberto';
+    $('jNext').textContent=next?`Próxima leitura: ${jContent(next.id).title} · faltam ${Math.max(0,next.xp-xp)} XP`:'Primeiro acervo descoberto';
     const edition=j.editions[today()],primary=jContent(edition.ids[0]);
-    $('jDaily').innerHTML=`<div class="j-moment"><label for="jStage">Meu momento</label><select id="jStage"><option value="observing">Estou observando</option><option value="reducing">Estou reduzindo</option><option value="stopped">Parei de fumar</option><option value="returning">Quero retomar</option></select></div><article class="j-feature"><span class="j-kicker">EDIÇÃO DE ${jEsc(dayText(today()))}</span><h3>${jEsc(primary.title)}</h3><p>${jEsc(edition.reason)}</p><button class="j-primary" data-jread="${primary.id}">Começar a leitura →</button></article><h3 class="j-section">Outra experiência</h3>${jCard(edition.ids[1])}<div class="j-practice"><small>EXPERIMENTAR</small><p>${jEsc(primary.prompt)}</p><button data-jplan>Levar uma ideia para meu plano</button></div><button class="j-text-button" data-jview="explore">Explorar outro tema →</button><br><button class="j-text-button" data-jedition>Marcar edição como vista</button><p class="j-note">Não precisa terminar hoje. Esta edição fica guardada.</p><details><summary>Edições anteriores</summary>${Object.keys(j.editions).filter(d=>d!==today()).sort().reverse().map(d=>`<h4>${jEsc(dayText(d))}</h4>${j.editions[d].ids.map(jCard).join('')}`).join('')||'<p class="j-note">Sua primeira edição está aqui. As próximas chegam nos dias em que você voltar.</p>'}</details>`;
+    $('jDaily').innerHTML=`<div class="j-moment"><label for="jStage">Meu momento</label><select id="jStage"><option value="observing">Estou observando</option><option value="reducing">Estou reduzindo</option><option value="stopped">Parei de fumar</option><option value="returning">Quero retomar</option></select></div><article class="j-feature"><span class="j-kicker">EDIÇÃO DE ${jEsc(dayText(today()))}</span><h3>${jEsc(primary.title)}</h3><p>${jEsc(edition.reason)}</p><button class="j-primary" data-jread="${primary.id}">${jReadStatus(primary.id)==='done'?'✓ Reler leitura':jReadStatus(primary.id)==='progress'?'◔ Continuar leitura':'● Começar leitura'}</button></article><h3 class="j-section">Outra experiência</h3>${jCard(edition.ids[1])}<div class="j-practice"><small>EXPERIMENTAR</small><p>${jEsc(primary.prompt)}</p><button data-jplan>Levar uma ideia para meu plano</button></div><button class="j-text-button" data-jview="explore">Explorar outro tema →</button><br><button class="j-text-button" data-jedition>Marcar edição como vista</button><p class="j-note">Não precisa terminar hoje. Esta edição fica guardada.</p><details><summary>Edições anteriores</summary>${Object.keys(j.editions).filter(d=>d!==today()).sort().reverse().map(d=>`<h4>${jEsc(dayText(d))}</h4>${j.editions[d].ids.map(jCard).join('')}`).join('')||'<p class="j-note">Sua primeira edição está aqui. As próximas chegam nos dias em que você voltar.</p>'}</details>`;
     $('jStage').value=j.stage.value;
-    const available=J_CONTENT.filter(c=>jAccessible(c.id)),locked=J_CONTENT.filter(c=>!jAccessible(c.id));
-    $('jExplore').innerHTML=`<p class="j-note">${available.length} de ${J_CONTENT.length} leituras acessíveis. As descobertas permanecem suas.</p>${['Apoio prático','Saúde','Relato real','Encontrar apoio'].map(kind=>`<h3 class="j-section">${kind}</h3>${available.filter(c=>c.kind===kind).map(c=>jCard(c.id)).join('')||'<p class="j-note">Novas leituras aparecem com seu progresso.</p>'}`).join('')}<h3 class="j-section">Próximas descobertas</h3>${locked.slice(0,3).map(c=>jCard(c.id)).join('')||'<p class="j-note">Você descobriu todo o primeiro acervo.</p>'}<details><summary>Leituras salvas</summary>${Object.entries(j.bookmarks).filter(([,v])=>v.value).map(([id])=>jCard(id)).join('')||'<p class="j-note">Salve uma leitura para encontrá-la aqui.</p>'}</details>`;
-    const planFields=[['reason','Meus motivos'],['situations','Situações que quero observar'],['alternative','Uma alternativa que quero experimentar'],['review','O que quero ajustar no plano']];
+    jRenderExplore();
+    const planFields=[
+      ['reason','1. O que você quer ganhar ao parar?','Escolha um motivo pessoal: algo da sua vida que você quer cuidar ou recuperar.'],
+      ['situations','2. Quando a vontade costuma aparecer?','Descreva ocasiões concretas: depois do café, no trabalho, com certas pessoas ou emoções.'],
+      ['alternative','3. O que você fará nessas ocasiões?','Complete: se a vontade vier quando…, vou tentar… Prepare uma alternativa possível.'],
+      ['review','4. O que ajudou antes — e o que quer ajustar?','Considere tentativas anteriores sem tratá-las como fracasso. O que vale repetir ou mudar?'],
+      ['support','5. Quem pode apoiar você, e de que forma?','Pense em alguém de confiança ou uma equipe de saúde. Que ajuda concreta você pode pedir?'],
+      ['preparation','6. Qual será seu próximo passo, e quando?','Pode ser preparar uma data para parar ou buscar atendimento. O que precisa organizar antes?'],
+      ['difficult','7. Como pretende retomar se sair do plano?','Defina uma ação pequena e quem procurar. Um episódio não precisa encerrar sua tentativa.']
+    ];
     const stories=Object.keys(J_STORY_XP).sort((a,b)=>J_STORY_XP[a]-J_STORY_XP[b]);
-    const familyHtml=J_FAMILIES.map(f=>{const achieved=f.steps.filter(n=>vale.achievements.includes(`j_${f.id}_${n}`));const next=f.steps.find(n=>!achieved.includes(n));return `<details><summary>${f.icon} ${f.name} <span>${achieved.length}/${f.steps.length}</span></summary><p class="j-note">${next?`${Math.floor(f.value())} de ${next} para o próximo marco`:'Todos os marcos deste ciclo descobertos'}</p>${f.steps.filter(n=>achieved.includes(n)||n===next).map(n=>{const id=`j_${f.id}_${n}`,a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row" ${achieved.includes(n)?`data-jachievement="${id}"`:'disabled'}><strong>${jEsc(a.name)} ${achieved.includes(n)&&!vale.seenAchievements.includes(id)?'<b class="j-new">NOVO</b>':''}</strong><span>${achieved.includes(n)?(j.dates[id]?new Date(j.dates[id]).toLocaleDateString('pt-BR'):'Descoberta anterior'):'Próximo marco'}</span></button>`}).join('')}</details>`}).join('');
-    $('jHistory').innerHTML=`<details id="jPlan"><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label])=>`<label>${label}<textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta. Você pode editar ou apagar os textos.</p></form></details><h3 class="j-section">Conquistas</h3>${familyHtml}<details><summary>Primeiras descobertas e memórias anteriores</summary>${ACHIEVEMENTS.filter(a=>!a.id.startsWith('j_')&&vale.achievements.includes(a.id)).map(a=>`<button class="j-row" data-jachievement="${a.id}"><strong>${jEsc(a.name)} ${vale.seenAchievements.includes(a.id)?'':'<b class="j-new">NOVO</b>'}</strong><span>${jEsc(a.desc)}</span></button>`).join('')||'<p class="j-note">Suas primeiras descobertas aparecerão aqui.</p>'}</details><h3 class="j-section">Crônicas do Vale</h3><p class="j-note">Ficção original · Os caminhos que reaparecem</p>${stories.filter(id=>jAccessible('c:'+id)).map(id=>jCard('c:'+id)).join('')}<details><summary>Próximos capítulos</summary>${stories.filter(id=>!jAccessible('c:'+id)).slice(0,3).map(id=>jCard('c:'+id)).join('')}</details><details><summary>Memórias do caminho</summary>${vale.inventory.map(id=>ITEMS[id]).filter(Boolean).map(item=>`<article class="j-memory"><h4>${item.icon} ${jEsc(item.name)}</h4><p>${jEsc(item.desc)}</p><small>Uma lembrança das descobertas que você já fez.</small></article>`).join('')||'<p class="j-note">Algumas conquistas deixam memórias.</p>'}</details><details><summary>Atributos do Nimbo</summary><p class="j-note">Pontuações do personagem, não medidas de saúde.</p>${[['Vitalidade',vitality()],['Vínculo',bond()],['Fôlego',breath()],['Resiliência',resilience()]].map(([name,n])=>`<p class="j-attribute">${name}<strong>${n}</strong></p>`).join('')}</details><button class="j-text-button" data-jseen>Marcar descobertas como vistas</button>`;
-    jApplyView();jBadges();
+    const familyHtml=J_FAMILIES.map(f=>{const achieved=f.steps.filter(n=>vale.achievements.includes(`j_${f.id}_${n}`));const next=f.steps.find(n=>!achieved.includes(n));return `<details><summary>${f.icon} ${f.name} <span>${achieved.length}/${f.steps.length}${achieved.some(n=>!vale.seenAchievements.includes(`j_${f.id}_${n}`))?' · NOVO':''}</span></summary><p class="j-note">${next?`${Math.floor(f.value())} de ${next} para o próximo marco`:'Todos os marcos deste ciclo descobertos'}</p>${f.steps.filter(n=>achieved.includes(n)||n===next).map(n=>{const id=`j_${f.id}_${n}`,a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row" ${achieved.includes(n)?`data-jachievement="${id}"`:'disabled'}><strong>${jEsc(a.name)} ${achieved.includes(n)&&!vale.seenAchievements.includes(id)?'<b class="j-new">NOVO</b>':''}</strong><span>${achieved.includes(n)?(j.dates[id]?new Date(j.dates[id]).toLocaleDateString('pt-BR'):'Descoberta anterior'):'Próximo marco'}</span></button>`}).join('')}</details>`}).join('');
+    $('jHistory').innerHTML=`<div id="jInbox">${jInbox()}</div><div class="j-history-jumps"><button data-jjump="jStories">Crônicas ↓</button><button data-jjump="jAchievements">Conquistas ↓</button><button data-jplan>Meu plano ↓</button></div><details id="jPlan"><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Perguntas orientadas pelos temas do <a href="https://smokefree.gov/build-your-quit-plan" target="_blank" rel="noopener">plano Smokefree</a>: motivos, situações, preparação e apoio.</p><p class="j-note">Seu plano é privado na sua conta. Você pode editar ou apagar os textos.</p></form></details><details id="jAchievements"><summary>Conquistas · ${vale.achievements.length} alcançadas</summary>${familyHtml}<details><summary>Primeiras descobertas e memórias anteriores</summary>${ACHIEVEMENTS.filter(a=>!a.id.startsWith('j_')&&vale.achievements.includes(a.id)).map(a=>`<button class="j-row" data-jachievement="${a.id}"><strong>${jEsc(a.name)} ${vale.seenAchievements.includes(a.id)?'':'<b class="j-new">NOVO</b>'}</strong><span>${jEsc(a.desc)}</span></button>`).join('')||'<p class="j-note">Suas primeiras descobertas aparecerão aqui.</p>'}</details></details><section id="jStories"><h3 class="j-section">Crônicas do Vale</h3><p class="j-note">Ficção original · Os caminhos que reaparecem</p><div class="j-filter-row" aria-label="Filtrar crônicas">${[['all','Todas'],['pending','Por terminar'],['unread','Não lidas'],['done','Lidas']].map(([id,label])=>`<button data-jstoryfilter="${id}" aria-pressed="${jStoryStatus===id}">${label}</button>`).join('')}</div><div id="jStoriesList"></div></section><details><summary>Próximos capítulos</summary>${stories.filter(id=>!jAccessible('c:'+id)).slice(0,3).map(id=>jCard('c:'+id)).join('')}</details><details><summary>Memórias do caminho</summary>${vale.inventory.map(id=>ITEMS[id]).filter(Boolean).map(item=>`<article class="j-memory"><h4>${item.icon} ${jEsc(item.name)}</h4><p>${jEsc(item.desc)}</p><small>Uma lembrança das descobertas que você já fez.</small></article>`).join('')||'<p class="j-note">Algumas conquistas deixam memórias.</p>'}</details><details><summary>Atributos do Nimbo</summary><p class="j-note">Pontuações do personagem, não medidas de saúde.</p>${[['Vitalidade',vitality()],['Vínculo',bond()],['Fôlego',breath()],['Resiliência',resilience()]].map(([name,n])=>`<p class="j-attribute">${name}<strong>${n}</strong></p>`).join('')}</details><button class="j-text-button" data-jseen>Marcar descobertas como vistas</button>`;
+    jRenderStories();jApplyView();jBadges();
   }
   function jApplyView(){for(const [id,v] of [['jDaily','daily'],['jExplore','explore'],['jHistory','history']])$(id).hidden=jView!==v;document.querySelectorAll('[data-jview]').forEach(b=>{b.classList.toggle('active',b.dataset.jview===jView);b.setAttribute('aria-pressed',String(b.dataset.jview===jView))})}
   function jRead(id){
@@ -3188,14 +3231,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('journey').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
     if(b.dataset.jview){jView=b.dataset.jview;jApplyView()}
+    if(b.dataset.jfilter){jExploreStatus=b.dataset.jfilter;jRenderExplore()}
+    if(b.dataset.jstoryfilter){jStoryStatus=b.dataset.jstoryfilter;jRenderStories()}
+    if(b.dataset.jjump){const el=$(b.dataset.jjump);if(el.tagName==='DETAILS')el.open=true;el.scrollIntoView({block:'start',behavior:'smooth'})}
     if(b.dataset.jread)jRead(b.dataset.jread);
     if(b.hasAttribute('data-jedition')){const j=ensureJourney();j.editionSeen=uniq([...j.editionSeen,today()]);jPersist();jBadges();b.textContent='✓ Edição vista'}
     if(b.hasAttribute('data-jplan')){jView='history';jApplyView();$('jPlan').open=true;$('jPlan').scrollIntoView({block:'start',behavior:'smooth'})}
-    if(b.dataset.jachievement){vale.seenAchievements=uniq([...vale.seenAchievements,b.dataset.jachievement]);jPersist();b.querySelector('.j-new')?.remove();jBadges();toast('Conquista reconhecida')}
+    if(b.dataset.jachievement){vale.seenAchievements=uniq([...vale.seenAchievements,b.dataset.jachievement]);jPersist();b.querySelector('.j-new')?.remove();b.disabled=true;b.classList.remove('j-achievement-new');b.innerHTML='<strong>✓ Conquista reconhecida</strong>';jBadges();$('jInbox').innerHTML=jInbox();toast('Conquista reconhecida')}
     if(b.hasAttribute('data-jseen')){const j=ensureJourney();j.seen=uniq([...j.seen,...j.unlocked]);vale.seenAchievements=uniq([...vale.seenAchievements,...vale.achievements]);jPersist();renderJourneyV7()}
   });
   $('journey').addEventListener('input',e=>{if(e.target.closest('#jPlanForm'))jPlanDirty=true});
-  $('journey').addEventListener('change',e=>{if(e.target.id==='jStage'){ensureJourney().stage={value:e.target.value,at:new Date().toISOString()};jPersist();toast('Momento salvo para as próximas edições')}});
+  $('journey').addEventListener('change',e=>{if(e.target.id==='jTopic'){jExploreKind=e.target.value;jRenderExplore();return}if(e.target.id==='jStage'){ensureJourney().stage={value:e.target.value,at:new Date().toISOString()};jPersist();toast('Momento salvo para as próximas edições')}});
   $('journey').addEventListener('submit',e=>{if(e.target.id!=='jPlanForm')return;e.preventDefault();const j=ensureJourney(),data=new FormData(e.target),at=new Date().toISOString();for(const [key,value] of data)j.plan[key]={value:String(value).slice(0,1500),at};jPlanDirty=false;document.activeElement?.blur();jPersist();checkAchievements();renderJourneyV7();$('jPlan').open=true;toast('Plano salvo')});
 
   let activeBuildingId='refuge';
