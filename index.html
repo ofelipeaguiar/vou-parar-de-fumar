@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.0">
+<meta name="app-version" content="7.5.1">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -160,7 +160,7 @@ h1{font-size:23px;line-height:1.08;margin:0 0 4px;letter-spacing:-.55px}
 
 /* nav */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(5,13,25,.92);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:7px 9px calc(7px + env(safe-area-inset-bottom))}
-.navin{max-width:600px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav button{background:transparent;border:0;color:#8998ad;padding:7px 3px;border-radius:12px;font-size:10px}.nav button.active{color:#aef5c2;background:rgba(98,233,143,.07)}.nav .ico{font:18px var(--pixel);display:block;margin-bottom:3px}
+.navin{max-width:600px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav button{background:transparent;border:0;color:#8998ad;padding:6px 3px;border-radius:10px;font-size:9px}.nav button.active{color:#aef5c2;background:rgba(98,233,143,.07)}.nav .ico{font:14px var(--pixel);display:block;margin-bottom:2px}
 section.tab{display:none}section.tab.active{display:block}
 #toast{position:fixed;z-index:30;left:50%;bottom:98px;transform:translateX(-50%) translateY(8px);max-width:calc(100vw - 30px);text-align:center;opacity:0;pointer-events:none;background:#eef8f4;color:#0b2a19;padding:9px 12px;border-radius:999px;font-size:10px;font-weight:800;transition:.2s}#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:350px){.quick-title{font-size:12px}.habitat{height:286px}.pet-zone{width:155px;height:155px}.pet-bob{width:140px;height:140px}}
@@ -523,7 +523,7 @@ section.tab{display:none}section.tab.active{display:block}
 .quick-actions-v71{margin-bottom:11px}
 .quick-actions-v71 .quick{min-height:82px}
 
-.nav button{position:relative;line-height:1.15}
+.nav button{position:relative}
 .nav-badge{
   position:absolute;right:16%;top:1px;min-width:16px;height:16px;padding:0 4px;
   display:none;align-items:center;justify-content:center;border-radius:999px;
@@ -594,8 +594,8 @@ section.tab{display:none}section.tab.active{display:block}
 body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .nav{padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
 .navin{grid-template-columns:repeat(3,1fr)!important;gap:3px 5px!important}
-.nav button{min-height:48px;padding:6px 3px!important;position:relative}
-.nav .ico{font-size:16px!important}
+.nav button{min-height:43px;padding:5px 3px!important;position:relative}
+.nav .ico{font-size:13px!important}
 
 .vale-screen-head{
   display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px
@@ -1236,8 +1236,8 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .nav{padding:7px 9px calc(7px + env(safe-area-inset-bottom))}
 .navin{grid-template-columns:repeat(5,1fr)!important;gap:4px!important}
-.nav button{min-height:54px;padding:7px 3px!important}
-.nav .ico{font-size:18px!important}
+.nav button{min-height:48px;padding:6px 3px!important}
+.nav .ico{font-size:14px!important}
 
 .vale-v75-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 0 10px}
 .vale-v75-kicker{font-size:10px;color:#8195aa;margin-bottom:3px}
@@ -3434,7 +3434,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
      V7.5 — mapa estrutural do Vale
      ========================================================= */
   const VALE_WORLD_W=1600,VALE_WORLD_H=1400;
-  const VALE_ZOOM_MIN=.45,VALE_ZOOM_MAX=1.35,VALE_ZOOM_STEP=.15;
+  const VALE_ZOOM_MIN=.65,VALE_ZOOM_MAX=1.35,VALE_ZOOM_STEP=.15;
   let valeCamera={x:0,y:0,zoom:1};
   let valeCameraReady=false;
   let activeValePlace='winds';
@@ -4259,6 +4259,18 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     showLogin();
   };
 
+  function compareAppVersions(a,b){
+    const pa=String(a||'').split('.').map(n=>parseInt(n,10)||0);
+    const pb=String(b||'').split('.').map(n=>parseInt(n,10)||0);
+    const len=Math.max(pa.length,pb.length);
+    for(let i=0;i<len;i++){
+      const av=pa[i]||0,bv=pb[i]||0;
+      if(av>bv)return 1;
+      if(av<bv)return -1;
+    }
+    return 0;
+  }
+
   async function checkForUpdate({manual=false}={}){
     try{
       const base=window.location.origin+window.location.pathname;
@@ -4268,12 +4280,19 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       if(!match)return;
 
       const remote=String(match[1]).trim();
+      const comparison=compareAppVersions(remote,APP_VERSION);
 
-      if(remote!==APP_VERSION){
+      // Só atualiza automaticamente quando a versão hospedada é realmente MAIS NOVA.
+      // Antes, qualquer diferença (inclusive servidor ainda em versão mais antiga)
+      // provocava redirect e podia gerar um loop de atualização.
+      if(comparison>0){
+        const guardKey='nimbo_last_auto_update_target';
+        if(!manual&&sessionStorage.getItem(guardKey)===remote)return;
+        sessionStorage.setItem(guardKey,remote);
         if(manual)toast('Nova versão encontrada. Atualizando…');
         setTimeout(()=>window.location.replace(`${base}?v=${encodeURIComponent(remote)}&refresh=${Date.now()}`),manual?500:0);
       }else if(manual){
-        toast('Você já está na versão mais recente.');
+        toast(comparison===0?'Você já está na versão mais recente.':'Esta versão local é mais nova que a hospedada.');
       }
     }catch{
       if(manual)toast('Não consegui verificar atualização agora.');
@@ -4418,14 +4437,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     setTimeout(()=>checkForUpdate(),1500);
   }
 
-  setInterval(render,60000);
+  // Atualizações periódicas não devem reconstruir o mapa enquanto o usuário o explora.
+  // A V7.5 reconstruía o Vale a cada 5 s, causando piscadas/reset visual do mapa.
+  setInterval(()=>{
+    const active=document.querySelector('.tab.active')?.id;
+    if(active!=='vale')render();
+  },60000);
   setInterval(()=>{
     if(currentUser&&navigator.onLine&&document.visibilityState==='visible'&&!syncing)syncAll();
   },30000);
-  setInterval(()=>{
-    const active=document.querySelector('.tab.active')?.id;
-    if(active==='vale')renderVale();
-  },5000);
   start();
 })();
 </script>
