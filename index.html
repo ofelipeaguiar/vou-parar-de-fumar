@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.8.1">
+<meta name="app-version" content="7.8.2">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1062,7 +1062,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 .daily-summary-row{grid-template-columns:1fr 1fr;gap:8px;margin:0 0 5px}
 .daily-summary-card{
-  min-height:104px;border-radius:17px;padding:12px 13px;
+  min-height:98px;border-radius:17px;padding:11px 13px;
   background:linear-gradient(180deg,rgba(20,39,64,.98),rgba(15,31,52,.98));
   border-color:rgba(118,177,230,.17)
 }
@@ -1073,11 +1073,11 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .summary-top{display:flex;align-items:flex-start;gap:8px;min-width:0}
 .summary-number{font-size:34px;line-height:.95;margin:0;letter-spacing:-1px;flex:0 0 auto}
 .summary-label{font-size:11px;line-height:1.2;padding-top:2px;color:#e8eef5}
-.recent-label{font-size:9px;color:#7f93aa;margin-top:10px}
+.recent-label{font-size:9px;color:#7f93aa;margin-top:8px}
 .recent-times{font:600 10px/1.45 var(--pixel);color:#cbd9e6;margin-top:3px;min-height:28px}
 .resist-summary .recent-times{color:#8be7ab}
 .close-day-card{
-  grid-column:1/-1;min-height:47px;padding:12px 14px;display:flex;align-items:center;
+  grid-column:1/-1;min-height:45px;padding:11px 14px;display:flex;align-items:center;
   font-size:14px;line-height:1.2;background:linear-gradient(180deg,#153351,#102b48)
 }
 .close-day-card::before,.close-day-card::after{content:none!important;display:none!important}
@@ -1106,7 +1106,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .day-detail-card .secondary:disabled{opacity:.4}
 
 .live-gap-chip{
-  margin-top:7px;padding:6px 7px;border-radius:9px;background:rgba(6,17,31,.42);
+  margin-top:7px;padding:6px 7px 5px;border-radius:9px;background:rgba(6,17,31,.42);
   border:1px solid rgba(114,222,241,.11)
 }
 .live-gap-line{display:flex;align-items:baseline;justify-content:space-between;gap:7px}
@@ -1114,8 +1114,8 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .live-gap-line strong{font:700 12px var(--pixel);color:#d9f5fb;white-space:nowrap}
 .live-gap-track{height:3px;border-radius:999px;background:#091522;overflow:hidden;margin-top:5px}
 .live-gap-track i{display:block;height:100%;width:0;background:var(--cyan);border-radius:999px;transition:width .35s}
-.live-gap-caption{font-size:7.5px;line-height:1.3;color:#829bb1;margin-top:4px;min-height:10px}
-.smoke-summary .recent-label{margin-top:6px}
+.live-gap-caption{display:none}
+.smoke-summary .recent-label{margin-top:4px}
 .smoke-summary .recent-times{min-height:15px}
 
 .close-summary-sheet{padding-top:15px}
@@ -1154,7 +1154,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .pet-zone-v731::before{width:90px;height:10px}
   .stats-v731{bottom:7px}.stats-v731 .stat{padding:5px 6px}.stats-v731 .stat-head{font-size:7.5px;margin-bottom:4px}.stats-v731 .stat-head b{font-size:9px}
   .quick-actions-v731 .quick{min-height:72px}
-  .daily-summary-card{min-height:98px;padding:10px 11px}.daily-summary-card::after{left:11px;right:11px}
+  .daily-summary-card{min-height:93px;padding:9px 11px}.daily-summary-card::after{left:11px;right:11px}
   .summary-number{font-size:31px}.recent-label{margin-top:8px}
   .close-day-card{min-height:44px}
 }
@@ -1164,7 +1164,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .pet-zone-v731{top:137px!important;height:142px!important}
   .pet-zone-v731 .pet-bob{width:142px;height:142px}
   .quick-actions-v731 .quick{min-height:68px}
-  .daily-summary-card{min-height:91px}.recent-label{margin-top:6px}
+  .daily-summary-card{min-height:86px}.recent-label{margin-top:5px}
 }
 @media(prefers-reduced-motion:reduce){
   .pet-zone-v731 .pet-sway{animation:none!important}
@@ -1896,7 +1896,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.8.1').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.8.2').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2994,6 +2994,42 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return value;
   }
 
+  function dailyPerformanceProfile(now=Date.now()){
+    const e=progressionEngine(now,true);
+    const day=today();
+    const dayScore=e.days[day]||null;
+    const daySmokes=smokes.filter(x=>eventDay(x)===day).slice().sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+    const refInterval=e.live.referenceInterval||e.reference.intervalMinutes||e.baseline.intervalMinutes||null;
+    const liveMinutes=e.live.minutes;
+    const beforeFirstSmoke=daySmokes.length===0;
+    const recentMs=120*60000;
+    const recentBurst=daySmokes.filter(x=>now-new Date(x.timestamp).getTime()<=recentMs).length;
+    const gapRatio=(refInterval&&liveMinutes!==null)?liveMinutes/refInterval:null;
+    const longGap=gapRatio!==null&&gapRatio>=1.15;
+    const veryLongGap=gapRatio!==null&&gapRatio>=1.6;
+    const shortGap=gapRatio!==null&&gapRatio<0.8;
+    const heavySequence=recentBurst>=2;
+    const toughMoment=heavySequence||shortGap||Boolean(dayScore&&dayScore.breathPenalty>=3);
+    const supportive=toughMoment||recoveryMinutes(now)>=5&&vitality()<48;
+    const upbeat=beforeFirstSmoke||veryLongGap||Boolean(dayScore&&dayScore.reference&&dayScore.reference.smokes!==null&&dayScore.smokes<dayScore.reference.smokes);
+    const talkative=upbeat||supportive||Boolean(dayScore&&dayScore.resists>=1);
+    const energy=clamp(
+      (beforeFirstSmoke?82:54)
+      +(veryLongGap?16:longGap?8:0)
+      -(shortGap?12:0)
+      -(heavySequence?15:0)
+      +(upbeat?8:0),
+      28,96
+    );
+    const expression=beforeFirstSmoke?'playful':veryLongGap?'radiant':longGap?'happy':heavySequence?'wry':shortGap?'confused':supportive?'tired':'neutral';
+    const moodTag=beforeFirstSmoke?'ligado':veryLongGap?'aceso':longGap?'confiante':heavySequence?'ríspido':shortGap?'mexido':supportive?'solidário':'atento';
+    const supportMessage=supportive?heavySequence?'sequência puxada':'precisando de apoio':upbeat?'ritmo favorável':'';
+    return {
+      beforeFirstSmoke, recentBurst, gapRatio, longGap, veryLongGap, shortGap, heavySequence, supportive, upbeat, talkative, energy,
+      expression, moodTag, supportMessage, liveMinutes, refInterval, dayScore, currentMultiplier:e.currentMultiplier
+    };
+  }
+
   function maybeBaseline(){
     const e=progressionEngine(Date.now(),true);
     game.baseline=e.baseline.smokes;
@@ -3656,9 +3692,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function message(m,b){
+    const perf=dailyPerformanceProfile();
     if(!observed().length)return'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
-    if(!game.baselineLocked)return'Ainda estou conhecendo seu ritmo.';
+    if(!game.baselineLocked)return'Estou te observando e aprendendo seu ritmo.';
     if(b<25)return'Fiquei sonolento sem notícias. Um registro honesto já me ajuda a acordar.';
+    if(perf.beforeFirstSmoke)return'Antes do primeiro cigarro eu fico mais ligado. Vamos alongar esse espaço?';
+    if(perf.veryLongGap)return'Esse intervalo está grande. Tô elétrico por aqui.';
+    if(perf.longGap)return'Hoje abriu um espaço bom. Quero ver até onde ele vai.';
+    if(perf.heavySequence)return'Não vou fingir que gostei da sequência. Mas eu sigo do seu lado.';
+    if(perf.shortGap)return'Intervalo curto. Sem drama: vamos tentar alongar o próximo.';
     return{
       tired:'A semana apertou um pouco. Eu continuo aqui — o histórico ainda vale.',
       neutral:'Estou acompanhando. Manter o mapa dos seus dias vivo já importa.',
@@ -3710,10 +3752,18 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(kind==='idle'){
       if(Date.now()<actorBusyUntil)return;
       const level=morningContext().level,hour=actorClock().hour,recovering=recoveryMinutes()<5;
-      const repertoire=recovering?['shrug','listen','tilt']:hour>=22||hour<6?['yawn','settle','listen']:level>=3?['tiptoe','wiggle','sway','peek']:level>=2?['stretch','sway','peek','nod']:['look','settle','listen','tilt'];
+      const perf=dailyPerformanceProfile();
+      const repertoire=recovering?['shrug','listen','tilt']
+        :hour>=22||hour<6?['yawn','settle','listen']
+        :perf.beforeFirstSmoke||perf.veryLongGap?['tiptoe','wiggle','hop','sway','peek']
+        :perf.longGap?['stretch','sway','peek','nod','wiggle']
+        :perf.heavySequence||perf.shortGap?['look','shrug','listen','tilt','settle']
+        :level>=3?['tiptoe','wiggle','sway','peek']
+        :level>=2?['stretch','sway','peek','nod']
+        :['look','settle','listen','tilt'];
       const options=repertoire.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]);
-      if(!recovering&&Math.random()<.25)setTemporaryPetExpression(level>=2?'wink':'wry',1800);
-      if(!actorState().quiet.value&&Date.now()-actorLastSpeech>90000&&Math.random()<.22){showPetReaction(actorLine('touch'),'calm',3200);actorLastSpeech=Date.now()}
+      if(!recovering&&Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.heavySequence?'wry':level>=2?'wink':'wry',1800);
+      if(!actorState().quiet.value&&Date.now()-actorLastSpeech>(perf.talkative?65000:90000)&&Math.random()<(perf.talkative?.36:.22)){showPetReaction(actorLine('touch'),perf.supportive?'warm':'calm',3200);actorLastSpeech=Date.now()}
       return;
     }
     const milestone=actorMilestone(kind);
@@ -3726,25 +3776,28 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function applyPetVisualState(v,b,f,r){
     const pet=$('petZone');
     if(!pet)return;
+    const perf=dailyPerformanceProfile();
     ['high-bond','high-breath','high-resilience','low-vitality'].forEach(c=>pet.classList.remove(c));
-    if(b>=60)pet.classList.add('high-bond');
-    if(f>=65)pet.classList.add('high-breath');
+    if(b>=60||perf.supportive)pet.classList.add('high-bond');
+    if(f>=65||perf.longGap)pet.classList.add('high-breath');
     if(r>=65)pet.classList.add('high-resilience');
     if(v<40)pet.classList.add('low-vitality');
 
-    const tone=v<35
-      ?{main:'#71888b',light:'#a5b5b3',glow:'rgba(132,167,177,.18)'}
-      :v<55
-        ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
-        :v<75
-          ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
-          :{main:'#45d6a8',light:'#9bf6d2',glow:'rgba(94,242,191,.34)'};
+    const tone=perf.heavySequence
+      ?{main:'#3ea272',light:'#75cf99',glow:'rgba(95,186,133,.20)'}
+      :v<35
+        ?{main:'#71888b',light:'#a5b5b3',glow:'rgba(132,167,177,.18)'}
+        :v<55
+          ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
+          :v<75
+            ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
+            :{main:'#45d6a8',light:'#9bf6d2',glow:'rgba(94,242,191,.34)'};
     pet.style.setProperty('--nimbo-main',tone.main);
     pet.style.setProperty('--nimbo-light',tone.light);
     pet.style.setProperty('--nimbo-glow',tone.glow);
-    pet.style.setProperty('--nimbo-scale',(0.94+(v/100)*0.10).toFixed(3));
+    pet.style.setProperty('--nimbo-scale',(0.94+(v/100)*0.10+(perf.upbeat?.03:0)).toFixed(3));
     pet.setAttribute('aria-label',`Tocar no Nimbo. Vitalidade ${v}, Vínculo ${b}, Fôlego ${f}, Resiliência ${r}.`);
-    petMotionProfile={vitality:v,breath:f};
+    petMotionProfile={vitality:v,breath:f,energy:perf.energy,talkative:perf.talkative?1:0,supportive:perf.supportive?1:0,upbeat:perf.upbeat?1:0};
   }
 
   function motionReduced(){
@@ -3759,9 +3812,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     clearTimeout(petWalkTimer);
     clearTimeout(petWalkEndTimer);
     if(motionReduced())return;
-    const energy=(petMotionProfile.vitality+petMotionProfile.breath)/2;
-    const min=soon?450:1200+(100-energy)*18;
-    const max=soon?1100:3000+(100-energy)*34;
+    const energy=clamp(((petMotionProfile.vitality+petMotionProfile.breath)/2)*.35+Number(petMotionProfile.energy||55)*.65,25,95);
+    const min=soon?420:1000+(100-energy)*16;
+    const max=soon?980:2600+(100-energy)*30;
     petWalkTimer=setTimeout(walkNimbo,randomBetween(min,max));
   }
 
@@ -3769,13 +3822,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const walker=$('petWalker');if(!walker||motionReduced())return;
     if(document.visibilityState!=='visible'||!document.querySelector('#home.tab.active')||Date.now()<actorBusyUntil){scheduleNimboWalk(false);return}
     const hour=actorClock().hour;
-    const energy=recoveryMinutes()<5?30:clamp(35+petMotionProfile.breath*.35+morningContext().level*7-(hour>=22||hour<6?22:0),30,90);
-    const range=clamp(($('petZone').clientWidth-110)/2,24,58);
+    const energy=recoveryMinutes()<5?30:clamp(22+petMotionProfile.breath*.18+Number(petMotionProfile.energy||55)*.62+morningContext().level*5-(hour>=22||hour<6?22:0),28,94);
+    const range=clamp(($('petZone').clientWidth-110)/2,24,62);
     let target=randomBetween(-range,range);if(Math.abs(target-nimboWalkX)<15)target=nimboWalkX>=0?-range:range;
-    const duration=Math.round(clamp(Math.abs(target-nimboWalkX)/(20+energy*.30)*1000,900,3200));
+    const duration=Math.round(clamp(Math.abs(target-nimboWalkX)/(20+energy*.34)*1000,780,3000));
     walker.style.setProperty('--nimbo-dir',target>=nimboWalkX?'1':'-1');
     walker.style.setProperty('--gaze',target>=nimboWalkX?'2px':'-2px');
-    walker.style.setProperty('--step-speed',energy>70?'.29s':'.42s');
+    walker.style.setProperty('--step-speed',energy>82?'.24s':energy>66?'.29s':energy>50?'.35s':'.45s');
     petWalkTimer=setTimeout(()=>{
       walker.style.setProperty('--walk-duration',duration+'ms');walker.style.setProperty('--walk-x',target.toFixed(1)+'px');walker.classList.add('walking');nimboWalkX=target;nimboWalkUntil=Date.now()+duration;
       petWalkEndTimer=setTimeout(()=>{walker.classList.remove('walking');walker.style.setProperty('--gaze','0px');walker.dataset.action='settle';actorTimer=setTimeout(()=>walker.dataset.action='',500);scheduleNimboWalk(false)},duration+30);
@@ -3819,7 +3872,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function schedulePetIdle(){
     clearTimeout(petIdleTimer);
-    const delay=16000+Math.random()*22000;
+    const perf=dailyPerformanceProfile();
+    const delay=(perf.talkative?11000:16000)+Math.random()*(perf.talkative?15000:22000);
     petIdleTimer=setTimeout(()=>{
       if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active')){
         reactPet('idle');
@@ -3910,7 +3964,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     state.celebrated[id]=new Date().toISOString();saveActor();return true;
   }
   function actorLine(kind){
-    const j=ensureJourney(),plan=j.plan,m=morningContext(),hour=actorClock().hour;
+    const j=ensureJourney(),plan=j.plan,m=morningContext(),hour=actorClock().hour,perf=dailyPerformanceProfile();
     const pools={
       smoke:['Cof. Me recompondo.','Minha cara entregou, né?','Ugh. Já volto ao meu formato.','Tô meio torto. Continuo aqui.','Opa. Preciso de um instante.','😵‍💫 ...já passa.','Registrado. Sem discurso.','Não vou fazer palestra. Hoje.'],
       resist:['Pru! Essa passou.','A vontade fez cena. Você ficou.','Menos um drama da nicotina.','Essa mereceu um pulinho.','Gostei dessa pausa.','Hehe. Seguimos. ✨','A vontade veio. E foi.','Um espacinho a mais.','Boa. Sem fogos... tá, um pulo.'],
@@ -3924,6 +3978,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       else {
         if(!m.hasSmoked&&m.timeLevel>=1)context.push('Sem primeiro registro ainda. 👀','Seu primeiro costuma aparecer antes.');
         if(m.hasSmoked&&m.timeLevel>=1)context.push('Primeiro registro mais tarde hoje. Boa!','O primeiro veio depois do habitual, hein.');
+        if(perf.beforeFirstSmoke)context.push('Antes do primeiro eu fico mais elétrico.','Vamos ver quanto esse espaço aguenta?');
+        if(perf.veryLongGap)context.push('Esse intervalo tá bonito.','Tô até mais falante com esse fôlego.');
+        else if(perf.longGap)context.push('Intervalo acima da média. Gosto disso.','Mais ar entre um cigarro e outro.');
+        if(perf.heavySequence)context.push('Sequência chata. Não vou dourar a pílula.','Tá apertado. Então vamos simplificar o próximo passo.');
+        else if(perf.shortGap)context.push('Intervalo curto. Sem brigar com isso.','Vamos tentar alongar o próximo, só o próximo.');
+        if(perf.supportive)context.push('Eu fico mais rabugento, mas mais junto também.','Se quiser, só segura mais alguns minutos comigo.');
         if(usualSmokeWindow())context.push('Esse horário tem história, hein.','Hora conhecida. Cabe uma pausa?');
         if(hour>=22||hour<5)context.push('Prr... modo noturno.','Até meus pixels estão bocejando.');
         else if(hour<12)context.push('Bom dia. Carregando simpatia...','Acordei. O carisma vem depois.');
@@ -3975,10 +4035,16 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function determineNimboExpression(v,b,f,r){
-    const hour=actorClock().hour,last=resists[resists.length-1];
+    const hour=actorClock().hour,last=resists[resists.length-1],perf=dailyPerformanceProfile();
     if(recoveryMinutes()<5)return {expression:'confused',moodTag:'me recuperando'};
     if(last&&Date.now()-new Date(last.timestamp).getTime()>=0&&Date.now()-new Date(last.timestamp).getTime()<120000)return {expression:'radiant',moodTag:'confiante'};
     if(hour>=22||hour<5)return {expression:'sleepy',moodTag:'tranquilo'};
+    if(perf.beforeFirstSmoke)return {expression:'playful',moodTag:'ligado'};
+    if(perf.veryLongGap)return {expression:'radiant',moodTag:'aceso'};
+    if(perf.longGap)return {expression:'happy',moodTag:'solto'};
+    if(perf.heavySequence)return {expression:'wry',moodTag:'ríspido'};
+    if(perf.shortGap)return {expression:'confused',moodTag:'mexido'};
+    if(perf.supportive)return {expression:'tired',moodTag:'junto'};
     const morning=morningContext();
     if(morning.level>=3)return {expression:'playful',moodTag:'animado'};
     if(morning.level>=2)return {expression:'happy',moodTag:'confiante'};
@@ -3986,7 +4052,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return {expression:'neutral',moodTag:b>=50?'à vontade':'atento'};
   }
 
-  function ambientNimboLine(){return ''}
+  function ambientNimboLine(){
+    const perf=dailyPerformanceProfile();
+    if(!observed().length)return 'Oi. Eu sou o Nimbo.';
+    if(!game.baselineLocked)return perf.beforeFirstSmoke?'Observando. Você, eu e esse espaço antes do primeiro.':'Ainda estou conhecendo seu ritmo.';
+    if(perf.beforeFirstSmoke)return 'Ainda sem primeiro cigarro hoje. Eu fico mais aceso nessas horas.';
+    if(perf.veryLongGap)return 'Intervalo grande. Tô animado e um pouco exibido.';
+    if(perf.longGap)return 'O dia abriu um bom espaço. Vamos cuidar dele.';
+    if(perf.heavySequence)return 'Não foi uma sequência elegante. Tudo bem. O próximo intervalo ainda existe.';
+    if(perf.shortGap)return 'Curto demais. Sem drama — mira no próximo intervalo.';
+    return message(mood(vitality(),bond()),bond());
+  }
 
   function setPetExpression(expr){
     const pet=$('petZone');
