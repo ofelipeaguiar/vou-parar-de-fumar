@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.4.1">
+<meta name="app-version" content="7.5.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1227,6 +1227,116 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   .pet-walker.walking .pet-bob,.pet-walker.walking .nimbo-foot{animation:none!important}
 }
 
+
+
+/* =========================================================
+   V7.5 — VALE ESTRUTURAL
+   Mapa modular, explorável e sem economia visível.
+   ========================================================= */
+body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+.nav{padding:7px 9px calc(7px + env(safe-area-inset-bottom))}
+.navin{grid-template-columns:repeat(5,1fr)!important;gap:4px!important}
+.nav button{min-height:48px;padding:6px 3px!important}
+.nav .ico{font-size:14px!important}
+
+.vale-v75-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 0 10px}
+.vale-v75-kicker{font-size:10px;color:#8195aa;margin-bottom:3px}
+.vale-v75-title{font-size:27px;line-height:1;font-weight:850;letter-spacing:-.65px}
+.vale-v75-copy{font-size:10px;color:#8397ad;line-height:1.4;margin-top:6px}
+.vale-v75-presence{flex:0 0 auto;border:1px solid rgba(98,233,143,.32);background:rgba(38,111,82,.14);border-radius:999px;padding:9px 12px;color:#e9fff0;font:700 10px var(--pixel);white-space:nowrap}
+.vale-v75-presence b{color:#73eca0;font-size:12px}
+
+.vale-v75-shell{background:#0d192a;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:8px;margin-bottom:10px;box-shadow:0 18px 48px rgba(0,0,0,.20)}
+.vale-v75-viewport{position:relative;height:clamp(510px,66vh,690px);overflow:hidden;border-radius:17px;border:1px solid rgba(255,255,255,.09);background:#284e36;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.vale-v75-viewport.dragging{cursor:grabbing}
+.vale-v75-world{position:absolute;left:0;top:0;width:1600px;height:1400px;transform-origin:0 0;will-change:transform;background:
+  radial-gradient(circle at 23% 22%,rgba(126,174,85,.18),transparent 18%),
+  radial-gradient(circle at 72% 60%,rgba(92,145,72,.16),transparent 22%),
+  linear-gradient(180deg,#47784b 0%,#3e7045 48%,#37663f 100%)}
+.vale-v75-world::before{content:"";position:absolute;inset:0;opacity:.16;pointer-events:none;background-image:
+  linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px}
+.vale-v75-world::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 150px rgba(4,15,18,.24)}
+
+.vale-v75-roads{position:absolute;inset:0;width:1600px;height:1400px;z-index:1;overflow:visible;pointer-events:none}
+.vale-v75-road-shadow{fill:none;stroke:rgba(71,54,32,.20);stroke-width:30;stroke-linecap:round;stroke-linejoin:round}
+.vale-v75-road{fill:none;stroke:#d2bd85;stroke-width:22;stroke-linecap:round;stroke-linejoin:round}
+.vale-v75-road.local{stroke-width:13;opacity:.92}
+.vale-v75-road-dash{fill:none;stroke:rgba(230,211,162,.42);stroke-width:7;stroke-linecap:round;stroke-dasharray:16 18}
+
+.vale-v75-scenery,.vale-v75-places{position:absolute;inset:0;z-index:2;pointer-events:none}
+.v75-tree{position:absolute;width:30px;height:43px;transform:translate(-50%,-85%);filter:drop-shadow(0 6px 4px rgba(0,0,0,.16))}
+.v75-tree::before{content:"";position:absolute;left:4px;top:0;width:22px;height:31px;background:#174f34;clip-path:polygon(50% 0,100% 58%,78% 58%,100% 100%,0 100%,22% 58%,0 58%);border-radius:2px}
+.v75-tree::after{content:"";position:absolute;left:13px;bottom:0;width:5px;height:14px;background:#725338;border-radius:2px}
+.v75-tree.round::before{width:30px;height:29px;left:0;top:2px;border-radius:48% 52% 45% 55%;clip-path:none;background:#276642;box-shadow:-8px 8px 0 #2d7047,8px 8px 0 #245d3d}
+.v75-rock{position:absolute;width:27px;height:18px;transform:translate(-50%,-50%);background:#6f7f72;clip-path:polygon(18% 22%,55% 0,89% 24%,100% 72%,72% 100%,12% 86%,0 52%);filter:drop-shadow(0 4px 2px rgba(0,0,0,.18))}
+.v75-flower{position:absolute;width:5px;height:5px;border-radius:50%;background:#f0e8af;box-shadow:7px 3px 0 #f6f0c2,-5px 6px 0 #e4d886;opacity:.8}
+
+.v75-place{position:absolute;z-index:4;pointer-events:auto;transform:translate(-50%,-50%);border:0;background:transparent;color:inherit;padding:0;text-align:center;-webkit-tap-highlight-color:transparent}
+.v75-place:not(.locked){cursor:pointer}
+.v75-place .v75-hit{position:relative;min-width:150px;min-height:135px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:1px}
+.v75-place.selected .v75-building{filter:drop-shadow(0 0 8px rgba(107,239,162,.9)) drop-shadow(0 10px 7px rgba(0,0,0,.20))}
+.v75-place.selected .v75-name{border-color:rgba(255,224,115,.85);box-shadow:0 0 0 2px rgba(255,224,115,.10)}
+.v75-place.locked{opacity:.62;filter:saturate(.6)}
+.v75-place.locked .v75-building{filter:grayscale(.35) drop-shadow(0 8px 5px rgba(0,0,0,.18))}
+.v75-name{max-width:168px;margin-top:-2px;background:rgba(7,20,33,.90);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:7px 10px;color:#f5f8fb;font-size:14px;font-weight:780;line-height:1.1;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.v75-name small{display:block;color:#a8b9c9;font-size:10px;font-weight:520;margin-top:4px;white-space:nowrap}
+.v75-state{position:absolute;right:4px;top:6px;padding:4px 6px;border-radius:999px;background:#0b1a2b;border:1px solid rgba(255,255,255,.16);font:700 8px var(--pixel);color:#bcd0dd}
+
+/* CSS sprites provisórios: simples de trocar por PNGs depois. */
+.v75-building{position:relative;filter:drop-shadow(0 10px 7px rgba(0,0,0,.20));transition:transform .15s,filter .2s}
+.v75-place:active .v75-building{transform:translateY(2px) scale(.97)}
+.v75-building.tower{width:72px;height:104px}
+.v75-building.tower .base{position:absolute;left:15px;bottom:0;width:43px;height:72px;background:linear-gradient(90deg,#cfceb9,#eee7cf 55%,#b7b8a8);border:2px solid #59636a;border-radius:8px 8px 4px 4px}
+.v75-building.tower .roof{position:absolute;left:8px;top:14px;width:57px;height:38px;background:#315ea0;clip-path:polygon(50% 0,100% 100%,0 100%);border-radius:3px}
+.v75-building.tower .flag{position:absolute;left:36px;top:0;width:3px;height:20px;background:#d8d2a4}.v75-building.tower .flag::after{content:"";position:absolute;left:3px;top:1px;width:23px;height:11px;background:#5b73c4;clip-path:polygon(0 0,100% 12%,78% 100%,0 82%)}
+.v75-building.tower .door{position:absolute;left:29px;bottom:0;width:15px;height:23px;background:#624939;border-radius:8px 8px 2px 2px}.v75-building.tower .window{position:absolute;left:31px;top:49px;width:12px;height:17px;border-radius:6px;background:#8bdcff;border:2px solid #4d5960}
+
+.v75-building.portico{width:100px;height:82px}
+.v75-building.portico .arch{position:absolute;left:27px;bottom:0;width:48px;height:75px;background:linear-gradient(90deg,#aaa99c,#ded8bf 50%,#9b9b91);border:3px solid #656762;clip-path:polygon(0 0,100% 0,100% 100%,68% 100%,67% 48%,59% 33%,50% 29%,41% 33%,33% 48%,32% 100%,0 100%)}
+.v75-building.portico .wing{position:absolute;bottom:0;width:27px;height:51px;background:#beb9a7;border:2px solid #666861}.v75-building.portico .wing.left{left:4px}.v75-building.portico .wing.right{right:4px}
+.v75-building.portico .banner{position:absolute;right:13px;top:23px;width:10px;height:28px;background:#7252a9;border-radius:1px}
+.v75-place.ruin .v75-building.portico{transform:rotate(-2deg);opacity:.88}.v75-place.ruin .v75-building.portico .wing.right{transform:translateY(10px) rotate(9deg)}
+
+.v75-building.workshop{width:104px;height:76px}
+.v75-building.workshop .body{position:absolute;left:9px;bottom:0;width:78px;height:50px;background:#b98155;border:3px solid #614b3c;border-radius:4px}.v75-building.workshop .roof{position:absolute;left:3px;top:13px;width:88px;height:34px;background:#773f32;clip-path:polygon(9% 0,91% 0,100% 100%,0 100%)}
+.v75-building.workshop .chimney{position:absolute;right:12px;top:0;width:14px;height:34px;background:#6d625b;border:2px solid #47484a}.v75-building.workshop .chimney::after{content:"";position:absolute;left:-4px;top:-17px;width:18px;height:18px;border-radius:50%;background:rgba(213,222,213,.58);box-shadow:9px -9px 0 rgba(213,222,213,.35)}
+.v75-building.workshop .door{position:absolute;left:36px;bottom:0;width:22px;height:28px;background:#553d31}
+
+.v75-house{position:absolute;width:48px;height:42px;transform:translate(-50%,-70%);filter:drop-shadow(0 5px 3px rgba(0,0,0,.18));z-index:3}
+.v75-house::before{content:"";position:absolute;left:5px;bottom:0;width:38px;height:29px;background:#eee0c2;border:2px solid #735b49;border-radius:3px}.v75-house::after{content:"";position:absolute;left:1px;top:0;width:46px;height:22px;background:#b45d3e;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.v75-house.blue::after{background:#4d72a9}.v75-house.small{transform:translate(-50%,-70%) scale(.78)}
+.v75-plaza{position:absolute;left:800px;top:715px;width:170px;height:125px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,#c8c1a7 0 49%,#ad9e79 50% 54%,transparent 55%);z-index:2;pointer-events:none}
+.v75-fountain{position:absolute;left:800px;top:704px;width:52px;height:52px;transform:translate(-50%,-50%);border-radius:50%;background:#7ba0aa;border:7px solid #d7cfb6;box-shadow:0 6px 6px rgba(0,0,0,.18);z-index:3;pointer-events:none}.v75-fountain::before{content:"";position:absolute;left:17px;top:-17px;width:8px;height:27px;background:#8baab2;border-radius:5px}.v75-fountain::after{content:"";position:absolute;left:11px;top:-23px;width:20px;height:20px;border-radius:50%;border:3px solid rgba(189,236,245,.65);border-bottom-color:transparent}
+.v75-central-label{position:absolute;left:800px;top:780px;transform:translate(-50%,-50%);z-index:5;background:rgba(7,20,33,.88);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:6px 9px;font-size:12px;font-weight:760;color:#f1f7fb;pointer-events:none}
+
+.v75-future{position:absolute;width:250px;height:190px;transform:translate(-50%,-50%);border:3px dashed rgba(224,235,225,.28);border-radius:34% 43% 38% 45%;z-index:3;display:grid;place-items:center;text-align:center;color:#d9e3e0;font:700 10px var(--pixel);background:radial-gradient(circle,rgba(202,220,215,.18),rgba(112,145,135,.13) 58%,transparent 72%);pointer-events:none}
+.v75-future::before{content:"";position:absolute;inset:-42px;border-radius:48%;background:radial-gradient(circle,rgba(211,225,222,.40),rgba(173,196,190,.20) 45%,transparent 70%);filter:blur(8px);z-index:-1}
+.v75-future span{padding:7px 10px;border-radius:999px;background:rgba(8,24,31,.56);border:1px solid rgba(255,255,255,.12)}
+
+.vale-v75-controls{position:absolute;z-index:20;right:9px;top:50%;transform:translateY(-50%);display:grid;gap:6px}
+.vale-v75-controls button{width:43px;height:43px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(7,22,39,.88);color:#e8f1f8;font-size:24px;line-height:1;box-shadow:0 5px 14px rgba(0,0,0,.18);backdrop-filter:blur(5px)}
+.vale-v75-controls button:active{transform:scale(.96)}
+.vale-v75-controls .center{font-size:19px}
+.vale-v75-zoom{position:absolute;z-index:19;right:11px;bottom:9px;padding:5px 7px;border-radius:8px;background:rgba(5,18,29,.62);color:#b7c8d5;font:700 8px var(--pixel);pointer-events:none}
+
+.vale-v75-card{display:none;margin-top:8px;border:1px solid rgba(114,222,241,.13);border-radius:17px;background:#101d32;padding:12px 13px;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.vale-v75-card.show{display:grid}
+.vale-v75-card-title{font-size:15px;font-weight:830;letter-spacing:-.2px}
+.vale-v75-card-sub{font:8px var(--pixel);color:#8fd7a9;margin-top:4px}
+.vale-v75-card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.vale-v75-card-meta span{font-size:9px;color:#9fb0c0;padding:5px 7px;border-radius:8px;background:#0b1728;border:1px solid rgba(255,255,255,.07)}
+.vale-v75-card button{min-width:94px;border:0;border-radius:12px;padding:12px 13px;background:linear-gradient(180deg,#66ec92,#46d77a);color:#07351a;font-weight:850}
+.vale-v75-card button:disabled{background:#1b2b3f;color:#718195;opacity:1}
+.vale-v75-tip{font-size:9px;color:#70869a;text-align:center;margin:8px 0 1px}
+
+@media(max-width:380px){
+  .vale-v75-title{font-size:24px}.vale-v75-copy{font-size:9px}.vale-v75-presence{padding:8px 9px}
+  .vale-v75-viewport{height:535px}.vale-v75-card{grid-template-columns:1fr}.vale-v75-card button{width:100%}
+}
+@media(max-height:760px) and (max-width:500px){.vale-v75-viewport{height:510px}}
+@media(prefers-reduced-motion:reduce){.v75-building{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -1393,94 +1503,56 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 </section>
 
 <section id="vale" class="tab">
-  <div class="vale-screen-head">
+  <div class="vale-v75-head">
     <div>
-      <h2>Vale do Nimbo</h2>
-      <p>Construa uma cidade viva. Estruturas produtivas podem ser repetidas: cada nova construção aparece no mapa e acelera a economia.</p>
+      <div class="vale-v75-kicker">Vou parar de fumar</div>
+      <div class="vale-v75-title">Vale do Nimbo</div>
+      <div class="vale-v75-copy">Pequenas ações. Um lugar que cresce com você.</div>
     </div>
-    <div class="vale-stoic-mark">O próximo passo<br>é o que existe agora.</div>
+    <div class="vale-v75-presence">✦ <b id="valePresenceV75">0</b> Presenças</div>
   </div>
 
-  <div class="world-strip">
-    <div class="world-resource"><span class="ri">🪵</span><div class="rv" id="woodValue">0</div><div class="rk">Madeira</div></div>
-    <div class="world-resource"><span class="ri">🪨</span><div class="rv" id="stoneValue">0</div><div class="rk">Pedra</div></div>
-    <div class="world-resource"><span class="ri">🌱</span><div class="rv" id="seedsValue">0</div><div class="rk">Sementes</div></div>
-    <div class="world-resource"><span class="ri">✦</span><div class="rv" id="presenceValue">0</div><div class="rk">Presença</div></div>
-  </div>
+  <div class="vale-v75-shell">
+    <div class="vale-v75-viewport" id="valeViewport" aria-label="Mapa explorável do Vale do Nimbo">
+      <div class="vale-v75-world" id="valeWorld">
+        <svg class="vale-v75-roads" viewBox="0 0 1600 1400" aria-hidden="true">
+          <path class="vale-v75-road-shadow" d="M800 716 C760 610 720 515 575 450"/>
+          <path class="vale-v75-road" d="M800 716 C760 610 720 515 575 450"/>
+          <path class="vale-v75-road-shadow" d="M800 716 C910 650 1030 575 1195 495"/>
+          <path class="vale-v75-road" d="M800 716 C910 650 1030 575 1195 495"/>
+          <path class="vale-v75-road-shadow" d="M800 716 C845 820 930 935 1080 1020"/>
+          <path class="vale-v75-road" d="M800 716 C845 820 930 935 1080 1020"/>
+          <path class="vale-v75-road-shadow" d="M800 716 C690 805 600 915 488 1055"/>
+          <path class="vale-v75-road" d="M800 716 C690 805 600 915 488 1055"/>
+          <path class="vale-v75-road local" d="M575 450 C635 405 688 355 760 315"/>
+          <path class="vale-v75-road local" d="M1195 495 C1290 505 1350 550 1425 605"/>
+          <path class="vale-v75-road-dash" d="M1080 1020 C1190 1100 1280 1160 1390 1205"/>
+          <path class="vale-v75-road-dash" d="M488 1055 C390 1120 325 1185 260 1260"/>
+        </svg>
+        <div class="vale-v75-scenery" id="valeSceneryV75"></div>
+        <div class="v75-plaza"></div><div class="v75-fountain"></div><div class="v75-central-label">Praça do Retorno</div>
+        <div class="vale-v75-places" id="valePlacesV75"></div>
+        <div class="v75-future" style="left:275px;top:720px"><span>EM BREVE</span></div>
+        <div class="v75-future" style="left:1325px;top:810px"><span>EM BREVE</span></div>
+        <div class="v75-future" style="left:760px;top:1250px"><span>EM BREVE</span></div>
+      </div>
+      <div class="vale-v75-controls" aria-label="Controles do mapa">
+        <button type="button" id="valeZoomIn" aria-label="Aproximar">+</button>
+        <button type="button" id="valeZoomOut" aria-label="Afastar">−</button>
+        <button type="button" class="center" id="valeCenter" aria-label="Centralizar mapa">◎</button>
+      </div>
+      <div class="vale-v75-zoom" id="valeZoomLabel">100%</div>
+    </div>
 
-  <div class="map-card city-builder-card">
-    <div class="map-head">
+    <div class="vale-v75-card" id="valePlaceCard">
       <div>
-        <div class="map-title">Cidade do Vale</div>
-        <div class="map-sub" id="cityMapSubtitle">As construções aparecem fisicamente conforme o Vale cresce.</div>
+        <div class="vale-v75-card-title" id="valeCardTitle">Torre dos Ventos</div>
+        <div class="vale-v75-card-sub" id="valeCardSub">DISTRITO DOS VENTOS</div>
+        <div class="vale-v75-card-meta" id="valeCardMeta"></div>
       </div>
-      <div class="production-pill" id="productionSummary">produção parada</div>
+      <button type="button" id="valeCardAction" disabled>Em breve</button>
     </div>
-
-    <div class="vale-map vale-map-v72" id="valeMap">
-      <div class="map-settlement-layer" id="mapSettlementLayer"></div>
-      <div class="map-life-layer" id="mapLifeLayer"></div>
-      <div class="map-nimbo" id="mapNimbo" aria-hidden="true"></div>
-      <div class="map-path" style="left:48%;top:51%;width:36%;transform:rotate(-28deg)"></div>
-      <div class="map-path" style="left:47%;top:52%;width:36%;transform:rotate(151deg)"></div>
-      <div class="map-path" style="left:49%;top:52%;width:29%;transform:rotate(88deg)"></div>
-      <div class="map-path" style="left:49%;top:51%;width:28%;transform:rotate(-90deg)"></div>
-      <div class="fog f1" id="fogNorth"></div>
-      <div class="fog f2" id="fogWest"></div>
-      <div class="fog f3" id="fogEast"></div>
-      <div class="future-region" id="futureRegion">🌫 Bosque do Intervalo</div>
-    </div>
-
-    <div class="building-palette-wrap">
-      <div class="building-palette-title">CONSTRUIR / GERENCIAR</div>
-      <div class="building-palette" id="buildingPalette">
-        <button class="building-choice" data-building="refuge"><span class="choice-dot"></span><span class="choice-icon">🏠</span><span class="choice-count">x1</span></button>
-        <button class="building-choice" data-building="portico"><span class="choice-dot"></span><span class="choice-icon">🏛️</span><span class="choice-count">N0</span></button>
-        <button class="building-choice" data-building="garden"><span class="choice-dot"></span><span class="choice-icon">🌾</span><span class="choice-count">x0</span></button>
-        <button class="building-choice" data-building="sawmill"><span class="choice-dot"></span><span class="choice-icon">🪚</span><span class="choice-count">x0</span></button>
-        <button class="building-choice" data-building="quarry"><span class="choice-dot"></span><span class="choice-icon">⛏️</span><span class="choice-count">x0</span></button>
-        <button class="building-choice" data-building="cartography"><span class="choice-dot"></span><span class="choice-icon">🗺️</span><span class="choice-count">N0</span></button>
-      </div>
-    </div>
-
-    <div class="building-detail-panel" id="buildingDetailPanel">
-      <div class="building-detail-head">
-        <div class="building-detail-left">
-          <div class="building-detail-icon" id="buildingDetailIcon">🏠</div>
-          <div><div class="building-detail-name" id="buildingDetailName">Abrigos</div><div class="building-detail-count" id="buildingDetailCount">1 construção</div></div>
-        </div>
-        <div class="production-pill" id="buildingDetailProduction">armazenamento</div>
-      </div>
-      <div class="building-detail-effect" id="buildingDetailEffect"></div>
-      <div class="building-detail-desc" id="buildingDetailDesc"></div>
-      <div class="building-requirement" id="buildingDetailRequirement" style="display:none"></div>
-      <div class="building-detail-footer">
-        <div class="building-costs" id="buildingDetailCosts"></div>
-        <button class="build-more-btn" id="buildMoreBtn">Construir +1</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="resources" class="tab">
-  <div class="resources-head">
-    <div class="resources-kicker">TESOURARIA DO VALE</div>
-    <div class="resources-title">Recursos em movimento</div>
-    <div class="resources-copy">A cidade produz continuamente. Vitalidade e Vínculo aumentam a eficiência; ações conscientes na vida real dão impulsos à economia sem recompensar o ato de fumar.</div>
-    <div class="resources-summary">
-      <div class="resources-summary-box"><div class="resources-summary-k">Eficiência produtiva</div><div class="resources-summary-v" id="resourceEfficiency">100%</div></div>
-      <div class="resources-summary-box"><div class="resources-summary-k">Armazenamento comum</div><div class="resources-summary-v" id="resourceStorage">4k</div></div>
-    </div>
-  </div>
-
-  <div class="resource-list" id="resourceList"></div>
-
-  <div class="behavior-economy">
-    <h3>O que sua jornada movimenta</h3>
-    <div class="behavior-economy-row"><span>Primeiro registro consciente do dia</span><span>+35 🪵 · +25 🪨 · +35 🌱</span></div>
-    <div class="behavior-economy-row"><span>Quis fumar, mas não fumei</span><span>+1 ✦ · +20 🪵 · +15 🪨 · +25 🌱</span></div>
-    <div class="behavior-economy-row"><span>Fechar o dia</span><span>+2 ✦ · +60 🪵 · +45 🪨 · +60 🌱</span></div>
-    <div class="behavior-economy-row"><span>Fumei agora</span><span>registro neutro · sem punição</span></div>
+    <div class="vale-v75-tip">Arraste para explorar • use + e − para ajustar o zoom</div>
   </div>
 </section>
 
@@ -1629,7 +1701,6 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 <nav class="nav"><div class="navin">
 <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
 <button data-tab="vale"><span class="ico">⌂</span>Vale</button>
-<button data-tab="resources"><span class="ico">▤</span>Recursos</button>
 <button data-tab="journey"><span class="ico">✦</span>Jornada<span class="nav-badge" id="journeyNavBadge">0</span></button>
 <button data-tab="history"><span class="ico">▥</span>Histórico</button>
 <button data-tab="more"><span class="ico">⚙</span>Mais</button>
@@ -1637,7 +1708,7 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.4.1';
+  const APP_VERSION='7.5.0';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2036,6 +2107,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       readChronicles:[],
       seenAchievements:[],
       dailyAwarenessRewards:[],
+      map:{x:null,y:null,zoom:1},
       baselines:{intervalMinutes:null,firstCigMinute:null},
       nimbo:defaultNimboState(),
       lastProductionAt:new Date().toISOString(),
@@ -2066,6 +2138,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       readChronicles:Array.isArray(raw.readChronicles)?raw.readChronicles:[],
       seenAchievements:Array.isArray(raw.seenAchievements)?raw.seenAchievements:[],
       dailyAwarenessRewards:Array.isArray(raw.dailyAwarenessRewards)?raw.dailyAwarenessRewards:[],
+      map:{...d.map,...(raw.map||{})},
       baselines:{...d.baselines,...(raw.baselines||{})},
       nimbo:{...defaultNimboState(),...(raw.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(raw.nimbo?.lastCareAt||{})}}
     };
@@ -3355,6 +3428,194 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
 
+
+
+  /* =========================================================
+     V7.5 — mapa estrutural do Vale
+     ========================================================= */
+  const VALE_WORLD_W=1600,VALE_WORLD_H=1400;
+  const VALE_ZOOM_MIN=.65,VALE_ZOOM_MAX=1.35,VALE_ZOOM_STEP=.15;
+  let valeCamera={x:0,y:0,zoom:1};
+  let valeCameraReady=false;
+  let activeValePlace='winds';
+  let valeDrag=null;
+
+  const VALE_SCENERY_V75={
+    trees:[
+      [90,130,0],[155,225,1],[250,155,0],[350,245,1],[470,125,0],[585,205,0],[680,105,1],[805,165,0],[930,110,1],[1060,190,0],[1190,125,1],[1330,210,0],[1480,140,1],
+      [105,430,1],[210,520,0],[330,400,0],[455,570,1],[625,530,0],[735,455,1],[920,425,0],[1040,520,1],[1350,430,0],[1490,555,1],
+      [100,900,0],[205,1020,1],[345,860,1],[525,910,0],[660,1015,1],[805,905,0],[950,850,1],[1220,910,0],[1390,980,1],[1510,870,0],
+      [140,1240,1],[310,1310,0],[500,1210,1],[980,1260,0],[1160,1205,1],[1350,1300,0],[1510,1190,1]
+    ],
+    rocks:[[180,330],[390,180],[720,260],[1000,305],[1450,330],[245,830],[605,760],[1180,720],[1470,1040],[390,1190],[1010,1110],[1290,1260]],
+    flowers:[[310,300],[520,690],[905,585],[1280,620],[650,1130],[1140,930],[230,1090],[1420,750]]
+  };
+
+  function legacyPresenceTotalV75(){
+    const stored=Math.max(0,Number(vale?.resources?.presence||0));
+    const behavioral=Math.max(0,closedDays.length*2+resists.length);
+    const rewards=(vale?.achievements||[]).reduce((sum,id)=>{
+      const a=ACHIEVEMENTS.find(x=>x.id===id);return sum+Number(a?.rewardPresence||0);
+    },0);
+    return Math.max(stored,behavioral,behavioral+rewards);
+  }
+
+  function valeUnlocksV75(){
+    const presence=legacyPresenceTotalV75();
+    return{
+      winds:resists.length>0||presence>=3,
+      portico:Number(vale?.buildings?.portico?.level||0)>0||closedDays.length>=7||presence>=12,
+      traversal:presence>=35
+    };
+  }
+
+  function valePlaceDefsV75(){
+    const u=valeUnlocksV75();
+    const porticoLevel=Number(vale?.buildings?.portico?.level||0);
+    return{
+      winds:{id:'winds',x:560,y:425,title:'Torre dos Ventos',sub:'DISTRITO DOS VENTOS',caption:'Voo na Névoa',unlocked:u.winds,type:'tower',state:u.winds?'aberta':'em breve',meta:u.winds?['Ferramenta em preparação','Voo chega na V7.7']:['A Névoa ainda cobre esta área']},
+      portico:{id:'portico',x:1190,y:490,title:'Distrito do Pórtico',sub:'ARQUIVO DO PÓRTICO',caption:'Arquivo do Pórtico',unlocked:u.portico,type:'portico',state:u.portico?'aberto':'ruínas',ruin:!u.portico&&porticoLevel===0,meta:u.portico?['Pórtico restaurado','Crônicas preservadas']:['Estrutura antiga','Ainda em ruínas']},
+      traversal:{id:'traversal',x:1080,y:1020,title:'Oficina da Travessia',sub:'DISTRITO DA TRAVESSIA',caption:'Construir novos caminhos',unlocked:u.traversal,type:'workshop',state:u.traversal?'aberta':'em breve',meta:u.traversal?['Distrito revelado','Jogo em preparação']:['Além da Névoa','Desbloqueio futuro']}
+    };
+  }
+
+  function buildingMarkupV75(type){
+    if(type==='tower')return '<div class="v75-building tower"><i class="flag"></i><i class="roof"></i><i class="base"></i><i class="door"></i><i class="window"></i></div>';
+    if(type==='portico')return '<div class="v75-building portico"><i class="arch"></i><i class="wing left"></i><i class="wing right"></i><i class="banner"></i></div>';
+    return '<div class="v75-building workshop"><i class="chimney"></i><i class="roof"></i><i class="body"></i><i class="door"></i></div>';
+  }
+
+  function renderValeSceneryV75(){
+    const layer=$('valeSceneryV75');if(!layer||layer.dataset.ready)return;
+    let html='';
+    VALE_SCENERY_V75.trees.forEach(([x,y,r],i)=>html+=`<i class="v75-tree ${r?'round':''}" style="left:${x}px;top:${y}px;transform:translate(-50%,-85%) scale(${.82+(i%4)*.07})"></i>`);
+    VALE_SCENERY_V75.rocks.forEach(([x,y],i)=>html+=`<i class="v75-rock" style="left:${x}px;top:${y}px;transform:translate(-50%,-50%) scale(${.75+(i%3)*.12})"></i>`);
+    VALE_SCENERY_V75.flowers.forEach(([x,y])=>html+=`<i class="v75-flower" style="left:${x}px;top:${y}px"></i>`);
+    // Casas cívicas simples: não clicáveis.
+    const houses=[[710,650,'blue'],[885,640,''],[720,810,''],[895,820,'blue'],[1000,590,'small'],[650,870,'small']];
+    houses.forEach(([x,y,c])=>html+=`<i class="v75-house ${c}" style="left:${x}px;top:${y}px"></i>`);
+    layer.innerHTML=html;layer.dataset.ready='1';
+  }
+
+  function renderValePlacesV75(){
+    const layer=$('valePlacesV75');if(!layer)return;
+    const defs=valePlaceDefsV75();
+    layer.innerHTML=Object.values(defs).map(d=>{
+      const selected=d.id===activeValePlace;
+      return `<button type="button" class="v75-place ${selected?'selected':''} ${d.unlocked?'':'locked'} ${d.ruin?'ruin':''}" data-v75-place="${d.id}" style="left:${d.x}px;top:${d.y}px" aria-label="${d.title}">
+        <span class="v75-hit">${buildingMarkupV75(d.type)}<span class="v75-state">${d.state}</span><span class="v75-name">${d.title}<small>${d.caption}</small></span></span>
+      </button>`;
+    }).join('');
+    layer.querySelectorAll('[data-v75-place]').forEach(btn=>btn.onclick=e=>{
+      e.stopPropagation();selectValePlaceV75(btn.dataset.v75Place);
+    });
+  }
+
+  function renderValeCardV75(){
+    const card=$('valePlaceCard');if(!card)return;
+    const d=valePlaceDefsV75()[activeValePlace];
+    if(!d){card.classList.remove('show');return}
+    card.classList.add('show');
+    $('valeCardTitle').textContent=d.title;
+    $('valeCardSub').textContent=d.sub;
+    $('valeCardMeta').innerHTML=d.meta.map(x=>`<span>${x}</span>`).join('');
+    const action=$('valeCardAction');
+    action.textContent=d.unlocked?'Em breve':'Bloqueado';
+    action.disabled=true;
+  }
+
+  function selectValePlaceV75(id){
+    if(!valePlaceDefsV75()[id])return;
+    activeValePlace=id;renderValePlacesV75();renderValeCardV75();
+  }
+
+  function cameraBoundsV75(x,y,zoom){
+    const vp=$('valeViewport');if(!vp)return{x,y};
+    const w=vp.clientWidth,h=vp.clientHeight;
+    const minX=Math.min(0,w-VALE_WORLD_W*zoom),minY=Math.min(0,h-VALE_WORLD_H*zoom);
+    return{x:clamp(x,minX,0),y:clamp(y,minY,0)};
+  }
+
+  function applyValeCameraV75({save=false}={}){
+    const world=$('valeWorld');if(!world)return;
+    const bounded=cameraBoundsV75(valeCamera.x,valeCamera.y,valeCamera.zoom);
+    valeCamera.x=bounded.x;valeCamera.y=bounded.y;
+    world.style.transform=`translate3d(${valeCamera.x}px,${valeCamera.y}px,0) scale(${valeCamera.zoom})`;
+    if($('valeZoomLabel'))$('valeZoomLabel').textContent=`${Math.round(valeCamera.zoom*100)}%`;
+    if(save){
+      vale.map={x:Math.round(valeCamera.x),y:Math.round(valeCamera.y),zoom:Number(valeCamera.zoom.toFixed(2))};
+      vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync();
+    }
+  }
+
+  function centerValeMapV75({save=false}={}){
+    const vp=$('valeViewport');if(!vp)return;
+    valeCamera.zoom=1;
+    valeCamera.x=vp.clientWidth/2-800;
+    valeCamera.y=vp.clientHeight/2-730;
+    applyValeCameraV75({save});
+  }
+
+  function setValeZoomV75(next){
+    const vp=$('valeViewport');if(!vp)return;
+    const old=valeCamera.zoom;
+    const z=clamp(Math.round(next*100)/100,VALE_ZOOM_MIN,VALE_ZOOM_MAX);
+    if(z===old)return;
+    const cx=vp.clientWidth/2,cy=vp.clientHeight/2;
+    const wx=(cx-valeCamera.x)/old,wy=(cy-valeCamera.y)/old;
+    valeCamera.zoom=z;
+    valeCamera.x=cx-wx*z;valeCamera.y=cy-wy*z;
+    applyValeCameraV75({save:true});
+  }
+
+  function initValeCameraV75(){
+    if(valeCameraReady)return;
+    const vp=$('valeViewport');if(!vp||!vp.clientWidth)return;
+    const saved=vale.map||{};
+    if(Number.isFinite(Number(saved.x))&&Number.isFinite(Number(saved.y))&&Number.isFinite(Number(saved.zoom))){
+      valeCamera={x:Number(saved.x),y:Number(saved.y),zoom:clamp(Number(saved.zoom),VALE_ZOOM_MIN,VALE_ZOOM_MAX)};
+      applyValeCameraV75();
+    }else centerValeMapV75();
+    valeCameraReady=true;
+  }
+
+  function bindValeMapV75(){
+    const vp=$('valeViewport');if(!vp||vp.dataset.bound)return;
+    vp.dataset.bound='1';
+    vp.addEventListener('pointerdown',e=>{
+      if(e.target.closest('button'))return;
+      valeDrag={id:e.pointerId,startX:e.clientX,startY:e.clientY,camX:valeCamera.x,camY:valeCamera.y,moved:false};
+      vp.setPointerCapture?.(e.pointerId);vp.classList.add('dragging');
+    });
+    vp.addEventListener('pointermove',e=>{
+      if(!valeDrag||valeDrag.id!==e.pointerId)return;
+      const dx=e.clientX-valeDrag.startX,dy=e.clientY-valeDrag.startY;
+      if(Math.abs(dx)+Math.abs(dy)>4)valeDrag.moved=true;
+      valeCamera.x=valeDrag.camX+dx;valeCamera.y=valeDrag.camY+dy;applyValeCameraV75();
+    });
+    const end=e=>{
+      if(!valeDrag||valeDrag.id!==e.pointerId)return;
+      vp.classList.remove('dragging');valeDrag=null;applyValeCameraV75({save:true});
+    };
+    vp.addEventListener('pointerup',end);vp.addEventListener('pointercancel',end);
+    $('valeZoomIn').onclick=()=>setValeZoomV75(valeCamera.zoom+VALE_ZOOM_STEP);
+    $('valeZoomOut').onclick=()=>setValeZoomV75(valeCamera.zoom-VALE_ZOOM_STEP);
+    $('valeCenter').onclick=()=>centerValeMapV75({save:true});
+    window.addEventListener('resize',()=>{if(valeCameraReady)applyValeCameraV75()});
+  }
+
+  function renderValeMap(){
+    renderValeSceneryV75();renderValePlacesV75();renderValeCardV75();bindValeMapV75();
+    requestAnimationFrame(()=>initValeCameraV75());
+  }
+
+  function renderVale(){
+    if($('valePresenceV75'))$('valePresenceV75').textContent=formatCompact(legacyPresenceTotalV75());
+    renderValeMap();
+    applyPetVisualState(vitality(),bond(),breath(),resilience());
+  }
+
+
   function render(){
     smokes.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     resists.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
@@ -4029,7 +4290,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('closeBuildingSheet').onclick=closeBuilding;
   $('buildingBackdrop').onclick=e=>{if(e.target===$('buildingBackdrop'))closeBuilding()};
   $('upgradeBuildingBtn').onclick=upgradeActiveBuilding;
-  $('buildMoreBtn').onclick=upgradeActiveBuilding;
+  if($('buildMoreBtn'))$('buildMoreBtn').onclick=upgradeActiveBuilding;
 
   $('closeStorySheet').onclick=closeStory;
   $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
@@ -4044,8 +4305,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   };
 
   if($('homeResourceStrip'))$('homeResourceStrip').onclick=()=>{
-    const resourceBtn=document.querySelector('.nav button[data-tab="resources"]');
-    if(resourceBtn)resourceBtn.click();
+    const valeBtn=document.querySelector('.nav button[data-tab="vale"]');
+    if(valeBtn)valeBtn.click();
   };
 
   document.querySelectorAll('[data-journey]').forEach(btn=>{
@@ -4064,13 +4325,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));
     document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id===btn.dataset.tab));
     if(btn.dataset.tab==='vale'){
-      collectValeProduction(true);
       renderVale();
-      scheduleSync();
-    }
-    if(btn.dataset.tab==='resources'){
-      collectValeProduction(true);
-      renderResources();
+      requestAnimationFrame(()=>{initValeCameraV75();applyValeCameraV75()});
     }
     if(btn.dataset.tab==='journey'){
       renderJourneyV7();
@@ -4167,10 +4423,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(currentUser&&navigator.onLine&&document.visibilityState==='visible'&&!syncing)syncAll();
   },30000);
   setInterval(()=>{
-    collectValeProduction(true);
-    renderVale();
     const active=document.querySelector('.tab.active')?.id;
-    if(active==='resources')renderResources();
+    if(active==='vale')renderVale();
   },5000);
   start();
 })();
