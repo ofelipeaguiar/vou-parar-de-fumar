@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.3">
+<meta name="app-version" content="7.5.4">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1239,15 +1239,15 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .nav button{min-height:48px;padding:6px 3px!important}
 .nav .ico{font-size:14px!important}
 
-.vale-v75-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 0 10px}
+.vale-v75-head{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:0 0 8px}
 .vale-v75-kicker{font-size:10px;color:#8195aa;margin-bottom:3px}
 .vale-v75-title{font-size:27px;line-height:1;font-weight:850;letter-spacing:-.65px}
 .vale-v75-copy{font-size:10px;color:#8397ad;line-height:1.4;margin-top:6px}
 .vale-v75-presence{flex:0 0 auto;border:1px solid rgba(98,233,143,.32);background:rgba(38,111,82,.14);border-radius:999px;padding:9px 12px;color:#e9fff0;font:700 10px var(--pixel);white-space:nowrap}
 .vale-v75-presence b{color:#73eca0;font-size:12px}
 
-.vale-v75-shell{background:#0d192a;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:8px;margin-bottom:10px;box-shadow:0 18px 48px rgba(0,0,0,.20)}
-.vale-v75-viewport{position:relative;height:clamp(510px,66vh,690px);overflow:hidden;border-radius:17px;border:1px solid rgba(255,255,255,.09);background:#284e36;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.vale-v75-shell{background:#0d192a;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:7px;margin-bottom:8px;box-shadow:0 18px 48px rgba(0,0,0,.20)}
+.vale-v75-viewport{position:relative;height:clamp(400px,48svh,560px);overflow:hidden;border-radius:17px;border:1px solid rgba(255,255,255,.09);background:#284e36;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
 .vale-v75-viewport.dragging{cursor:grabbing}
 .vale-v75-world{position:absolute;left:0;top:0;width:1600px;height:1400px;transform-origin:0 0;will-change:transform;background:
   radial-gradient(circle at 23% 22%,rgba(126,174,85,.18),transparent 18%),
@@ -1359,21 +1359,21 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .vale-v75-controls .center{font-size:19px}
 .vale-v75-zoom{position:absolute;z-index:19;right:11px;bottom:9px;padding:5px 7px;border-radius:8px;background:rgba(5,18,29,.62);color:#b7c8d5;font:700 8px var(--pixel);pointer-events:none}
 
-.vale-v75-card{display:none;margin-top:8px;border:1px solid rgba(114,222,241,.13);border-radius:17px;background:#101d32;padding:12px 13px;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.vale-v75-card{display:none;margin-top:7px;border:1px solid rgba(114,222,241,.13);border-radius:17px;background:#101d32;padding:11px 12px;grid-template-columns:1fr auto;gap:10px;align-items:center}
 .vale-v75-card.show{display:grid}
-.vale-v75-card-title{font-size:15px;font-weight:830;letter-spacing:-.2px}
-.vale-v75-card-sub{font:8px var(--pixel);color:#8fd7a9;margin-top:4px}
-.vale-v75-card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.vale-v75-card-title{font-size:14px;font-weight:830;letter-spacing:-.2px}
+.vale-v75-card-sub{font:8px var(--pixel);color:#8fd7a9;margin-top:3px}
+.vale-v75-card-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
 .vale-v75-card-meta span{font-size:9px;color:#9fb0c0;padding:5px 7px;border-radius:8px;background:#0b1728;border:1px solid rgba(255,255,255,.07)}
-.vale-v75-card button{min-width:94px;border:0;border-radius:12px;padding:12px 13px;background:linear-gradient(180deg,#66ec92,#46d77a);color:#07351a;font-weight:850}
+.vale-v75-card button{min-width:94px;border:0;border-radius:12px;padding:11px 13px;background:linear-gradient(180deg,#66ec92,#46d77a);color:#07351a;font-weight:850}
 .vale-v75-card button:disabled{background:#1b2b3f;color:#718195;opacity:1}
 .vale-v75-tip{font-size:9px;color:#70869a;text-align:center;margin:8px 0 1px}
 
 @media(max-width:380px){
   .vale-v75-title{font-size:24px}.vale-v75-copy{font-size:9px}.vale-v75-presence{padding:8px 9px}
-  .vale-v75-viewport{height:535px}.vale-v75-card{grid-template-columns:1fr}.vale-v75-card button{width:100%}
+  .vale-v75-viewport{height:430px}.vale-v75-card{grid-template-columns:1fr}.vale-v75-card button{width:100%}
 }
-@media(max-height:760px) and (max-width:500px){.vale-v75-viewport{height:510px}}
+@media(max-height:760px) and (max-width:500px){.vale-v75-viewport{height:400px}}
 @media(prefers-reduced-motion:reduce){.v75-building{transition:none!important}}
 
 </style>
@@ -1542,12 +1542,8 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 </section>
 
 <section id="vale" class="tab">
-  <div class="vale-v75-head">
-    <div>
-      <div class="vale-v75-kicker">Vou parar de fumar</div>
-      <div class="vale-v75-title">Vale do Nimbo</div>
-      <div class="vale-v75-copy">Pequenas ações. Um lugar que cresce com você.</div>
-    </div>
+  <div class="vale-v75-head compact">
+    <div class="vale-v75-hero" aria-hidden="true"></div>
     <div class="vale-v75-presence">✦ <b id="valePresenceV75">0</b> Presenças</div>
   </div>
 
@@ -1592,7 +1588,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
       </div>
       <button type="button" id="valeCardAction" disabled>Em breve</button>
     </div>
-    <div class="vale-v75-tip">Arraste para explorar • use + e − para ajustar o zoom</div>
+    
   </div>
 </section>
 
@@ -1748,7 +1744,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.3').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.4').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
