@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.7">
+<meta name="app-version" content="7.5.8">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1442,7 +1442,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .vale-v75-viewport{height:clamp(260px,calc(100svh - 390px),470px)}
 @media(max-width:380px){.vale-v75-viewport{height:clamp(230px,calc(100svh - 405px),420px)}}
 
-/* V7.5.7 — mapa ocupa o espaço restante, com cartão acima da navegação. */
+/* V7.5.8 — mapa ocupa o espaço restante, com cartão acima da navegação. */
 #vale .vale-v75-head{margin-bottom:7px;min-height:30px}
 #vale .vale-v75-presence{padding:7px 11px}
 #vale .vale-v75-shell{padding:7px;margin-bottom:0}
@@ -1828,7 +1828,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.7').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.8').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -3810,7 +3810,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if($('valeZoomLabel'))$('valeZoomLabel').textContent=`${Math.round(valeCamera.zoom*100)}%`;
     if(save){
       vale.map={x:Math.round(valeCamera.x),y:Math.round(valeCamera.y),zoom:Number(valeCamera.zoom.toFixed(2))};
-      vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync();
+      vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync({mapOnly:true});
     }
   }
 
@@ -4086,6 +4086,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
           result=await sb.from('day_closures').delete().eq('user_id',currentUser.id).eq('day',item.value);
         }
         if(result?.error)throw result.error;
+        if(item.type==='event')delete syncAck.events[item.value];
+        if(item.type==='closure')delete syncAck.closures[item.value];
+        saveSyncAck();
       }catch(e){
         console.error('delete sync',e);
         remaining.push(item);
@@ -4094,6 +4097,21 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     pendingDeletes=[...remaining,...pendingDeletes.filter(item=>!batch.includes(item))];
     write(DELETIONS_KEY,pendingDeletes);
+  }
+
+  const CLOUD_CHECK_MS=5*60*1000;
+  let lastCloudRead=0,syncAgain=false;
+  let syncAck={events:{},closures:{},game:'',vale:''};
+  const syncAckKey=()=>`nimbo_sync_ack_v1_${currentUser.id}`;
+  function saveSyncAck(){if(currentUser)write(syncAckKey(),syncAck)}
+  function stateSignature(value){
+    return JSON.stringify(value,(key,val)=>key==='updatedAt'||key==='updated_at'?undefined:val);
+  }
+  function hasPendingSync(){
+    return pendingDeletes.length>0||
+      [...smokes,...resists].some(x=>syncAck.events[x.id]!==x.timestamp)||
+      closedDays.some(x=>syncAck.closures[x.date]!==x.closedAt)||
+      syncAck.game!==stateSignature(game)||syncAck.vale!==stateSignature(vale);
   }
 
   async function pushLocal(){
@@ -4116,21 +4134,28 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       }))
     ];
 
-    if(eventRows.length){
-      const {error}=await sb.from('events').upsert(eventRows,{onConflict:'user_id,local_id'});
+    const changedEvents=eventRows.filter(row=>syncAck.events[row.local_id]!==row.occurred_at);
+    if(changedEvents.length){
+      const {error}=await sb.from('events').upsert(changedEvents,{onConflict:'user_id,local_id'});
       if(error)throw error;
+      changedEvents.forEach(row=>syncAck.events[row.local_id]=row.occurred_at);saveSyncAck();
     }
 
     if(closedDays.length){
-      const closureRows=closedDays.map(x=>({
+      const closureRows=closedDays.filter(x=>syncAck.closures[x.date]!==x.closedAt).map(x=>({
         user_id:currentUser.id,
         day:x.date,
         closed_at:x.closedAt||new Date(`${x.date}T23:59:00`).toISOString()
       }));
+      if(closureRows.length){
       const {error}=await sb.from('day_closures').upsert(closureRows,{onConflict:'user_id,day'});
       if(error)throw error;
+      closureRows.forEach(row=>syncAck.closures[row.day]=row.closed_at);saveSyncAck();
+      }
     }
 
+    const gameSignature=stateSignature(game);
+    if(syncAck.game!==gameSignature){
     const {error:gameError}=await sb.from('game_state').upsert({
       user_id:currentUser.id,
       baseline:game.baseline,
@@ -4141,10 +4166,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     },{onConflict:'user_id'});
 
     if(gameError)throw gameError;
+    syncAck.game=gameSignature;saveSyncAck();
+    }
 
-    let mergedVale=normalizeValeState(vale);
+    if(syncAck.vale===stateSignature(vale))return;
+    let mergedVale;
     const remoteValeRes=await sb.from('vale_state').select('state,updated_at').maybeSingle();
     if(remoteValeRes.error && remoteValeRes.error.code!=='PGRST116')throw remoteValeRes.error;
+    mergedVale=normalizeValeState(vale);
     if(remoteValeRes.data?.state){
       const remoteVale=normalizeValeState({...remoteValeRes.data.state,updatedAt:remoteValeRes.data.updated_at||remoteValeRes.data.state.updatedAt});
       mergedVale=mergeValeStates(mergedVale,remoteVale);
@@ -4154,13 +4183,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     vale=mergedVale;
     write(VALE_KEY,vale);
 
+    const valePayload=JSON.parse(JSON.stringify(vale));
     const {error:valeError}=await sb.from('vale_state').upsert({
       user_id:currentUser.id,
-      state:vale,
-      updated_at:vale.updatedAt
+      state:valePayload,
+      updated_at:valePayload.updatedAt
     },{onConflict:'user_id'});
 
     if(valeError)throw valeError;
+    syncAck.vale=stateSignature(valePayload);saveSyncAck();
   }
 
   function syncSnapshot(){
@@ -4210,6 +4241,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       .map(x=>({id:x.local_id||uuid(),timestamp:x.occurred_at}));
 
     const cloudClosed=(clRes.data||[]).map(x=>({date:x.day,closedAt:x.closed_at}));
+    syncAck.events=Object.fromEntries([...cloudSmokes,...cloudResists].map(x=>[x.id,x.timestamp]));
+    syncAck.closures=Object.fromEntries(cloudClosed.map(x=>[x.date,x.closedAt]));
     const deletions=[...snapshot.deletes,...pendingDeletes];
     smokes=reconcileRows(cloudSmokes,smokes,snapshot.smokes,'id','event',deletions);
     resists=reconcileRows(cloudResists,resists,snapshot.resists,'id','event',deletions);
@@ -4229,6 +4262,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       vale=mergeValeStates(vale,cloudVale,{preferCloud:!!forceVale});
     }
 
+    syncAck.game=stateSignature(game);
+    if(valeRes.data?.state)syncAck.vale=stateSignature(normalizeValeState(valeRes.data.state));
+    saveSyncAck();lastCloudRead=Date.now();
     checkAchievements({notify:false});
     checkStoryUnlocks();
 
@@ -4239,8 +4275,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     write(VALE_KEY,vale);
   }
 
-  async function syncAll({showToast=false,preferCloud=false}={}){
-    if(!sb||!currentUser||syncing)return;
+  async function syncAll({showToast=false,preferCloud=false,checkCloud=false}={}){
+    if(!sb||!currentUser)return;
+    if(syncing){syncAgain=true;return}
+    const shouldRead=preferCloud||showToast||checkCloud||Date.now()-lastCloudRead>=CLOUD_CHECK_MS;
+    if(!shouldRead&&!hasPendingSync())return;
 
     if(!navigator.onLine){
       setSyncState('offline','NIMBO • OFFLINE');
@@ -4263,7 +4302,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       }else{
         // Fluxo normal e primeira migração: o histórico local sobe antes de baixar.
         await pushLocal();
-        await pullCloud({snapshot});
+        if(shouldRead)await pullCloud({snapshot});
       }
 
       const now=new Date().toISOString();
@@ -4279,12 +4318,18 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       if(showToast)toast('Não consegui sincronizar. Seus dados continuam salvos no aparelho.');
     }finally{
       syncing=false;
+      if(syncAgain){syncAgain=false;scheduleSync()}
     }
   }
 
-  function scheduleSync(){
+  function scheduleSync({mapOnly=false}={}){
     clearTimeout(window.__syncTimer);
-    window.__syncTimer=setTimeout(()=>syncAll(),550);
+    // Map movement must not postpone an already scheduled event upload.
+    const due=Date.now()+(mapOnly?10000:2000);
+    const next=mapOnly&&window.__syncUrgent&&window.__syncDue?window.__syncDue:due;
+    window.__syncUrgent=!mapOnly||!!window.__syncUrgent;
+    window.__syncDue=next;
+    window.__syncTimer=setTimeout(()=>{window.__syncDue=0;window.__syncUrgent=false;syncAll()},Math.max(0,next-Date.now()));
   }
 
   function reopenTodayIfNeeded(){
@@ -4408,6 +4453,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         return;
       }
 
+      syncAck={events:{},closures:{},game:'',vale:''};saveSyncAck();
       smokes=d.records||[];
       resists=Array.isArray(d.resists)?d.resists:[];
       closedDays=Array.isArray(d.closedDays)?d.closedDays:[];
@@ -4454,6 +4500,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       if(r2.error)throw r2.error;
       if(r3.error)throw r3.error;
       if(r4.error)throw r4.error;
+      syncAck={events:{},closures:{},game:'',vale:''};saveSyncAck();
 
       smokes=[];
       resists=[];
@@ -4483,6 +4530,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   async function showLoggedIn(user){
     currentUser=user;
     const cacheMode=bindLocalCacheToUser(user.id);
+    syncAck=read(syncAckKey(),{events:{},closures:{},game:'',vale:''});
+    lastCloudRead=0;
     ensureLocalIds();
     vale=normalizeValeState(vale);
     write(VALE_KEY,vale);
@@ -4827,7 +4876,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   },60000);
   setInterval(()=>{
     if(currentUser&&navigator.onLine&&document.visibilityState==='visible'&&!syncing)syncAll();
-  },30000);
+  },CLOUD_CHECK_MS);
   start();
 })();
 </script>
