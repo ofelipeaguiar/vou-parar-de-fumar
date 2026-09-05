@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.1">
+<meta name="app-version" content="7.5.2">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1306,6 +1306,45 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .v75-house{position:absolute;width:48px;height:42px;transform:translate(-50%,-70%);filter:drop-shadow(0 5px 3px rgba(0,0,0,.18));z-index:3}
 .v75-house::before{content:"";position:absolute;left:5px;bottom:0;width:38px;height:29px;background:#eee0c2;border:2px solid #735b49;border-radius:3px}.v75-house::after{content:"";position:absolute;left:1px;top:0;width:46px;height:22px;background:#b45d3e;clip-path:polygon(50% 0,100% 100%,0 100%)}
 .v75-house.blue::after{background:#4d72a9}.v75-house.small{transform:translate(-50%,-70%) scale(.78)}
+
+/* V7.5.2 — progressão visual */
+.vale-v75-roads path{transition:opacity .45s ease}
+.vale-v75-roads path.road-hidden{opacity:0}
+.v752-home{position:absolute;left:800px;top:850px;width:112px;height:82px;transform:translate(-50%,-50%);z-index:4;pointer-events:none}
+.v752-home .v75-house{left:56px!important;top:45px!important;transform:translate(-50%,-70%) scale(1.08)}
+.v752-home-label{position:absolute;left:50%;top:65px;transform:translateX(-50%);white-space:nowrap;background:rgba(7,20,33,.88);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:5px 7px;color:#eaf2f7;font-size:10px;font-weight:740}
+.v752-plaza-detail{position:absolute;z-index:3;pointer-events:none;opacity:0;transform:scale(.7);transition:opacity .4s ease,transform .45s cubic-bezier(.2,.9,.25,1.3)}
+.v752-plaza-detail.show{opacity:1;transform:scale(1)}
+.v752-lamp{width:5px;height:22px;background:#3c4c4b;border-radius:2px;box-shadow:0 5px 3px rgba(0,0,0,.16)}
+.v752-lamp::before{content:"";position:absolute;left:-4px;top:-5px;width:13px;height:9px;border-radius:50%;background:#ffe69a;box-shadow:0 0 12px rgba(255,225,140,.45)}
+.v752-flowerbed{width:36px;height:18px;border-radius:50%;background:#416d40;border:3px solid #b7a77a;box-shadow:inset 0 0 0 4px #5a8a4f}
+
+.v752-annex{position:absolute;display:block;opacity:1;filter:drop-shadow(0 6px 4px rgba(0,0,0,.18));pointer-events:none}
+.v752-annex.shed{width:42px;height:30px;background:#cfb487;border:2px solid #66513f;border-radius:3px}
+.v752-annex.shed::before{content:"";position:absolute;left:-4px;top:-13px;width:48px;height:18px;background:#795344;clip-path:polygon(10% 0,90% 0,100% 100%,0 100%)}
+.v752-annex.house{width:36px;height:28px;background:#eadabb;border:2px solid #6d5746;border-radius:3px}
+.v752-annex.house::before{content:"";position:absolute;left:-4px;top:-14px;width:42px;height:18px;background:#4d72a9;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.v752-annex.archive{width:48px;height:30px;background:#cbc5b2;border:2px solid #696b65;border-radius:2px}
+.v752-annex.archive::before{content:"";position:absolute;left:5px;top:-11px;width:38px;height:13px;background:#918a79;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.v752-annex.pillar{width:13px;height:42px;background:#c9c5b5;border:2px solid #70716b;border-radius:2px}
+.v752-annex.wind{width:38px;height:38px;border:3px solid #566b74;border-radius:50%}
+.v752-annex.wind::before,.v752-annex.wind::after{content:"";position:absolute;left:16px;top:-7px;width:4px;height:48px;background:#d8d2a4;transform-origin:50% 50%}
+.v752-annex.wind::after{transform:rotate(90deg)}
+.v752-stage-cluster .a1{left:-28px;bottom:4px}.v752-stage-cluster .a2{right:-30px;bottom:3px}.v752-stage-cluster .a3{right:-42px;top:18px}
+.v75-place.stage-2 .v75-building.tower .base{height:78px;background:linear-gradient(90deg,#c8c9ba,#f3ecd4 55%,#aeb4aa)}
+.v75-place.stage-3 .v75-building.tower{transform:scale(1.08)}
+.v75-place.stage-2 .v75-building.portico,.v75-place.stage-3 .v75-building.portico{filter:drop-shadow(0 10px 7px rgba(0,0,0,.2)) saturate(1.06)}
+.v75-place.stage-3 .v75-building.portico{transform:scale(1.06)}
+.v75-place.pending-upgrade .v752-annex{animation:v752Pop .8s cubic-bezier(.2,.85,.25,1.25) both}
+.v75-place.discovering .v75-building,.v75-place.discovering .v752-annex{animation:v752Discover .9s cubic-bezier(.18,.82,.22,1.15) both}
+.v75-place.discovering::before{content:"";position:absolute;left:50%;top:48%;width:190px;height:150px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(220,235,226,.82),rgba(220,235,226,.44) 42%,transparent 72%);animation:v752FogAway 1.1s ease both;z-index:8;pointer-events:none}
+@keyframes v752Pop{0%{opacity:0;transform:translateY(8px) scale(.55)}70%{opacity:1;transform:translateY(-2px) scale(1.08)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes v752Discover{0%{opacity:0;transform:translateY(8px) scale(.62)}70%{opacity:1;transform:translateY(-2px) scale(1.06)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes v752FogAway{0%{opacity:1;filter:blur(2px)}55%{opacity:.72}100%{opacity:0;transform:translate(-50%,-50%) scale(1.45);filter:blur(10px)}}
+.v752-discovery-toast{position:absolute;left:50%;top:18px;z-index:30;transform:translate(-50%,-10px);min-width:210px;max-width:78%;padding:10px 13px;border-radius:14px;background:rgba(7,20,33,.95);border:1px solid rgba(110,237,161,.35);box-shadow:0 12px 28px rgba(0,0,0,.28);color:#f4f8fb;text-align:center;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .3s ease}
+.v752-discovery-toast.show{opacity:1;transform:translate(-50%,0)}
+.v752-discovery-toast small{display:block;color:#6feaa0;font:700 8px var(--pixel);letter-spacing:.3px;margin-bottom:5px}
+.v752-discovery-toast b{font-size:13px}
 .v75-plaza{position:absolute;left:800px;top:715px;width:170px;height:125px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,#c8c1a7 0 49%,#ad9e79 50% 54%,transparent 55%);z-index:2;pointer-events:none}
 .v75-fountain{position:absolute;left:800px;top:704px;width:52px;height:52px;transform:translate(-50%,-50%);border-radius:50%;background:#7ba0aa;border:7px solid #d7cfb6;box-shadow:0 6px 6px rgba(0,0,0,.18);z-index:3;pointer-events:none}.v75-fountain::before{content:"";position:absolute;left:17px;top:-17px;width:8px;height:27px;background:#8baab2;border-radius:5px}.v75-fountain::after{content:"";position:absolute;left:11px;top:-23px;width:20px;height:20px;border-radius:50%;border:3px solid rgba(189,236,245,.65);border-bottom-color:transparent}
 .v75-central-label{position:absolute;left:800px;top:780px;transform:translate(-50%,-50%);z-index:5;background:rgba(7,20,33,.88);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:6px 9px;font-size:12px;font-weight:760;color:#f1f7fb;pointer-events:none}
@@ -1516,16 +1555,16 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
     <div class="vale-v75-viewport" id="valeViewport" aria-label="Mapa explorável do Vale do Nimbo">
       <div class="vale-v75-world" id="valeWorld">
         <svg class="vale-v75-roads" viewBox="0 0 1600 1400" aria-hidden="true">
-          <path class="vale-v75-road-shadow" d="M800 716 C760 610 720 515 575 450"/>
-          <path class="vale-v75-road" d="M800 716 C760 610 720 515 575 450"/>
-          <path class="vale-v75-road-shadow" d="M800 716 C910 650 1030 575 1195 495"/>
-          <path class="vale-v75-road" d="M800 716 C910 650 1030 575 1195 495"/>
-          <path class="vale-v75-road-shadow" d="M800 716 C845 820 930 935 1080 1020"/>
-          <path class="vale-v75-road" d="M800 716 C845 820 930 935 1080 1020"/>
-          <path class="vale-v75-road-shadow" d="M800 716 C690 805 600 915 488 1055"/>
-          <path class="vale-v75-road" d="M800 716 C690 805 600 915 488 1055"/>
-          <path class="vale-v75-road local" d="M575 450 C635 405 688 355 760 315"/>
-          <path class="vale-v75-road local" d="M1195 495 C1290 505 1350 550 1425 605"/>
+          <path class="vale-v75-road-shadow" data-v75-road-to="winds" d="M800 716 C760 610 720 515 575 450"/>
+          <path class="vale-v75-road" data-v75-road-to="winds" d="M800 716 C760 610 720 515 575 450"/>
+          <path class="vale-v75-road-shadow" data-v75-road-to="portico" d="M800 716 C910 650 1030 575 1195 495"/>
+          <path class="vale-v75-road" data-v75-road-to="portico" d="M800 716 C910 650 1030 575 1195 495"/>
+          <path class="vale-v75-road-shadow" data-v75-road-to="traversal" d="M800 716 C845 820 930 935 1080 1020"/>
+          <path class="vale-v75-road" data-v75-road-to="traversal" d="M800 716 C845 820 930 935 1080 1020"/>
+          <path class="vale-v75-road-shadow" data-v75-road-to="future" d="M800 716 C690 805 600 915 488 1055"/>
+          <path class="vale-v75-road" data-v75-road-to="future" d="M800 716 C690 805 600 915 488 1055"/>
+          <path class="vale-v75-road local" data-v75-road-to="winds2" d="M575 450 C635 405 688 355 760 315"/>
+          <path class="vale-v75-road local" data-v75-road-to="portico2" d="M1195 495 C1290 505 1350 550 1425 605"/>
           <path class="vale-v75-road-dash" d="M1080 1020 C1190 1100 1280 1160 1390 1205"/>
           <path class="vale-v75-road-dash" d="M488 1055 C390 1120 325 1185 260 1260"/>
         </svg>
@@ -1542,6 +1581,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
         <button type="button" class="center" id="valeCenter" aria-label="Centralizar mapa">◎</button>
       </div>
       <div class="vale-v75-zoom" id="valeZoomLabel">100%</div>
+      <div class="v752-discovery-toast" id="valeDiscoveryToast"><small>NOVO LUGAR DESCOBERTO</small><b id="valeDiscoveryName"></b></div>
     </div>
 
     <div class="vale-v75-card" id="valePlaceCard">
@@ -1708,7 +1748,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION='7.5.1';
+  const APP_VERSION='7.5.2';
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2087,11 +2127,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     };
   }
 
+  function defaultDistrictStateV752(){
+    return{unlocked:false,stage:0,sessions:0,supportedCravings:0,discoverySeen:false,seenStage:0,pendingDiscovery:false,pendingUpgrade:false};
+  }
+
   function defaultValeState(){
-    const historicalPresence=Math.min(18,closedDays.length*2+resists.length);
+    const historicalPresence=Math.max(0,closedDays.length*2+resists.length);
     return{
-      version:3,
+      version:4,
       economyVersion:2,
+      presenceTotal:historicalPresence,
+      progressionInitialized:false,
       resources:{wood:700,stone:500,seeds:450,presence:historicalPresence},
       buildings:{
         refuge:{level:1},
@@ -2101,6 +2147,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         quarry:{level:0},
         cartography:{level:0}
       },
+      districts:{
+        winds:defaultDistrictStateV752(),
+        portico:defaultDistrictStateV752(),
+        traversal:defaultDistrictStateV752()
+      },
+      discoveries:[],
       inventory:[],
       achievements:[],
       chronicles:['prologue'],
@@ -2123,6 +2175,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     const out={
       ...d,...raw,
+      version:Math.max(4,Number(raw.version||0)),
+      presenceTotal:Math.max(0,Number(raw.presenceTotal??raw.resources?.presence??d.presenceTotal)),
       resources:{...d.resources,...(raw.resources||{})},
       buildings:{
         refuge:{...d.buildings.refuge,...(raw.buildings?.refuge||{})},
@@ -2132,6 +2186,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         quarry:{...d.buildings.quarry,...(raw.buildings?.quarry||{})},
         cartography:{...d.buildings.cartography,...(raw.buildings?.cartography||{})}
       },
+      districts:{
+        winds:{...defaultDistrictStateV752(),...(raw.districts?.winds||{})},
+        portico:{...defaultDistrictStateV752(),...(raw.districts?.portico||{})},
+        traversal:{...defaultDistrictStateV752(),...(raw.districts?.traversal||{})}
+      },
+      discoveries:Array.isArray(raw.discoveries)?raw.discoveries:[],
       inventory:Array.isArray(raw.inventory)?raw.inventory:[],
       achievements:Array.isArray(raw.achievements)?raw.achievements:[],
       chronicles:Array.isArray(raw.chronicles)?raw.chronicles:['prologue'],
@@ -2143,17 +2203,26 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       nimbo:{...defaultNimboState(),...(raw.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(raw.nimbo?.lastCareAt||{})}}
     };
 
-    // Migração única da economia V7/V7.1 para a economia acelerada V7.2.
+    // Compatibilidade com a antiga economia. Os campos permanecem no estado durante a transição,
+    // mas não dirigem mais a progressão visual do Vale.
     if(Number(raw.economyVersion||1)<2){
       out.resources.wood=Math.max(700,Number(out.resources.wood||0)*3);
       out.resources.stone=Math.max(500,Number(out.resources.stone||0)*3);
       out.resources.seeds=Math.max(450,Number(out.resources.seeds||0)*3);
       out.economyVersion=2;
-      out.version=3;
       out.lastProductionAt=new Date().toISOString();
+    }
+
+    // V7.5.2: uma migração em duas etapas. Aqui preservamos o máximo histórico disponível;
+    // após ACHIEVEMENTS estar inicializado, ensureValeProgressionV752() completa o cálculo.
+    if(Number(raw.version||0)<4){
+      out.presenceTotal=Math.max(out.presenceTotal,Number(raw.resources?.presence||0),closedDays.length*2+resists.length);
+      out.progressionInitialized=false;
+      out.version=4;
       out.updatedAt=new Date().toISOString();
     }
 
+    out.resources.presence=Math.max(Number(out.resources.presence||0),Number(out.presenceTotal||0));
     return out;
   }
 
@@ -2166,6 +2235,23 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return [...new Set((arr||[]).filter(Boolean))];
   }
 
+  function mergeDistrictV752(a,b){
+    const seen=!!a.discoverySeen||!!b.discoverySeen;
+    const stage=Math.max(Number(a.stage||0),Number(b.stage||0));
+    return{
+      ...defaultDistrictStateV752(),
+      ...(Number(a.stage||0)>=Number(b.stage||0)?a:b),
+      unlocked:!!a.unlocked||!!b.unlocked||stage>0,
+      stage,
+      sessions:Math.max(Number(a.sessions||0),Number(b.sessions||0)),
+      supportedCravings:Math.max(Number(a.supportedCravings||0),Number(b.supportedCravings||0)),
+      discoverySeen:seen,
+      seenStage:Math.max(Number(a.seenStage||0),Number(b.seenStage||0)),
+      pendingDiscovery:!seen&&(!!a.pendingDiscovery||!!b.pendingDiscovery),
+      pendingUpgrade:!!a.pendingUpgrade||!!b.pendingUpgrade
+    };
+  }
+
   function mergeValeStates(localRaw,cloudRaw,{preferCloud=false}={}){
     const local=normalizeValeState(localRaw);
     const cloud=normalizeValeState(cloudRaw);
@@ -2175,9 +2261,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     const merged=normalizeValeState({
       ...primary,
-      version:Math.max(Number(local.version||0),Number(cloud.version||0),3),
+      version:Math.max(Number(local.version||0),Number(cloud.version||0),4),
       economyVersion:Math.max(Number(local.economyVersion||0),Number(cloud.economyVersion||0),2),
-      resources:{...primary.resources},
+      presenceTotal:Math.max(Number(local.presenceTotal||0),Number(cloud.presenceTotal||0),Number(local.resources?.presence||0),Number(cloud.resources?.presence||0)),
+      progressionInitialized:!!local.progressionInitialized||!!cloud.progressionInitialized,
+      resources:{...primary.resources,presence:Math.max(Number(local.resources?.presence||0),Number(cloud.resources?.presence||0),Number(local.presenceTotal||0),Number(cloud.presenceTotal||0))},
       buildings:{
         refuge:{level:Math.max(Number(local.buildings.refuge.level||0),Number(cloud.buildings.refuge.level||0))},
         portico:{level:Math.max(Number(local.buildings.portico.level||0),Number(cloud.buildings.portico.level||0))},
@@ -2186,6 +2274,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         quarry:{level:Math.max(Number(local.buildings.quarry.level||0),Number(cloud.buildings.quarry.level||0))},
         cartography:{level:Math.max(Number(local.buildings.cartography.level||0),Number(cloud.buildings.cartography.level||0))}
       },
+      districts:{
+        winds:mergeDistrictV752(local.districts.winds,cloud.districts.winds),
+        portico:mergeDistrictV752(local.districts.portico,cloud.districts.portico),
+        traversal:mergeDistrictV752(local.districts.traversal,cloud.districts.traversal)
+      },
+      discoveries:uniq([...(local.discoveries||[]),...(cloud.discoveries||[])]),
       inventory:uniq([...(local.inventory||[]),...(cloud.inventory||[])]),
       achievements:uniq([...(local.achievements||[]),...(cloud.achievements||[])]),
       chronicles:uniq([...(local.chronicles||[]),...(cloud.chronicles||[])]),
@@ -2208,7 +2302,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     ['wood','stone','seeds'].forEach(resource=>{
       merged.resources[resource]=Math.min(mergedCap,Math.max(0,Number(merged.resources[resource]||0)));
     });
-    merged.resources.presence=Math.max(0,Number(merged.resources.presence||0));
+    merged.presenceTotal=Math.max(0,Number(merged.presenceTotal||0));
+    merged.resources.presence=Math.max(Number(merged.resources.presence||0),merged.presenceTotal);
     return merged;
   }
 
@@ -2536,7 +2631,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function claimDailyAwarenessReward(day=today()){
     if(vale.dailyAwarenessRewards.includes(day))return false;
     vale.dailyAwarenessRewards.push(day);
-    addResourceBurst({wood:35,stone:25,seeds:35},'Vale acordou • recursos do primeiro registro do dia');
+    vale.updatedAt=new Date().toISOString();
+    write(VALE_KEY,vale);
     return true;
   }
 
@@ -2549,10 +2645,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function addPresence(amount,reason=''){
-    vale.resources.presence=Math.max(0,Number(vale.resources.presence||0)+amount);
+    const gain=Math.max(0,Number(amount||0));
+    vale.presenceTotal=Math.max(0,Number(vale.presenceTotal||0)+gain);
+    // Campo legado mantido espelhado para backups/sincronização com versões antigas.
+    vale.resources.presence=Math.max(Number(vale.resources.presence||0),vale.presenceTotal);
     vale.updatedAt=new Date().toISOString();
     write(VALE_KEY,vale);
-    if(amount>0&&reason)toast(`✦ +${amount} Presença • ${reason}`);
+    if(gain>0&&reason)toast(`✦ +${gain} Presença • ${reason}`);
   }
 
   function itemCostAdjusted(buildingId,cost){
@@ -2572,7 +2671,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function payCost(cost){
-    ['wood','stone','seeds','presence'].forEach(k=>{
+    // Presença é cumulativa a partir da V7.5.2 e nunca é gasta.
+    ['wood','stone','seeds'].forEach(k=>{
       vale.resources[k]=Math.max(0,Number(vale.resources[k]||0)-Number(cost[k]||0));
     });
   }
@@ -2605,7 +2705,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     ACHIEVEMENTS.forEach(a=>{
       if(!vale.achievements.includes(a.id)&&a.condition()){
         vale.achievements.push(a.id);
-        if(a.rewardPresence)vale.resources.presence=Number(vale.resources.presence||0)+a.rewardPresence;
+        if(a.rewardPresence){
+          vale.presenceTotal=Math.max(0,Number(vale.presenceTotal||0)+Number(a.rewardPresence||0));
+          vale.resources.presence=Math.max(Number(vale.resources.presence||0),vale.presenceTotal);
+        }
         if(a.item)grantItem(a.item);
         newly.push(a);
       }
@@ -3431,7 +3534,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
 
   /* =========================================================
-     V7.5 — mapa estrutural do Vale
+     V7.5.2 — progressão visual do Vale
+     Presença cumulativa + distritos em estágios + descoberta.
      ========================================================= */
   const VALE_WORLD_W=1600,VALE_WORLD_H=1400;
   const VALE_ZOOM_MIN=.65,VALE_ZOOM_MAX=1.35,VALE_ZOOM_STEP=.15;
@@ -3439,6 +3543,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   let valeCameraReady=false;
   let activeValePlace='winds';
   let valeDrag=null;
+  let valeDiscoveryTimer=null;
 
   const VALE_SCENERY_V75={
     trees:[
@@ -3451,59 +3556,166 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     flowers:[[310,300],[520,690],[905,585],[1280,620],[650,1130],[1140,930],[230,1090],[1420,750]]
   };
 
-  function legacyPresenceTotalV75(){
-    const stored=Math.max(0,Number(vale?.resources?.presence||0));
-    const behavioral=Math.max(0,closedDays.length*2+resists.length);
-    const rewards=(vale?.achievements||[]).reduce((sum,id)=>{
-      const a=ACHIEVEMENTS.find(x=>x.id===id);return sum+Number(a?.rewardPresence||0);
+  function achievementPresenceTotalV752(){
+    return (vale?.achievements||[]).reduce((sum,id)=>{
+      const a=ACHIEVEMENTS.find(x=>x.id===id);
+      return sum+Number(a?.rewardPresence||0);
     },0);
-    return Math.max(stored,behavioral,behavioral+rewards);
   }
 
-  function valeUnlocksV75(){
-    const presence=legacyPresenceTotalV75();
-    return{
-      winds:resists.length>0||presence>=3,
-      portico:Number(vale?.buildings?.portico?.level||0)>0||closedDays.length>=7||presence>=12,
-      traversal:presence>=35
-    };
+  function historicalPresenceFloorV752(){
+    const stored=Math.max(0,Number(vale?.resources?.presence||0));
+    const behavioral=Math.max(0,closedDays.length*2+resists.length);
+    return Math.max(stored,behavioral+achievementPresenceTotalV752());
+  }
+
+  function windsStageV752(){
+    const n=resists.length;
+    // O pedido contém sobreposição no marco 30 (21–30 e 30+).
+    // Adotamos 30+ como regra prioritária: 30 já é estágio 3.
+    if(n>=30)return 3;
+    if(n>=21)return 2;
+    if(n>=1)return 1;
+    return 0;
+  }
+
+  function porticoStageV752(){
+    const days=closedDays.length;
+    const legacy=Math.min(3,Math.max(0,Number(vale?.buildings?.portico?.level||0)));
+    const byDays=days>=30?3:days>=15?2:days>=7?1:0;
+    return Math.max(legacy,byDays);
+  }
+
+  function traversalStageV752(){
+    return Number(vale?.presenceTotal||0)>=35?1:0;
+  }
+
+  function ensureValeProgressionV752({persist=true}={}){
+    let changed=false;
+    const floor=historicalPresenceFloorV752();
+    if(Number(vale.presenceTotal||0)<floor){vale.presenceTotal=floor;changed=true}
+    if(Number(vale.resources.presence||0)<Number(vale.presenceTotal||0)){
+      vale.resources.presence=Number(vale.presenceTotal||0);changed=true;
+    }
+
+    const targets={winds:windsStageV752(),portico:porticoStageV752(),traversal:traversalStageV752()};
+    const initializing=!vale.progressionInitialized;
+
+    Object.entries(targets).forEach(([id,targetStage])=>{
+      const d=vale.districts[id]||(vale.districts[id]=defaultDistrictStateV752());
+      const oldStage=Math.max(0,Number(d.stage||0));
+      const nextStage=Math.max(oldStage,targetStage);
+      if(nextStage!==oldStage){
+        d.stage=nextStage;d.unlocked=nextStage>0;changed=true;
+        if(!initializing){
+          if(oldStage===0&&nextStage>0&&!d.discoverySeen)d.pendingDiscovery=true;
+          else if(oldStage>0&&nextStage>oldStage)d.pendingUpgrade=true;
+        }
+      }else if(d.unlocked!==(nextStage>0)){
+        d.unlocked=nextStage>0;changed=true;
+      }
+      if(initializing){
+        d.discoverySeen=nextStage>0;
+        d.seenStage=nextStage;
+        d.pendingDiscovery=false;
+        d.pendingUpgrade=false;
+      }
+    });
+
+    if(initializing){vale.progressionInitialized=true;vale.version=4;changed=true}
+    if(changed&&persist){
+      vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);
+    }
+    return changed;
+  }
+
+  function cityStageV752(){
+    const p=Number(vale.presenceTotal||0);
+    return p>=100?7:p>=75?6:p>=50?5:p>=30?4:p>=20?3:p>=10?2:p>=5?1:0;
   }
 
   function valePlaceDefsV75(){
-    const u=valeUnlocksV75();
-    const porticoLevel=Number(vale?.buildings?.portico?.level||0);
+    ensureValeProgressionV752();
+    const winds=vale.districts.winds,portico=vale.districts.portico,traversal=vale.districts.traversal;
+    const wn=resists.length,days=closedDays.length,p=Number(vale.presenceTotal||0);
     return{
-      winds:{id:'winds',x:560,y:425,title:'Torre dos Ventos',sub:'DISTRITO DOS VENTOS',caption:'Voo na Névoa',unlocked:u.winds,type:'tower',state:u.winds?'aberta':'em breve',meta:u.winds?['Ferramenta em preparação','Voo chega na V7.7']:['A Névoa ainda cobre esta área']},
-      portico:{id:'portico',x:1190,y:490,title:'Distrito do Pórtico',sub:'ARQUIVO DO PÓRTICO',caption:'Arquivo do Pórtico',unlocked:u.portico,type:'portico',state:u.portico?'aberto':'ruínas',ruin:!u.portico&&porticoLevel===0,meta:u.portico?['Pórtico restaurado','Crônicas preservadas']:['Estrutura antiga','Ainda em ruínas']},
-      traversal:{id:'traversal',x:1080,y:1020,title:'Oficina da Travessia',sub:'DISTRITO DA TRAVESSIA',caption:'Construir novos caminhos',unlocked:u.traversal,type:'workshop',state:u.traversal?'aberta':'em breve',meta:u.traversal?['Distrito revelado','Jogo em preparação']:['Além da Névoa','Desbloqueio futuro']}
+      winds:{id:'winds',x:560,y:425,title:'Torre dos Ventos',sub:'DISTRITO DOS VENTOS',caption:'Voo na Névoa',unlocked:winds.stage>0,stage:winds.stage,type:'tower',state:winds.stage?`estágio ${winds.stage}`:'bloqueada',ruin:false,
+        meta:winds.stage===0?['0 vontades atravessadas','Primeira descoberta: 1']:
+          winds.stage===1?[`${wn} vontades atravessadas`,'Próxima expansão: 21']:
+          winds.stage===2?[`${wn} vontades atravessadas`,'Próxima expansão: 30']:[`${wn} vontades atravessadas`,'Distrito consolidado']},
+      portico:{id:'portico',x:1190,y:490,title:'Distrito do Pórtico',sub:'ARQUIVO DO PÓRTICO',caption:'Arquivo do Pórtico',unlocked:portico.stage>0,stage:portico.stage,type:'portico',state:portico.stage?`estágio ${portico.stage}`:'ruínas',ruin:portico.stage===0,
+        meta:portico.stage===0?[`${days} dias fechados`,'Restauração: 7 dias']:
+          portico.stage===1?[`${days} dias fechados`,'Próxima expansão: 15 dias']:
+          portico.stage===2?[`${days} dias fechados`,'Próxima expansão: 30 dias']:[`${days} dias fechados`,'Distrito consolidado']},
+      traversal:{id:'traversal',x:1080,y:1020,title:'Oficina da Travessia',sub:'DISTRITO DA TRAVESSIA',caption:'Construir novos caminhos',unlocked:traversal.stage>0,stage:traversal.stage,type:'workshop',state:traversal.stage?'estágio 1':'bloqueada',ruin:false,
+        meta:traversal.stage?[`${formatCompact(p)} Presenças`,'Oficina revelada • jogo futuro']:[`${formatCompact(p)} / 35 Presenças`,'Além da Névoa']}
     };
   }
 
-  function buildingMarkupV75(type){
-    if(type==='tower')return '<div class="v75-building tower"><i class="flag"></i><i class="roof"></i><i class="base"></i><i class="door"></i><i class="window"></i></div>';
-    if(type==='portico')return '<div class="v75-building portico"><i class="arch"></i><i class="wing left"></i><i class="wing right"></i><i class="banner"></i></div>';
-    return '<div class="v75-building workshop"><i class="chimney"></i><i class="roof"></i><i class="body"></i><i class="door"></i></div>';
+  function buildingMarkupV75(type,stage){
+    let main='';
+    if(type==='tower')main='<div class="v75-building tower"><i class="flag"></i><i class="roof"></i><i class="base"></i><i class="door"></i><i class="window"></i></div>';
+    else if(type==='portico')main='<div class="v75-building portico"><i class="arch"></i><i class="wing left"></i><i class="wing right"></i><i class="banner"></i></div>';
+    else main='<div class="v75-building workshop"><i class="chimney"></i><i class="roof"></i><i class="body"></i><i class="door"></i></div>';
+    if(stage<=1)return `<span class="v752-stage-cluster">${main}</span>`;
+    let annex='';
+    if(type==='tower'){
+      annex='<i class="v752-annex shed a1"></i>'+(stage>=3?'<i class="v752-annex house a2"></i><i class="v752-annex wind a3"></i>':'');
+    }else if(type==='portico'){
+      annex='<i class="v752-annex archive a1"></i>'+(stage>=3?'<i class="v752-annex pillar a2"></i><i class="v752-annex pillar a3"></i>':'');
+    }
+    return `<span class="v752-stage-cluster">${main}${annex}</span>`;
   }
 
   function renderValeSceneryV75(){
-    const layer=$('valeSceneryV75');if(!layer||layer.dataset.ready)return;
+    const layer=$('valeSceneryV75');if(!layer)return;
+    const stage=cityStageV752();
+    if(layer.dataset.cityStage===String(stage))return;
     let html='';
     VALE_SCENERY_V75.trees.forEach(([x,y,r],i)=>html+=`<i class="v75-tree ${r?'round':''}" style="left:${x}px;top:${y}px;transform:translate(-50%,-85%) scale(${.82+(i%4)*.07})"></i>`);
     VALE_SCENERY_V75.rocks.forEach(([x,y],i)=>html+=`<i class="v75-rock" style="left:${x}px;top:${y}px;transform:translate(-50%,-50%) scale(${.75+(i%3)*.12})"></i>`);
     VALE_SCENERY_V75.flowers.forEach(([x,y])=>html+=`<i class="v75-flower" style="left:${x}px;top:${y}px"></i>`);
-    // Casas cívicas simples: não clicáveis.
-    const houses=[[710,650,'blue'],[885,640,''],[720,810,''],[895,820,'blue'],[1000,590,'small'],[650,870,'small']];
-    houses.forEach(([x,y,c])=>html+=`<i class="v75-house ${c}" style="left:${x}px;top:${y}px"></i>`);
-    layer.innerHTML=html;layer.dataset.ready='1';
+
+    // Casa do Nimbo existe desde o primeiro dia.
+    html+='<div class="v752-home"><i class="v75-house blue"></i><span class="v752-home-label">Casa do Nimbo</span></div>';
+
+    // A cidade central cresce por Presença total, em posições fixas e previsíveis.
+    const houses=[
+      [710,650,'blue',1],[885,640,'',2],[720,810,'',4],[895,820,'blue',4],[1000,590,'small',5],[650,870,'small',5]
+    ];
+    houses.filter(([, , ,min])=>stage>=min).forEach(([x,y,c])=>html+=`<i class="v75-house ${c}" style="left:${x}px;top:${y}px"></i>`);
+    if(stage>=3){
+      html+='<i class="v752-plaza-detail v752-lamp show" style="left:735px;top:720px"></i><i class="v752-plaza-detail v752-lamp show" style="left:865px;top:720px"></i>';
+      html+='<i class="v752-plaza-detail v752-flowerbed show" style="left:746px;top:758px"></i><i class="v752-plaza-detail v752-flowerbed show" style="left:838px;top:758px"></i>';
+    }
+    layer.innerHTML=html;layer.dataset.cityStage=String(stage);
+  }
+
+  function renderValeRoadsV752(defs){
+    document.querySelectorAll('[data-v75-road-to]').forEach(path=>{
+      const id=path.dataset.v75RoadTo;
+      let show=true;
+      if(id==='winds')show=defs.winds.stage>0;
+      if(id==='winds2')show=defs.winds.stage>=2;
+      if(id==='portico')show=defs.portico.stage>0;
+      if(id==='portico2')show=defs.portico.stage>=2;
+      if(id==='traversal')show=defs.traversal.stage>0;
+      if(id==='future')show=Number(vale.presenceTotal||0)>=75;
+      path.classList.toggle('road-hidden',!show);
+    });
   }
 
   function renderValePlacesV75(){
     const layer=$('valePlacesV75');if(!layer)return;
     const defs=valePlaceDefsV75();
+    renderValeRoadsV752(defs);
     layer.innerHTML=Object.values(defs).map(d=>{
       const selected=d.id===activeValePlace;
-      return `<button type="button" class="v75-place ${selected?'selected':''} ${d.unlocked?'':'locked'} ${d.ruin?'ruin':''}" data-v75-place="${d.id}" style="left:${d.x}px;top:${d.y}px" aria-label="${d.title}">
-        <span class="v75-hit">${buildingMarkupV75(d.type)}<span class="v75-state">${d.state}</span><span class="v75-name">${d.title}<small>${d.caption}</small></span></span>
+      const state=vale.districts[d.id];
+      const discovering=!!state?.pendingDiscovery;
+      const upgrading=!!state?.pendingUpgrade;
+      return `<button type="button" class="v75-place stage-${d.stage} ${selected?'selected':''} ${d.unlocked?'':'locked'} ${d.ruin?'ruin':''} ${discovering?'discovering':''} ${upgrading?'pending-upgrade':''}" data-v75-place="${d.id}" style="left:${d.x}px;top:${d.y}px" aria-label="${d.title}">
+        <span class="v75-hit">${buildingMarkupV75(d.type,d.stage)}<span class="v75-state">${d.state}</span><span class="v75-name">${d.title}<small>${d.caption}</small></span></span>
       </button>`;
     }).join('');
     layer.querySelectorAll('[data-v75-place]').forEach(btn=>btn.onclick=e=>{
@@ -3517,7 +3729,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(!d){card.classList.remove('show');return}
     card.classList.add('show');
     $('valeCardTitle').textContent=d.title;
-    $('valeCardSub').textContent=d.sub;
+    $('valeCardSub').textContent=d.unlocked?`${d.sub} • ESTÁGIO ${d.stage}`:d.sub;
     $('valeCardMeta').innerHTML=d.meta.map(x=>`<span>${x}</span>`).join('');
     const action=$('valeCardAction');
     action.textContent=d.unlocked?'Em breve':'Bloqueado';
@@ -3554,6 +3766,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     valeCamera.x=vp.clientWidth/2-800;
     valeCamera.y=vp.clientHeight/2-730;
     applyValeCameraV75({save});
+  }
+
+  function focusValePlaceV752(id){
+    const vp=$('valeViewport'),d=valePlaceDefsV75()[id];if(!vp||!d)return;
+    valeCamera.zoom=1;
+    valeCamera.x=vp.clientWidth/2-d.x;
+    valeCamera.y=vp.clientHeight/2-d.y;
+    applyValeCameraV75();
   }
 
   function setValeZoomV75(next){
@@ -3604,13 +3824,47 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     window.addEventListener('resize',()=>{if(valeCameraReady)applyValeCameraV75()});
   }
 
+  function pendingValeMomentV752(){
+    const order=['winds','portico','traversal'];
+    for(const id of order){if(vale.districts[id]?.pendingDiscovery)return{id,type:'discovery'}}
+    for(const id of order){if(vale.districts[id]?.pendingUpgrade)return{id,type:'upgrade'}}
+    return null;
+  }
+
+  function playPendingValeDiscoveryV752(){
+    if(!document.querySelector('#vale.tab.active'))return;
+    const pending=pendingValeMomentV752();if(!pending)return;
+    const d=valePlaceDefsV75()[pending.id],state=vale.districts[pending.id];if(!d||!state)return;
+    activeValePlace=pending.id;
+    focusValePlaceV752(pending.id);
+    renderValePlacesV75();renderValeCardV75();
+    const toastEl=$('valeDiscoveryToast'),name=$('valeDiscoveryName');
+    if(name)name.textContent=pending.type==='discovery'?d.title:`${d.title} • estágio ${d.stage}`;
+    const small=toastEl?.querySelector('small');if(small)small.textContent=pending.type==='discovery'?'NOVO LUGAR DESCOBERTO':'O DISTRITO CRESCEU';
+    clearTimeout(valeDiscoveryTimer);
+    setTimeout(()=>toastEl?.classList.add('show'),120);
+    valeDiscoveryTimer=setTimeout(()=>{
+      toastEl?.classList.remove('show');
+      if(pending.type==='discovery'){
+        state.pendingDiscovery=false;state.discoverySeen=true;
+        if(!vale.discoveries.includes(pending.id))vale.discoveries.push(pending.id);
+      }else state.pendingUpgrade=false;
+      state.seenStage=Math.max(Number(state.seenStage||0),Number(state.stage||0));
+      vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync();
+      renderValePlacesV75();renderValeCardV75();
+      // Se mais de um marco estiver pendente, apresenta o próximo sem empilhar animações.
+      setTimeout(()=>playPendingValeDiscoveryV752(),450);
+    },2100);
+  }
+
   function renderValeMap(){
-    renderValeSceneryV75();renderValePlacesV75();renderValeCardV75();bindValeMapV75();
+    ensureValeProgressionV752();renderValeSceneryV75();renderValePlacesV75();renderValeCardV75();bindValeMapV75();
     requestAnimationFrame(()=>initValeCameraV75());
   }
 
   function renderVale(){
-    if($('valePresenceV75'))$('valePresenceV75').textContent=formatCompact(legacyPresenceTotalV75());
+    ensureValeProgressionV752();
+    if($('valePresenceV75'))$('valePresenceV75').textContent=formatCompact(vale.presenceTotal);
     renderValeMap();
     applyPetVisualState(vitality(),bond(),breath(),resilience());
   }
@@ -3933,7 +4187,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     claimDailyAwarenessReward(today());
     animatePet(true);
     addPresence(1,'vontade atravessada');
-    addResourceBurst({wood:20,stone:15,seeds:25});
     render();
     checkAchievements();
     scheduleSync();
@@ -3960,7 +4213,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       render();
       reactPet('close');
       addPresence(2,'dia fechado');
-      addResourceBurst({wood:60,stone:45,seeds:60});
       checkAchievements();
       render();
       scheduleSync();
@@ -4345,7 +4597,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id===btn.dataset.tab));
     if(btn.dataset.tab==='vale'){
       renderVale();
-      requestAnimationFrame(()=>{initValeCameraV75();applyValeCameraV75()});
+      requestAnimationFrame(()=>{initValeCameraV75();applyValeCameraV75();setTimeout(()=>playPendingValeDiscoveryV752(),180)});
     }
     if(btn.dataset.tab==='journey'){
       renderJourneyV7();
