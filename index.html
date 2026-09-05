@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.7.1">
+<meta name="app-version" content="7.8.1">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1105,7 +1105,39 @@ body{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .day-detail-card .actions{margin-top:8px}.day-detail-card .secondary{width:100%;padding:11px 12px}
 .day-detail-card .secondary:disabled{opacity:.4}
 
+.live-gap-chip{
+  margin-top:7px;padding:6px 7px;border-radius:9px;background:rgba(6,17,31,.42);
+  border:1px solid rgba(114,222,241,.11)
+}
+.live-gap-line{display:flex;align-items:baseline;justify-content:space-between;gap:7px}
+.live-gap-line span{font-size:8px;color:#8ea4b9;white-space:nowrap}
+.live-gap-line strong{font:700 12px var(--pixel);color:#d9f5fb;white-space:nowrap}
+.live-gap-track{height:3px;border-radius:999px;background:#091522;overflow:hidden;margin-top:5px}
+.live-gap-track i{display:block;height:100%;width:0;background:var(--cyan);border-radius:999px;transition:width .35s}
+.live-gap-caption{font-size:7.5px;line-height:1.3;color:#829bb1;margin-top:4px;min-height:10px}
+.smoke-summary .recent-label{margin-top:6px}
+.smoke-summary .recent-times{min-height:15px}
+
+.close-summary-sheet{padding-top:15px}
+.close-summary-kicker{font:8px var(--pixel);color:#9bddea;margin-bottom:5px}
+.close-summary-title{font-size:21px;font-weight:820;letter-spacing:-.35px}
+.close-summary-copy{font-size:10px;line-height:1.5;color:var(--muted);margin-top:6px}
+.close-score-hero{margin:14px 0 10px;padding:14px;border-radius:16px;background:#0c192a;border:1px solid rgba(114,222,241,.12)}
+.close-score-hero strong{display:block;font:800 30px var(--pixel);color:#dff7ff}
+.close-score-hero span{font-size:9px;color:#8fa5ba}
+.close-score-list{display:grid;gap:6px;margin-top:10px}
+.close-score-row{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;padding:9px 10px;border-radius:11px;background:#0d1a2c;border:1px solid var(--line)}
+.close-score-icon{font-size:16px;text-align:center}.close-score-name{font-size:10px;font-weight:750}.close-score-note{font-size:8px;color:var(--muted);margin-top:2px;line-height:1.3}
+.close-score-xp{font:800 11px var(--pixel);color:#bdf5cd}.close-score-xp.zero{color:#6f8195}
+.close-score-footer{font-size:9px;color:#91a5b9;line-height:1.45;margin:10px 1px 0}
+.close-summary-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:14px}
+.close-summary-actions button{border-radius:12px;padding:12px 10px;font-size:11px;font-weight:800}
+.close-cancel{border:1px solid var(--line);background:#18273f;color:var(--text)}
+.close-confirm{border:0;background:linear-gradient(180deg,#66ec92,#46d77a);color:#07351a}
+.close-confirm:disabled{opacity:.4}
+
 @media(max-width:360px){
+  .live-gap-line strong{font-size:11px}.live-gap-caption{font-size:7px}
   .habitat-v731{height:310px}
   .pet-zone-v731{top:163px!important;height:170px!important}
   .pet-zone-v731 .pet-bob{width:170px;height:170px}
@@ -1644,7 +1676,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   </div>
   <div class="quick-actions quick-actions-v731">
     <button class="quick smoke" id="smokeBtn" type="button" aria-label="Registrar que fumei agora"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
-    <button class="quick resist" id="resistBtn" type="button" aria-label="Registrar que quis fumar, mas não fumei"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Presença</span></button>
+    <button class="quick resist" id="resistBtn" type="button" aria-label="Registrar que quis fumar, mas não fumei"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Resiliência</span></button>
   </div>
 
   <div class="daily-summary-row" aria-label="Resumo de hoje">
@@ -1652,6 +1684,11 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
       <div class="summary-top">
         <div class="summary-number" id="todayCount">0</div>
         <div class="summary-label"><span id="cigLabel">cigarros</span><br>hoje</div>
+      </div>
+      <div class="live-gap-chip" aria-live="polite">
+        <div class="live-gap-line"><span>sem fumar agora</span><strong id="liveGapClock">—</strong></div>
+        <div class="live-gap-track" aria-hidden="true"><i id="liveGapFill"></i></div>
+        <div class="live-gap-caption" id="liveGapCaption">Aguardando referência</div>
       </div>
       <div class="recent-label">Últimos horários</div>
       <div class="recent-times" id="lastTime">Nenhum registro</div>
@@ -1693,7 +1730,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 <section id="vale" class="tab">
   <div class="vale-v75-head compact">
     <div class="vale-v75-hero" aria-hidden="true"></div>
-    <div class="vale-v75-presence">✦ <b id="valePresenceV75">0</b> Presenças</div>
+    <div class="vale-v75-presence">✦ <b id="valePresenceV75">0</b> XP</div>
   </div>
 
   <div class="vale-v75-shell">
@@ -1830,6 +1867,24 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   </div>
 </div>
 
+<div class="sheet-backdrop" id="dayCloseBackdrop" role="dialog" aria-modal="true" aria-labelledby="dayCloseTitle">
+  <div class="sheet close-summary-sheet">
+    <div class="sheet-handle"></div>
+    <div class="close-summary-kicker" id="dayCloseKicker">FECHAMENTO DO DIA</div>
+    <div class="close-summary-title" id="dayCloseTitle">Fechar o dia?</div>
+    <div class="close-summary-copy" id="dayCloseCopy"></div>
+    <div id="dayCloseResult" hidden>
+      <div class="close-score-hero"><strong id="dayCloseXp">+0 XP</strong><span id="dayCloseXpLabel">gerados por este dia</span></div>
+      <div class="close-score-list" id="dayCloseBreakdown"></div>
+      <div class="close-score-footer" id="dayCloseFooter"></div>
+    </div>
+    <div class="close-summary-actions">
+      <button type="button" class="close-cancel" id="dayCloseCancel">Cancelar</button>
+      <button type="button" class="close-confirm" id="dayCloseConfirm">Fechar e calcular XP</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 <nav class="nav"><div class="navin">
 <button class="active" data-tab="home"><span class="ico">●</span>Hoje</button>
@@ -1841,7 +1896,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.7.1').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.8.1').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2313,8 +2368,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function defaultValeState(){
     const historicalPresence=Math.max(0,closedDays.length*2+resists.length);
     return{
-      version:4,
+      version:5,
       economyVersion:2,
+      progressionEngineVersion:2,
       presenceTotal:historicalPresence,
       progressionInitialized:false,
       resources:{wood:700,stone:500,seeds:450,presence:historicalPresence},
@@ -2354,7 +2410,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     const out={
       ...d,...raw,
-      version:Math.max(4,Number(raw.version||0)),
+      version:Math.max(5,Number(raw.version||0)),
+      progressionEngineVersion:Math.max(1,Number(raw.progressionEngineVersion||1)),
       journey:normalizeJourney(raw.journey),
       actor:normalizeActor(raw.actor),
       presenceTotal:Math.max(0,Number(raw.presenceTotal??raw.resources?.presence??d.presenceTotal)),
@@ -2395,12 +2452,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       out.lastProductionAt=new Date().toISOString();
     }
 
-    // V7.5.2: uma migração em duas etapas. Aqui preservamos o máximo histórico disponível;
-    // após ACHIEVEMENTS estar inicializado, ensureValeProgressionV752() completa o cálculo.
-    if(Number(raw.version||0)<4){
-      out.presenceTotal=Math.max(out.presenceTotal,Number(raw.resources?.presence||0),closedDays.length*2+resists.length);
+    // V7.8: o histórico é preservado, mas a camada derivada de progressão é reconstruída
+    // pelo Progression Engine V2. Isso permite testar atributos e desbloqueios novos sem
+    // carregar estágios/conquistas calculados pelas regras antigas.
+    if(Number(raw.progressionEngineVersion||1)<2){
+      out.progressionEngineVersion=2;
       out.progressionInitialized=false;
-      out.version=4;
+      out.districts={winds:defaultDistrictStateV752(),portico:defaultDistrictStateV752(),traversal:defaultDistrictStateV752()};
+      out.discoveries=[];
+      out.achievements=[];
+      out.seenAchievements=[];
+      out.inventory=[];
+      out.chronicles=['prologue'];
+      out.readChronicles=[];
+      const oldJourney=normalizeJourney(raw.journey);
+      out.journey={...oldJourney,migrated:false,unlocked:[],seen:[],completed:[],editions:{},editionSeen:[],dates:{}};
+      out.version=5;
       out.updatedAt=new Date().toISOString();
     }
 
@@ -2445,8 +2512,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       ...primary,
       journey:mergeJourney(local.journey,cloud.journey),
       actor:mergeActor(local.actor,cloud.actor),
-      version:Math.max(Number(local.version||0),Number(cloud.version||0),4),
+      version:Math.max(Number(local.version||0),Number(cloud.version||0),5),
       economyVersion:Math.max(Number(local.economyVersion||0),Number(cloud.economyVersion||0),2),
+      progressionEngineVersion:Math.max(Number(local.progressionEngineVersion||0),Number(cloud.progressionEngineVersion||0),2),
       presenceTotal:Math.max(Number(local.presenceTotal||0),Number(cloud.presenceTotal||0),Number(local.resources?.presence||0),Number(cloud.resources?.presence||0)),
       progressionInitialized:!!local.progressionInitialized||!!cloud.progressionInitialized,
       resources:{...primary.resources,presence:Math.max(Number(local.resources?.presence||0),Number(cloud.resources?.presence||0),Number(local.presenceTotal||0),Number(cloud.presenceTotal||0))},
@@ -2610,147 +2678,381 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return [...new Set(closedDays.map(x=>x.date))].filter(d=>d<today()).sort();
   }
 
-  function maybeBaseline(){
-    const days=completedDays().slice(0,7);
-    game.baseline=days.length?days.reduce((sum,d)=>sum+smokeCount(d),0)/days.length:null;
-    game.baselineLocked=days.length===7;
-    write(GAME_KEY,game);
-    write(VALE_KEY,vale);
+  let progressionCache=null;
+
+  function median(values){
+    const a=(values||[]).filter(Number.isFinite).slice().sort((x,y)=>x-y);
+    if(!a.length)return null;
+    const m=Math.floor(a.length/2);
+    return a.length%2?a[m]:(a[m-1]+a[m])/2;
   }
 
-  function avg7(){
-    const first=dayDate(today());
-    first.setDate(first.getDate()-7);
-    const firstKey=`${first.getFullYear()}-${pad(first.getMonth()+1)}-${pad(first.getDate())}`;
-    const known=completedDays().filter(d=>d>=firstKey);
-    return known.length?known.reduce((sum,d)=>sum+smokeCount(d),0)/known.length:null;
+  function mean(values){
+    const a=(values||[]).filter(Number.isFinite);
+    return a.length?a.reduce((sum,n)=>sum+n,0)/a.length:null;
   }
 
-  function reduction(){
-    if(!game.baselineLocked||!(game.baseline>0))return null;
-    const a=avg7();
-    return a===null?null:((game.baseline-a)/game.baseline)*100;
+  function closureForDay(day){
+    return closedDays.find(x=>x.date===day)||null;
   }
 
-  function bond(){
-    const ks=last7();
-    let c=0;
-    ks.forEach(k=>{if(isClosed(k)||smokeCount(k)>0||resistCount(k)>0)c++});
-    let s=Math.round(c/7*84);
-    const t=today();
-    if(isClosed(t))s+=16;
-    else if(smokeCount(t)>0||resistCount(t)>0)s+=8;
-    return clamp(s,0,100);
-  }
-
-  function vitality(){
-    const r=reduction();
-    const v=r===null?55:55+r*.9;
-    return Math.round(clamp(v,15,100));
+  function closureTimeForDay(day){
+    const c=closureForDay(day);
+    if(c){
+      const t=new Date(c.closedAt).getTime();
+      if(Number.isFinite(t))return t;
+    }
+    return appDayStart(addAppDays(day,1)).getTime();
   }
 
   function daySmokeTimes(day){
     return smokes
       .filter(x=>eventDay(x)===day)
       .map(x=>new Date(x.timestamp))
+      .filter(d=>Number.isFinite(d.getTime()))
       .sort((a,b)=>a-b);
   }
 
-  function averageIntervalsForDays(days){
+  function firstCigMinuteForDay(day){
+    const nominalStart=appDayStart(day).getTime();
+    const first=daySmokeTimes(day).find(d=>d.getTime()>=nominalStart);
+    return first?minuteInAppDay(first):null;
+  }
+
+  function globalSmokeGapsEndingOnDays(days){
+    const allowed=new Set(days||[]),ordered=smokes.slice().sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     const gaps=[];
-    days.forEach(day=>{
-      const times=daySmokeTimes(day);
-      for(let i=1;i<times.length;i++){
-        gaps.push((times[i]-times[i-1])/60000);
-      }
-    });
-    return gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:null;
+    for(let i=1;i<ordered.length;i++){
+      if(!allowed.has(eventDay(ordered[i])))continue;
+      const gap=(new Date(ordered[i].timestamp)-new Date(ordered[i-1].timestamp))/60000;
+      if(Number.isFinite(gap)&&gap>0)gaps.push(gap);
+    }
+    return gaps;
+  }
+
+  function averageIntervalsForDays(days){
+    return mean(globalSmokeGapsEndingOnDays(days));
   }
 
   function firstCigAverageForDays(days){
-    const mins=[];
-    days.forEach(day=>{
-      // Um dia pode ter começado manualmente antes das 05:00 do seu calendário.
-      // Esses registros contam normalmente, mas não entram na métrica de "primeiro cigarro"
-      // para evitar uma melhora/piora artificial causada apenas pelo fechamento antecipado.
-      const nominalStart=appDayStart(day).getTime();
-      const times=daySmokeTimes(day).filter(d=>d.getTime()>=nominalStart);
-      if(times.length)mins.push(minuteInAppDay(times[0]));
-    });
-    return mins.length?mins.reduce((a,b)=>a+b,0)/mins.length:null;
+    return mean((days||[]).map(firstCigMinuteForDay).filter(Number.isFinite));
   }
+
+  function buildInitialBaseline(days){
+    const use=(days||[]).slice(0,7);
+    return{
+      days:use,
+      smokes:use.length?median(use.map(smokeCount)):null,
+      intervalMinutes:median(globalSmokeGapsEndingOnDays(use)),
+      firstCigMinute:median(use.map(firstCigMinuteForDay).filter(Number.isFinite))
+    };
+  }
+
+  function rhythmMultiplierFromHistory(history,referenceSmokes){
+    const recent=(history||[]).slice(-7).map(x=>x.smokes).filter(Number.isFinite);
+    if(recent.length<3)return 1;
+    const current=mean(recent);
+    if(!(referenceSmokes>0))return current===0?1.25:.55;
+    const ratio=current/referenceSmokes;
+    return clamp(1.4-.4*ratio,.35,1.25);
+  }
+
+  function vitalityReward(smokeTotal,referenceSmokes,multiplier){
+    if(referenceSmokes===null)return 0;
+    if(referenceSmokes<=0)return smokeTotal===0?Math.round(10*multiplier):0;
+    const ratio=smokeTotal/referenceSmokes;
+    let base=0;
+    if(smokeTotal===0)base=20;
+    else if(ratio<1)base=4+Math.round((1-ratio)*18);
+    else if(ratio<=1.05)base=2;
+    return Math.max(0,Math.round(base*multiplier));
+  }
+
+  function resilienceBaseForIndex(index){
+    return [6,5,4,3][index]??2;
+  }
+
+  const BREATH_TIERS=[
+    {ratio:1,xp:2},{ratio:1.25,xp:4},{ratio:1.5,xp:7},
+    {ratio:2,xp:11},{ratio:3,xp:17},{ratio:4,xp:24}
+  ];
+  const BREATH_CURVE=[
+    {ratio:0,xp:0},{ratio:.5,xp:1},{ratio:1,xp:2},{ratio:1.25,xp:4},
+    {ratio:1.5,xp:7},{ratio:2,xp:11},{ratio:3,xp:17},{ratio:4,xp:24},{ratio:6,xp:32}
+  ];
+
+  // Fôlego cresce progressivamente enquanto o intervalo continua aberto, e não apenas ao cruzar marcos fixos.
+  function breathTierTotal(minutes,referenceInterval){
+    if(!(referenceInterval>0)||!(minutes>=0))return 0;
+    const ratio=Math.max(0,minutes/referenceInterval);
+    if(ratio>=BREATH_CURVE[BREATH_CURVE.length-1].ratio){
+      const last=BREATH_CURVE[BREATH_CURVE.length-1];
+      return Math.floor(last.xp+(ratio-last.ratio)*3);
+    }
+    for(let i=1;i<BREATH_CURVE.length;i++){
+      const hi=BREATH_CURVE[i],lo=BREATH_CURVE[i-1];
+      if(ratio<=hi.ratio){
+        const pct=(ratio-lo.ratio)/Math.max(.0001,hi.ratio-lo.ratio);
+        return Math.max(0,Math.round(lo.xp+(hi.xp-lo.xp)*pct));
+      }
+    }
+    return 0;
+  }
+
+  function breathShortGapPenalty(minutes,referenceInterval){
+    if(!(referenceInterval>0)||!(minutes>=0)||minutes>=referenceInterval)return 0;
+    const ratio=minutes/referenceInterval;
+    if(ratio<.40)return 5;
+    if(ratio<.60)return 3;
+    if(ratio<.80)return 2;
+    return 1;
+  }
+
+  function breathDailyFrequencyPenalty(smokeTotal,referenceSmokes){
+    if(!(referenceSmokes>0)||!(smokeTotal>referenceSmokes))return 0;
+    const excess=Math.max(0,smokeTotal-referenceSmokes);
+    const ratio=smokeTotal/referenceSmokes;
+    return Math.max(1,Math.round(excess*1.5+Math.max(0,ratio-1)*4));
+  }
+
+  function nextBreathTier(minutes,referenceInterval){
+    if(!(referenceInterval>0))return null;
+    return BREATH_TIERS.find(t=>minutes<referenceInterval*t.ratio)||null;
+  }
+
+  function firstDelayReward(currentMinute,referenceMinute,multiplier){
+    if(currentMinute===null||referenceMinute===null)return 0;
+    const d=currentMinute-referenceMinute;
+    const base=d>=120?10:d>=60?7:d>=30?4:d>=15?2:0;
+    return Math.round(base*multiplier);
+  }
+
+  function ratchetReference(reference,postBaselineClosed){
+    const window=(postBaselineClosed||[]).slice(-7);
+    if(window.length<5)return reference;
+    const next={...reference};
+    const smokeCandidate=median(window.map(x=>x.smokes));
+    if(next.smokes!==null&&smokeCandidate!==null&&next.smokes>0&&smokeCandidate<=next.smokes*.90){
+      next.smokes=Math.max(0,Math.round((next.smokes+(smokeCandidate-next.smokes)*.22)*10)/10);
+    }
+    const intervalCandidate=median(window.map(x=>x.intervalMedian).filter(Number.isFinite));
+    if(next.intervalMinutes>0&&intervalCandidate!==null&&intervalCandidate>=next.intervalMinutes*1.10){
+      next.intervalMinutes=Math.round(next.intervalMinutes+(intervalCandidate-next.intervalMinutes)*.22);
+    }
+    const firstCandidate=median(window.map(x=>x.firstMinute).filter(Number.isFinite));
+    if(next.firstCigMinute!==null&&firstCandidate!==null&&firstCandidate>=next.firstCigMinute+20){
+      next.firstCigMinute=Math.round(next.firstCigMinute+(firstCandidate-next.firstCigMinute)*.22);
+    }
+    return next;
+  }
+
+  function attributeLevelFromXp(xp){
+    let level=45,remaining=Math.max(0,Math.round(xp||0)),nextCost=0;
+    while(level<100){
+      nextCost=Math.max(8,Math.round(6+level*.18));
+      if(remaining<nextCost)break;
+      remaining-=nextCost;level++;
+    }
+    if(level>=100){remaining=0;nextCost=0}
+    return{level,xp:Math.max(0,Math.round(xp||0)),into:remaining,nextCost};
+  }
+
+  function progressionEngine(now=Date.now(),force=false){
+    const bucket=Math.floor(now/15000);
+    if(!force&&progressionCache&&progressionCache.bucket===bucket)return progressionCache.value;
+
+    const completed=completedDays();
+    const baselineDays=completed.slice(0,7);
+    const baseline=buildInitialBaseline(baselineDays);
+    const baselineAvailable=baselineDays.length>=1;
+    const baselineLocked=baselineDays.length>=7;
+    const baselineStartDay=baselineAvailable?baselineDays[0]:null;
+    const baselineEndDay=baselineLocked?baselineDays[6]:null;
+    let reference={smokes:baseline.smokes,intervalMinutes:baseline.intervalMinutes,firstCigMinute:baseline.firstCigMinute};
+    let postBaselineClosed=[];
+    let lastSmokeAt=null;
+    let intervalAwarded=0;
+    const dayScores={};
+    const totals={vitality:0,breath:0,resilience:0,bond:0,milestone:0};
+    const allDays=uniq([...observed(),today()]).sort();
+    const sortedSmokes=smokes.slice().sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+
+    const scoreFor=day=>dayScores[day]||(dayScores[day]={
+      day,smokes:smokeCount(day),resists:resistCount(day),vitality:0,breath:0,breathPenalty:0,resilience:0,bond:0,milestone:0,
+      multiplier:1,phase:!baselineAvailable?'observation':baselineLocked&&day>baselineEndDay?'journey':baselineDays.length>=3?'calibration':'observation',reference:null,totalXp:0
+    });
+
+    for(const day of allDays){
+      const score=scoreFor(day);
+      // Um único dia fechado já cria uma referência provisória. A partir do dia seguinte, ela pode orientar ganhos.
+      const afterBaseline=baselineAvailable&&day>baselineStartDay;
+      const multiplier=afterBaseline&&baselineLocked?rhythmMultiplierFromHistory(postBaselineClosed,reference.smokes):1;
+      score.multiplier=multiplier;
+      score.reference={...reference};
+
+      const events=[
+        ...smokes.filter(x=>eventDay(x)===day).map(x=>({...x,type:'smoke'})),
+        ...resists.filter(x=>eventDay(x)===day).map(x=>({...x,type:'resist'}))
+      ].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+
+      if(events.length)score.bond+=2;
+      let resistIndex=0;
+      for(const event of events){
+        const at=new Date(event.timestamp).getTime();
+        if(event.type==='resist'){
+          score.resilience+=Math.max(1,Math.round(resilienceBaseForIndex(resistIndex++)*multiplier));
+          continue;
+        }
+        if(!Number.isFinite(at))continue;
+        if(afterBaseline&&lastSmokeAt!==null&&reference.intervalMinutes>0){
+          const gap=Math.max(0,(at-lastSmokeAt)/60000);
+          const tier=breathTierTotal(gap,reference.intervalMinutes);
+          const delta=Math.max(0,tier-intervalAwarded);
+          score.breath+=Math.round(delta*multiplier);
+          const shortPenalty=breathShortGapPenalty(gap,reference.intervalMinutes);
+          if(shortPenalty){score.breath-=shortPenalty;score.breathPenalty+=shortPenalty}
+        }
+        lastSmokeAt=at;
+        intervalAwarded=0;
+      }
+
+      const closed=isClosed(day);
+      if(closed)score.bond+=3;
+
+      if(baselineLocked&&day===baselineEndDay&&closed){
+        score.milestone+=20;
+      }
+      if(afterBaseline&&closed){
+        const closeAt=closureTimeForDay(day);
+        if(lastSmokeAt!==null&&reference.intervalMinutes>0&&closeAt>=lastSmokeAt){
+          const gap=(closeAt-lastSmokeAt)/60000;
+          const tier=breathTierTotal(gap,reference.intervalMinutes);
+          const delta=Math.max(0,tier-intervalAwarded);
+          score.breath+=Math.round(delta*multiplier);
+          intervalAwarded=Math.max(intervalAwarded,tier);
+        }
+        score.vitality+=vitalityReward(score.smokes,reference.smokes,multiplier);
+        score.breath+=firstDelayReward(firstCigMinuteForDay(day),reference.firstCigMinute,multiplier);
+
+        // Mais cigarros do que a referência significam maior frequência ao longo do dia.
+        // A penalidade só reduz o Fôlego gerado neste próprio dia; nunca apaga Fôlego de dias anteriores.
+        const frequencyPenalty=breathDailyFrequencyPenalty(score.smokes,reference.smokes);
+        if(frequencyPenalty){score.breath-=frequencyPenalty;score.breathPenalty+=frequencyPenalty}
+
+        if(baselineLocked&&day>baselineEndDay){
+          const dayGaps=globalSmokeGapsEndingOnDays([day]);
+          postBaselineClosed.push({
+            day,smokes:score.smokes,intervalMedian:median(dayGaps),firstMinute:firstCigMinuteForDay(day)
+          });
+          reference=ratchetReference(reference,postBaselineClosed);
+        }
+      }
+
+      const isCurrent=day===today()&&!closed;
+      if(afterBaseline&&isCurrent&&lastSmokeAt!==null&&reference.intervalMinutes>0&&now>=lastSmokeAt){
+        const gap=(now-lastSmokeAt)/60000;
+        const tier=breathTierTotal(gap,reference.intervalMinutes);
+        const delta=Math.max(0,tier-intervalAwarded);
+        score.breath+=Math.round(delta*multiplier);
+      }
+
+      score.vitality=Math.max(0,Math.round(score.vitality));
+      score.breath=Math.max(0,Math.round(score.breath));
+      score.resilience=Math.max(0,Math.round(score.resilience));
+      score.bond=Math.max(0,Math.round(score.bond));
+      score.totalXp=score.vitality+score.breath+score.resilience+score.bond+score.milestone;
+      totals.vitality+=score.vitality;totals.breath+=score.breath;totals.resilience+=score.resilience;totals.bond+=score.bond;totals.milestone+=score.milestone;
+    }
+
+    // Se o último cigarro ocorreu num dia que não entrou no laço (casos antigos/importados), ainda o usamos no relógio.
+    if(lastSmokeAt===null&&sortedSmokes.length){
+      const t=new Date(sortedSmokes[sortedSmokes.length-1].timestamp).getTime();
+      if(Number.isFinite(t))lastSmokeAt=t;
+    }
+
+    const attrs={
+      vitality:attributeLevelFromXp(totals.vitality),
+      breath:attributeLevelFromXp(totals.breath),
+      resilience:attributeLevelFromXp(totals.resilience),
+      bond:attributeLevelFromXp(totals.bond)
+    };
+    const totalXp=totals.vitality+totals.breath+totals.resilience+totals.bond+totals.milestone;
+    const recentClosed=completed.slice(-7);
+    const recentSmokeAverage=mean(recentClosed.map(smokeCount));
+    const initialReduction=baseline.smokes>0&&recentSmokeAverage!==null?((baseline.smokes-recentSmokeAverage)/baseline.smokes)*100:null;
+    const currentMultiplier=baselineLocked?rhythmMultiplierFromHistory(postBaselineClosed,reference.smokes):1;
+    const liveMinutes=lastSmokeAt===null?null:Math.max(0,(now-lastSmokeAt)/60000);
+    const currentTier=liveMinutes===null?0:breathTierTotal(liveMinutes,reference.intervalMinutes);
+    const nextTier=liveMinutes===null?null:nextBreathTier(liveMinutes,reference.intervalMinutes);
+    const phase=baselineDays.length<3?'observation':baselineLocked?'journey':'calibration';
+    const value={
+      version:2,phase,baselineAvailable,baselineLocked,baseline,reference,days:dayScores,totals,attributes:attrs,totalXp,
+      recentSmokeAverage,reduction:initialReduction,currentMultiplier,lastSmokeAt,
+      live:{minutes:liveMinutes,tierXp:currentTier,nextTier,referenceInterval:reference.intervalMinutes}
+    };
+    progressionCache={bucket,value};
+    return value;
+  }
+
+  function maybeBaseline(){
+    const e=progressionEngine(Date.now(),true);
+    game.baseline=e.baseline.smokes;
+    game.baselineLocked=e.baselineLocked;
+    game.bestReduction=Math.max(0,Number(e.reduction||0));
+    vale.baselines.intervalMinutes=e.baseline.intervalMinutes===null?null:Math.round(e.baseline.intervalMinutes);
+    vale.baselines.firstCigMinute=e.baseline.firstCigMinute===null?null:Math.round(e.baseline.firstCigMinute);
+    write(GAME_KEY,game);write(VALE_KEY,vale);
+  }
+
+  function avg7(){
+    const days=completedDays().slice(-7);
+    return days.length?mean(days.map(smokeCount)):null;
+  }
+
+  function reduction(){return progressionEngine().reduction}
+  function bond(){return progressionEngine().attributes.bond.level}
+  function vitality(){return progressionEngine().attributes.vitality.level}
+  function breath(){return progressionEngine().attributes.breath.level}
+  function resilience(){return progressionEngine().attributes.resilience.level}
 
   function ensureValeBaselines(){
-    const days=completedDays().slice(0,7);
-    if(vale.baselines.intervalMinutes===null&&days.length>=3){
-      const v=averageIntervalsForDays(days);
-      if(v!==null)vale.baselines.intervalMinutes=Math.round(v);
-    }
-    if(vale.baselines.firstCigMinute===null&&days.length>=3){
-      const v=firstCigAverageForDays(days);
-      if(v!==null)vale.baselines.firstCigMinute=Math.round(v);
-    }
-    write(VALE_KEY,vale);
-  }
-
-  function breath(){
-    ensureValeBaselines();
-    const recent=last7();
-    const currentInterval=averageIntervalsForDays(recent);
-    const baseInterval=vale.baselines.intervalMinutes;
-    const currentFirst=firstCigAverageForDays(recent);
-    const baseFirst=vale.baselines.firstCigMinute;
-    let score=50,hasSignal=false;
-
-    if(currentInterval!==null&&baseInterval!==null&&baseInterval>0){
-      score+=clamp(((currentInterval-baseInterval)/baseInterval)*48,-28,34);
-      hasSignal=true;
-    }
-    if(currentFirst!==null&&baseFirst!==null){
-      score+=clamp((currentFirst-baseFirst)/4,-16,18);
-      hasSignal=true;
-    }
-
-    return hasSignal?Math.round(clamp(score,20,100)):50;
-  }
-
-  function resilience(){
-    const recentResists=last7().reduce((s,k)=>s+resistCount(k),0);
-    const daysWithResist=last7().filter(k=>resistCount(k)>0).length;
-    return Math.round(clamp(25+recentResists*4.5+daysWithResist*4.5,20,100));
+    const e=progressionEngine();
+    vale.baselines.intervalMinutes=e.baseline.intervalMinutes===null?null:Math.round(e.baseline.intervalMinutes);
+    vale.baselines.firstCigMinute=e.baseline.firstCigMinute===null?null:Math.round(e.baseline.firstCigMinute);
   }
 
   function firstCigImprovement(){
-    ensureValeBaselines();
-    const current=firstCigAverageForDays(last7());
-    const base=vale.baselines.firstCigMinute;
+    const e=progressionEngine();
+    const current=firstCigAverageForDays(completedDays().slice(-7));
+    const base=e.baseline.firstCigMinute;
     return current===null||base===null?0:current-base;
   }
 
   function maxGapMinutes(){
+    const ordered=smokes.slice().sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     let max=0;
-    observed().forEach(day=>{
-      const times=daySmokeTimes(day);
-      for(let i=1;i<times.length;i++){
-        max=Math.max(max,(times[i]-times[i-1])/60000);
-      }
-    });
+    for(let i=1;i<ordered.length;i++){
+      const gap=(new Date(ordered[i].timestamp)-new Date(ordered[i-1].timestamp))/60000;
+      if(Number.isFinite(gap))max=Math.max(max,gap);
+    }
+    const e=progressionEngine();
+    if(e.live.minutes!==null)max=Math.max(max,e.live.minutes);
     return max;
   }
 
   function hasLongGapAchievement(){
-    ensureValeBaselines();
-    const base=vale.baselines.intervalMinutes;
+    const base=progressionEngine().baseline.intervalMinutes;
     const maxGap=maxGapMinutes();
     if(base===null)return maxGap>=150;
     return maxGap>=Math.max(120,base+45);
   }
 
   function hasObstacleAchievement(){
-    if(!(game.baselineLocked&&game.baseline>0))return false;
+    const base=progressionEngine().baseline.smokes;
+    if(!(progressionEngine().baselineLocked&&base>0))return false;
     const days=observed().sort();
     for(const day of days){
-      if(smokeCount(day)>game.baseline*1.2){
+      if(smokeCount(day)>base*1.2){
         const d=dayDate(day);d.setDate(d.getDate()+1);
         const next=key(d);
         if(smokeCount(next)>0||resistCount(next)>0||isClosed(next))return true;
@@ -3334,15 +3636,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function progress(){
-    const r=reduction();
-    if(r!==null&&r>game.bestReduction)game.bestReduction=r;
-    const xp=closedDays.length*12+resists.length*6+Math.round(Math.max(0,game.bestReduction||0)*3);
+    const e=progressionEngine();
+    const xp=e.totalXp;
     const thresholds=[0,100,250,500,850];
     let level=1;
     thresholds.forEach((t,i)=>{if(xp>=t)level=i+1});
-    game.maxLevel=Math.max(game.maxLevel||1,level);
+    game.bestReduction=Math.max(0,Number(e.reduction||0));
+    game.maxLevel=level;
     write(GAME_KEY,game);
-    return{xp,level:game.maxLevel,thresholds};
+    return{xp,level,thresholds};
   }
 
   function mood(v,b){
@@ -3789,26 +4091,37 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return Math.max(stored,behavioral+achievementPresenceTotalV752());
   }
 
-  function windsStageV752(){
-    const n=resists.length;
-    // O pedido contém sobreposição no marco 30 (21–30 e 30+).
-    // Adotamos 30+ como regra prioritária: 30 já é estágio 3.
-    if(n>=30)return 3;
-    if(n>=21)return 2;
-    if(n>=1)return 1;
-    return 0;
+  const VALE_V2_REQUIREMENTS={
+    winds:[
+      {xp:15,resilience:46},
+      {xp:180,resilience:50,breath:48},
+      {xp:420,resilience:56,breath:54}
+    ],
+    portico:[
+      {xp:35,bond:47},
+      {xp:180,bond:51},
+      {xp:450,bond:58}
+    ],
+    traversal:[
+      {xp:300,vitality:48,breath:48,resilience:50,bond:50}
+    ]
+  };
+
+  function valeRequirementMet(req,e=progressionEngine()){
+    if(!req)return true;
+    if(e.totalXp<Number(req.xp||0))return false;
+    return ['vitality','breath','resilience','bond'].every(k=>req[k]===undefined||e.attributes[k].level>=req[k]);
   }
 
-  function porticoStageV752(){
-    const days=closedDays.length;
-    const legacy=Math.min(3,Math.max(0,Number(vale?.buildings?.portico?.level||0)));
-    const byDays=days>=30?3:days>=15?2:days>=7?1:0;
-    return Math.max(legacy,byDays);
+  function stageFromRequirements(id){
+    const e=progressionEngine(),list=VALE_V2_REQUIREMENTS[id]||[];
+    let stage=0;list.forEach((req,i)=>{if(valeRequirementMet(req,e))stage=i+1});
+    return stage;
   }
 
-  function traversalStageV752(){
-    return Number(vale?.presenceTotal||0)>=35?1:0;
-  }
+  function windsStageV752(){return stageFromRequirements('winds')}
+  function porticoStageV752(){return stageFromRequirements('portico')}
+  function traversalStageV752(){return stageFromRequirements('traversal')}
 
   function ensureValeProgressionV752({persist=true}={}){
     let changed=false;
@@ -3842,7 +4155,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       }
     });
 
-    if(initializing){vale.progressionInitialized=true;vale.version=4;changed=true}
+    if(initializing){vale.progressionInitialized=true;vale.version=5;vale.progressionEngineVersion=2;changed=true}
     if(changed&&persist){
       vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);
     }
@@ -3850,25 +4163,27 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function cityStageV752(){
-    const p=Number(vale.presenceTotal||0);
-    return p>=100?7:p>=75?6:p>=50?5:p>=30?4:p>=20?3:p>=10?2:p>=5?1:0;
+    const xp=progressionEngine().totalXp;
+    return xp>=900?7:xp>=650?6:xp>=450?5:xp>=300?4:xp>=180?3:xp>=100?2:xp>=40?1:0;
+  }
+
+  function valeRequirementSummary(id,stage){
+    const req=(VALE_V2_REQUIREMENTS[id]||[])[stage];
+    if(!req)return['Estágio máximo atual','Progressão consolidada'];
+    const e=progressionEngine();
+    const names={vitality:'Vitalidade',breath:'Fôlego',resilience:'Resiliência',bond:'Vínculo'};
+    const parts=[`XP ${Math.min(e.totalXp,req.xp)}/${req.xp}`];
+    Object.keys(names).forEach(k=>{if(req[k]!==undefined)parts.push(`${names[k]} ${e.attributes[k].level}/${req[k]}`)});
+    return[parts.slice(0,2).join(' • '),parts.slice(2).join(' • ')||`Forma ${progress().level}`];
   }
 
   function valePlaceDefsV75(){
     ensureValeProgressionV752();
     const winds=vale.districts.winds,portico=vale.districts.portico,traversal=vale.districts.traversal;
-    const wn=resists.length,days=closedDays.length,p=Number(vale.presenceTotal||0);
     return{
-      winds:{id:'winds',x:560,y:425,title:'Torre dos Ventos',sub:'DISTRITO DOS VENTOS',caption:'Voo na Névoa',unlocked:winds.stage>0,stage:winds.stage,type:'tower',state:winds.stage?`estágio ${winds.stage}`:'bloqueada',ruin:false,
-        meta:winds.stage===0?['0 vontades atravessadas','Primeira descoberta: 1']:
-          winds.stage===1?[`${wn} vontades atravessadas`,'Próxima expansão: 21']:
-          winds.stage===2?[`${wn} vontades atravessadas`,'Próxima expansão: 30']:[`${wn} vontades atravessadas`,'Distrito consolidado']},
-      portico:{id:'portico',x:1190,y:490,title:'Distrito do Pórtico',sub:'ARQUIVO DO PÓRTICO',caption:'Arquivo do Pórtico',unlocked:portico.stage>0,stage:portico.stage,type:'portico',state:portico.stage?`estágio ${portico.stage}`:'ruínas',ruin:portico.stage===0,
-        meta:portico.stage===0?[`${days} dias fechados`,'Restauração: 7 dias']:
-          portico.stage===1?[`${days} dias fechados`,'Próxima expansão: 15 dias']:
-          portico.stage===2?[`${days} dias fechados`,'Próxima expansão: 30 dias']:[`${days} dias fechados`,'Distrito consolidado']},
-      traversal:{id:'traversal',x:1080,y:1020,title:'Oficina da Travessia',sub:'DISTRITO DA TRAVESSIA',caption:'Construir novos caminhos',unlocked:traversal.stage>0,stage:traversal.stage,type:'workshop',state:traversal.stage?'estágio 1':'bloqueada',ruin:false,
-        meta:traversal.stage?[`${formatCompact(p)} Presenças`,'Oficina revelada • jogo futuro']:[`${formatCompact(p)} / 35 Presenças`,'Além da Névoa']}
+      winds:{id:'winds',x:560,y:425,title:'Torre dos Ventos',sub:'DISTRITO DOS VENTOS',caption:'Voo na Névoa',unlocked:winds.stage>0,stage:winds.stage,type:'tower',state:winds.stage?`estágio ${winds.stage}`:'bloqueada',ruin:false,meta:valeRequirementSummary('winds',winds.stage)},
+      portico:{id:'portico',x:1190,y:490,title:'Distrito do Pórtico',sub:'ARQUIVO DO PÓRTICO',caption:'Arquivo do Pórtico',unlocked:portico.stage>0,stage:portico.stage,type:'portico',state:portico.stage?`estágio ${portico.stage}`:'ruínas',ruin:portico.stage===0,meta:valeRequirementSummary('portico',portico.stage)},
+      traversal:{id:'traversal',x:1080,y:1020,title:'Oficina da Travessia',sub:'DISTRITO DA TRAVESSIA',caption:'Construir novos caminhos',unlocked:traversal.stage>0,stage:traversal.stage,type:'workshop',state:traversal.stage?'estágio 1':'bloqueada',ruin:false,meta:valeRequirementSummary('traversal',traversal.stage)}
     };
   }
 
@@ -3920,7 +4235,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       if(id==='portico')show=defs.portico.stage>0;
       if(id==='portico2')show=defs.portico.stage>=2;
       if(id==='traversal')show=defs.traversal.stage>0;
-      if(id==='future')show=Number(vale.presenceTotal||0)>=75;
+      if(id==='future')show=progressionEngine().totalXp>=650;
       path.classList.toggle('road-hidden',!show);
     });
   }
@@ -3950,14 +4265,20 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     card.classList.add('show');
     $('valeCardTitle').textContent=d.title;
     $('valeCardSub').textContent=d.unlocked?`${d.sub} • ESTÁGIO ${d.stage}`:d.sub;
-    const count=d.id==='winds'?resists.length:d.id==='portico'?closedDays.length:Number(vale.presenceTotal||0);
-    const target=d.id==='winds'?[1,21,30,null][d.stage]:d.id==='portico'?[7,15,30,null][d.stage]:d.stage?null:35;
-    const unit=d.id==='winds'?'vontades atravessadas':d.id==='portico'?'dias fechados':'Presenças';
-    $('valeCardMeta').textContent=target?`${count} de ${target} ${unit} · ${d.stage?'próxima expansão':'descoberta'}`:`${count} ${unit} · estágio máximo atual`;
-    const bar=$('valeProgress'),pct=target?Math.min(100,count/target*100):100;
-    bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax',String(target||100));bar.setAttribute('aria-valuenow',String(target?Math.min(count,target):100));
-    $('valeProgressFill').style.width=`${pct}%`;
-    $('valePlaceDescription').textContent={winds:'Aqui, cada vontade atravessada dá altura à Torre dos Ventos.',portico:'O Pórtico guarda a memória dos dias que você confirmou.',traversal:'Sua presença revela uma oficina para construir novos caminhos.'}[d.id];
+    const e=progressionEngine(),req=(VALE_V2_REQUIREMENTS[d.id]||[])[d.stage];
+    const names={vitality:'Vitalidade',breath:'Fôlego',resilience:'Resiliência',bond:'Vínculo'};
+    if(req){
+      const pieces=[`${e.totalXp}/${req.xp} XP`];
+      Object.keys(names).forEach(k=>{if(req[k]!==undefined)pieces.push(`${names[k]} ${e.attributes[k].level}/${req[k]}`)});
+      $('valeCardMeta').textContent=`${d.stage?'Próxima expansão':'Descoberta'} • ${pieces.join(' • ')}`;
+      const ratios=[Math.min(1,e.totalXp/req.xp),...Object.keys(names).filter(k=>req[k]!==undefined).map(k=>Math.min(1,e.attributes[k].level/req[k]))];
+      const pct=Math.round(mean(ratios)*100),bar=$('valeProgress');
+      bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax','100');bar.setAttribute('aria-valuenow',String(pct));$('valeProgressFill').style.width=`${pct}%`;
+    }else{
+      $('valeCardMeta').textContent=`${e.totalXp} XP • estágio máximo atual`;
+      const bar=$('valeProgress');bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax','100');bar.setAttribute('aria-valuenow','100');$('valeProgressFill').style.width='100%';
+    }
+    $('valePlaceDescription').textContent={winds:'Fôlego e Resiliência levantam a Torre: criar espaço e atravessar vontades fazem este distrito crescer.',portico:'Vínculo e XP restauram o Pórtico: voltar, registrar e confirmar os dias sustentam este distrito.',traversal:'A Oficina aparece quando os quatro atributos avançam de forma equilibrada, junto com a experiência total.'}[d.id];
     const action=$('valeCardAction');
     action.textContent=d.unlocked?'Atividade em breve':'Lugar ainda bloqueado';
     scheduleValeLayout();
@@ -4133,15 +4454,56 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     requestAnimationFrame(()=>{fitValeLayout();initValeCameraV75()});
   }
 
+  function formatGapClock(minutes){
+    if(minutes===null||!Number.isFinite(minutes))return '—';
+    const total=Math.max(0,Math.floor(minutes));
+    if(total<60)return `${total}m`;
+    const h=Math.floor(total/60),m=total%60;
+    if(h<24)return `${h}h ${pad(m)}m`;
+    const d=Math.floor(h/24),rh=h%24;return `${d}d ${rh}h`;
+  }
+
+  function updateLiveIntervalClock(){
+    const clock=$('liveGapClock'),caption=$('liveGapCaption'),fill=$('liveGapFill');
+    if(!clock||!caption||!fill)return;
+    const e=progressionEngine(Date.now(),true),live=e.live;
+    if(live.minutes===null){
+      clock.textContent='—';fill.style.width='0%';caption.textContent=e.baselineAvailable?'Nenhum cigarro registrado neste ciclo.':'Feche 1 dia para criar uma referência provisória.';return;
+    }
+    clock.textContent=formatGapClock(live.minutes);
+    if(!(live.referenceInterval>0)||!e.baselineAvailable){
+      fill.style.width=`${Math.min(100,(live.minutes/180)*100)}%`;
+      caption.textContent=e.baselineAvailable?'Referência provisória sem intervalo suficiente':'Feche 1 dia para criar uma referência provisória';
+      return;
+    }
+    const next=live.nextTier;
+    const nextMinutes=next?live.referenceInterval*next.ratio:null;
+    const previous=BREATH_TIERS.filter(t=>live.minutes>=live.referenceInterval*t.ratio).slice(-1)[0];
+    const lower=previous?live.referenceInterval*previous.ratio:0;
+    const upper=nextMinutes||Math.max(live.referenceInterval*4,live.minutes);
+    fill.style.width=`${clamp((live.minutes-lower)/Math.max(1,upper-lower)*100,0,100)}%`;
+    const refText=`ref. ${formatMinutes(live.referenceInterval)}`;
+    const gain=live.tierXp?` • +${live.tierXp} Fôlego em curso`:'';
+    const nextText=next?` • próximo marco ${formatMinutes(nextMinutes)}`:' • intervalo excepcional';
+    const provisional=e.baselineLocked?'':' • ref. provisória';
+    caption.textContent=`${refText}${provisional}${gain}${nextText}`;
+    if($('breathText'))$('breathText').textContent=e.attributes.breath.level;
+    if($('breathBar'))$('breathBar').style.width=e.attributes.breath.level+'%';
+  }
+
+  let liveGapTimer=setInterval(updateLiveIntervalClock,15000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateLiveIntervalClock()});
+
   function renderVale(){
     ensureValeProgressionV752();
-    if($('valePresenceV75'))$('valePresenceV75').textContent=formatCompact(vale.presenceTotal);
+    if($('valePresenceV75'))$('valePresenceV75').textContent=formatCompact(progressionEngine().totalXp);
     renderValeMap();
     applyPetVisualState(vitality(),bond(),breath(),resilience());
   }
 
 
   function render(){
+    progressionCache=null;
     smokes.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     resists.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     maybeBaseline();
@@ -4180,17 +4542,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     $('closeDayBtn').textContent=isClosed(t)?'Dia fechado':'Fechar o dia';
     $('closeDayBtn').classList.toggle('closed',isClosed(t));
 
-    $('baselineValue').textContent=game.baseline===null?'—':`${game.baseline.toFixed(1).replace('.',',')}/dia`;
-    $('baselineStatus').textContent=game.baselineLocked?'baseline fixa':'baseline provisória';
+    const engine=progressionEngine();
+    $('baselineValue').textContent=engine.baseline.smokes===null?'—':`${engine.baseline.smokes.toFixed(1).replace('.',',')}/dia`;
+    $('baselineStatus').textContent=engine.baselineLocked?'referência inicial fixa':engine.baselineAvailable?(engine.phase==='calibration'?'referência provisória • calibração':'referência provisória • observação'):'baseline em observação';
 
-    const a=avg7(),r=reduction();
+    const a=avg7(),r=engine.reduction;
     $('avg7').textContent=a===null?'—':a.toFixed(1).replace('.',',');
-    $('trendText').textContent=r===null?`${Math.min(completedDays().length,7)}/7 dias completos confirmados`:`${r>=0?'↓':'↑'} ${Math.abs(r).toFixed(0)}% vs baseline`;
+    $('trendText').textContent=!engine.baselineLocked?`${Math.min(completedDays().length,7)}/7 dias completos confirmados`:`${r===null?'Ritmo em leitura':`${r>=0?'↓':'↑'} ${Math.abs(r).toFixed(0)}% vs referência inicial`} • evolução ${engine.currentMultiplier.toFixed(2).replace('.',',')}×`;
     const smokeGaps=st.slice(1).map((item,index)=>(new Date(item.timestamp)-new Date(st[index].timestamp))/60000);
     $('longestGap').textContent=smokeGaps.length?formatMinutes(Math.max(...smokeGaps)):'—';
-    $('sinceLastSmoke').textContent=st.length
-      ?formatMinutes(Math.max(0,(Date.now()-new Date(st[st.length-1].timestamp).getTime())/60000))
-      :'Sem registro hoje';
+    $('sinceLastSmoke').textContent=engine.live.minutes===null?'Sem registro':formatMinutes(engine.live.minutes);
+    updateLiveIntervalClock();
 
     $('vitalityText').textContent=v;
     $('bondText').textContent=b;
@@ -4544,43 +4906,91 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     write(RESIST_KEY,resists);
     claimDailyAwarenessReward(day);
     animatePet(true);
-    addPresence(1,'vontade atravessada');
     render();
     checkAchievements();
     scheduleSync();
   };
 
-  function closeRecordedDay(day){
+  let pendingCloseDay=null;
+
+  function closeScoreRows(score){
+    const rows=[
+      ['❤','Vitalidade',score.vitality,score.vitality?'Consumo do dia comparado à referência conquistada.':'Sem ganho de redução confirmado neste dia.'],
+      ['🌬','Fôlego',score.breath,score.breathPenalty?`Intervalos e tempo sem fumar, já descontando ${score.breathPenalty} ponto${score.breathPenalty===1?'':'s'} por maior frequência.`:score.breath?'Intervalos maiores, primeiro cigarro mais tarde e tempo sem fumar.':'Sem ganho líquido de Fôlego neste dia.'],
+      ['🛡','Resiliência',score.resilience,score.resilience?'Vontades atravessadas, com retorno decrescente no mesmo dia.':'Nenhuma vontade atravessada registrada.'],
+      ['◇','Vínculo',score.bond,score.bond?'Registro e confirmação do dia.':'Sem ganho de vínculo.']
+    ];
+    if(score.milestone)rows.push(['✦','Marco de calibração',score.milestone,'Sete dias confirmados: o motor de progressão passa a usar sua referência inicial.']);
+    return rows;
+  }
+
+  function openCloseDayReview(day){
+    if(day>today()||isClosed(day))return;
+    pendingCloseDay=day;
+    $('dayCloseKicker').textContent='FECHAMENTO DO DIA';
+    $('dayCloseTitle').textContent=`Fechar ${dayText(day)}?`;
+    $('dayCloseCopy').textContent=`${smokeCount(day)} cigarro${smokeCount(day)===1?'':'s'} • ${resistCount(day)} vontade${resistCount(day)===1?'':'s'} superada${resistCount(day)===1?'':'s'}. Confirme apenas se os registros deste dia estão completos.`;
+    $('dayCloseResult').hidden=true;
+    $('dayCloseCancel').hidden=false;$('dayCloseCancel').textContent='Cancelar';
+    $('dayCloseConfirm').textContent='Fechar e calcular XP';$('dayCloseConfirm').disabled=false;
+    $('dayCloseBackdrop').classList.add('show');
+  }
+
+  function showClosedDayScore(day,score,closesActiveDay){
+    $('dayCloseKicker').textContent=score.phase==='journey'?'PROGRESSION ENGINE V2':'CALIBRAÇÃO';
+    $('dayCloseTitle').textContent='Dia fechado';
+    $('dayCloseCopy').textContent=score.phase==='journey'
+      ?`Ritmo de evolução aplicado: ${score.multiplier.toFixed(2).replace('.',',')}×.`
+      :`A partir do primeiro dia fechado já existe uma referência provisória. Ela continua sendo refinada até sete dias confirmados.`;
+    $('dayCloseXp').textContent=`+${score.totalXp} XP`;
+    $('dayCloseXpLabel').textContent='gerados por este dia';
+    $('dayCloseBreakdown').innerHTML=closeScoreRows(score).map(([icon,name,xp,note])=>`<div class="close-score-row"><div class="close-score-icon">${icon}</div><div><div class="close-score-name">${name}</div><div class="close-score-note">${note}</div></div><div class="close-score-xp ${xp?'':'zero'}">+${xp}</div></div>`).join('');
+    const e=progressionEngine();
+    const ref=e.reference.smokes===null?'—':e.reference.smokes.toFixed(1).replace('.',',');
+    $('dayCloseFooter').textContent=`Referência conquistada atual: ${ref} cigarros/dia${closesActiveDay?` • nova contagem: ${dayText(today())}`:''}. Nada conquistado é retirado; dias piores reduzem a velocidade das próximas recompensas.`;
+    $('dayCloseResult').hidden=false;
+    $('dayCloseCancel').hidden=true;
+    $('dayCloseConfirm').textContent='Concluir';
+    pendingCloseDay=null;
+  }
+
+  function commitCloseRecordedDay(day){
     const activeBefore=today();
     if(day>activeBefore||isClosed(day))return;
     const closesActiveDay=day===activeBefore;
-    const nextDay=addAppDays(day,1);
-    const nextNote=closesActiveDay?`\n\nDepois de fechar, a contagem passa imediatamente para ${dayText(nextDay)}, mesmo antes das 05h.`:'';
-    if(!confirm(`Fechar ${dayText(day)} com ${smokeCount(day)} cigarros e ${resistCount(day)} vontades superadas? Confirme apenas se os registros desse dia estão completos.${nextNote}`))return;
     closedDays.push({date:day,closedAt:new Date().toISOString()});
     write(CLOSED_KEY,closedDays);
     vale.closureRewards=vale.closureRewards||[];
     if(!vale.closureRewards.includes(day)){
       vale.closureRewards.push(day);
-      addPresence(2,'dia fechado');
     }
+    progressionCache=null;
+    const score=progressionEngine(Date.now(),true).days[day]||{vitality:0,breath:0,breathPenalty:0,resilience:0,bond:3,milestone:0,totalXp:3,multiplier:1,phase:'observation'};
     reactPet('close');render();checkAchievements();scheduleSync();
-    if(closesActiveDay)toast(`Dia fechado • nova contagem: ${dayText(today())}`);
+    showClosedDayScore(day,score,closesActiveDay);
   }
 
   function reopenRecordedDay(day){
-    if(!isClosed(day)||!confirm(`Reabrir ${dayText(day)}? Fechar novamente não repete a recompensa.`))return;
+    if(!isClosed(day)||!confirm(`Reabrir ${dayText(day)}? A progressão será recalculada a partir do histórico confirmado.`))return;
     closedDays=closedDays.filter(x=>x.date!==day);
-    write(CLOSED_KEY,closedDays);addPendingDelete('closure',day);render();scheduleSync();
+    write(CLOSED_KEY,closedDays);addPendingDelete('closure',day);progressionCache=null;render();scheduleSync();
   }
 
-  $('closeDayBtn').onclick=()=>closeRecordedDay(today());
+  $('closeDayBtn').onclick=()=>openCloseDayReview(today());
   $('historyList').onclick=e=>{
     const btn=e.target.closest('[data-close-day],[data-reopen-day]');
     if(!btn)return;
-    if(btn.dataset.closeDay)closeRecordedDay(btn.dataset.closeDay);
+    if(btn.dataset.closeDay)openCloseDayReview(btn.dataset.closeDay);
     else reopenRecordedDay(btn.dataset.reopenDay);
   };
+
+  $('dayCloseCancel').onclick=()=>{$('dayCloseBackdrop').classList.remove('show');pendingCloseDay=null};
+  $('dayCloseConfirm').onclick=()=>{
+    if(pendingCloseDay){const day=pendingCloseDay;commitCloseRecordedDay(day);return}
+    $('dayCloseBackdrop').classList.remove('show');
+  };
+  $('dayCloseBackdrop').onclick=e=>{if(e.target===$('dayCloseBackdrop')&&!pendingCloseDay)$('dayCloseBackdrop').classList.remove('show')};
+
   $('reviewPendingDays').onclick=()=>document.querySelector('[data-tab="history"]').click();
 
   $('undoBtn').onclick=()=>{
