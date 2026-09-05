@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.5.4">
+<meta name="app-version" content="7.5.5">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1376,6 +1376,11 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 @media(max-height:760px) and (max-width:500px){.vale-v75-viewport{height:400px}}
 @media(prefers-reduced-motion:reduce){.v75-building{transition:none!important}}
 
+/* V7.5.5 — revisão de dias sem interromper os registros de hoje */
+.pending-days{margin:12px 0;padding:13px;border:1px solid #446279;border-radius:16px;background:#132b3b;display:flex;gap:12px;align-items:center}
+.pending-days[hidden]{display:none}.pending-days strong{font-size:13px}.pending-days p{font-size:12px;color:#b5c6d3;margin:5px 0 0;line-height:1.4}.pending-days button{flex-shrink:0;min-height:44px}
+.history-close{display:block;margin-top:9px;min-height:44px;font-size:12px}.history-row>div:first-child{min-width:0}.date-sub{overflow-wrap:anywhere}
+@media(max-width:380px){.pending-days{align-items:stretch;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -1493,6 +1498,10 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
   <div id="homeResourceStrip" style="display:none"><span id="homeWoodValue">0</span><span id="homeStoneValue">0</span><span id="homeSeedsValue">0</span><span id="homePresenceValue">0</span></div>
 
+  <div id="pendingDaysNotice" class="pending-days" hidden>
+    <div><strong id="pendingDaysTitle"></strong><p id="pendingDaysSummary"></p></div>
+    <button type="button" class="secondary" id="reviewPendingDays">Revisar dias</button>
+  </div>
   <div class="quick-actions quick-actions-v731">
     <button class="quick smoke" id="smokeBtn" type="button" aria-label="Registrar que fumei agora"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
     <button class="quick resist" id="resistBtn" type="button" aria-label="Registrar que quis fumar, mas não fumei"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Presença</span></button>
@@ -1529,7 +1538,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
       </div>
       <div class="day-detail-metrics">
         <div class="baseline"><span id="baselineStatus">baseline em observação</span><strong id="baselineValue">—</strong></div>
-        <div class="baseline"><span>Média 7 dias</span><strong id="avg7">—</strong></div>
+        <div class="baseline"><span>Média: dias fechados nos últimos 7 dias</span><strong id="avg7">—</strong></div>
         <div class="baseline"><span>Maior intervalo hoje</span><strong id="longestGap">—</strong></div>
         <div class="baseline"><span>Desde o último cigarro</span><strong id="sinceLastSmoke">—</strong></div>
       </div>
@@ -1616,7 +1625,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
     <div class="attr-grid">
       <div class="attr-card">
         <div class="attr-top"><span class="attr-name">❤️ Vitalidade</span><span class="attr-value" id="attrVitality">55</span></div>
-        <div class="attr-desc">Compara sua média recente de cigarros com a baseline.</div>
+        <div class="attr-desc">Compara dias fechados e já terminados com seus primeiros sete dias completos confirmados.</div>
         <div class="attr-effect">No Nimbo: muda cor, brilho e tamanho.</div>
       </div>
       <div class="attr-card">
@@ -1744,7 +1753,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.4').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.5.5').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2169,7 +2178,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function normalizeValeState(raw){
     const d=defaultValeState();
-    if(!raw||typeof raw!=='object')return d;
+    if(!raw||typeof raw!=='object')return {...d,closureRewards:closedDays.map(x=>x.date)};
 
     const out={
       ...d,...raw,
@@ -2195,6 +2204,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       chronicles:Array.isArray(raw.chronicles)?raw.chronicles:['prologue'],
       readChronicles:Array.isArray(raw.readChronicles)?raw.readChronicles:[],
       seenAchievements:Array.isArray(raw.seenAchievements)?raw.seenAchievements:[],
+      closureRewards:Array.isArray(raw.closureRewards)?raw.closureRewards:closedDays.map(x=>x.date),
       dailyAwarenessRewards:Array.isArray(raw.dailyAwarenessRewards)?raw.dailyAwarenessRewards:[],
       map:{...d.map,...(raw.map||{})},
       baselines:{...d.baselines,...(raw.baselines||{})},
@@ -2283,6 +2293,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       chronicles:uniq([...(local.chronicles||[]),...(cloud.chronicles||[])]),
       readChronicles:uniq([...(local.readChronicles||[]),...(cloud.readChronicles||[])]),
       seenAchievements:uniq([...(local.seenAchievements||[]),...(cloud.seenAchievements||[])]),
+      closureRewards:uniq([...(local.closureRewards||[]),...(cloud.closureRewards||[])]),
       dailyAwarenessRewards:uniq([...(local.dailyAwarenessRewards||[]),...(cloud.dailyAwarenessRewards||[])]),
       baselines:{
         intervalMinutes:primary.baselines.intervalMinutes??secondary.baselines.intervalMinutes??null,
@@ -2416,20 +2427,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return a;
   }
 
+  function completedDays(){
+    return [...new Set(closedDays.map(x=>x.date))].filter(d=>d<today()).sort();
+  }
+
   function maybeBaseline(){
-    if(game.baselineLocked&&typeof game.baseline==='number')return;
-    const days=observed().slice(0,7);
-    if(!days.length)return;
-    game.baseline=days.reduce((s,k)=>s+smokeCount(k),0)/days.length;
-    if(days.length>=7)game.baselineLocked=true;
+    const days=completedDays().slice(0,7);
+    game.baseline=days.length?days.reduce((sum,d)=>sum+smokeCount(d),0)/days.length:null;
+    game.baselineLocked=days.length===7;
     write(GAME_KEY,game);
     write(VALE_KEY,vale);
   }
 
   function avg7(){
-    const ks=last7();
-    const known=ks.filter(k=>smokeCount(k)>0||resistCount(k)>0||isClosed(k)||k===today());
-    return known.length?known.reduce((s,k)=>s+smokeCount(k),0)/known.length:null;
+    const first=new Date();first.setHours(12,0,0,0);first.setDate(first.getDate()-7);
+    const known=completedDays().filter(d=>d>=key(first));
+    return known.length?known.reduce((sum,d)=>sum+smokeCount(d),0)/known.length:null;
   }
 
   function reduction(){
@@ -2483,7 +2496,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function ensureValeBaselines(){
-    const days=observed().slice(0,7);
+    const days=completedDays().slice(0,7);
     if(vale.baselines.intervalMinutes===null&&days.length>=3){
       const v=averageIntervalsForDays(days);
       if(v!==null)vale.baselines.intervalMinutes=Math.round(v);
@@ -2914,51 +2927,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       button.textContent=repeat?(state.level?'Construir +1':'Construir'):(state.level?'Melhorar':'Construir');
       button.disabled=!req.ok||!canPay(nextCost);
     }
-  }
-
-  function renderValeMap(){
-    $('fogWest').classList.toggle('hidden',vale.buildings.portico.level>=1);
-    $('fogEast').classList.toggle('hidden',vale.buildings.refuge.level>=2);
-    $('fogNorth').classList.toggle('hidden',vale.buildings.cartography.level>=1);
-
-    $('futureRegion').classList.toggle('unlocked',vale.buildings.cartography.level>=1);
-    $('futureRegion').textContent=vale.buildings.cartography.level>=1
-      ?'🌲 Bosque do Intervalo • revelado'
-      :'🌫 Bosque do Intervalo';
-
-    renderValeSettlement();
-    renderBuildingPalette();
-    renderBuildingDetail(activeBuildingId);
-  }
-
-  function renderVale(){
-    collectValeProduction();
-    const cap=storageCap();
-
-    $('woodValue').textContent=formatCompact(vale.resources.wood);
-    $('stoneValue').textContent=formatCompact(vale.resources.stone);
-    $('seedsValue').textContent=formatCompact(vale.resources.seeds);
-    $('presenceValue').textContent=formatCompact(vale.resources.presence);
-
-    if($('homeWoodValue'))$('homeWoodValue').textContent=formatCompact(vale.resources.wood);
-    if($('homeStoneValue'))$('homeStoneValue').textContent=formatCompact(vale.resources.stone);
-    if($('homeSeedsValue'))$('homeSeedsValue').textContent=formatCompact(vale.resources.seeds);
-    if($('homePresenceValue'))$('homePresenceValue').textContent=formatCompact(vale.resources.presence);
-
-    const rates=productionRates();
-    const total=rates.wood+rates.stone+rates.seeds;
-    $('productionSummary').textContent=total>0
-      ?`+${formatRate(total)}/min`
-      :'produção parada';
-
-    if($('cityMapSubtitle')){
-      const buildings=vale.buildings.refuge.level+vale.buildings.garden.level+vale.buildings.sawmill.level+vale.buildings.quarry.level;
-      $('cityMapSubtitle').textContent=`${buildings} estruturas no Vale • capacidade ${formatCompact(cap)} por recurso comum.`;
-    }
-
-    renderValeMap();
-    renderResources();
-    applyPetVisualState(vitality(),bond(),breath(),resilience());
   }
 
   function resourceTimeToFull(current,cap,rate){
@@ -3915,7 +3883,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     const a=avg7(),r=reduction();
     $('avg7').textContent=a===null?'—':a.toFixed(1).replace('.',',');
-    $('trendText').textContent=r===null?`${Math.min(observed().length,7)}/7 dias observados`:`${r>=0?'↓':'↑'} ${Math.abs(r).toFixed(0)}% vs baseline`;
+    $('trendText').textContent=r===null?`${Math.min(completedDays().length,7)}/7 dias completos confirmados`:`${r>=0?'↓':'↑'} ${Math.abs(r).toFixed(0)}% vs baseline`;
     const smokeGaps=st.slice(1).map((item,index)=>(new Date(item.timestamp)-new Date(st[index].timestamp))/60000);
     $('longestGap').textContent=smokeGaps.length?formatMinutes(Math.max(...smokeGaps)):'—';
     $('sinceLastSmoke').textContent=st.length
@@ -3961,11 +3929,16 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
 
 
+    const pending=observed().filter(d=>d<today()&&!isClosed(d));
+    $('pendingDaysNotice').hidden=!pending.length;
+    $('pendingDaysTitle').textContent=`${pending.length} dia${pending.length===1?' ficou':'s ficaram'} em aberto`;
+    const latest=pending[pending.length-1];
+    $('pendingDaysSummary').textContent=latest?`${dayText(latest)}: ${smokeCount(latest)} cigarros e ${resistCount(latest)} vontades superadas. Os registros continuam no Histórico.`:'';
     const ks=observed().sort().reverse();
     $('historyList').innerHTML=ks.length?ks.map(k=>{
       const s=smokeCount(k),rr=resistCount(k);
       const times=smokes.filter(x=>key(x.timestamp)===k).map(x=>time(x.timestamp));
-      return `<div class="history-row"><div><div class="date-title">${dayText(k)} ${isClosed(k)?'✓':''}</div><div class="date-sub">${times.length?times.join(' · '):'sem cigarros registrados'}${rr?`<br>✦ ${rr} vontade${rr>1?'s':''} superada${rr>1?'s':''}`:''}</div></div><div class="day-score"><strong>${s}</strong><span>cigarros</span></div></div>`;
+      return `<div class="history-row"><div><div class="date-title">${dayText(k)} ${isClosed(k)?'✓ Fechado':k<today()?'• Em aberto':'• Hoje'}</div><div class="date-sub">${times.length?times.join(' · '):'sem cigarros registrados'}${rr?`<br>✦ ${rr} vontade${rr>1?'s':''} superada${rr>1?'s':''} · ${resists.filter(x=>key(x.timestamp)===k).map(x=>time(x.timestamp)).join(' · ')}`:''}</div></div><div class="day-score"><strong>${s}</strong><span>cigarros</span><button type="button" class="secondary history-close" ${isClosed(k)?`data-reopen-day="${k}"`:`data-close-day="${k}"`}>${isClosed(k)?'Reabrir':'Fechar dia'}</button></div></div>`;
     }).join(''):'<div class="empty">Seu histórico vai aparecer aqui conforme você registrar.</div>';
 
     $('totalSmokes').textContent=smokes.length;
@@ -3980,9 +3953,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   async function processPendingDeletes(){
     if(!currentUser||!pendingDeletes.length)return;
+    const batch=[...pendingDeletes];
     const remaining=[];
 
-    for(const item of pendingDeletes){
+    for(const item of batch){
       try{
         let result;
         if(item.type==='event'){
@@ -3997,7 +3971,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       }
     }
 
-    pendingDeletes=remaining;
+    pendingDeletes=[...remaining,...pendingDeletes.filter(item=>!batch.includes(item))];
     write(DELETIONS_KEY,pendingDeletes);
   }
 
@@ -4068,10 +4042,35 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(valeError)throw valeError;
   }
 
-  async function pullCloud({forceVale=false}={}){
+  function syncSnapshot(){
+    return {smokes:smokes.map(x=>({...x})),resists:resists.map(x=>({...x})),closedDays:closedDays.map(x=>({...x})),deletes:pendingDeletes.map(x=>({...x}))};
+  }
+
+  function reconcileRows(remote,local,before,id,type,deletes){
+    const old=new Set(before.map(x=>x[id])),live=new Set(local.map(x=>x[id]));
+    const removed=new Set([...old].filter(x=>!live.has(x)));
+    deletes.filter(x=>x.type===type).forEach(x=>removed.add(x.value));
+    const merged=new Map(remote.filter(x=>!removed.has(x[id])).map(x=>[x[id],x]));
+    local.filter(x=>!old.has(x[id])).forEach(x=>merged.set(x[id],x));
+    // Reopened and reclosed days have a new confirmation timestamp.
+    if(type==='closure')local.filter(x=>before.some(b=>b[id]===x[id]&&b.closedAt!==x.closedAt)).forEach(x=>merged.set(x[id],x));
+    return [...merged.values()];
+  }
+
+  async function fetchAllRows(table,columns,order){
+    const rows=[];
+    for(let offset=0;;offset+=500){
+      const result=await sb.from(table).select(columns).eq('user_id',currentUser.id).order(order,{ascending:true}).order(table==='events'?'local_id':'user_id',{ascending:true}).range(offset,offset+499);
+      if(result.error)throw result.error;
+      rows.push(...(result.data||[]));
+      if((result.data||[]).length<500)return {data:rows};
+    }
+  }
+
+  async function pullCloud({forceVale=false,snapshot=syncSnapshot()}={}){
     const [evRes,clRes,gameRes,valeRes]=await Promise.all([
-      sb.from('events').select('local_id,event_type,occurred_at').order('occurred_at',{ascending:true}),
-      sb.from('day_closures').select('day,closed_at').order('day',{ascending:true}),
+      fetchAllRows('events','local_id,event_type,occurred_at','occurred_at'),
+      fetchAllRows('day_closures','day,closed_at','day'),
       sb.from('game_state').select('baseline,baseline_locked,best_reduction,max_level').maybeSingle(),
       sb.from('vale_state').select('state,updated_at').maybeSingle()
     ]);
@@ -4081,15 +4080,19 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(gameRes.error)throw gameRes.error;
     if(valeRes.error)throw valeRes.error;
 
-    smokes=(evRes.data||[])
+    const cloudSmokes=(evRes.data||[])
       .filter(x=>x.event_type==='cigarette')
       .map(x=>({id:x.local_id||uuid(),timestamp:x.occurred_at}));
 
-    resists=(evRes.data||[])
+    const cloudResists=(evRes.data||[])
       .filter(x=>x.event_type==='resisted_cigarette')
       .map(x=>({id:x.local_id||uuid(),timestamp:x.occurred_at}));
 
-    closedDays=(clRes.data||[]).map(x=>({date:x.day,closedAt:x.closed_at}));
+    const cloudClosed=(clRes.data||[]).map(x=>({date:x.day,closedAt:x.closed_at}));
+    const deletions=[...snapshot.deletes,...pendingDeletes];
+    smokes=reconcileRows(cloudSmokes,smokes,snapshot.smokes,'id','event',deletions);
+    resists=reconcileRows(cloudResists,resists,snapshot.resists,'id','event',deletions);
+    closedDays=reconcileRows(cloudClosed,closedDays,snapshot.closedDays,'date','closure',deletions);
 
     if(gameRes.data){
       game={
@@ -4124,6 +4127,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       return;
     }
 
+    const snapshot=syncSnapshot();
     syncing=true;
     setSyncState('syncing','SINCRONIZANDO…');
 
@@ -4133,12 +4137,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       if(preferCloud){
         // Ao trocar de conta no mesmo aparelho, nunca envie o cache recém-limpo
         // sobre a conta que já existe na nuvem.
-        await pullCloud({forceVale:true});
+        await pullCloud({forceVale:true,snapshot});
         await pushLocal();
       }else{
         // Fluxo normal e primeira migração: o histórico local sobe antes de baixar.
         await pushLocal();
-        await pullCloud();
+        await pullCloud({snapshot});
       }
 
       const now=new Date().toISOString();
@@ -4195,32 +4199,33 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     scheduleSync();
   };
 
-  $('closeDayBtn').onclick=()=>{
-    const t=today();
-
-    if(isClosed(t)){
-      if(confirm('Reabrir o dia de hoje?')){
-        closedDays=closedDays.filter(x=>x.date!==t);
-        write(CLOSED_KEY,closedDays);
-        addPendingDelete('closure',t);
-        render();
-        scheduleSync();
-      }
-      return;
-    }
-
-    const s=smokeCount(t),r=resistCount(t);
-    if(confirm(`Fechar o dia com ${s} cigarro${s===1?'':'s'} e ${r} vontade${r===1?'':'s'} superada${r===1?'':'s'}?`)){
-      closedDays.push({date:t,closedAt:new Date().toISOString()});
-      write(CLOSED_KEY,closedDays);
-      render();
-      reactPet('close');
+  function closeRecordedDay(day){
+    if(day>today()||isClosed(day))return;
+    if(!confirm(`Fechar ${dayText(day)} com ${smokeCount(day)} cigarros e ${resistCount(day)} vontades superadas? Confirme apenas se os registros desse dia estão completos.`))return;
+    closedDays.push({date:day,closedAt:new Date().toISOString()});
+    write(CLOSED_KEY,closedDays);
+    vale.closureRewards=vale.closureRewards||[];
+    if(!vale.closureRewards.includes(day)){
+      vale.closureRewards.push(day);
       addPresence(2,'dia fechado');
-      checkAchievements();
-      render();
-      scheduleSync();
     }
+    reactPet('close');render();checkAchievements();scheduleSync();
+  }
+
+  function reopenRecordedDay(day){
+    if(!isClosed(day)||!confirm(`Reabrir ${dayText(day)}? Fechar novamente não repete a recompensa.`))return;
+    closedDays=closedDays.filter(x=>x.date!==day);
+    write(CLOSED_KEY,closedDays);addPendingDelete('closure',day);render();scheduleSync();
+  }
+
+  $('closeDayBtn').onclick=()=>isClosed(today())?reopenRecordedDay(today()):closeRecordedDay(today());
+  $('historyList').onclick=e=>{
+    const btn=e.target.closest('[data-close-day],[data-reopen-day]');
+    if(!btn)return;
+    if(btn.dataset.closeDay)closeRecordedDay(btn.dataset.closeDay);
+    else reopenRecordedDay(btn.dataset.reopenDay);
   };
+  $('reviewPendingDays').onclick=()=>document.querySelector('[data-tab="history"]').click();
 
   $('undoBtn').onclick=()=>{
     const events=[
@@ -4684,6 +4689,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     document.addEventListener('visibilitychange',()=>{
       if(document.visibilityState==='visible'){
+        render();
         checkForUpdate();
         if(currentUser&&!$('passwordScreen').classList.contains('show'))syncAll();
       }
