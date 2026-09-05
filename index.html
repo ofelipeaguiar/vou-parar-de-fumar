@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.8.2">
+<meta name="app-version" content="7.9.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1502,6 +1502,23 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .j-inbox{padding:14px;border:1px solid #5c6f59;border-radius:15px;background:#142b31;margin-bottom:12px}.j-inbox:has(.j-row){border-color:#98aa7f}.j-history-jumps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}.j-history-jumps button{min-height:44px;padding:8px 12px;border:1px solid #3a5360;border-radius:9px;background:#122936;color:#d5dfd1;font-size:12px}.j-achievement-new{border-left:3px solid #d5b66f!important}.j-plan-hint{display:block;color:#aebfc8;font-size:12px;line-height:1.5;margin-top:5px}.j-empty{border:1px dashed #405a68;border-radius:12px;padding:20px;font-size:13px;line-height:1.5;color:#bdcbd3}#jPlanForm a{color:#d9e3b8}#jStories,#jAchievements,#jPlan{scroll-margin-top:14px}
 
 
+/* =========================================================
+   V7.9 — JORNADA DE APOIO + NIMBO ACOLHEDOR
+   A ajuda é sempre acessível; XP permanece apenas como camada lúdica.
+   ========================================================= */
+.j-purpose{margin:4px 0 0;color:#aebfc8;font-size:11px;line-height:1.45;max-width:360px}
+#journey .j-compact-head{align-items:flex-start;margin-bottom:8px}
+#journey .j-compact-head>span{padding-top:3px;white-space:nowrap}
+.j-daily-context{font-size:11px;line-height:1.5;color:#b9c9cd;margin:-2px 0 12px}
+.j-support-note{border-left:2px solid #c7d5aa;background:#142b31;border-radius:0 12px 12px 0;padding:12px 14px;margin:12px 0;color:#d8e2d5;font-size:12px;line-height:1.55}
+.j-explore-block{margin:18px 0 24px}.j-explore-block>h3{font-size:18px;margin:0 0 5px}.j-explore-block>p{font-size:12px;color:#aebfc8;line-height:1.5;margin:0 0 10px}
+.j-layer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0 14px}.j-layer-card{border:1px solid #314957;background:#102431;border-radius:13px;padding:11px}.j-layer-card small{display:block;color:#9fb3bc;font-size:9px;line-height:1.3}.j-layer-card strong{display:block;font-size:18px;margin-top:4px}.j-layer-card span{display:block;color:#b8c8ca;font-size:10px;line-height:1.4;margin-top:5px}
+.j-trend{border:1px solid #304957;background:#102330;border-radius:14px;padding:12px;margin:10px 0 16px}.j-trend h4{font-size:13px;margin:0 0 10px}.j-trend-row{display:grid;grid-template-columns:62px 1fr 30px;gap:8px;align-items:center;margin:7px 0}.j-trend-day{font-size:10px;color:#afc0c6}.j-trend-bars{display:grid;gap:3px}.j-trend-bar{height:6px;border-radius:999px;background:#0a1823;overflow:hidden}.j-trend-bar i{display:block;height:100%;border-radius:999px;background:#9caec1}.j-trend-bar.resist i{background:#bfd59d}.j-trend-value{text-align:right;font:9px var(--pixel);color:#c9d5d7}
+.j-attribute-list{display:grid;gap:7px;margin-top:10px}.j-attribute-card{border:1px solid #2d4554;border-radius:12px;padding:11px 12px;background:#102431}.j-attribute-head{display:flex;justify-content:space-between;gap:10px;font-size:13px}.j-attribute-copy{font-size:10px;line-height:1.45;color:#aebfc8;margin-top:5px}
+.j-achievement-group{border-bottom:1px solid #30454b;padding:2px 0}.j-achievement-group summary{font-weight:650}.j-always{color:#cbdcae!important}.j-layer-note{font-size:10px;line-height:1.45;color:#9eb1bb;margin-top:8px}
+@media(max-width:380px){.j-layer-grid{grid-template-columns:1fr}.j-trend-row{grid-template-columns:54px 1fr 28px}}
+
+
 /* 7.7.1 — Nimbo: intenção, apoio dos pés e gestos compostos */
 .pet-walker{transition-timing-function:cubic-bezier(.35,0,.25,1)!important}
 .pet-walker .eyes-open,.pet-walker .eyes-bored{transform:translateX(var(--gaze,0px));transition:transform .18s ease}
@@ -1783,8 +1800,8 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 <section id="history" class="tab"><div class="panel"><h2>Histórico</h2><div id="historyList"></div></div></section>
 
 <section id="journey" class="tab">
-<div class="j-compact-head"><h2>Jornada</h2><span id="jEvolution"></span></div>
-<div class="j-xp-panel"><div class="j-xp-caption"><span id="jXpCaption"></span><span id="jXpTarget"></span></div><div class="j-xp-track" id="jXpTrack" role="progressbar" aria-label="XP para a próxima evolução"><i id="jXpFill"></i></div><p id="jNext"></p></div>
+<div class="j-compact-head"><div><h2>Jornada</h2><p class="j-purpose">Apoio para criar espaço entre a vontade e a ação.</p></div><span id="jEvolution"></span></div>
+<div class="j-xp-panel" hidden aria-hidden="true"><div class="j-xp-caption"><span id="jXpCaption"></span><span id="jXpTarget"></span></div><div class="j-xp-track" id="jXpTrack" role="progressbar" aria-label="XP do caminho do Nimbo"><i id="jXpFill"></i></div><p id="jNext"></p></div>
 <nav class="j-tabs" aria-label="Seções da Jornada"><button data-jview="daily" class="active">Para você <b id="jDailyBadge"></b></button><button data-jview="explore">Explorar <b id="jExploreBadge"></b></button><button data-jview="history">Minha história <b id="jHistoryBadge"></b></button></nav>
 <div id="jDaily"></div><div id="jExplore" hidden></div><div id="jHistory" hidden></div>
 <div class="j-essential"><button data-jread="pause">Uma pausa agora</button><button data-jread="support">Encontrar tratamento</button></div>
@@ -1896,7 +1913,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.8.2').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.9.0').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2320,11 +2337,42 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       id:'thirty_days',icon:'🕯️',name:'Trinta amanheceres',secret:true,
       desc:'Registre trinta dias diferentes da jornada.',rewardPresence:8,
       condition:()=>observed().length>=30
+    },
+    {
+      id:'practice_first',icon:'◐',name:'Antes do automático',secret:false,
+      desc:'Crie seu primeiro espaço consciente diante de uma vontade.',rewardPresence:2,
+      condition:()=>practiceSummary().total>=1
+    },
+    {
+      id:'practice_ten',icon:'◌',name:'A impressão não é uma ordem',secret:false,
+      desc:'Pratique dez vezes criar espaço antes de decidir.',rewardPresence:4,
+      condition:()=>practiceSummary().total>=10
+    },
+    {
+      id:'practice_smoked',icon:'↺',name:'O espaço existiu',secret:true,
+      desc:'Crie espaço diante da vontade mesmo em uma ocasião que terminou em cigarro.',rewardPresence:3,
+      condition:()=>practiceSummary().endedInSmoke>=1
+    },
+    {
+      id:'practice_alternative',icon:'◇',name:'Outra forma de pausa',secret:true,
+      desc:'Experimente um caminho de apoio diferente do automático.',rewardPresence:3,
+      condition:()=>practiceSummary().usedAlternative>=1
     }
   ];
 
 
   const J_CONTENT=[{"id": "pause", "title": "Uma pausa com outra forma", "xp": 0, "body": "Uma ocasião conhecida pode ser o começo de um plano diferente. Observe uma pausa que costuma vir acompanhada de cigarro: o café, a saída de uma reunião ou o fim de uma tarefa.\n\nO exercício é escolher uma alternativa pequena para essa ocasião. Pode ser mudar de ambiente, tomar água ou conversar com alguém. Não precisa funcionar em todas as situações para ser uma experiência útil.\n\nDepois, registre o que aconteceu. Se a alternativa não ajudou, você pode ajustá-la. Esta proposta editorial é um exercício de planejamento, não uma promessa de controlar toda vontade.", "prompt": "Quando chegar minha próxima pausa, quero experimentar…", "url": "https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo/como-parar-de-fumar", "source": "INCA", "kind": "Apoio prático", "attr": null, "review": "05/09/2026"}, {"id": "reason", "title": "Um motivo que seja seu", "xp": 10, "body": "Escolher uma data para parar faz parte das orientações do INCA. Antes dela, também há espaço para escrever o que você deseja recuperar ou proteger.\n\nSeu motivo pode ser cotidiano: ter mais liberdade para organizar o dia, mudar a relação com as pausas ou cuidar da saúde. Ele não precisa impressionar outra pessoa.\n\nGuarde uma frase que você reconheça como sua. Você poderá reescrevê-la quando sua experiência mudar.", "prompt": "Quero parar porque…", "url": "https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo/como-parar-de-fumar", "source": "INCA", "kind": "Apoio prático", "attr": null, "review": "05/09/2026"}, {"id": "triggers", "title": "Conhecer as ocasiões", "xp": 25, "body": "O cigarro pode estar associado a situações que se repetem. Nesta atividade, anote três ocasiões em que você percebe vontade: onde estava, o que estava fazendo e o que poderia experimentar.\n\nNão é um diagnóstico nem uma explicação automática do seu comportamento. É uma observação que você poderá levar para uma conversa com quem acompanha seu processo.\n\nOs registros do app mostram horários e eventos; eles não contam sozinhos toda a história.", "prompt": "Três situações que quero observar são…", "url": "https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo/como-parar-de-fumar", "source": "INCA", "kind": "Apoio prático", "attr": ["bond", 40], "review": "05/09/2026"}, {"id": "plan", "title": "Escolher o próximo passo", "xp": 45, "body": "O INCA apresenta orientações para planejar a cessação. A escolha do caminho pode ser discutida com uma equipe de saúde, considerando sua história e tentativas anteriores.\n\nReduzir registros não é o mesmo que confirmar que você parou. Use seu plano para dar nome ao que está tentando fazer, e não apenas acompanhar números.\n\nEscreva um próximo passo possível: procurar uma unidade de saúde, conversar sobre tratamento ou preparar a rotina para uma data escolhida.", "prompt": "Meu próximo passo e quando quero fazê-lo…", "url": "https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo/como-parar-de-fumar", "source": "INCA", "kind": "Apoio prático", "attr": null, "review": "05/09/2026"}, {"id": "support", "title": "Você pode buscar companhia", "xp": 0, "body": "O SUS oferece tratamento para tabagismo. A Jornada pode ajudar você a organizar perguntas e encontrar as orientações oficiais para buscar atendimento.\n\nVocê não precisa resolver sozinho todas as dificuldades antes de procurar ajuda. Conte quais foram suas tentativas, o que ficou difícil e que apoio você gostaria de receber.\n\nUse a fonte abaixo para consultar o programa do INCA e busque informações sobre o atendimento na sua unidade de saúde.", "prompt": "O que quero perguntar na próxima conversa sobre tratamento…", "url": "https://www.gov.br/inca/pt-br/assuntos/gestor-e-profissional-de-saude/programa-nacional-de-controle-do-tabagismo/tratamento", "source": "INCA", "kind": "Encontrar apoio", "attr": null, "review": "05/09/2026"}, {"id": "benefits", "title": "Mudanças que continuam no tempo", "xp": 75, "body": "Parar de fumar beneficia a saúde mesmo depois de muitos anos de consumo. Segundo o CDC, a cessação reduz riscos de doenças cardiovasculares, respiratórias e de vários tipos de câncer.\n\nEsses benefícios se desenvolvem em diferentes escalas de tempo. Um resultado de pesquisa não permite calcular a recuperação individual a partir dos seus registros no app.\n\nAqui, XP e atributos descrevem a evolução do Nimbo. Não medem pulmões, circulação ou risco de doença.", "prompt": "Que mudança na minha vida eu gostaria de perceber?", "url": "https://www.cdc.gov/tobacco/about/benefits-of-quitting.html", "source": "CDC", "kind": "Saúde", "attr": ["vitality", 65], "review": "05/09/2026"}, {"id": "breath", "title": "O fôlego além dos números", "xp": 115, "body": "O CDC descreve redução de sintomas respiratórios, como tosse e falta de ar, após a cessação. A experiência de cada pessoa depende de sua saúde e de outros fatores.\n\nO atributo Fôlego do Nimbo usa os registros para orientar o personagem. Ele não verifica sua função pulmonar.\n\nSe algo no seu corpo preocupa você, leve essa observação a um profissional; não use a pontuação do app para decidir se está tudo bem.", "prompt": "Uma observação que quero levar para uma consulta…", "url": "https://www.cdc.gov/tobacco/about/benefits-of-quitting.html", "source": "CDC", "kind": "Saúde", "attr": ["breath", 65], "review": "05/09/2026"}, {"id": "returning", "title": "Retomar sem apagar o caminho", "xp": 165, "body": "Esta é uma proposta de reflexão: volte a olhar para o que aconteceu sem transformar um episódio na explicação de todo o processo.\n\nUm registro pode ser revisado. Um plano também. O que ajudou antes continua sendo informação útil, mesmo quando um dia foi diferente do esperado.\n\nSe você está encontrando dificuldade para continuar, pode buscar apoio no tratamento oferecido pelo SUS. Retomar pode começar por uma conversa, não por uma meta maior.", "prompt": "Uma coisa que quero manter e uma que quero ajustar…", "url": "https://www.gov.br/inca/pt-br/assuntos/gestor-e-profissional-de-saude/programa-nacional-de-controle-do-tabagismo/tratamento", "source": "INCA", "kind": "Apoio prático", "attr": ["resilience", 60], "review": "05/09/2026"}, {"id": "beatrice", "title": "Beatrice: reconhecer as situações", "xp": 25, "body": "No relato publicado pelo CDC, Beatrice descreve como reconhecer e evitar situações associadas ao cigarro fez parte de sua tentativa de parar. Ela preparou um plano e persistiu apesar da dificuldade.\n\nEsta é uma síntese em português, não uma fala literal. A experiência dela não garante que o mesmo caminho funcione para todos. Na fonte há vídeos e mais contexto em inglês.", "prompt": "Que situação do meu dia merece uma alternativa preparada?", "url": "https://www.cdc.gov/tobacco/campaign/tips/stories/beatrice.html", "source": "CDC · Beatrice R.", "kind": "Relato real", "attr": null, "review": "05/09/2026"}, {"id": "tiffany", "title": "Tiffany: um motivo ligado à vida", "xp": 75, "body": "Tiffany conta ao CDC que perdeu a mãe para um câncer de pulmão quando era adolescente. Mais tarde, o desejo de acompanhar a vida da própria filha foi uma motivação para parar de fumar.\n\nO relato inclui perda familiar. Você pode voltar e escolher outra leitura se este tema não fizer sentido agora. Esta síntese não substitui o relato completo, disponível em inglês.", "prompt": "Que motivo pessoal quero guardar no meu plano?", "url": "https://www.cdc.gov/tobacco/campaign/tips/stories/tiffany.html", "source": "CDC · Tiffany R.", "kind": "Relato real", "attr": null, "review": "05/09/2026"}, {"id": "rebecca", "title": "Rebecca: cuidar de mais de uma coisa", "xp": 165, "body": "Rebecca relata ao CDC que convivia com depressão e usava o cigarro tentando lidar com o que sentia. Ela reconheceu a necessidade de cuidar da depressão e do tabagismo. Depois de parar, descreveu sentir-se melhor.\n\nÉ uma experiência individual, não uma promessa de melhora da saúde mental nem motivo para mudar um tratamento por conta própria. Leia a história completa em inglês na fonte.", "prompt": "Que tipo de apoio eu gostaria de ter?", "url": "https://www.cdc.gov/tobacco/campaign/tips/stories/rebecca.html", "source": "CDC · Rebecca M.", "kind": "Relato real", "attr": null, "review": "05/09/2026"}, {"id": "brian", "title": "Brian: uma história de saúde", "xp": 310, "body": "A história de Brian publicada pelo CDC aborda doença cardíaca: ele sofreu um infarto aos 35 anos e precisou parar de fumar para receber um transplante de coração. O CDC informa que ele faleceu aos 68 anos, após décadas de problemas de saúde relacionados ao tabagismo.\n\nEste relato inclui doença grave e morte. A leitura é opcional. Não é uma previsão do seu futuro: é a história documentada de uma pessoa.", "prompt": "O que eu gostaria de conversar com um profissional?", "url": "https://www.cdc.gov/tobacco/campaign/tips/stories/brian-heart.html", "source": "CDC · Brian H.", "kind": "Relato real", "attr": null, "review": "05/09/2026"}];
+  // Conteúdo de apoio nunca depende de XP. Lore e descobertas podem continuar progressivos.
+  const J_ALWAYS_AVAILABLE=new Set(['pause','reason','triggers','plan','support','returning','benefits']);
+
+  // Arquitetura preparada para o futuro botão “Tô com vontade”.
+  // Nesta versão não há gatilho visível: apenas modelo, caminhos e registro de prática.
+  const CRAVING_SUPPORT_PATHS={
+    nimbo:{id:'nimbo',label:'Ficar com o Nimbo',minutes:2,kind:'presença',prompt:'Fica aqui comigo um pouco. A vontade pode existir sem decidir por você.'},
+    distract:{id:'distract',label:'Distrair a cabeça',minutes:3,kind:'distração',prompt:'Vamos ocupar alguns minutos e depois olhar de novo para a vontade.'},
+    journey:{id:'journey',label:'Lembrar do caminho',minutes:2,kind:'reflexão',prompt:'Leia uma ideia curta, seu motivo ou uma alternativa do seu plano.'}
+  };
+
   const J_STORY_XP={prologue:0,street:20,portico:55,fog:100,obstacle:160,return:240,bridge:330,horizon:410,cup:12,bench:35,thread:60,letter:95,lamp:140,rain:200,drawer:270,door:350};
   CHRONICLES["horizon"]={"name": "O horizonte", "kicker": "CAPÍTULO VII", "quote": "Uma história original do Vale.", "text": "Quando a névoa abriu, Nimbo viu uma estrada que não estava no mapa. Sentou-se no degrau e desenhou apenas o começo.\n\nA cartógrafa perguntou por que ele não marcava o destino. Nimbo mostrou o lápis curto: ainda havia o suficiente para o próximo trecho.\n\nNaquela tarde, a cidade não ficou menor nem mais silenciosa. Mas ele encontrou tempo para olhar o céu entre dois prédios. Voltou ao Vale com o desenho no bolso.\n\nPendurou o mapa perto da porta, ao alcance de quem quisesse sair. A estrada não exigia uma promessa. Esperava passos."};
   CHRONICLES["cup"]={"name": "Uma xícara na janela", "kicker": "INTERLÚDIO", "quote": "Uma história original do Vale.", "text": "Nimbo deixou a xícara no parapeito. Sempre a levava consigo, como se a pausa só existisse enquanto suas mãos estivessem ocupadas.\n\nDessa vez ficou olhando o vapor. Um pássaro pousou na casa em frente e puxou um fio solto do telhado. Tentou duas vezes antes de conseguir.\n\nO café esfriou um pouco. Nimbo bebeu assim mesmo. Antes de sair, voltou a xícara para o mesmo lugar. Havia descoberto um assento que a pressa escondia."};
@@ -2342,13 +2390,18 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   CHRONICLES.bridge.text=CHRONICLES.bridge.text.replace('A Casa da Cartografia revelou','O mapa do Vale revelou');
   Object.values(ITEMS).forEach(item=>item.bonus='Memória de uma descoberta no Vale.');
   const J_FAMILIES=[
-    {id:'days',name:'Dias confirmados',icon:'☀',steps:[1,3,7,14,30,60,100],value:()=>completedDays().length},
+    {id:'practice',name:'Espaços praticados',icon:'◐',steps:[1,3,5,10,20,35,50,100],value:()=>practiceSummary().total},
     {id:'resists',name:'Vontades atravessadas',icon:'✦',steps:[1,3,5,10,20,35,50,100],value:()=>resists.length},
-    {id:'zero',name:'Dias sem cigarro confirmados',icon:'◌',steps:[1,3,7,14,30,60,100],value:()=>completedDays().filter(d=>smokeCount(d)===0).length},
-    {id:'plan',name:'Meu plano',icon:'✎',steps:[1,2,3,4],value:()=>Object.values(ensureJourney().plan).filter(x=>x.value.trim()).length},
-    {id:'reduction',name:'Mudanças observadas',icon:'↘',steps:[10,25,50],value:()=>completedDays().filter(d=>last7().includes(d)).length>=3?Math.max(0,reduction()||0):0}
+    {id:'days',name:'Dias confirmados',icon:'☀',steps:[1,3,7,14,30,60,100],value:()=>completedDays().length},
+    {id:'plan',name:'Plano pessoal',icon:'✎',steps:[1,2,3,4,7],value:()=>Object.values(ensureJourney().plan).filter(x=>x.value?.trim()).length},
+    {id:'zero',name:'Dias sem cigarro',icon:'◌',steps:[1,3,7,14,30,60,100],value:()=>completedDays().filter(d=>smokeCount(d)===0).length},
+    {id:'reduction',name:'Redução observada',icon:'↘',steps:[10,25,50],value:()=>completedDays().filter(d=>last7().includes(d)).length>=3?Math.max(0,reduction()||0):0}
   ];
-  J_FAMILIES.forEach(f=>f.steps.forEach(n=>ACHIEVEMENTS.push({id:`j_${f.id}_${n}`,icon:f.icon,name:`${f.name} · ${n}${f.id==='reduction'?'%':''}`,desc:f.id==='days'||f.id==='zero'?'Dias completos, acumulados; não precisam ser consecutivos.':f.id==='reduction'?'Referência confirmada e ao menos três dias completos recentes.':'Um marco do seu caminho.',rewardPresence:0,condition:()=>f.value()>=n})));
+  J_FAMILIES.forEach(f=>f.steps.forEach(n=>ACHIEVEMENTS.push({
+    id:`j_${f.id}_${n}`,icon:f.icon,name:`${f.name} · ${n}${f.id==='reduction'?'%':''}`,
+    desc:f.id==='practice'?'Prática acumulada; o desfecho não apaga o espaço criado.':f.id==='days'||f.id==='zero'?'Dias acumulados; não precisam ser consecutivos.':f.id==='reduction'?'Referência confirmada e ao menos três dias completos recentes.':'Um marco do seu caminho.',
+    rewardPresence:0,condition:()=>f.value()>=n
+  })));
 
   function defaultNimboState(){
     return{
@@ -2894,13 +2947,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         ...smokes.filter(x=>eventDay(x)===day).map(x=>({...x,type:'smoke'})),
         ...resists.filter(x=>eventDay(x)===day).map(x=>({...x,type:'resist'}))
       ].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+      const practices=cravingPractices().filter(x=>(x.day||actorDay(x.startedAt))===day);
 
       if(events.length)score.bond+=2;
-      let resistIndex=0;
+      if(practices.length)score.bond+=1;
+      let resistIndex=0,practiceIndex=0;
       for(const event of events){
         const at=new Date(event.timestamp).getTime();
         if(event.type==='resist'){
-          score.resilience+=Math.max(1,Math.round(resilienceBaseForIndex(resistIndex++)*multiplier));
+          score.resilience+=Math.max(1,resilienceBaseForIndex(resistIndex++));
           continue;
         }
         if(!Number.isFinite(at))continue;
@@ -2908,12 +2963,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
           const gap=Math.max(0,(at-lastSmokeAt)/60000);
           const tier=breathTierTotal(gap,reference.intervalMinutes);
           const delta=Math.max(0,tier-intervalAwarded);
-          score.breath+=Math.round(delta*multiplier);
+          score.breath+=Math.round(delta);
           const shortPenalty=breathShortGapPenalty(gap,reference.intervalMinutes);
           if(shortPenalty){score.breath-=shortPenalty;score.breathPenalty+=shortPenalty}
         }
         lastSmokeAt=at;
         intervalAwarded=0;
+      }
+
+      for(const practice of practices){
+        const base=[3,2,1][practiceIndex++]??1;
+        score.resilience+=base;
       }
 
       const closed=isClosed(day);
@@ -2928,11 +2988,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
           const gap=(closeAt-lastSmokeAt)/60000;
           const tier=breathTierTotal(gap,reference.intervalMinutes);
           const delta=Math.max(0,tier-intervalAwarded);
-          score.breath+=Math.round(delta*multiplier);
+          score.breath+=Math.round(delta);
           intervalAwarded=Math.max(intervalAwarded,tier);
         }
         score.vitality+=vitalityReward(score.smokes,reference.smokes,multiplier);
-        score.breath+=firstDelayReward(firstCigMinuteForDay(day),reference.firstCigMinute,multiplier);
+        score.breath+=firstDelayReward(firstCigMinuteForDay(day),reference.firstCigMinute,1);
 
         // Mais cigarros do que a referência significam maior frequência ao longo do dia.
         // A penalidade só reduz o Fôlego gerado neste próprio dia; nunca apaga Fôlego de dias anteriores.
@@ -2953,7 +3013,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         const gap=(now-lastSmokeAt)/60000;
         const tier=breathTierTotal(gap,reference.intervalMinutes);
         const delta=Math.max(0,tier-intervalAwarded);
-        score.breath+=Math.round(delta*multiplier);
+        score.breath+=Math.round(delta);
       }
 
       score.vitality=Math.max(0,Math.round(score.vitality));
@@ -2969,6 +3029,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       const t=new Date(sortedSmokes[sortedSmokes.length-1].timestamp).getTime();
       if(Number.isFinite(t))lastSmokeAt=t;
     }
+
+    const jState=ensureJourney();
+    const planBonus=Math.min(7,Object.values(jState.plan||{}).filter(x=>x?.value?.trim()).length);
+    const readingBonus=Math.min(12,(jState.completed||[]).length);
+    const returnBonus=vale.returnedAfterGap?3:0;
+    totals.bond+=planBonus+readingBonus+returnBonus;
 
     const attrs={
       vitality:attributeLevelFromXp(totals.vitality),
@@ -2986,8 +3052,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const nextTier=liveMinutes===null?null:nextBreathTier(liveMinutes,reference.intervalMinutes);
     const phase=baselineDays.length<3?'observation':baselineLocked?'journey':'calibration';
     const value={
-      version:2,phase,baselineAvailable,baselineLocked,baseline,reference,days:dayScores,totals,attributes:attrs,totalXp,
+      version:3,phase,baselineAvailable,baselineLocked,baseline,reference,days:dayScores,totals,attributes:attrs,totalXp,
       recentSmokeAverage,reduction:initialReduction,currentMultiplier,lastSmokeAt,
+      layers:{
+        consumption:{smokes:smokes.length,recentAverage:recentSmokeAverage,reduction:initialReduction,baseline:baseline.smokes},
+        skills:{resists:resists.length,practices:practiceSummary().total,practiceEndedInSmoke:practiceSummary().endedInSmoke},
+        game:{xp:totalXp,formXp:totalXp}
+      },
       live:{minutes:liveMinutes,tierXp:currentTier,nextTier,referenceInterval:reference.intervalMinutes}
     };
     progressionCache={bucket,value};
@@ -3022,7 +3093,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       28,96
     );
     const expression=beforeFirstSmoke?'playful':veryLongGap?'radiant':longGap?'happy':heavySequence?'wry':shortGap?'confused':supportive?'tired':'neutral';
-    const moodTag=beforeFirstSmoke?'ligado':veryLongGap?'aceso':longGap?'confiante':heavySequence?'ríspido':shortGap?'mexido':supportive?'solidário':'atento';
+    const moodTag=beforeFirstSmoke?'ligado':veryLongGap?'aceso':longGap?'confiante':heavySequence?'perto':shortGap?'atento':supportive?'solidário':'atento';
     const supportMessage=supportive?heavySequence?'sequência puxada':'precisando de apoio':upbeat?'ritmo favorável':'';
     return {
       beforeFirstSmoke, recentBurst, gapRatio, longGap, veryLongGap, shortGap, heavySequence, supportive, upbeat, talkative, energy,
@@ -3494,22 +3565,87 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function normalizeJourney(raw={}){
     raw=raw||{};
-    return {version:1,migrated:!!raw.migrated,unlocked:Array.isArray(raw.unlocked)?raw.unlocked:[],seen:Array.isArray(raw.seen)?raw.seen:[],completed:Array.isArray(raw.completed)?raw.completed:[],editions:raw.editions||{},editionSeen:Array.isArray(raw.editionSeen)?raw.editionSeen:[],bookmarks:raw.bookmarks||{},plan:raw.plan||{},dates:raw.dates||{},stage:raw.stage||{value:'observing',at:''}};
+    return {
+      version:2,migrated:!!raw.migrated,
+      unlocked:Array.isArray(raw.unlocked)?raw.unlocked:[],seen:Array.isArray(raw.seen)?raw.seen:[],completed:Array.isArray(raw.completed)?raw.completed:[],
+      editions:raw.editions||{},editionSeen:Array.isArray(raw.editionSeen)?raw.editionSeen:[],bookmarks:raw.bookmarks||{},plan:raw.plan||{},dates:raw.dates||{},
+      stage:raw.stage||{value:'observing',at:''},
+      practices:Array.isArray(raw.practices)?raw.practices.filter(x=>x&&x.id):[]
+    };
   }
   function mergeJourney(a,b){
     a=normalizeJourney(a);b=normalizeJourney(b);
     const latest=(x,y)=>{const out={...x};Object.entries(y).forEach(([k,v])=>{if(!out[k]||String(v.at)>String(out[k].at))out[k]=v});return out};
     const editions={...a.editions};Object.entries(b.editions).forEach(([d,e])=>{if(!editions[d]||String(e.at)<String(editions[d].at))editions[d]=e});
-    return {...a,migrated:a.migrated||b.migrated,unlocked:uniq([...a.unlocked,...b.unlocked]),seen:uniq([...a.seen,...b.seen]),completed:uniq([...a.completed,...b.completed]),editionSeen:uniq([...a.editionSeen,...b.editionSeen]),editions,bookmarks:latest(a.bookmarks,b.bookmarks),plan:latest(a.plan,b.plan),dates:{...b.dates,...a.dates},stage:String(a.stage.at)>=String(b.stage.at)?a.stage:b.stage};
+    const practiceMap=new Map();
+    [...a.practices,...b.practices].forEach(p=>{const old=practiceMap.get(p.id);if(!old||String(p.updatedAt||p.endedAt||p.startedAt)>String(old.updatedAt||old.endedAt||old.startedAt))practiceMap.set(p.id,p)});
+    return {...a,version:2,migrated:a.migrated||b.migrated,unlocked:uniq([...a.unlocked,...b.unlocked]),seen:uniq([...a.seen,...b.seen]),completed:uniq([...a.completed,...b.completed]),editionSeen:uniq([...a.editionSeen,...b.editionSeen]),editions,bookmarks:latest(a.bookmarks,b.bookmarks),plan:latest(a.plan,b.plan),dates:{...b.dates,...a.dates},stage:String(a.stage.at)>=String(b.stage.at)?a.stage:b.stage,practices:[...practiceMap.values()]};
   }
   function ensureJourney(){
     if(!vale.journey)vale.journey=normalizeJourney();
+    else vale.journey=normalizeJourney(vale.journey);
     return vale.journey;
+  }
+  function cravingPractices(){return ensureJourney().practices.slice().sort((a,b)=>new Date(a.startedAt)-new Date(b.startedAt))}
+  function practiceSummary(){
+    const rows=cravingPractices();
+    return {
+      total:rows.length,
+      completed:rows.filter(x=>x.endedAt).length,
+      endedInSmoke:rows.filter(x=>x.outcome==='smoked').length,
+      resisted:rows.filter(x=>x.outcome==='resisted').length,
+      reduced:rows.filter(x=>x.outcome==='reduced').length,
+      usedAlternative:rows.filter(x=>x.path&&x.path!=='nimbo').length
+    };
+  }
+  function beginCravingPractice({path='nimbo',intensity=null,source='future-craving-button'}={}){
+    if(!CRAVING_SUPPORT_PATHS[path])path='nimbo';
+    const at=new Date().toISOString(),row={id:uuid(),day:today(),startedAt:at,updatedAt:at,path,source,intensityBefore:Number.isFinite(Number(intensity))?Number(intensity):null,outcome:'open',endedAt:null,intensityAfter:null,linkedEventId:null};
+    ensureJourney().practices.push(row);jPersist();return row;
+  }
+  function completeCravingPractice(id,{outcome='unknown',intensityAfter=null,linkedEventId=null}={}){
+    const row=ensureJourney().practices.find(x=>x.id===id);if(!row)return null;
+    const at=new Date().toISOString();row.outcome=outcome;row.endedAt=at;row.updatedAt=at;row.intensityAfter=Number.isFinite(Number(intensityAfter))?Number(intensityAfter):null;row.linkedEventId=linkedEventId||row.linkedEventId||null;jPersist();checkAchievements();return row;
+  }
+  function supportPathForMoment(){
+    const plan=ensureJourney().plan,alt=(plan.alternative?.value||'').trim();
+    if(alt)return CRAVING_SUPPORT_PATHS.journey;
+    const perf=dailyPerformanceProfile();
+    return perf.supportive?CRAVING_SUPPORT_PATHS.nimbo:CRAVING_SUPPORT_PATHS.distract;
   }
   function jPersist(){vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync()}
   function jEsc(t){return String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-  function jAccessible(id){const j=ensureJourney();return j.unlocked.includes(id)||Object.values(j.editions).some(e=>e.ids.includes(id))}
+  function jAccessible(id){
+    if(J_ALWAYS_AVAILABLE.has(id))return true;
+    const j=ensureJourney();return j.unlocked.includes(id)||Object.values(j.editions).some(e=>e.ids.includes(id));
+  }
   function jContent(id){if(id.startsWith('c:')){const c=CHRONICLES[id.slice(2)];return c?{id,title:c.name,body:c.text,kind:c.kicker+' · Ficção original',source:'Crônicas originais do Vale',prompt:'Que imagem desta história você gostaria de guardar?'}:null}return J_CONTENT.find(c=>c.id===id)}
+  function journeyPreferredId(){
+    const j=ensureJourney();
+    if(j.stage.value==='returning')return'returning';
+    if(j.stage.value==='stopped')return'benefits';
+    if(j.stage.value==='reducing')return resists.length>=3?'triggers':'plan';
+    return observed().length<3?'pause':resists.length>=3?'triggers':'reason';
+  }
+  function journeyReasonFor(id){
+    const stage=ensureJourney().stage.value;
+    if(id==='returning')return'Você disse que quer retomar. Esta leitura fica disponível agora, sem exigir progresso anterior.';
+    if(id==='benefits')return'Você marcou que parou de fumar. A Jornada muda de foco: sustentar a escolha e observar o caminho.';
+    if(id==='triggers')return'Os registros já permitem olhar menos para desempenho e mais para quando a vontade costuma aparecer.';
+    if(id==='plan')return'Reduzir fica mais fácil de sustentar quando o próximo passo e as alternativas estão claros.';
+    if(id==='pause')return'Antes de medir qualquer resultado, vale treinar uma pausa com outra forma.';
+    return stage==='observing'?'Uma leitura para observar sem transformar o dia em nota.':'Uma leitura escolhida a partir do seu momento atual.';
+  }
+  function setTodayEdition({force=false}={}){
+    const j=ensureJourney(),preferred=journeyPreferredId(),old=j.editions[today()];
+    if(old&&!force&&old.stage===j.stage.value&&old.primary===preferred)return false;
+    const previous=Object.values(j.editions).flatMap(e=>e.ids||[]);
+    const companions=['beatrice','tiffany','rebecca'];
+    const companion=companions[Object.keys(j.editions).length%companions.length];
+    j.editions[today()]={ids:[preferred,companion],primary:preferred,stage:j.stage.value,at:new Date().toISOString(),reason:journeyReasonFor(preferred)};
+    j.editionSeen=j.editionSeen.filter(d=>d!==today());
+    return true;
+  }
   function refreshJourney(){
     const j=ensureJourney();let changed=false;
     const grant=id=>{if(!j.unlocked.includes(id)){j.unlocked.push(id);j.dates[id]=new Date().toISOString();changed=true}};
@@ -3518,21 +3654,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       vale.readChronicles.forEach(id=>{j.seen=uniq([...j.seen,'c:'+id]);j.completed=uniq([...j.completed,'c:'+id])});
       j.migrated=true;changed=true;
     }
-    const xp=progress().xp;
-    const attrs={bond:bond(),resilience:resilience(),breath:breath(),vitality:vitality()};
-    J_CONTENT.forEach(c=>{const attrReady=c.attr&&completedDays().length>=7&&attrs[c.attr[0]]>=c.attr[1];if(xp>=c.xp||attrReady)grant(c.id)});
+    J_ALWAYS_AVAILABLE.forEach(grant);
+    const xp=progress().xp,attrs={bond:bond(),resilience:resilience(),breath:breath(),vitality:vitality()};
+    J_CONTENT.forEach(c=>{if(J_ALWAYS_AVAILABLE.has(c.id))return;const attrReady=c.attr&&completedDays().length>=7&&attrs[c.attr[0]]>=c.attr[1];if(xp>=c.xp||attrReady)grant(c.id)});
     Object.entries(J_STORY_XP).forEach(([id,min])=>{if(xp>=min||vale.chronicles.includes(id)){grant('c:'+id);if(!vale.chronicles.includes(id)){vale.chronicles.push(id);changed=true}}});
-    if(!j.editions[today()]){
-      const previous=Object.values(j.editions).flatMap(e=>e.ids);
-      let candidates=J_CONTENT.filter(c=>c.kind!=='Relato real');
-      const preferred=j.stage.value==='returning'?'returning':j.stage.value==='stopped'?'benefits':resists.length>=3?'triggers':observed().length<3?'pause':'plan';
-      candidates.sort((a,b)=>(previous.includes(a.id)?10:0)-(previous.includes(b.id)?10:0)||(a.id===preferred?-1:b.id===preferred?1:0));
-      let primary=candidates[0];
-      if(candidates.every(c=>previous.includes(c.id))){const dayIndex=Math.floor(new Date(today()+'T12:00:00Z').getTime()/86400000);primary=candidates[dayIndex%candidates.length]}
-      const companions=['beatrice','tiffany','rebecca'];
-      const companion=companions[Object.keys(j.editions).length%companions.length];
-      j.editions[today()]={ids:[primary.id,companion],at:new Date().toISOString(),reason:primary.id===preferred?'Uma seleção a partir do seu momento e dos registros disponíveis.':'Uma nova perspectiva para o seu caminho.'};changed=true;
-    }
+    if(!j.editions[today()]||!j.editions[today()].primary){if(setTodayEdition())changed=true}
     if(changed){vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale)}
     return j;
   }
@@ -3541,69 +3667,66 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const c=jContent(id);if(!c)return '';
     const j=ensureJourney(),status=jReadStatus(id),accessible=status!=='locked';
     const states={unread:['●','Não lido'],progress:['◔','Em leitura'],done:['✓','Lido'],locked:['◇','Bloqueado']};
-    const [icon,label]=states[status];
-    const requirement=id.startsWith('c:')?J_STORY_XP[id.slice(2)]:c.xp;
-    const minutes=Math.max(1,Math.ceil(c.body.split(/\s+/).length/180));
-    return `<button class="j-row j-reading-${status}" ${accessible?`data-jread="${id}"`:'disabled'}><small>${jEsc(c.kind)} · ${minutes} min</small><strong>${jEsc(c.title)}</strong><span class="j-state-label">${icon} ${label}${j.bookmarks[id]?.value?' · Salvo':''}</span>${accessible?'':`<span>${requirement} XP${c.attr?' ou '+({bond:'Vínculo',resilience:'Resiliência',breath:'Fôlego',vitality:'Vitalidade'}[c.attr[0]])+' '+c.attr[1]+' com 7 dias completos':''}</span>`}</button>`;
+    const [icon,label]=states[status],minutes=Math.max(1,Math.ceil(c.body.split(/\s+/).length/180));
+    const always=J_ALWAYS_AVAILABLE.has(id),requirement=id.startsWith('c:')?J_STORY_XP[id.slice(2)]:c.xp;
+    return `<button class="j-row j-reading-${status}" ${accessible?`data-jread="${id}"`:'disabled'}><small>${jEsc(c.kind)} · ${minutes} min${always?' · SEM BLOQUEIO':''}</small><strong>${jEsc(c.title)}</strong><span class="j-state-label ${always?'j-always':''}">${icon} ${label}${j.bookmarks[id]?.value?' · Salvo':''}</span>${accessible?'':`<span>${requirement} XP${c.attr?' ou '+({bond:'Vínculo',resilience:'Resiliência',breath:'Fôlego',vitality:'Vitalidade'}[c.attr[0]])+' '+c.attr[1]+' com 7 dias completos':''}</span>`}</button>`;
   }
   let jExploreStatus='all',jExploreKind='all',jStoryStatus='all';
-  function jRenderExplore(){
+  function jAchievementFamiliesHtml(){
     const j=ensureJourney();
-    const filtered=J_CONTENT.filter(c=>(jExploreKind==='all'||c.kind===jExploreKind)&&(jExploreStatus==='all'||(jExploreStatus==='saved'?j.bookmarks[c.id]?.value:jReadStatus(c.id)===jExploreStatus)));
-    const rank={unread:0,progress:1,done:2,locked:3};
-    filtered.sort((a,b)=>rank[jReadStatus(a.id)]-rank[jReadStatus(b.id)]||a.xp-b.xp);
-    $('jExplore').innerHTML=`<div class="j-catalog-head"><h3>Biblioteca de apoio</h3><p>Práticas, saúde e relatos reais. As crônicas estão em Minha história.</p></div><div class="j-filter-row" aria-label="Filtrar por leitura">${[['all','Todos'],['unread','Não lidos'],['progress','Em leitura'],['done','Lidos'],['saved','Salvos']].map(([id,title])=>`<button data-jfilter="${id}" aria-pressed="${jExploreStatus===id}">${title}</button>`).join('')}</div><label class="j-topic-label" for="jTopic">Tema<select id="jTopic"><option value="all">Todos os temas</option>${['Apoio prático','Saúde','Relato real','Encontrar apoio'].map(k=>`<option value="${k}">${k}</option>`).join('')}</select></label><p class="j-note" aria-live="polite">${filtered.length} leitura${filtered.length===1?'':'s'} nesta seleção · ${J_CONTENT.filter(c=>jAccessible(c.id)).length} de ${J_CONTENT.length} liberadas</p><div class="j-catalog-list">${filtered.map(c=>jCard(c.id)).join('')||'<div class="j-empty">Nenhuma leitura nesta seleção. Experimente outro filtro.</div>'}</div>`;
-    $('jTopic').value=jExploreKind;
+    return J_FAMILIES.map(f=>{const achieved=f.steps.filter(n=>vale.achievements.includes(`j_${f.id}_${n}`)),next=f.steps.find(n=>!achieved.includes(n));return `<details class="j-achievement-group"><summary>${f.icon} ${f.name} <span>${achieved.length}/${f.steps.length}${achieved.some(n=>!vale.seenAchievements.includes(`j_${f.id}_${n}`))?' · NOVO':''}</span></summary><p class="j-note">${next?`${Math.floor(f.value())} de ${next} para o próximo marco`:'Todos os marcos deste ciclo descobertos'}</p>${f.steps.filter(n=>achieved.includes(n)||n===next).map(n=>{const id=`j_${f.id}_${n}`,a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row" ${achieved.includes(n)?`data-jachievement="${id}"`:'disabled'}><strong>${jEsc(a.name)} ${achieved.includes(n)&&!vale.seenAchievements.includes(id)?'<b class="j-new">NOVO</b>':''}</strong><span>${achieved.includes(n)?(j.dates[id]?new Date(j.dates[id]).toLocaleDateString('pt-BR'):'Descoberta anterior'):'Próximo marco'}</span><small>${jEsc(a.desc)}</small></button>`}).join('')}</details>`}).join('');
   }
   function jInbox(){
     const j=ensureJourney(),stories=j.unlocked.filter(id=>id.startsWith('c:')&&!j.seen.includes(id)),ach=unseenAchievementIds().filter(id=>ACHIEVEMENTS.some(a=>a.id===id));
     const count=stories.length+ach.length;
-    return `<section class="j-inbox" aria-label="Novidades de Minha história"><h3>${count?`${count} novidade${count===1?'':'s'} para você`:'Tudo visto por aqui'}</h3><p>${count?'Abra diretamente o que acabou de descobrir.':'As crônicas não concluídas continuam na lista de leituras.'}</p>${stories.map(jCard).join('')}${ach.map(id=>{const a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row j-achievement-new" data-jachievement="${id}"><small>CONQUISTA · NOVA</small><strong>${jEsc(a.name)}</strong><span>${jEsc(a.desc)}</span><span>Reconhecer conquista ✓</span></button>`}).join('')}</section>`;
+    return `<section class="j-inbox" aria-label="Novidades para explorar"><h3>${count?`${count} novidade${count===1?'':'s'} no caminho`:'Tudo visto por aqui'}</h3><p>${count?'Crônicas e conquistas ficam reunidas no Explorar.':'O acervo continua disponível quando você quiser voltar.'}</p>${stories.slice(0,3).map(jCard).join('')}${ach.slice(0,3).map(id=>{const a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row j-achievement-new" data-jachievement="${id}"><small>CONQUISTA · NOVA</small><strong>${jEsc(a.name)}</strong><span>${jEsc(a.desc)}</span><span>Reconhecer conquista ✓</span></button>`}).join('')}</section>`;
   }
   function jRenderStories(){
     const ids=Object.keys(J_STORY_XP).sort((a,b)=>J_STORY_XP[a]-J_STORY_XP[b]).map(id=>'c:'+id);
-    const shown=ids.filter(id=>jAccessible(id)&&(jStoryStatus==='all'||(jStoryStatus==='pending'?jReadStatus(id)!=='done':jReadStatus(id)===jStoryStatus)));
-    $('jStoriesList').innerHTML=shown.map(jCard).join('')||'<p class="j-note">Nenhuma crônica nesta seleção.</p>';
+    const shown=ids.filter(id=>(jStoryStatus==='all'||(jStoryStatus==='pending'?jReadStatus(id)!=='done':jReadStatus(id)===jStoryStatus)));
+    const box=$('jStoriesList');if(box)box.innerHTML=shown.map(jCard).join('')||'<p class="j-note">Nenhuma crônica nesta seleção.</p>';
     document.querySelectorAll('[data-jstoryfilter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.jstoryfilter===jStoryStatus)));
   }
+  function jRenderExplore(){
+    const j=ensureJourney();
+    const filtered=J_CONTENT.filter(c=>(jExploreKind==='all'||c.kind===jExploreKind)&&(jExploreStatus==='all'||(jExploreStatus==='saved'?j.bookmarks[c.id]?.value:jReadStatus(c.id)===jExploreStatus)));
+    const rank={unread:0,progress:1,done:2,locked:3};filtered.sort((a,b)=>rank[jReadStatus(a.id)]-rank[jReadStatus(b.id)]||a.xp-b.xp);
+    const memories=vale.inventory.map(id=>ITEMS[id]).filter(Boolean);
+    $('jExplore').innerHTML=`${jInbox()}<section class="j-explore-block"><h3>Biblioteca de apoio</h3><p>Práticas, filosofia aplicada, saúde e relatos. Apoio essencial nunca fica atrás de XP.</p><div class="j-filter-row" aria-label="Filtrar por leitura">${[['all','Todos'],['unread','Não lidos'],['progress','Em leitura'],['done','Lidos'],['saved','Salvos']].map(([id,title])=>`<button data-jfilter="${id}" aria-pressed="${jExploreStatus===id}">${title}</button>`).join('')}</div><label class="j-topic-label" for="jTopic">Tema<select id="jTopic"><option value="all">Todos os temas</option>${['Apoio prático','Saúde','Relato real','Encontrar apoio'].map(k=>`<option value="${k}">${k}</option>`).join('')}</select></label><div class="j-catalog-list">${filtered.map(c=>jCard(c.id)).join('')||'<div class="j-empty">Nenhuma leitura nesta seleção.</div>'}</div></section><section class="j-explore-block" id="jStories"><h3>Crônicas do Vale</h3><p>Ficção original. Aqui o estoicismo aparece como prática: impressão, espaço, escolha e retorno.</p><div class="j-filter-row" aria-label="Filtrar crônicas">${[['all','Todas'],['pending','Por terminar'],['unread','Não lidas'],['done','Lidas']].map(([id,label])=>`<button data-jstoryfilter="${id}" aria-pressed="${jStoryStatus===id}">${label}</button>`).join('')}</div><div id="jStoriesList"></div></section><section class="j-explore-block" id="jAchievements"><h3>Conquistas</h3><p>Marcos de prática e de caminho. Nenhuma sequência é zerada por um cigarro.</p>${jAchievementFamiliesHtml()}<details><summary>Descobertas especiais</summary>${ACHIEVEMENTS.filter(a=>!a.id.startsWith('j_')&&vale.achievements.includes(a.id)).map(a=>`<button class="j-row" data-jachievement="${a.id}"><strong>${jEsc(a.name)} ${vale.seenAchievements.includes(a.id)?'':'<b class="j-new">NOVO</b>'}</strong><span>${jEsc(a.desc)}</span></button>`).join('')||'<p class="j-note">As descobertas especiais aparecem conforme você pratica e retorna.</p>'}</details></section>${memories.length?`<section class="j-explore-block"><h3>Memórias do caminho</h3>${memories.map(item=>`<article class="j-memory"><h4>${item.icon} ${jEsc(item.name)}</h4><p>${jEsc(item.desc)}</p></article>`).join('')}</section>`:''}`;
+    const topic=$('jTopic');if(topic)topic.value=jExploreKind;jRenderStories();
+  }
   function jBadges(){
-    const j=ensureJourney();const fresh=j.unlocked.filter(id=>!j.seen.includes(id));
-    const daily=j.editions[today()]&&!j.editionSeen.includes(today())?1:0;
-    const explore=fresh.filter(id=>!id.startsWith('c:')).length;
-    const history=fresh.filter(id=>id.startsWith('c:')).length+unseenAchievementIds().length;
-    for(const [id,count] of [['jDailyBadge',daily],['jExploreBadge',explore],['jHistoryBadge',history],['journeyNavBadge',daily+explore+history]]){
-      const el=$(id);if(!el)continue;el.textContent=count>9?'9+':count?String(count):'';el.classList.toggle('show',count>0);
-    }
+    const j=ensureJourney(),fresh=j.unlocked.filter(id=>!j.seen.includes(id)&&!J_ALWAYS_AVAILABLE.has(id)),daily=j.editions[today()]&&!j.editionSeen.includes(today())?1:0;
+    const explore=fresh.length+unseenAchievementIds().length,history=0;
+    for(const [id,count] of [['jDailyBadge',daily],['jExploreBadge',explore],['jHistoryBadge',history],['journeyNavBadge',daily+explore]]){const el=$(id);if(!el)continue;el.textContent=count>9?'9+':count?String(count):'';el.classList.toggle('show',count>0)}
+  }
+  function jHistoryTrendHtml(){
+    const days=uniq([...completedDays().slice(-6),today()]).sort().slice(-7),maxSmoke=Math.max(1,...days.map(smokeCount)),maxResist=Math.max(1,...days.map(resistCount));
+    if(!days.length)return'<div class="j-empty">Seus registros vão formar a evolução aqui.</div>';
+    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/maxSmoke*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/maxResist*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}</span></div>`}).join('')}<p class="j-layer-note">Barras: cigarros / vontades atravessadas. Tendência, não nota.</p></div>`;
+  }
+  function jHistoryHtml(){
+    const j=ensureJourney(),e=progressionEngine(),ps=practiceSummary(),planFields=[
+      ['reason','1. O que você quer ganhar ao parar?','Escolha um motivo pessoal: algo da sua vida que você quer cuidar ou recuperar.'],
+      ['situations','2. Quando a vontade costuma aparecer?','Descreva ocasiões concretas: depois do café, no trabalho, com certas pessoas ou emoções.'],
+      ['alternative','3. O que você fará nessas ocasiões?','Complete: se a vontade vier quando…, vou tentar… Prepare uma alternativa possível.'],
+      ['review','4. O que ajudou antes — e o que quer ajustar?','Considere tentativas anteriores sem tratá-las como fracasso.'],
+      ['support','5. Quem pode apoiar você, e de que forma?','Pense em alguém de confiança ou uma equipe de saúde.'],
+      ['preparation','6. Qual será seu próximo passo, e quando?','Pode ser preparar uma data para parar ou buscar atendimento.'],
+      ['difficult','7. Como pretende retomar se sair do plano?','Defina uma ação pequena. Um episódio não precisa encerrar sua tentativa.']
+    ];
+    const baseline=e.baseline.smokes===null?'—':e.baseline.smokes.toFixed(1).replace('.',',');
+    const avg=avg7();
+    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Dados de consumo ficam separados das habilidades que você está treinando.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>baseline observada, não meta moral</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>histórico preservado, sem exigência de sequência</span></div></div>${jHistoryTrendHtml()}</section><section class="j-explore-block"><h3>O que você está treinando</h3><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>apoio usado ao longo do caminho</span></div></div></section><details id="jPlan" open><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><section class="j-explore-block"><h3>Atributos do Nimbo</h3><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></section>`;
   }
   let jView='daily',jReaderId=null,jPlanDirty=false;
   function renderJourneyV7(){
     if(jPlanDirty||document.activeElement?.closest('#jPlanForm')||$('jReader')?.open){jBadges();return}
-    const j=refreshJourney(),xp=progress().xp;
-    const p=progress(),level=p.level,lo=p.thresholds[level-1],hi=p.thresholds[level];
-    $('jEvolution').textContent=`Nimbo · forma ${level}`;
-    $('jXpCaption').textContent=`${xp} XP`;
-    $('jXpTarget').textContent=hi?`${Math.max(0,hi-xp)} para evoluir`:'Forma máxima atual';
-    $('jXpFill').style.width=(hi?clamp((xp-lo)/(hi-lo)*100,0,100):100)+'%';
-    $('jXpTrack').setAttribute('aria-valuemin',String(lo));$('jXpTrack').setAttribute('aria-valuemax',String(hi||Math.max(xp,lo)));$('jXpTrack').setAttribute('aria-valuenow',String(hi?clamp(xp,lo,hi):Math.max(xp,lo)));
-    const next=[...J_CONTENT.map(c=>({id:c.id,xp:c.xp})),...Object.entries(J_STORY_XP).map(([id,xp])=>({id:'c:'+id,xp}))].filter(c=>!jAccessible(c.id)).sort((a,b)=>a.xp-b.xp)[0];
-    $('jNext').textContent=next?`Próxima leitura: ${jContent(next.id).title} · faltam ${Math.max(0,next.xp-xp)} XP`:'Primeiro acervo descoberto';
-    const edition=j.editions[today()],primary=jContent(edition.ids[0]);
-    $('jDaily').innerHTML=`<div class="j-moment"><label for="jStage">Meu momento</label><select id="jStage"><option value="observing">Estou observando</option><option value="reducing">Estou reduzindo</option><option value="stopped">Parei de fumar</option><option value="returning">Quero retomar</option></select></div><article class="j-feature"><span class="j-kicker">EDIÇÃO DE ${jEsc(dayText(today()))}</span><h3>${jEsc(primary.title)}</h3><p>${jEsc(edition.reason)}</p><button class="j-primary" data-jread="${primary.id}">${jReadStatus(primary.id)==='done'?'✓ Reler leitura':jReadStatus(primary.id)==='progress'?'◔ Continuar leitura':'● Começar leitura'}</button></article><h3 class="j-section">Outra experiência</h3>${jCard(edition.ids[1])}<div class="j-practice"><small>EXPERIMENTAR</small><p>${jEsc(primary.prompt)}</p><button data-jplan>Levar uma ideia para meu plano</button></div><button class="j-text-button" data-jview="explore">Explorar outro tema →</button><br><button class="j-text-button" data-jedition>Marcar edição como vista</button><p class="j-note">Não precisa terminar hoje. Esta edição fica guardada.</p><details><summary>Edições anteriores</summary>${Object.keys(j.editions).filter(d=>d!==today()).sort().reverse().map(d=>`<h4>${jEsc(dayText(d))}</h4>${j.editions[d].ids.map(jCard).join('')}`).join('')||'<p class="j-note">Sua primeira edição está aqui. As próximas chegam nos dias em que você voltar.</p>'}</details>`;
-    $('jStage').value=j.stage.value;
-    jRenderExplore();
-    const planFields=[
-      ['reason','1. O que você quer ganhar ao parar?','Escolha um motivo pessoal: algo da sua vida que você quer cuidar ou recuperar.'],
-      ['situations','2. Quando a vontade costuma aparecer?','Descreva ocasiões concretas: depois do café, no trabalho, com certas pessoas ou emoções.'],
-      ['alternative','3. O que você fará nessas ocasiões?','Complete: se a vontade vier quando…, vou tentar… Prepare uma alternativa possível.'],
-      ['review','4. O que ajudou antes — e o que quer ajustar?','Considere tentativas anteriores sem tratá-las como fracasso. O que vale repetir ou mudar?'],
-      ['support','5. Quem pode apoiar você, e de que forma?','Pense em alguém de confiança ou uma equipe de saúde. Que ajuda concreta você pode pedir?'],
-      ['preparation','6. Qual será seu próximo passo, e quando?','Pode ser preparar uma data para parar ou buscar atendimento. O que precisa organizar antes?'],
-      ['difficult','7. Como pretende retomar se sair do plano?','Defina uma ação pequena e quem procurar. Um episódio não precisa encerrar sua tentativa.']
-    ];
-    const stories=Object.keys(J_STORY_XP).sort((a,b)=>J_STORY_XP[a]-J_STORY_XP[b]);
-    const familyHtml=J_FAMILIES.map(f=>{const achieved=f.steps.filter(n=>vale.achievements.includes(`j_${f.id}_${n}`));const next=f.steps.find(n=>!achieved.includes(n));return `<details><summary>${f.icon} ${f.name} <span>${achieved.length}/${f.steps.length}${achieved.some(n=>!vale.seenAchievements.includes(`j_${f.id}_${n}`))?' · NOVO':''}</span></summary><p class="j-note">${next?`${Math.floor(f.value())} de ${next} para o próximo marco`:'Todos os marcos deste ciclo descobertos'}</p>${f.steps.filter(n=>achieved.includes(n)||n===next).map(n=>{const id=`j_${f.id}_${n}`,a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row" ${achieved.includes(n)?`data-jachievement="${id}"`:'disabled'}><strong>${jEsc(a.name)} ${achieved.includes(n)&&!vale.seenAchievements.includes(id)?'<b class="j-new">NOVO</b>':''}</strong><span>${achieved.includes(n)?(j.dates[id]?new Date(j.dates[id]).toLocaleDateString('pt-BR'):'Descoberta anterior'):'Próximo marco'}</span></button>`}).join('')}</details>`}).join('');
-    $('jHistory').innerHTML=`<div id="jInbox">${jInbox()}</div><div class="j-history-jumps"><button data-jjump="jStories">Crônicas ↓</button><button data-jjump="jAchievements">Conquistas ↓</button><button data-jplan>Meu plano ↓</button></div><details id="jPlan"><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Perguntas orientadas pelos temas do <a href="https://smokefree.gov/build-your-quit-plan" target="_blank" rel="noopener">plano Smokefree</a>: motivos, situações, preparação e apoio.</p><p class="j-note">Seu plano é privado na sua conta. Você pode editar ou apagar os textos.</p></form></details><details id="jAchievements"><summary>Conquistas · ${vale.achievements.length} alcançadas</summary>${familyHtml}<details><summary>Primeiras descobertas e memórias anteriores</summary>${ACHIEVEMENTS.filter(a=>!a.id.startsWith('j_')&&vale.achievements.includes(a.id)).map(a=>`<button class="j-row" data-jachievement="${a.id}"><strong>${jEsc(a.name)} ${vale.seenAchievements.includes(a.id)?'':'<b class="j-new">NOVO</b>'}</strong><span>${jEsc(a.desc)}</span></button>`).join('')||'<p class="j-note">Suas primeiras descobertas aparecerão aqui.</p>'}</details></details><section id="jStories"><h3 class="j-section">Crônicas do Vale</h3><p class="j-note">Ficção original · Os caminhos que reaparecem</p><div class="j-filter-row" aria-label="Filtrar crônicas">${[['all','Todas'],['pending','Por terminar'],['unread','Não lidas'],['done','Lidas']].map(([id,label])=>`<button data-jstoryfilter="${id}" aria-pressed="${jStoryStatus===id}">${label}</button>`).join('')}</div><div id="jStoriesList"></div></section><details><summary>Próximos capítulos</summary>${stories.filter(id=>!jAccessible('c:'+id)).slice(0,3).map(id=>jCard('c:'+id)).join('')}</details><details><summary>Memórias do caminho</summary>${vale.inventory.map(id=>ITEMS[id]).filter(Boolean).map(item=>`<article class="j-memory"><h4>${item.icon} ${jEsc(item.name)}</h4><p>${jEsc(item.desc)}</p><small>Uma lembrança das descobertas que você já fez.</small></article>`).join('')||'<p class="j-note">Algumas conquistas deixam memórias.</p>'}</details><details><summary>Atributos do Nimbo</summary><p class="j-note">Pontuações do personagem, não medidas de saúde.</p>${[['Vitalidade',vitality()],['Vínculo',bond()],['Fôlego',breath()],['Resiliência',resilience()]].map(([name,n])=>`<p class="j-attribute">${name}<strong>${n}</strong></p>`).join('')}</details><button class="j-text-button" data-jseen>Marcar descobertas como vistas</button>`;
-    jRenderStories();jApplyView();jBadges();
+    const j=refreshJourney(),p=progress(),xp=p.xp,level=p.level,lo=p.thresholds[level-1],hi=p.thresholds[level];
+    $('jEvolution').textContent=`Nimbo · forma ${level}`;$('jXpCaption').textContent=`${xp} XP`;$('jXpTarget').textContent=hi?`${Math.max(0,hi-xp)} para evoluir`:'Forma máxima atual';$('jXpFill').style.width=(hi?clamp((xp-lo)/(hi-lo)*100,0,100):100)+'%';$('jXpTrack').setAttribute('aria-valuemin',String(lo));$('jXpTrack').setAttribute('aria-valuemax',String(hi||Math.max(xp,lo)));$('jXpTrack').setAttribute('aria-valuenow',String(hi?clamp(xp,lo,hi):Math.max(xp,lo)));$('jNext').textContent='A ajuda essencial não depende deste progresso.';
+    const edition=j.editions[today()],primary=jContent(edition.ids[0]),companion=jContent(edition.ids[1]);
+    $('jDaily').innerHTML=`<div class="j-moment"><label for="jStage">Meu momento</label><select id="jStage"><option value="observing">Estou observando</option><option value="reducing">Estou reduzindo</option><option value="stopped">Parei de fumar</option><option value="returning">Quero retomar</option></select></div><p class="j-daily-context">Mude seu momento quando precisar. A leitura abaixo se adapta na hora.</p><article class="j-feature"><span class="j-kicker">PARA AGORA · ${jEsc(dayText(today()))}</span><h3>${jEsc(primary.title)}</h3><p>${jEsc(edition.reason)}</p><button class="j-primary" data-jread="${primary.id}">${jReadStatus(primary.id)==='done'?'✓ Reler leitura':jReadStatus(primary.id)==='progress'?'◔ Continuar leitura':'● Começar leitura'}</button></article><div class="j-practice"><small>UMA IDEIA PARA LEVAR</small><p>${jEsc(primary.prompt)}</p><button data-jplan>Levar para meu plano</button></div>${companion?`<details><summary>Outra perspectiva</summary>${jCard(companion.id)}</details>`:''}<div class="j-support-note">A vontade pode aparecer sem pedir permissão. O que você faz depois ainda pode ser treinado. A ajuda não é prêmio e não exige XP.</div><button class="j-text-button" data-jview="explore">Explorar leituras, crônicas e conquistas →</button><br><button class="j-text-button" data-jedition>Marcar seleção de hoje como vista</button>`;
+    $('jStage').value=j.stage.value;jRenderExplore();$('jHistory').innerHTML=jHistoryHtml();jApplyView();jBadges();
   }
   function jApplyView(){for(const [id,v] of [['jDaily','daily'],['jExplore','explore'],['jHistory','history']])$(id).hidden=jView!==v;document.querySelectorAll('[data-jview]').forEach(b=>{b.classList.toggle('active',b.dataset.jview===jView);b.setAttribute('aria-pressed',String(b.dataset.jview===jView))})}
   function jRead(id){
@@ -3634,7 +3757,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(b.hasAttribute('data-jseen')){const j=ensureJourney();j.seen=uniq([...j.seen,...j.unlocked]);vale.seenAchievements=uniq([...vale.seenAchievements,...vale.achievements]);jPersist();renderJourneyV7()}
   });
   $('journey').addEventListener('input',e=>{if(e.target.closest('#jPlanForm'))jPlanDirty=true});
-  $('journey').addEventListener('change',e=>{if(e.target.id==='jTopic'){jExploreKind=e.target.value;jRenderExplore();return}if(e.target.id==='jStage'){ensureJourney().stage={value:e.target.value,at:new Date().toISOString()};jPersist();toast('Momento salvo para as próximas edições')}});
+  $('journey').addEventListener('change',e=>{if(e.target.id==='jTopic'){jExploreKind=e.target.value;jRenderExplore();return}if(e.target.id==='jStage'){const j=ensureJourney();j.stage={value:e.target.value,at:new Date().toISOString()};setTodayEdition({force:true});jPersist();renderJourneyV7();toast('Momento atualizado agora')}});
   $('journey').addEventListener('submit',e=>{if(e.target.id!=='jPlanForm')return;e.preventDefault();const j=ensureJourney(),data=new FormData(e.target),at=new Date().toISOString();for(const [key,value] of data)j.plan[key]={value:String(value).slice(0,1500),at};jPlanDirty=false;document.activeElement?.blur();jPersist();checkAchievements();renderJourneyV7();$('jPlan').open=true;toast('Plano salvo')});
 
   let activeBuildingId='refuge';
@@ -3699,8 +3822,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(perf.beforeFirstSmoke)return'Antes do primeiro cigarro eu fico mais ligado. Vamos alongar esse espaço?';
     if(perf.veryLongGap)return'Esse intervalo está grande. Tô elétrico por aqui.';
     if(perf.longGap)return'Hoje abriu um espaço bom. Quero ver até onde ele vai.';
-    if(perf.heavySequence)return'Não vou fingir que gostei da sequência. Mas eu sigo do seu lado.';
-    if(perf.shortGap)return'Intervalo curto. Sem drama: vamos tentar alongar o próximo.';
+    if(perf.heavySequence)return'O dia apertou um pouco. Eu fico mais perto no próximo intervalo.';
+    if(perf.shortGap)return'Intervalo curto. Sem cobrança: o próximo espaço ainda pode ser diferente.';
     return{
       tired:'A semana apertou um pouco. Eu continuo aqui — o histórico ainda vale.',
       neutral:'Estou acompanhando. Manter o mapa dos seus dias vivo já importa.',
@@ -3762,14 +3885,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         :level>=2?['stretch','sway','peek','nod']
         :['look','settle','listen','tilt'];
       const options=repertoire.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]);
-      if(!recovering&&Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.heavySequence?'wry':level>=2?'wink':'wry',1800);
+      if(!recovering&&Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.supportive?'wry':level>=2?'wink':'wry',1800);
       if(!actorState().quiet.value&&Date.now()-actorLastSpeech>(perf.talkative?65000:90000)&&Math.random()<(perf.talkative?.36:.22)){showPetReaction(actorLine('touch'),perf.supportive?'warm':'calm',3200);actorLastSpeech=Date.now()}
       return;
     }
     const milestone=actorMilestone(kind);
-    const choices=milestone?['party','exitReturn']:kind==='resist'?['hop','wiggle','tiptoe','bow']:kind==='close'?['bow','stretch']:kind==='smoke'?['recoil','shrug']:['tilt','peek','nod','shrug','tiptoe'];
+    const choices=milestone?['party','exitReturn']:kind==='resist'?['hop','wiggle','tiptoe','bow']:kind==='close'?['bow','stretch']:kind==='smoke'?['settle','listen','tilt','shrug']:['tilt','peek','nod','shrug','tiptoe'];
     const options=choices.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]||choices[0]);
-    setTemporaryPetExpression(milestone?'delighted':kind==='resist'?'radiant':kind==='smoke'?'confused':Math.random()<.5?'wink':'wry',milestone?3500:2400);
+    setTemporaryPetExpression(milestone?'delighted':kind==='resist'?'radiant':kind==='smoke'?'wry':Math.random()<.5?'wink':'wry',milestone?3500:2400);
     showPetReaction(actorLine(milestone?'milestone':kind),kind==='resist'||milestone?'good':'warm',3400);actorLastSpeech=Date.now();
   }
 
@@ -3781,17 +3904,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(b>=60||perf.supportive)pet.classList.add('high-bond');
     if(f>=65||perf.longGap)pet.classList.add('high-breath');
     if(r>=65)pet.classList.add('high-resilience');
-    if(v<40)pet.classList.add('low-vitality');
-
-    const tone=perf.heavySequence
-      ?{main:'#3ea272',light:'#75cf99',glow:'rgba(95,186,133,.20)'}
-      :v<35
-        ?{main:'#71888b',light:'#a5b5b3',glow:'rgba(132,167,177,.18)'}
-        :v<55
-          ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
-          :v<75
-            ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
-            :{main:'#45d6a8',light:'#9bf6d2',glow:'rgba(94,242,191,.34)'};
+    // Consumo não deixa o Nimbo doente ou menos afetuoso visualmente.
+    const tone=perf.supportive
+      ?{main:'#43b887',light:'#88ddae',glow:'rgba(92,200,145,.24)'}
+      :b<35
+        ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
+        :b<70
+          ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
+          :{main:'#45d6a8',light:'#9bf6d2',glow:'rgba(94,242,191,.34)'};
     pet.style.setProperty('--nimbo-main',tone.main);
     pet.style.setProperty('--nimbo-light',tone.light);
     pet.style.setProperty('--nimbo-glow',tone.glow);
@@ -3966,41 +4086,47 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function actorLine(kind){
     const j=ensureJourney(),plan=j.plan,m=morningContext(),hour=actorClock().hour,perf=dailyPerformanceProfile();
     const pools={
-      smoke:['Cof. Me recompondo.','Minha cara entregou, né?','Ugh. Já volto ao meu formato.','Tô meio torto. Continuo aqui.','Opa. Preciso de um instante.','😵‍💫 ...já passa.','Registrado. Sem discurso.','Não vou fazer palestra. Hoje.'],
-      resist:['Pru! Essa passou.','A vontade fez cena. Você ficou.','Menos um drama da nicotina.','Essa mereceu um pulinho.','Gostei dessa pausa.','Hehe. Seguimos. ✨','A vontade veio. E foi.','Um espacinho a mais.','Boa. Sem fogos... tá, um pulo.'],
+      smoke:['Cof. Tô tortinho. Fica aqui comigo.','Esse pegou um pouco. Já passa.','Registrado. O próximo momento ainda não aconteceu.','Pru… eu continuo aqui.','Tá registrado. Sem julgamento.','Bom. Agora sabemos que aconteceu.','Sem discurso. Só fica aqui um pouquinho.','Minha cara ficou esquisita. Minha companhia não mudou.'],
+      resist:['Pru! Essa passou.','A vontade fez cena. Você ficou.','Essa mereceu um pulinho.','Gostei dessa pausa.','Hehe. Seguimos. ✨','A vontade veio. E foi.','Um espacinho a mais.','Boa. Sem fogos... tá, um pulo.'],
       close:['Dia guardado. Ufa.','Fechou. Descansa esse teclado.','Mais uma página nossa.','Por hoje, tá registrado.','Prr... até daqui a pouco.'],
       milestone:['PRUUU! Essa merece festa! 🎉','Aplausos! Sim, são meus.','Tá. Agora eu vou comemorar.','Olha o tamanho desse passo!','Pru-pru! Essa entrou pra história.'],
-      touch:['Pru?','Hm. Tô de olho. 👀','Presença confirmada. A minha.','Você de novo. Ainda bem.','Meu silêncio também faz companhia.','Boop.','Um pixel de cada vez.','Tô aqui. Meio esquisito, mas aqui.','Aceito carinho. Críticas, depois.','Prrr. 🙂','Essa cara vem de fábrica.','Pausa dramática... pronto.']
+      touch:['Pru?','Hm. Tô de olho. 👀','Você de novo. Ainda bem.','Meu silêncio também faz companhia.','Boop.','Um pixel de cada vez.','Tô aqui. Meio esquisito, mas aqui.','Aceito carinho. Críticas, depois.','Prrr. 🙂','Essa cara vem de fábrica.','Pausa dramática... pronto.']
     };
-    let lines=pools[kind]||pools.touch,context=[];
-    if(kind==='touch'){
-      if(recoveryMinutes()<5)context.push('Me recuperando... sem palestra.','Cof. Minha cara tá carregando.','Tô tortinho. Já me ajeito.');
-      else {
-        if(!m.hasSmoked&&m.timeLevel>=1)context.push('Sem primeiro registro ainda. 👀','Seu primeiro costuma aparecer antes.');
-        if(m.hasSmoked&&m.timeLevel>=1)context.push('Primeiro registro mais tarde hoje. Boa!','O primeiro veio depois do habitual, hein.');
-        if(perf.beforeFirstSmoke)context.push('Antes do primeiro eu fico mais elétrico.','Vamos ver quanto esse espaço aguenta?');
-        if(perf.veryLongGap)context.push('Esse intervalo tá bonito.','Tô até mais falante com esse fôlego.');
-        else if(perf.longGap)context.push('Intervalo acima da média. Gosto disso.','Mais ar entre um cigarro e outro.');
-        if(perf.heavySequence)context.push('Sequência chata. Não vou dourar a pílula.','Tá apertado. Então vamos simplificar o próximo passo.');
-        else if(perf.shortGap)context.push('Intervalo curto. Sem brigar com isso.','Vamos tentar alongar o próximo, só o próximo.');
-        if(perf.supportive)context.push('Eu fico mais rabugento, mas mais junto também.','Se quiser, só segura mais alguns minutos comigo.');
-        if(usualSmokeWindow())context.push('Esse horário tem história, hein.','Hora conhecida. Cabe uma pausa?');
-        if(hour>=22||hour<5)context.push('Prr... modo noturno.','Até meus pixels estão bocejando.');
-        else if(hour<12)context.push('Bom dia. Carregando simpatia...','Acordei. O carisma vem depois.');
-        else if(hour<18)context.push('Essa tarde aceita uma pausa.','Tarde longa. Companhia pequena.');
-        else context.push('Boa noite. Ainda por aqui.','O dia andou, hein.');
-        if(m.resists)context.push(`${m.resists} vontade${m.resists===1?'':'s'} atravessada${m.resists===1?'':'s'}. Pru!`);
-        const alternative=(plan.alternative?.value||'').toLowerCase();
-        if(/água|agua/.test(alternative))context.push('A água do plano tá por perto?');
-        else if(/caminh|passe/.test(alternative))context.push('A caminhada do plano topa sair?');
-        else if(alternative.trim())context.push('Hora de testar sua alternativa?');
-        if(plan.reason?.value?.trim())context.push('Seu motivo ainda tá no plano.');
-        if(plan.support?.value?.trim())context.push('Que tal chamar seu apoio?');
-        if(j.stage.value==='returning')context.push('Voltou. Isso já muda a cena.');
-      }
+    let lines=pools[kind]||pools.touch;
+    const layers=[];
+    if(kind==='smoke'){
+      const todaySmokes=smokes.filter(e=>Number.isFinite(+new Date(e.timestamp))&&+new Date(e.timestamp)<=Date.now()&&actorDay(e.timestamp)===actorDay(new Date())).length;
+      if(m.timeLevel>=1&&todaySmokes===1)layers.push(['O primeiro veio mais tarde hoje. Isso continua valendo.','Primeiro mais tarde hoje, hein. O registro não apaga esse espaço.']);
+      layers.push(pools.smoke);
+    }else if(kind==='touch'){
+      // 1. acontecimento imediato
+      if(recoveryMinutes()<5)layers.push(['Tô tortinho. Fica aqui comigo.','Cof. Minha cara tá carregando. Minha companhia continua igual.','Só um instante. Eu me ajeito por aqui.']);
+      // 2. estado atual do processo
+      if(j.stage.value==='returning')layers.push(['Você voltou. Isso já é prática.','Sem reconstruir tudo hoje. Só o próximo passo.']);
+      // 3. padrão comportamental relevante
+      if(perf.beforeFirstSmoke)layers.push(['Ainda antes do primeiro. Vamos cuidar desse espaço.','Esse começo do dia tá diferente. Eu percebi.']);
+      else if(perf.veryLongGap)layers.push(['Esse intervalo cresceu bastante.','Tem bastante ar aqui entre um e outro.']);
+      else if(perf.longGap)layers.push(['Intervalo acima da sua referência.','Esse espaço ficou um pouco maior hoje.']);
+      else if(perf.heavySequence)layers.push(['O dia apertou. Eu fico mais perto agora.','Sem corrigir o dia inteiro. Só cuidamos do próximo intervalo.']);
+      else if(perf.shortGap)layers.push(['Foi um intervalo curto. Sem cobrança.','O próximo espaço ainda não foi decidido.']);
+      if(usualSmokeWindow())layers.push(['Hm. Esse horário eu conheço.','Hora conhecida. Cabe uma pausa antes do automático?']);
+      // 4. plano pessoal
+      const alternative=(plan.alternative?.value||'').toLowerCase();
+      if(/água|agua/.test(alternative))layers.push(['A água do seu plano tá por perto?']);
+      else if(/caminh|passe/.test(alternative))layers.push(['A caminhada do seu plano ainda faz sentido agora?']);
+      else if(alternative.trim())layers.push(['Quer testar a alternativa que você deixou no plano?']);
+      if(plan.reason?.value?.trim())layers.push(['Seu motivo continua guardado no plano.']);
+      if(plan.support?.value?.trim())layers.push(['Se precisar, seu apoio também faz parte do plano.']);
+      // 5. progresso recente
+      if(m.resists)layers.push([`${m.resists} vontade${m.resists===1?'':'s'} atravessada${m.resists===1?'':'s'} hoje. Pru!`]);
+      // 6. personalidade e horário
+      if(hour>=22||hour<5)layers.push(['Prr... modo noturno.','Até meus pixels estão bocejando.']);
+      else if(hour<12)layers.push(['Bom dia. Carregando simpatia...','Acordei. O carisma vem depois.']);
+      else if(hour<18)layers.push(['Essa tarde aceita uma pausa.','Tarde longa. Companhia pequena.']);
+      else layers.push(['Boa noite. Ainda por aqui.','O dia andou, hein.']);
+      layers.push(pools.touch);
     }
-    if(kind==='smoke'&&m.timeLevel>=1&&smokes.filter(e=>Number.isFinite(+new Date(e.timestamp))&&+new Date(e.timestamp)<=Date.now()&&actorDay(e.timestamp)===actorDay(new Date())).length===1)context.push('Primeiro mais tarde hoje, hein. Boa!');
-    if(context.length&&Math.random()<.65)lines=context;
+    if(layers.length)lines=layers.find(layer=>layer&&layer.length)||lines;
     let available=lines.filter(x=>!actorRecentLines.includes(x));if(!available.length)available=lines.filter(x=>x!==actorLastLine);
     const base=available[Math.floor(Math.random()*available.length)]||lines[0];actorRecentLines.push(base);actorRecentLines=actorRecentLines.slice(-8);actorLastLine=base;
     const name=actorName();if(name&&kind!=='smoke'&&Date.now()-actorLastNameAt>600000&&Math.random()<.15){actorLastNameAt=Date.now();return `${name}, ${base[0].toLowerCase()+base.slice(1)}`}
@@ -4036,13 +4162,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function determineNimboExpression(v,b,f,r){
     const hour=actorClock().hour,last=resists[resists.length-1],perf=dailyPerformanceProfile();
-    if(recoveryMinutes()<5)return {expression:'confused',moodTag:'me recuperando'};
+    if(recoveryMinutes()<5)return {expression:'wry',moodTag:'se recompondo'};
     if(last&&Date.now()-new Date(last.timestamp).getTime()>=0&&Date.now()-new Date(last.timestamp).getTime()<120000)return {expression:'radiant',moodTag:'confiante'};
     if(hour>=22||hour<5)return {expression:'sleepy',moodTag:'tranquilo'};
     if(perf.beforeFirstSmoke)return {expression:'playful',moodTag:'ligado'};
     if(perf.veryLongGap)return {expression:'radiant',moodTag:'aceso'};
     if(perf.longGap)return {expression:'happy',moodTag:'solto'};
-    if(perf.heavySequence)return {expression:'wry',moodTag:'ríspido'};
+    if(perf.heavySequence)return {expression:'wry',moodTag:'perto'};
     if(perf.shortGap)return {expression:'confused',moodTag:'mexido'};
     if(perf.supportive)return {expression:'tired',moodTag:'junto'};
     const morning=morningContext();
@@ -4059,8 +4185,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(perf.beforeFirstSmoke)return 'Ainda sem primeiro cigarro hoje. Eu fico mais aceso nessas horas.';
     if(perf.veryLongGap)return 'Intervalo grande. Tô animado e um pouco exibido.';
     if(perf.longGap)return 'O dia abriu um bom espaço. Vamos cuidar dele.';
-    if(perf.heavySequence)return 'Não foi uma sequência elegante. Tudo bem. O próximo intervalo ainda existe.';
-    if(perf.shortGap)return 'Curto demais. Sem drama — mira no próximo intervalo.';
+    if(perf.heavySequence)return 'Dia apertado. Eu continuo aqui; o próximo intervalo ainda existe.';
+    if(perf.shortGap)return 'Foi um intervalo curto. Sem cobrança — cuidamos do próximo.';
     return message(mood(vitality(),bond()),bond());
   }
 
@@ -4991,10 +5117,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function closeScoreRows(score){
     const rows=[
-      ['❤','Vitalidade',score.vitality,score.vitality?'Consumo do dia comparado à referência conquistada.':'Sem ganho de redução confirmado neste dia.'],
-      ['🌬','Fôlego',score.breath,score.breathPenalty?`Intervalos e tempo sem fumar, já descontando ${score.breathPenalty} ponto${score.breathPenalty===1?'':'s'} por maior frequência.`:score.breath?'Intervalos maiores, primeiro cigarro mais tarde e tempo sem fumar.':'Sem ganho líquido de Fôlego neste dia.'],
-      ['🛡','Resiliência',score.resilience,score.resilience?'Vontades atravessadas, com retorno decrescente no mesmo dia.':'Nenhuma vontade atravessada registrada.'],
-      ['◇','Vínculo',score.bond,score.bond?'Registro e confirmação do dia.':'Sem ganho de vínculo.']
+      ['❤','Vitalidade',score.vitality,score.vitality?'Tendência de consumo do dia em relação à sua referência.':'Hoje não houve avanço de Vitalidade; isso não retira o que já foi conquistado.'],
+      ['🌬','Fôlego',score.breath,score.breathPenalty?`Intervalos e horário do primeiro cigarro, com ${score.breathPenalty} ponto${score.breathPenalty===1?'':'s'} não gerado${score.breathPenalty===1?'':'s'} por frequência maior neste dia.`:score.breath?'Espaços maiores entre cigarros e/ou primeiro cigarro mais tarde.':'Sem novo ganho de Fôlego neste dia.'],
+      ['🛡','Resiliência',score.resilience,score.resilience?'Práticas de criar espaço e vontades atravessadas. O consumo do dia não reduz esta aprendizagem.':'Nenhuma prática de Resiliência registrada neste dia.'],
+      ['◇','Vínculo',score.bond,score.bond?'Presença, registro honesto e confirmação do dia.':'Sem novo ganho de Vínculo neste fechamento.']
     ];
     if(score.milestone)rows.push(['✦','Marco de calibração',score.milestone,'Sete dias confirmados: o motor de progressão passa a usar sua referência inicial.']);
     return rows;
@@ -5016,14 +5142,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     $('dayCloseKicker').textContent=score.phase==='journey'?'PROGRESSION ENGINE V2':'CALIBRAÇÃO';
     $('dayCloseTitle').textContent='Dia fechado';
     $('dayCloseCopy').textContent=score.phase==='journey'
-      ?`Ritmo de evolução aplicado: ${score.multiplier.toFixed(2).replace('.',',')}×.`
+      ?`Vitalidade considera o ritmo recente: ${score.multiplier.toFixed(2).replace('.',',')}×. Fôlego, Resiliência e Vínculo são calculados separadamente.`
       :`A partir do primeiro dia fechado já existe uma referência provisória. Ela continua sendo refinada até sete dias confirmados.`;
     $('dayCloseXp').textContent=`+${score.totalXp} XP`;
     $('dayCloseXpLabel').textContent='gerados por este dia';
     $('dayCloseBreakdown').innerHTML=closeScoreRows(score).map(([icon,name,xp,note])=>`<div class="close-score-row"><div class="close-score-icon">${icon}</div><div><div class="close-score-name">${name}</div><div class="close-score-note">${note}</div></div><div class="close-score-xp ${xp?'':'zero'}">+${xp}</div></div>`).join('');
     const e=progressionEngine();
     const ref=e.reference.smokes===null?'—':e.reference.smokes.toFixed(1).replace('.',',');
-    $('dayCloseFooter').textContent=`Referência conquistada atual: ${ref} cigarros/dia${closesActiveDay?` • nova contagem: ${dayText(today())}`:''}. Nada conquistado é retirado; dias piores reduzem a velocidade das próximas recompensas.`;
+    $('dayCloseFooter').textContent=`Referência conquistada atual: ${ref} cigarros/dia${closesActiveDay?` • nova contagem: ${dayText(today())}`:''}. Nada conquistado é retirado. Um dia com mais cigarros afeta a leitura de Vitalidade, não o valor das práticas de Resiliência ou do Vínculo.`;
     $('dayCloseResult').hidden=false;
     $('dayCloseCancel').hidden=true;
     $('dayCloseConfirm').textContent='Concluir';
