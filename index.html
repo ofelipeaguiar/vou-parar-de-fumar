@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.9.0">
+<meta name="app-version" content="8.0.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1566,6 +1566,105 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .pet-zone.wry .face-wry,.pet-zone.wink .face-wink,.pet-zone.delighted .face-delighted{display:block}
 .pet-zone.nimbo-blink .face771{transform:scaleY(.95);transform-origin:60px 65px}
 @media(prefers-reduced-motion:reduce){.pet-walker[data-action] .pet-sway{animation:none!important;transform:none!important;opacity:1!important}.face771{transition:none!important}}
+
+
+/* =========================================================
+   V8.0 — MODO VONTADE
+   CTA central sem aumentar a altura da Home + intervenção dedicada.
+   ========================================================= */
+.quick-actions-v8{grid-template-columns:.92fr 1.16fr .92fr!important;gap:6px!important}
+.quick-actions-v8 .quick{min-width:0;min-height:76px!important;padding:8px 5px!important}
+.quick-actions-v8 .quick-title{font-size:12px!important;line-height:1.12!important}
+.quick-actions-v8 .quick-sub{font-size:8px!important;line-height:1.15!important;margin-top:3px!important}
+.quick-actions-v8 .quick-icon{font-size:18px!important;margin-bottom:3px!important}
+.quick-actions-v8 .quick.craving{
+  background:linear-gradient(145deg,#82f5ae,#48dc80)!important;color:#07351a!important;
+  border-color:transparent!important;box-shadow:0 8px 22px rgba(66,215,120,.17)
+}
+.quick-actions-v8 .quick.craving .quick-title{font-size:13.5px!important}
+.quick-actions-v8 .craving-icon{width:25px;height:20px;display:grid;place-items:center}
+.quick-actions-v8 .craving-icon svg{width:25px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+body.craving-mode-active{padding-bottom:0!important}
+body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none!important}
+.craving-screen{padding:0 0 calc(18px + env(safe-area-inset-bottom))}
+.craving-topbar{height:44px;display:grid;grid-template-columns:80px 1fr 80px;align-items:center;margin-bottom:7px}
+.craving-back{justify-self:start;border:0;background:transparent;color:#a9bfd3;min-height:44px;padding:5px 0;font-size:12px;font-weight:700}
+.craving-mode-label{justify-self:center;font:8px var(--pixel);letter-spacing:1.5px;color:#86dfb2;white-space:nowrap}
+.craving-mode-dot{justify-self:end;width:18px;height:3px;border-radius:999px;background:var(--green)}
+.craving-hero{
+  position:relative;overflow:hidden;border-radius:24px;border:1px solid rgba(123,203,241,.22);
+  background:radial-gradient(circle at 50% 17%,rgba(85,175,200,.18),transparent 28%),linear-gradient(180deg,#102b49 0%,#102540 52%,#0d1b30 100%);
+  padding:12px 15px 16px;text-align:center;box-shadow:0 18px 48px rgba(0,0,0,.18);transition:min-height .25s ease,padding .25s ease
+}
+.craving-hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 16% 22%,rgba(255,214,107,.13) 0 2px,transparent 3px),radial-gradient(circle at 81% 16%,rgba(255,214,107,.16) 0 2px,transparent 3px),radial-gradient(circle at 75% 36%,rgba(114,222,241,.09) 0 2px,transparent 3px)}
+.craving-pet.pet-zone{
+  position:relative!important;z-index:2!important;left:auto!important;top:auto!important;transform:none!important;margin:0 auto;
+  width:190px!important;height:158px!important;display:grid;place-items:center;pointer-events:none;background:none!important;border:0!important;padding:0!important;
+  --nimbo-main:#4fca80;--nimbo-light:#8bf1b0;--nimbo-glow:rgba(98,233,143,.28)
+}
+.craving-pet .pet-bob{width:150px!important;height:150px!important;animation:cravingFloat 3s ease-in-out infinite;transform-origin:50% 82%}
+.craving-pet .pet-sway{width:100%;height:100%;animation:none!important}
+.craving-pet .pet-svg{width:100%!important;height:100%!important;filter:drop-shadow(0 12px 9px rgba(0,0,0,.23)) drop-shadow(0 0 18px var(--nimbo-glow))}
+.craving-pet .body-main{fill:var(--nimbo-main)!important}.craving-pet .body-light{fill:var(--nimbo-light)!important}
+@keyframes cravingFloat{0%,100%{transform:translateY(3px)}50%{transform:translateY(-6px)}}
+.craving-title{position:relative;z-index:2;font:800 19px/1.16 var(--pixel);letter-spacing:-.45px;margin:0 auto;max-width:430px}
+.craving-copy{position:relative;z-index:2;font-size:12px;line-height:1.48;color:#9fb3c5;max-width:430px;margin:9px auto 0;min-height:36px}
+.craving-timer-card{position:relative;z-index:2;margin:13px auto 0;max-width:410px;display:flex;align-items:center;justify-content:center;gap:15px;padding:11px 15px;border-radius:17px;background:rgba(8,26,45,.82);border:1px solid rgba(114,222,241,.18)}
+.craving-timer-ring{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 0 72deg,#2a5d75 72deg 360deg);position:relative}.craving-timer-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:#0c2036}.craving-timer-ring span{position:relative;font-size:20px}
+.craving-timer-time{font:800 23px var(--pixel);line-height:1}.craving-timer-caption{font-size:9px;color:#8fa5b8;margin-top:4px;text-align:left}
+.craving-support-list{display:grid;gap:8px;margin-top:10px}
+.craving-support-btn{width:100%;min-height:66px;border-radius:16px;border:1px solid rgba(118,177,230,.20);background:linear-gradient(180deg,#142943,#102139);color:var(--text);display:grid;grid-template-columns:40px 1fr 18px;align-items:center;gap:9px;text-align:left;padding:10px 12px}
+.craving-support-btn:active{transform:scale(.99)}.craving-support-btn.primary{border-color:rgba(98,233,143,.35);background:linear-gradient(180deg,rgba(31,91,68,.92),rgba(18,62,54,.92))}
+.craving-support-btn .support-ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(98,233,143,.10);font-size:19px}.craving-support-btn strong{display:block;font-size:13px}.craving-support-btn small{display:block;font-size:10px;line-height:1.28;color:#8fa5b8;margin-top:3px;font-weight:500}.craving-support-btn .support-arrow{font-size:19px;color:#7ca4bd;text-align:right}
+.craving-foot{display:flex;justify-content:center;margin-top:10px}.craving-register-anyway{border:0;background:transparent;color:#70c8f2;text-decoration:underline;text-underline-offset:4px;font-size:11px;line-height:1.35;padding:10px 12px}
+.craving-message-panel{margin-top:10px;padding:14px 15px;border-radius:16px;border:1px solid rgba(182,156,255,.20);background:linear-gradient(145deg,rgba(182,156,255,.09),rgba(16,29,50,.98));text-align:left}
+.craving-message-panel small{font:8px var(--pixel);letter-spacing:1px;color:#cbbaff}.craving-message-panel strong{display:block;font:700 16px/1.25 Georgia,serif;color:#eef2e7;margin:8px 0 6px}.craving-message-panel p{font-size:12px;line-height:1.55;color:#b8c9d2;margin:0}.craving-message-panel button{margin-top:11px;border:0;border-radius:11px;background:#dce3c5;color:#1f3932;min-height:42px;padding:9px 12px;font-size:11px;font-weight:750}
+
+.craving-mini-timer{position:absolute;z-index:8;right:12px;top:11px;display:flex;align-items:center;gap:5px;border:1px solid rgba(114,222,241,.20);background:rgba(6,19,35,.78);border-radius:999px;padding:6px 8px;backdrop-filter:blur(6px)}
+.craving-mini-timer span{font-size:12px;color:#80e8ad}.craving-mini-timer strong{font:700 11px var(--pixel);color:#e8f7fb}
+.craving-play-reaction{position:absolute;z-index:9;left:50%;top:94px;transform:translateX(-50%) translateY(5px);opacity:0;pointer-events:none;max-width:78%;font:700 10px/1.3 var(--pixel);color:#f3faf8;background:rgba(6,18,35,.82);border:1px solid rgba(176,216,250,.18);border-radius:11px;padding:7px 9px;transition:.16s}
+.craving-play-reaction.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.craving-sparks{position:absolute;inset:0;z-index:6;pointer-events:none}.craving-spark{position:absolute;font-size:14px;animation:cravingSpark .72s ease-out forwards}@keyframes cravingSpark{0%{opacity:0;transform:translateY(5px) scale(.4)}30%{opacity:1}100%{opacity:0;transform:translateY(-24px) scale(1.15)}}
+
+.craving-hero.playing{min-height:500px;padding-top:38px;display:flex;flex-direction:column;justify-content:center}
+.craving-hero.playing .craving-intro{display:none}
+.craving-hero.playing .craving-pet{width:min(360px,96%)!important;height:330px!important;pointer-events:auto;cursor:pointer;outline:0}
+.craving-hero.playing .craving-pet .pet-bob{width:245px!important;height:245px!important;animation:cravingFloat 2.5s ease-in-out infinite}
+.craving-hero.playing .craving-pet:focus-visible{outline:2px solid rgba(255,214,107,.92);outline-offset:-35px;border-radius:50%}
+.craving-hero.playing .craving-stop-early{display:block}
+.craving-stop-early{position:relative;z-index:7;align-self:center;border:0;background:transparent;color:#7da1b7;font-size:10px;padding:10px 15px;margin-top:4px;text-decoration:underline;text-underline-offset:3px}
+.craving-hero.playing~.craving-support-list,.craving-screen.play-session .craving-support-list,.craving-screen.play-session .craving-foot,.craving-screen.play-session .craving-message-panel{display:none!important}
+
+.craving-pet.react-hop .pet-bob{animation:cravingHop .56s cubic-bezier(.2,.8,.2,1)!important}.craving-pet.react-wiggle .pet-bob{animation:cravingWiggle .62s ease!important}.craving-pet.react-squish .pet-bob{animation:cravingSquish .52s ease!important}.craving-pet.react-tilt .pet-bob{animation:cravingTilt .58s ease!important}
+@keyframes cravingHop{0%,100%{transform:translateY(0)}38%{transform:translateY(-30px) scale(1.06)}70%{transform:translateY(2px) scale(.98)}}
+@keyframes cravingWiggle{0%,100%{transform:none}22%{transform:rotate(-8deg) scale(1.04)}48%{transform:rotate(8deg)}72%{transform:rotate(-4deg)}}
+@keyframes cravingSquish{0%,100%{transform:none}35%{transform:scale(1.09,.88) translateY(8px)}67%{transform:scale(.96,1.07) translateY(-5px)}}
+@keyframes cravingTilt{0%,100%{transform:none}42%{transform:translateX(8px) rotate(10deg)}72%{transform:translateX(-4px) rotate(-4deg)}}
+
+.craving-review{position:relative;z-index:8;width:100%;max-width:420px;margin:4px auto 0;padding:15px;border-radius:18px;background:rgba(7,22,38,.90);border:1px solid rgba(114,222,241,.19);backdrop-filter:blur(7px)}
+.craving-review small{font:8px var(--pixel);letter-spacing:1px;color:#87d9b0}.craving-review h3{font-size:21px;margin:7px 0 5px}.craving-review p{font-size:11px;line-height:1.45;color:#9db0c0;margin:0}
+.craving-outcomes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:12px}.craving-outcomes button{min-height:48px;border:1px solid rgba(118,177,230,.20);background:#11263d;color:#e7eef4;border-radius:11px;font-size:10px;font-weight:750;padding:8px 5px}.craving-outcomes button:first-child{border-color:rgba(98,233,143,.30);color:#bdf5cd}
+.craving-review-actions{display:flex;gap:7px;justify-content:center;margin-top:12px;flex-wrap:wrap}.craving-review-actions button{min-height:42px;border:1px solid rgba(118,177,230,.22);background:#12283f;color:#d9e7ef;border-radius:11px;padding:9px 12px;font-size:11px;font-weight:700}.craving-review-actions .craving-review-primary{background:#dce3c5;color:#1f3932;border-color:transparent}
+.craving-review-note{margin-top:9px!important;font-size:9px!important;color:#8499aa!important}
+.craving-hero.reviewing{min-height:500px;padding-top:28px;display:flex;flex-direction:column;justify-content:center}.craving-hero.reviewing .craving-intro{display:none}.craving-hero.reviewing .craving-pet{width:250px!important;height:215px!important}.craving-hero.reviewing .craving-pet .pet-bob{width:185px!important;height:185px!important}
+
+@media(max-width:380px){
+  .quick-actions-v8{gap:5px!important;grid-template-columns:.9fr 1.18fr .9fr!important}
+  .quick-actions-v8 .quick{min-height:74px!important;padding-left:4px!important;padding-right:4px!important}
+  .quick-actions-v8 .quick-title{font-size:11px!important}.quick-actions-v8 .quick.craving .quick-title{font-size:12.5px!important}.quick-actions-v8 .quick-sub{font-size:7.5px!important}
+  .craving-title{font-size:17px}.craving-copy{font-size:11px}.craving-pet.pet-zone{height:145px!important}.craving-pet .pet-bob{width:138px!important;height:138px!important}
+  .craving-support-btn{min-height:61px}.craving-support-btn strong{font-size:12px}.craving-support-btn small{font-size:9px}
+  .craving-hero.playing,.craving-hero.reviewing{min-height:455px}.craving-hero.playing .craving-pet{height:300px!important}.craving-hero.playing .craving-pet .pet-bob{width:220px!important;height:220px!important}
+  .craving-outcomes{gap:5px}.craving-outcomes button{font-size:9px;padding:7px 4px}
+}
+@media(max-height:730px) and (max-width:500px){
+  .quick-actions-v8 .quick{min-height:70px!important}
+  .craving-topbar{height:38px}.craving-hero{padding-top:8px}.craving-pet.pet-zone{height:132px!important}.craving-pet .pet-bob{width:126px!important;height:126px!important}.craving-copy{margin-top:6px}.craving-timer-card{margin-top:9px}.craving-support-btn{min-height:57px;padding-top:8px;padding-bottom:8px}
+  .craving-hero.playing,.craving-hero.reviewing{min-height:420px}.craving-hero.playing .craving-pet{height:265px!important}.craving-hero.playing .craving-pet .pet-bob{width:205px!important;height:205px!important}
+}
+@media(prefers-reduced-motion:reduce){.craving-pet .pet-bob,.craving-pet[class*="react-"] .pet-bob,.craving-spark{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -1691,8 +1790,9 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
     <div><strong id="pendingDaysTitle"></strong><p id="pendingDaysSummary"></p></div>
     <button type="button" class="secondary" id="reviewPendingDays">Revisar dias</button>
   </div>
-  <div class="quick-actions quick-actions-v731">
+  <div class="quick-actions quick-actions-v731 quick-actions-v8">
     <button class="quick smoke" id="smokeBtn" type="button" aria-label="Registrar que fumei agora"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
+    <button class="quick craving" id="cravingBtn" type="button" aria-label="Abrir apoio porque estou com vontade de fumar"><span class="quick-icon craving-icon" aria-hidden="true"><svg viewBox="0 0 32 24"><path d="M9.2 20h13.2a6.1 6.1 0 0 0 .7-12.2A8.1 8.1 0 0 0 7.6 9.6 5.2 5.2 0 0 0 9.2 20Z"/></svg></span><span class="quick-title">Tô com<br>vontade</span><span class="quick-sub">Abrir apoio agora</span></button>
     <button class="quick resist" id="resistBtn" type="button" aria-label="Registrar que quis fumar, mas não fumei"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Resiliência</span></button>
   </div>
 
@@ -1742,6 +1842,63 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
       <div class="actions"><button class="secondary" id="undoBtn">Desfazer último evento</button></div>
     </div>
   </details>
+</section>
+
+<section id="craving" class="tab craving-screen" aria-label="Modo vontade">
+  <div class="craving-topbar">
+    <button class="craving-back" id="cravingBack" type="button">‹ Voltar</button>
+    <div class="craving-mode-label">MODO VONTADE</div>
+    <div class="craving-mode-dot" aria-hidden="true"></div>
+  </div>
+
+  <div class="craving-hero" id="cravingHero">
+    <div class="craving-mini-timer" id="cravingMiniTimer" hidden><span>◷</span><strong id="cravingMiniTime">02:00</strong></div>
+    <div class="craving-play-reaction" id="cravingPlayReaction" aria-live="polite"></div>
+    <div class="craving-pet pet-zone neutral" id="cravingNimbo" data-level="1" role="button" tabindex="-1" aria-label="Nimbo"></div>
+    <div class="craving-sparks" id="cravingSparks" aria-hidden="true"></div>
+
+    <div class="craving-intro" id="cravingIntro">
+      <h2 class="craving-title" id="cravingTitle">A vontade chegou.<br>Vamos criar um espaço?</h2>
+      <p class="craving-copy" id="cravingCopy">Você não precisa decidir nada agora. Podemos só atravessar os próximos dois minutos juntos.</p>
+      <div class="craving-timer-card" id="cravingTimerCard">
+        <div class="craving-timer-ring"><span>◷</span></div>
+        <div><div class="craving-timer-time" id="cravingTimerTime">02:00</div><div class="craving-timer-caption" id="cravingTimerCaption">dois minutos só para você</div></div>
+      </div>
+    </div>
+
+    <div class="craving-review" id="cravingReview" hidden>
+      <small>DOIS MINUTOS DEPOIS</small>
+      <h3 id="cravingReviewTitle">E agora?</h3>
+      <p id="cravingReviewCopy">Não precisa dar uma nota. Só percebe se alguma coisa mudou.</p>
+      <div class="craving-outcomes" id="cravingOutcomeButtons">
+        <button type="button" data-craving-outcome="resisted">Passou</button>
+        <button type="button" data-craving-outcome="reduced">Diminuiu</button>
+        <button type="button" data-craving-outcome="strong">Ainda está forte</button>
+      </div>
+      <div class="craving-review-actions" id="cravingReviewActions" hidden>
+        <button type="button" class="craving-review-primary" id="cravingReviewHome">Voltar à Home</button>
+        <button type="button" id="cravingMoreMinute" hidden>Ficar mais 1 minuto</button>
+      </div>
+      <p class="craving-review-note" id="cravingReviewNote"></p>
+    </div>
+
+    <button class="craving-stop-early" id="cravingStopEarly" type="button" hidden>encerrar antes</button>
+  </div>
+
+  <div class="craving-support-list" id="cravingSupportList">
+    <button class="craving-support-btn primary" id="cravingStayBtn" type="button"><span class="support-ico">🍃</span><span><strong>Ficar aqui por 2 minutos</strong><small>Brinque com o Nimbo enquanto o tempo passa.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Jogar um minuto</strong><small>Uma brincadeira curta com o Nimbo para mudar o foco.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn" id="cravingMessageBtn" type="button"><span class="support-ico">💬</span><span><strong>Ler uma mensagem</strong><small>Uma ideia curta da Jornada para este momento.</small></span><span class="support-arrow">›</span></button>
+  </div>
+
+  <div class="craving-message-panel" id="cravingMessagePanel" hidden>
+    <small>DO VALE</small>
+    <strong id="cravingMessageTitle"></strong>
+    <p id="cravingMessageText"></p>
+    <button type="button" id="cravingMessageStay">Ficar com o Nimbo por 2 minutos</button>
+  </div>
+
+  <div class="craving-foot" id="cravingFoot"><button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Se eu fumar depois, tudo bem: ainda quero registrar ›</button></div>
 </section>
 
 <section id="vale" class="tab">
@@ -1913,7 +2070,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.9.0').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.0.0').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -3613,6 +3770,124 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const perf=dailyPerformanceProfile();
     return perf.supportive?CRAVING_SUPPORT_PATHS.nimbo:CRAVING_SUPPORT_PATHS.distract;
   }
+
+
+  /* V8 — Modo Vontade: a abertura já conta como prática de criar espaço. */
+  const CRAVING_INTROS=[
+    {title:'A vontade chegou.\\nVamos criar um espaço?',copy:'Você não precisa decidir nada agora. Podemos só atravessar os próximos dois minutos juntos.'},
+    {title:'A impressão chegou.\\nEla não é uma ordem.',copy:'Não precisa discutir com a vontade nem obedecer imediatamente. Primeiro, um pouco de espaço.'},
+    {title:'A névoa apareceu.\\nSó o próximo trecho.',copy:'Não precisamos enxergar o caminho inteiro. Fica aqui comigo antes de escolher o que vem depois.'},
+    {title:'Você veio antes do automático.',copy:'Isso já interrompeu a sequência por um instante. Sem promessa grande: só este momento.'},
+    {title:'Não precisa resolver tudo agora.',copy:'A vontade pode estar aqui sem virar uma decisão neste segundo. Vamos esperar um pouco juntos.'},
+    {title:'Dois minutos.\\nNada além disso.',copy:'Sem meta enorme e sem palestra. Só um intervalo pequeno entre a vontade e a próxima ação.'},
+    {title:'Pru. Eu vi você chegando.',copy:'Fica aqui comigo um instante. A próxima escolha ainda não aconteceu.'},
+    {title:'O caminho continua aqui.',copy:'Um momento difícil não apaga o que veio antes. Agora basta criar espaço para o próximo passo.'},
+    {title:'A vontade pode fazer barulho.',copy:'Você não precisa fazer nada para ela sumir imediatamente. Podemos observar como ela muda.'},
+    {title:'Antes de escolher, presença.',copy:'O que apareceu não dependeu de você. O próximo pequeno gesto ainda pode ser escolhido.'}
+  ];
+  const CRAVING_JOURNEY_MESSAGES=[
+    {title:'“A impressão não é uma ordem.”',text:'A vontade apareceu. Isso é uma impressão forte, não uma obrigação. O exercício agora é só notar o espaço entre sentir e agir.'},
+    {title:'A Névoa é o automático',text:'No Vale, a Névoa não representa o cigarro: representa a sensação de que uma reação é inevitável. Perceber que ela chegou já muda a cena.'},
+    {title:'Só o próximo trecho',text:'Um mapa não controla o mundo. Ele ajuda a escolher o próximo passo. Agora você não precisa resolver o resto do dia.'},
+    {title:'O obstáculo também vira caminho',text:'Um momento difícil não apaga os passos anteriores. Até aquilo que saiu do plano pode virar informação para a próxima escolha.'},
+    {title:'Voltar também é prática',text:'Você não precisa chegar aqui depois de um dia perfeito. Voltar quando fica difícil faz parte do próprio caminho.'},
+    {title:'Cuide do que depende de você',text:'A vontade surgir não foi uma escolha. Ficar aqui por alguns instantes, observar e escolher de novo pode ser.'},
+    {title:'A próxima escolha ainda não aconteceu',text:'Não é preciso prometer “nunca mais” neste minuto. Existe apenas a decisão que ainda não foi tomada.'}
+  ];
+  const CRAVING_TAP_LINES=['Pru!','Boop.','Hehe. ✨','Tô aqui.','Você de novo. Ainda bem.','Isso faz cócega.','Um pixel de cada vez.','Prrr.','Sem pressa.','Só esse instante.','👀','Pausa dramática... pronto.','Achei você.','Mais um toque?'];
+  let cravingLastIntro=-1,cravingCurrentPracticeId=null,cravingPendingLink=null,cravingTimer=null,cravingTimerEndsAt=0,cravingTimerDuration=120,cravingTapCount=0,cravingReactionTimer=null;
+
+  function cravingPracticeRow(){return cravingCurrentPracticeId?ensureJourney().practices.find(x=>x.id===cravingCurrentPracticeId):null}
+  function cravingPracticeOpen(){const row=cravingPracticeRow();return !!(row&&!row.endedAt&&row.outcome==='open')}
+  function setCurrentCravingPath(path){
+    const row=cravingPracticeRow();if(!row)return;
+    row.paths=uniq([...(Array.isArray(row.paths)?row.paths:[row.path].filter(Boolean)),path]);
+    if(path!=='nimbo'||!row.path)row.path=path;
+    row.updatedAt=new Date().toISOString();jPersist();
+  }
+  function pickCravingIntro(){
+    const pool=CRAVING_INTROS.slice();
+    const j=ensureJourney();
+    if(j.stage.value==='returning')pool.push({title:'Você voltou.\\nIsso já muda a cena.',copy:'Não precisamos recuperar tudo de uma vez. Dois minutos de presença já são um retorno ao caminho.'});
+    if((j.plan.reason?.value||'').trim())pool.push({title:'Seu motivo continua lá.',copy:'Agora não precisamos transformá-lo em discurso. Só criar espaço suficiente para você escolher de novo.'});
+    let idx=Math.floor(Math.random()*pool.length);if(pool.length>1&&idx===cravingLastIntro)idx=(idx+1)%pool.length;cravingLastIntro=idx;return pool[idx];
+  }
+  function cloneCravingNimbo(){
+    const source=$('petZone')?.querySelector('svg'),target=$('cravingNimbo');if(!source||!target)return;
+    target.innerHTML=`<div class="pet-bob"><div class="pet-sway">${source.outerHTML}</div></div>`;
+    const home=$('petZone'),level=progress().level;target.dataset.level=String(level);
+    if(home){const style=getComputedStyle(home);['--nimbo-main','--nimbo-light','--nimbo-glow'].forEach(p=>target.style.setProperty(p,style.getPropertyValue(p)||''));}
+    setCravingExpression('happy');
+  }
+  function setCravingExpression(expr){
+    const pet=$('cravingNimbo');if(!pet)return;
+    ['sleepy','tired','neutral','happy','radiant','bored','playful','confused','shocked','wry','wink','delighted'].forEach(c=>pet.classList.remove(c));pet.classList.add(expr||'happy');
+  }
+  function resetCravingScreen(){
+    clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;cravingTapCount=0;
+    const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session');hero.classList.remove('playing','reviewing');
+    $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=true;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;
+    $('cravingSupportList').style.display='';$('cravingFoot').style.display='';$('cravingMessagePanel').hidden=true;$('cravingIntro').style.display='';
+    $('cravingNimbo').tabIndex=-1;$('cravingNimbo').setAttribute('aria-label','Nimbo no Modo Vontade');
+    $('cravingTimerTime').textContent='02:00';$('cravingTimerCaption').textContent='dois minutos só para você';
+  }
+  function openCravingMode(){
+    if(cravingPendingLink){const old=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);if(old&&!old.endedAt)completeCravingPractice(old.id,{outcome:'unknown'});cravingPendingLink=null;}
+    if(cravingPracticeOpen())completeCravingPractice(cravingCurrentPracticeId,{outcome:'left'});
+    cravingCurrentPracticeId=beginCravingPractice({path:'nimbo',source:'craving-button'}).id;
+    resetCravingScreen();cloneCravingNimbo();
+    const intro=pickCravingIntro();$('cravingTitle').innerHTML=intro.title.replace(/\\n/g,'<br>');$('cravingCopy').textContent=intro.copy;
+    document.body.classList.add('craving-mode-active');document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id==='craving'));
+    window.scrollTo({top:0,behavior:'auto'});checkAchievements();render();
+  }
+  function closeCravingMode({outcome='left',keepForNextEvent=false}={}){
+    clearInterval(cravingTimer);cravingTimer=null;
+    if(cravingPracticeOpen()&&!keepForNextEvent)completeCravingPractice(cravingCurrentPracticeId,{outcome});
+    if(keepForNextEvent&&cravingCurrentPracticeId)cravingPendingLink={id:cravingCurrentPracticeId,until:Date.now()+30*60*1000};
+    document.body.classList.remove('craving-mode-active');document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id==='home'));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab==='home'));
+    cravingCurrentPracticeId=null;render();window.scrollTo({top:0,behavior:'auto'});
+  }
+  function formatCravingClock(seconds){seconds=Math.max(0,Math.ceil(seconds));return `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`}
+  function updateCravingTimer(){
+    if(!cravingTimerEndsAt)return;const left=Math.max(0,(cravingTimerEndsAt-Date.now())/1000),label=formatCravingClock(left);$('cravingMiniTime').textContent=label;$('cravingTimerTime').textContent=label;
+    if(left<=0){clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;finishCravingPlay()}
+  }
+  function startCravingPlay(seconds=120,path='nimbo'){
+    setCurrentCravingPath(path);clearInterval(cravingTimer);cravingTimerDuration=seconds;cravingTimerEndsAt=Date.now()+seconds*1000;cravingTapCount=0;
+    const screen=$('craving'),hero=$('cravingHero');screen.classList.add('play-session');hero.classList.remove('reviewing');hero.classList.add('playing');
+    $('cravingReview').hidden=true;$('cravingIntro').style.display='none';$('cravingMiniTimer').hidden=false;$('cravingStopEarly').hidden=false;$('cravingNimbo').tabIndex=0;$('cravingNimbo').setAttribute('aria-label','Brincar com o Nimbo. Toque para ele reagir.');
+    $('cravingSupportList').style.display='none';$('cravingFoot').style.display='none';$('cravingMessagePanel').hidden=true;setCravingExpression(path==='distract'?'playful':'happy');updateCravingTimer();cravingTimer=setInterval(updateCravingTimer,250);$('cravingNimbo').focus({preventScroll:true});
+  }
+  function finishCravingPlay(){
+    const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session');hero.classList.remove('playing');hero.classList.add('reviewing');
+    $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=false;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;$('cravingReviewTitle').textContent='E agora?';$('cravingReviewCopy').textContent='Não precisa dar uma nota. Só percebe se alguma coisa mudou.';$('cravingReviewNote').textContent='Nenhuma resposta registra automaticamente uma vontade superada na Home.';setCravingExpression('happy');
+  }
+  function reactCravingNimbo(){
+    if(!$('cravingHero').classList.contains('playing'))return;const pet=$('cravingNimbo');cravingTapCount++;
+    const motions=['react-hop','react-wiggle','react-squish','react-tilt'],exprs=['happy','playful','wink','delighted','wry'];const motion=motions[Math.floor(Math.random()*motions.length)],expr=exprs[Math.floor(Math.random()*exprs.length)];
+    motions.forEach(c=>pet.classList.remove(c));void pet.offsetWidth;pet.classList.add(motion);setCravingExpression(expr);setTimeout(()=>pet.classList.remove(motion),700);setTimeout(()=>{if($('cravingHero').classList.contains('playing'))setCravingExpression('happy')},1250);
+    let line=CRAVING_TAP_LINES[Math.floor(Math.random()*CRAVING_TAP_LINES.length)];if(cravingTapCount===5)line='Cinco toques. Eu sobrevivi.';if(cravingTapCount===10)line='Dez. Tá, isso já é uma brincadeira.';if(cravingTapCount===20)line='Você é persistente. Eu respeito.';
+    const bubble=$('cravingPlayReaction');bubble.textContent=line;bubble.classList.add('show');clearTimeout(cravingReactionTimer);cravingReactionTimer=setTimeout(()=>bubble.classList.remove('show'),900);
+    const spark=document.createElement('span');spark.className='craving-spark';spark.textContent=Math.random()<.5?'✦':'·';spark.style.left=`${38+Math.random()*25}%`;spark.style.top=`${33+Math.random()*25}%`;$('cravingSparks').appendChild(spark);setTimeout(()=>spark.remove(),800);
+  }
+  function showCravingJourneyMessage(){
+    setCurrentCravingPath('journey');let pool=CRAVING_JOURNEY_MESSAGES.slice(),j=ensureJourney();
+    if(j.stage.value==='returning')pool.unshift({title:'Voltar é a própria prática',text:'Não há placa contando quantos dias você ficou longe. O caminho reaparece quando você volta a pisar nele.'});
+    if((j.plan.reason?.value||'').trim())pool.unshift({title:'Seu motivo ainda está no plano',text:`Você escreveu um motivo que continua guardado aqui. Não precisa transformá-lo em cobrança; deixe que ele só lembre por que vale criar este intervalo.`});
+    const msg=pool[Math.floor(Math.random()*pool.length)];$('cravingMessageTitle').textContent=msg.title;$('cravingMessageText').textContent=msg.text;$('cravingMessagePanel').hidden=false;$('cravingMessagePanel').scrollIntoView({block:'nearest',behavior:'smooth'});
+  }
+  function handleCravingOutcome(outcome){
+    if(cravingCurrentPracticeId)completeCravingPractice(cravingCurrentPracticeId,{outcome});
+    $('cravingOutcomeButtons').hidden=true;$('cravingReviewActions').hidden=false;$('cravingMoreMinute').hidden=outcome==='resisted';
+    if(outcome==='resisted'){$('cravingReviewTitle').textContent='Ela passou.';$('cravingReviewCopy').textContent='Você criou espaço antes de decidir. Isso não registra automaticamente o botão “Quis fumar, mas não fumei”.';$('cravingReviewNote').textContent='Se quiser contar esta vontade como superada, registre na Home.';setCravingExpression('delighted')}
+    else if(outcome==='reduced'){$('cravingReviewTitle').textContent='Ela diminuiu.';$('cravingReviewCopy').textContent='Não precisa zerar para este intervalo ter valido. A vontade mudou de intensidade — e você percebeu.';$('cravingReviewNote').textContent='Você pode voltar ou ficar mais um minuto.';setCravingExpression('wink')}
+    else {$('cravingReviewTitle').textContent='Ela ainda está forte.';$('cravingReviewCopy').textContent='Tudo bem. O exercício não era vencer a vontade em dois minutos; era impedir que ela decidisse sozinha.';$('cravingReviewNote').textContent='Você pode ficar mais um minuto ou voltar e registrar o que acontecer.';setCravingExpression('wry')}
+  }
+  function pendingPracticeForEvent(){
+    if(!cravingPendingLink)return null;if(Date.now()>cravingPendingLink.until){const expired=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);if(expired&&!expired.endedAt)completeCravingPractice(expired.id,{outcome:'unknown'});cravingPendingLink=null;return null}const row=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);return row||null;
+  }
+  function linkPendingPracticeToEvent(outcome,eventId){const row=pendingPracticeForEvent();if(!row)return;completeCravingPractice(row.id,{outcome,linkedEventId:eventId});cravingPendingLink=null;}
+
   function jPersist(){vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync()}
   function jEsc(t){return String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
   function jAccessible(id){
@@ -5089,10 +5364,27 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     window.__syncTimer=setTimeout(()=>{window.__syncDue=0;window.__syncUrgent=false;syncAll()},Math.max(0,next-Date.now()));
   }
 
+  $('cravingBtn').onclick=openCravingMode;
+  $('cravingBack').onclick=()=>closeCravingMode({outcome:'left'});
+  $('cravingStayBtn').onclick=()=>startCravingPlay(120,'nimbo');
+  $('cravingGameBtn').onclick=()=>startCravingPlay(60,'distract');
+  $('cravingMessageBtn').onclick=showCravingJourneyMessage;
+  $('cravingMessageStay').onclick=()=>startCravingPlay(120,'nimbo');
+  $('cravingStopEarly').onclick=finishCravingPlay;
+  $('cravingNimbo').onclick=reactCravingNimbo;
+  $('cravingNimbo').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&$('cravingHero').classList.contains('playing')){e.preventDefault();reactCravingNimbo()}};
+  document.querySelectorAll('[data-craving-outcome]').forEach(btn=>btn.onclick=()=>handleCravingOutcome(btn.dataset.cravingOutcome));
+  $('cravingReviewHome').onclick=()=>{const row=cravingPracticeRow();const outcome=row?.outcome||'left';if(outcome==='reduced'||outcome==='strong')cravingPendingLink={id:row.id,until:Date.now()+30*60*1000};closeCravingMode({outcome})};
+  $('cravingMoreMinute').onclick=()=>startCravingPlay(60,'nimbo');
+  $('cravingRegisterAnyway').onclick=()=>closeCravingMode({keepForNextEvent:true});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&cravingTimerEndsAt)updateCravingTimer()});
+
   $('smokeBtn').onclick=()=>{
     const day=today();
-    smokes.push({id:uuid(),timestamp:new Date().toISOString(),day});
+    const event={id:uuid(),timestamp:new Date().toISOString(),day};
+    smokes.push(event);
     write(SMOKE_KEY,smokes);
+    linkPendingPracticeToEvent('smoked',event.id);
     claimDailyAwarenessReward(day);
     refreshMorningBehavior();
     animatePet(false);
@@ -5104,8 +5396,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   $('resistBtn').onclick=()=>{
     const day=today();
-    resists.push({id:uuid(),timestamp:new Date().toISOString(),day});
+    const event={id:uuid(),timestamp:new Date().toISOString(),day};
+    resists.push(event);
     write(RESIST_KEY,resists);
+    linkPendingPracticeToEvent('resisted',event.id);
     claimDailyAwarenessReward(day);
     animatePet(true);
     render();
