@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="7.6.2">
+<meta name="app-version" content="7.7.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1463,11 +1463,40 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 .j-dialog{color:#ebefe6;background:#102431;border:1px solid #47616a;border-radius:22px;padding:0;width:min(94vw,570px);max-height:88svh}.j-dialog::backdrop{background:#020a14d9}.j-dialog header{position:sticky;top:0;z-index:1;background:#102431;align-items:center;padding:12px 18px;margin:0;border-bottom:1px solid #345059}.j-dialog header span{font-size:11px;color:#b8cec9}.j-dialog header button{background:none;color:#e5ebdc;border:0;width:44px;height:44px;font-size:21px}.j-reader-content{padding:10px 22px 24px}.j-reader-content h2{font:400 30px/1.15 Georgia,serif}.j-reader-content p{font-size:17px;line-height:1.75;color:#d9e3df}.j-reader-content small{font-size:11px;line-height:1.5;color:#aec2c8}.j-reader-content a{color:#d6e2b7}.j-reader-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}.j-reader-actions button{min-height:44px;background:#dce3c5;border:0;border-radius:9px;padding:10px 14px;color:#1f3932}#jReaderPrompt{border-left:2px solid #cad6a8;margin-top:20px;padding:10px 14px;font-size:15px;line-height:1.5}#journey [hidden]{display:none!important}#journey button:focus-visible{outline:2px solid #ead7a2;outline-offset:2px}
 
 
-/* 7.6.2 — hierarquia compacta, estados explícitos e novidades diretamente acessíveis */
+/* 7.7.0 — hierarquia compacta, estados explícitos e novidades diretamente acessíveis */
 .j-compact-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 11px}.j-compact-head h2{font-size:21px;letter-spacing:-.5px;margin:0}.j-compact-head>span{font-size:12px;color:#aabfc6}.j-xp-panel{background:#162338;border:1px solid #344059;border-radius:14px;padding:12px 14px}.j-xp-caption{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#d2c8ed}.j-xp-caption span:first-child{font-size:17px;font-weight:700;color:#f2eff9}.j-xp-track{height:7px;background:#0b1727;border-radius:6px;overflow:hidden;margin:9px 0 0}.j-xp-track i{display:block;height:100%;background:linear-gradient(90deg,#a991e2,#c7b5f0);border-radius:6px}.j-xp-panel p{font-size:11px;line-height:1.4;color:#bdc4d7;margin:8px 0 0}.j-tabs{margin:8px 0 14px}.j-tabs button{font-size:12px}.j-feature{padding:18px}.j-feature h3{font-size:25px;margin:12px 0}.j-feature p{font-size:12px}.j-moment{margin-bottom:10px}
 .j-catalog-head h3,.j-inbox h3{font-size:18px;margin:0 0 6px}.j-catalog-head p,.j-inbox>p{font-size:12px;color:#b5c8cf;line-height:1.5;margin:0 0 13px}.j-filter-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.j-filter-row button{border:1px solid #38525e;border-radius:9px;min-height:44px;background:#112631;color:#bfcdd5;padding:8px 10px;font-size:12px}.j-filter-row button[aria-pressed="true"]{border-color:#c1d0a4;background:#30473f;color:#eaf0d8}.j-topic-label{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:#b7c8ce}.j-topic-label select{font-size:16px;padding:10px;border-radius:9px;background:#132735;color:#dce6df;border:1px solid #3e5863;max-width:80%}
 #journey .j-row{border:1px solid #2d4554;border-radius:12px;padding:13px 14px;margin:8px 0;background:#112330}#journey .j-row strong{font-size:15px;line-height:1.4}#journey .j-row small{font-size:11px;margin-bottom:7px}#journey .j-row .j-state-label{font-size:12px;font-weight:600;margin-top:9px}#journey .j-reading-unread{border-left:3px solid #d1d9a5;background:#1a3038}#journey .j-reading-unread .j-state-label{color:#e8e9b8}#journey .j-reading-progress{border-left:3px solid #b3a0df}#journey .j-reading-progress .j-state-label{color:#d3c2ee}#journey .j-reading-done{background:#0e202c}#journey .j-reading-done .j-state-label{color:#acccb9}#journey .j-reading-locked{background:#0c1b26;color:#abbac4}#journey .j-reading-locked span{color:#afbec5}
 .j-inbox{padding:14px;border:1px solid #5c6f59;border-radius:15px;background:#142b31;margin-bottom:12px}.j-inbox:has(.j-row){border-color:#98aa7f}.j-history-jumps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}.j-history-jumps button{min-height:44px;padding:8px 12px;border:1px solid #3a5360;border-radius:9px;background:#122936;color:#d5dfd1;font-size:12px}.j-achievement-new{border-left:3px solid #d5b66f!important}.j-plan-hint{display:block;color:#aebfc8;font-size:12px;line-height:1.5;margin-top:5px}.j-empty{border:1px dashed #405a68;border-radius:12px;padding:20px;font-size:13px;line-height:1.5;color:#bdcbd3}#jPlanForm a{color:#d9e3b8}#jStories,#jAchievements,#jPlan{scroll-margin-top:14px}
+
+
+/* 7.7.0 — Nimbo: intenção, apoio dos pés e gestos compostos */
+.pet-walker{transition-timing-function:cubic-bezier(.35,0,.25,1)!important}
+.pet-walker .eyes-open,.pet-walker .eyes-bored{transform:translateX(var(--gaze,0px));transition:transform .18s ease}
+.pet-walker.walking .pet-bob{animation:n770Step var(--step-speed,.38s) ease-in-out infinite!important}
+.pet-walker.walking .nimbo-foot{animation-duration:var(--step-speed,.38s)!important}
+.pet-walker:not(.walking) .pet-bob{animation:n770Breathe 4.6s ease-in-out infinite}
+.pet-walker .pet-sway{animation:none!important;transform-origin:50% 85%}
+.pet-walker[data-action="look"] .pet-sway,.pet-walker[data-action="peek"] .pet-sway{animation:n770Look 1.2s ease-in-out!important}
+.pet-walker[data-action="tilt"] .pet-sway,.pet-walker[data-action="listen"] .pet-sway{animation:n770Tilt 1s ease-in-out!important}
+.pet-walker[data-action="stretch"] .pet-sway{animation:n770Stretch 1.2s ease-in-out!important}
+.pet-walker[data-action="settle"] .pet-sway,.pet-walker[data-action="nod"] .pet-sway{animation:n770Nod .7s ease-in-out!important}
+.pet-walker[data-action="sway"] .pet-sway{animation:n770Sway 1.2s ease-in-out!important}
+.pet-walker[data-action="hop"] .pet-sway{animation:n770Hop 1.3s ease-in-out!important}
+.pet-walker[data-action="bow"] .pet-sway{animation:n770Bow 1.2s ease-in-out!important}
+.pet-walker[data-action="wiggle"] .pet-sway{animation:n770Wiggle 1.2s ease-in-out!important}
+.pet-walker[data-action="glow"] .pet-sway{animation:n770Stretch 1.4s ease-in-out!important}
+@keyframes n770Step{0%,100%{transform:translateY(0) rotate(-.7deg)}50%{transform:translateY(-3px) rotate(.7deg)}}
+@keyframes n770Breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.014)}}
+@keyframes n770Look{30%,65%{transform:translateX(3px) rotate(3deg)}}
+@keyframes n770Tilt{35%,70%{transform:rotate(-6deg)}}
+@keyframes n770Stretch{25%{transform:scale(1.025,.97)}60%{transform:scale(.98,1.05)}85%{transform:scale(1.01,.99)}}
+@keyframes n770Nod{35%{transform:translateY(2px) scaleY(.97)}70%{transform:translateY(-1px)}}
+@keyframes n770Sway{30%{transform:rotate(-3deg)}70%{transform:rotate(3deg)}}
+@keyframes n770Hop{18%{transform:scale(1.04,.95)}43%{transform:translateY(-13px) scale(.99,1.03)}70%{transform:scale(1.04,.96)}88%{transform:scale(.99,1.01)}}
+@keyframes n770Bow{45%{transform:scaleY(.94) rotate(4deg)}}
+@keyframes n770Wiggle{20%,60%{transform:rotate(-5deg)}40%,80%{transform:rotate(5deg)}}
+@media(prefers-reduced-motion:reduce){.pet-walker .pet-bob,.pet-walker .pet-sway,.pet-walker[data-action] .pet-sway,.pet-walker.walking .pet-bob,.pet-walker.walking .nimbo-foot{animation:none!important}}
 
 </style>
 </head>
@@ -1585,6 +1614,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   </div>
 
   <div id="homeResourceStrip" style="display:none"><span id="homeWoodValue">0</span><span id="homeStoneValue">0</span><span id="homeSeedsValue">0</span><span id="homePresenceValue">0</span></div>
+
 
   <div id="pendingDaysNotice" class="pending-days" hidden>
     <div><strong id="pendingDaysTitle"></strong><p id="pendingDaysSummary"></p></div>
@@ -1728,7 +1758,8 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   </div>
 
   <div class="panel">
-    <h2>Atualização</h2>
+    <h2>Nimbo</h2><label><input type="checkbox" id="nimboQuiet"> Menos falas espontâneas</label><div class="note">Toques e registros continuam recebendo respostas curtas. O Nimbo respeita o movimento reduzido do aparelho.</div>
+  </div><div class="panel"><h2>Atualização</h2>
     <div class="actions"><button class="secondary" id="updateBtn">Verificar atualização</button></div>
     <div class="note" id="installedVersion">Versão instalada: —</div>
   </div>
@@ -1788,7 +1819,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.6.2').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'7.7.0').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -1827,7 +1858,7 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
   const pad=n=>String(n).padStart(2,'0');
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 
-  // V7.6.2 — o dia natural do app vai de 05:00 até 04:59 do dia seguinte.
+  // V7.7.0 — o dia natural do app vai de 05:00 até 04:59 do dia seguinte.
   // O fechamento manual pode antecipar o início do próximo dia de contagem.
   const APP_DAY_CUTOFF_HOUR=5;
   const APP_DAY_RE=/^\d{4}-\d{2}-\d{2}$/;
@@ -2303,6 +2334,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       ...d,...raw,
       version:Math.max(4,Number(raw.version||0)),
       journey:normalizeJourney(raw.journey),
+      actor:normalizeActor(raw.actor),
       presenceTotal:Math.max(0,Number(raw.presenceTotal??raw.resources?.presence??d.presenceTotal)),
       resources:{...d.resources,...(raw.resources||{})},
       buildings:{
@@ -2390,6 +2422,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const merged=normalizeValeState({
       ...primary,
       journey:mergeJourney(local.journey,cloud.journey),
+      actor:mergeActor(local.actor,cloud.actor),
       version:Math.max(Number(local.version||0),Number(cloud.version||0),4),
       economyVersion:Math.max(Number(local.economyVersion||0),Number(cloud.economyVersion||0),2),
       presenceTotal:Math.max(Number(local.presenceTotal||0),Number(cloud.presenceTotal||0),Number(local.resources?.presence||0),Number(cloud.resources?.presence||0)),
@@ -2466,7 +2499,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let changed=false;
     [...smokes,...resists].forEach(x=>{
       if(!x.id){x.id=uuid();changed=true}
-      // Migração V7.6.2: registros antigos passam a ter um dia lógico explícito.
+      // Migração V7.7.0: registros antigos passam a ter um dia lógico explícito.
       // Se não houver override anterior, a classificação usa o corte natural das 05:00.
       if(!validAppDay(x.day)){x.day=key(x.timestamp);changed=true}
     });
@@ -3343,84 +3376,26 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     },duration);
   }
 
-  function petMotion(kind='touch'){
-    const pet=$('petZone');
-    if(!pet)return;
-    pet.classList.remove('pet-touch','pet-celebrate','pet-settle','pet-idle');
-    void pet.offsetWidth;
-    const cls={
-      touch:'pet-touch',
-      resist:'pet-celebrate',
-      close:'pet-celebrate',
-      smoke:'pet-settle',
-      idle:'pet-idle'
-    }[kind]||'pet-touch';
-    pet.classList.add(cls);
-    setTimeout(()=>pet.classList.remove(cls),kind==='idle'?1200:800);
-  }
+  function petMotion(kind='touch'){actorPlay(kind==='resist'?'hop':kind==='idle'?'look':'nod',1000)}
 
   function animatePet(good){
     reactPet(good?'resist':'smoke');
   }
 
   function reactPet(kind){
-    if(kind!=='idle')pauseNimboWalk(kind==='touch'?1200:2600);
-    petMotion(kind);
-    const v=vitality(),b=bond(),f=breath(),r=resilience();
-
-    if(kind==='smoke'){
-      setTemporaryPetExpression('confused',2400);
-      const lines=[
-        'Anotei. Continuamos daqui.',
-        'Tudo bem. O importante é continuar vendo com clareza.',
-        'Registro feito. O caminho ainda está aqui.'
-      ];
-      showPetReaction(lines[Math.floor(Math.random()*lines.length)],'calm',2300);
-      return;
-    }
-
-    if(kind==='resist'){
-      setTemporaryPetExpression('radiant',2400);
-      const lines=[
-        '✦ Eu senti essa escolha.',
-        'Um pouco mais de espaço.',
-        'Essa vontade passou e ficou registrada.'
-      ];
-      showPetReaction(lines[Math.floor(Math.random()*lines.length)],'good',2400);
-      return;
-    }
-
-    if(kind==='close'){
-      setTemporaryPetExpression('happy',2500);
-      showPetReaction('Dia guardado. Amanhã a gente continua.','warm',2500);
-      return;
-    }
-
-    if(kind==='touch'){
-      setTemporaryPetExpression(Math.random()<0.22?'playful':'neutral',2200);
-      let lines;
-      if(v<40){
-        lines=['Hoje eu tô mais quieto. Fica aqui um pouco.','Nem todo dia precisa ser forte.'];
-      }else if(b>=70){
-        lines=['Oi. Eu tava te esperando.','Você voltou. Eu gosto quando você aparece por aqui.','Tô aqui com você.'];
-      }else if(r>=70){
-        lines=['A gente tá ficando firme.','Olha essa postura.'];
-      }else if(f>=70){
-        lines=['Tá sentindo o ar? Tem mais espaço agora.','Hoje eu tô leve.'];
-      }else{
-        lines=['Um passo de cada vez.','Tô prestando atenção com você.','Cada registro deixa seu ritmo mais claro.'];
-      }
-      showPetReaction(lines[Math.floor(Math.random()*lines.length)],b>=60?'warm':'calm',2200);
-      return;
-    }
-
     if(kind==='idle'){
-      setTemporaryPetExpression(Math.random()<0.5?'bored':'neutral',1000);
-      const lines=b>=60
-        ?['…','♪','✦']
-        :v<40?['…','zzz','…']:['…','✦','♪'];
-      showPetReaction(lines[Math.floor(Math.random()*lines.length)],'calm',900);
+      if(Date.now()<actorBusyUntil)return;
+      const level=morningContext().level;
+      const repertoire=level>=3?['peek','hop','wiggle','sway','look']:level>=2?['tilt','stretch','sway','peek','nod']:level===1?['look','tilt','peek','stretch']:['look','settle','listen','tilt'];
+      const options=repertoire.filter(x=>x!==actorLast);
+      actorPlay(options[Math.floor(Math.random()*options.length)],1200);
+      if(!actorState().quiet.value&&Date.now()-actorLastSpeech>90000&&Math.random()<.22){showPetReaction(actorLine('touch'),'calm',2200);actorLastSpeech=Date.now()}
+      return;
     }
+    const choices=kind==='resist'?['hop','wiggle','bow']:kind==='close'?['bow','glow']:kind==='smoke'?['nod','listen']:['tilt','peek','nod','listen'];
+    const options=choices.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]||choices[0],kind==='resist'?1300:950);
+    setTemporaryPetExpression(kind==='resist'?'radiant':kind==='smoke'?'neutral':'happy',2200);
+    showPetReaction(actorLine(kind),kind==='resist'?'good':'warm',2300);actorLastSpeech=Date.now();
   }
 
   function applyPetVisualState(v,b,f,r){
@@ -3466,36 +3441,19 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function walkNimbo(){
-    const walker=$('petWalker');
-    if(!walker||motionReduced())return;
-    if(document.visibilityState!=='visible'||!document.querySelector('#home.tab.active')){
-      scheduleNimboWalk(false);
-      return;
-    }
-
-    const f=petMotionProfile.breath;
-    const range=clamp(28+f*.34,36,58);
-    let target=randomBetween(-range,range);
-    for(let i=0;i<5&&Math.abs(target-nimboWalkX)<24;i++)target=randomBetween(-range,range);
-    if(Math.abs(target-nimboWalkX)<18)target=nimboWalkX>=0?-range:range;
-
-    const distance=Math.abs(target-nimboWalkX);
-    const speed=25+f*.23;
-    const duration=Math.round(clamp(distance/speed*1000,850,2550));
-    const direction=target>=nimboWalkX?1:-1;
-
-    walker.style.setProperty('--nimbo-dir',String(direction));
+    const walker=$('petWalker');if(!walker||motionReduced())return;
+    if(document.visibilityState!=='visible'||!document.querySelector('#home.tab.active')||Date.now()<actorBusyUntil){scheduleNimboWalk(false);return}
+    const energy=clamp(35+petMotionProfile.breath*.35+morningContext().level*7+Math.min(12,resistCount(today())*2),30,90);
+    const range=clamp(($('petZone').clientWidth-110)/2,24,58);
+    let target=randomBetween(-range,range);if(Math.abs(target-nimboWalkX)<15)target=nimboWalkX>=0?-range:range;
+    const duration=Math.round(clamp(Math.abs(target-nimboWalkX)/(20+energy*.30)*1000,900,3200));
+    walker.style.setProperty('--nimbo-dir',target>=nimboWalkX?'1':'-1');
+    walker.style.setProperty('--gaze',target>=nimboWalkX?'2px':'-2px');
+    walker.style.setProperty('--step-speed',energy>70?'.29s':'.42s');
     petWalkTimer=setTimeout(()=>{
-      walker.style.setProperty('--walk-duration',`${duration}ms`);
-      walker.style.setProperty('--walk-x',`${target.toFixed(1)}px`);
-      walker.classList.add('walking');
-      nimboWalkX=target;
-      nimboWalkUntil=Date.now()+duration;
-      petWalkEndTimer=setTimeout(()=>{
-        walker.classList.remove('walking');
-        scheduleNimboWalk(false);
-      },duration+40);
-    },90);
+      walker.style.setProperty('--walk-duration',duration+'ms');walker.style.setProperty('--walk-x',target.toFixed(1)+'px');walker.classList.add('walking');nimboWalkX=target;nimboWalkUntil=Date.now()+duration;
+      petWalkEndTimer=setTimeout(()=>{walker.classList.remove('walking');walker.style.setProperty('--gaze','0px');walker.dataset.action='settle';actorTimer=setTimeout(()=>walker.dataset.action='',500);scheduleNimboWalk(false)},duration+30);
+    },randomBetween(180,340));
   }
 
   function pauseNimboWalk(delay=1500){
@@ -3544,6 +3502,78 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     },delay);
   }
 
+  function normalizeActor(raw={}){return {dawns:raw?.dawns||{},quiet:raw?.quiet||{value:false,at:''}}}
+  function mergeActor(a,b){a=normalizeActor(a);b=normalizeActor(b);const dawns={...a.dawns};for(const [day,v] of Object.entries(b.dawns)){const old=dawns[day];if(!old){dawns[day]=v;continue}const base=old.startedAt<=v.startedAt?old:v;dawns[day]={...base,confirmedMinutes:Math.max(old.confirmedMinutes||0,v.confirmedMinutes||0),endedAt:[old.endedAt,v.endedAt].filter(Boolean).sort()[0]||null}}
+    return {dawns,quiet:a.quiet.at>=b.quiet.at?a.quiet:b.quiet};}
+  function actorState(){if(!vale.actor)vale.actor=normalizeActor();return vale.actor}
+  // Comportamento derivado dos registros. Não concede XP nem grava a cada tick.
+  // O ciclo natural (05h) independe do fechamento antecipado do contador.
+  function morningContext(now=new Date()){
+    const nowMs=+now,day=key(now),earliest=addAppDays(day,-28);
+    const valid=e=>Number.isFinite(+new Date(e.timestamp))&&+new Date(e.timestamp)<=nowMs;
+    const records=smokes.filter(valid),urges=resists.filter(valid);
+    const current=records.filter(e=>key(e.timestamp)===day).sort((a,b)=>+new Date(a.timestamp)-+new Date(b.timestamp));
+    const firsts=new Map();
+    for(const e of records){
+      const d=key(e.timestamp);if(d>=day||d<earliest)continue;
+      const time=+new Date(e.timestamp);if(!firsts.has(d)||time<firsts.get(d))firsts.set(d,time);
+    }
+    // Horário local relativo às 05h, inclusive registros após meia-noite.
+    const minutes=time=>{const d=new Date(time);return ((d.getHours()-5+24)%24)*60+d.getMinutes()+d.getSeconds()/60};
+    const samples=[...firsts].sort((a,b)=>b[0].localeCompare(a[0])).slice(0,14).map(x=>minutes(x[1])).sort((a,b)=>a-b);
+    const median=xs=>xs.length%2?xs[(xs.length-1)/2]:(xs[xs.length/2-1]+xs[xs.length/2])/2;
+    const reference=samples.length>=3?median(samples):null;
+    const spread=reference===null?60:Math.max(30,median(samples.map(x=>Math.abs(x-reference)).sort((a,b)=>a-b)));
+    // Depois do primeiro cigarro, conserva o contexto alcançado até aquele registro.
+    const observedAt=current.length?+new Date(current[0].timestamp):nowMs;
+    const delay=reference===null?null:minutes(observedAt)-reference;
+    const timeLevel=delay===null||delay<0?0:delay<spread?1:delay<spread*2?2:3;
+    const count=urges.filter(e=>key(e.timestamp)===day).length;
+    const urgeLevel=count>=3?3:count>=1?2:0;
+    return {level:Math.max(timeLevel,urgeLevel),timeLevel,delay,reference,sampleCount:samples.length,resists:count,hasSmoked:current.length>0};
+  }
+  function saveActor(){vale.updatedAt=new Date().toISOString();write(VALE_KEY,vale);scheduleSync()}
+  function refreshMorningBehavior(){
+    const pet=$('petZone');if(!pet)return;
+    pet.dataset.morning=String(morningContext().level);
+    if(typeof petExpressionOverride!=='undefined'&&!petExpressionOverride){
+      const state=determineNimboExpression(vitality(),bond(),breath(),resilience());
+      setPetExpression(state.expression);
+      const label=$('petState');if(label)label.textContent=state.moodTag;
+    }
+  }
+  $('nimboQuiet').onchange=e=>{actorState().quiet={value:e.target.checked,at:new Date().toISOString()};saveActor()};
+  let actorTimer=null,actorBusyUntil=0,actorLast='',actorLastLine='',actorLastSpeech=0;
+  const ACTOR_GESTURES=['look','tilt','stretch','settle','nod','sway','peek','hop','bow','wiggle','glow','listen'];
+  function actorPlay(kind,duration=1000){
+    const walker=$('petWalker');if(!walker)return;
+    clearTimeout(actorTimer);pauseNimboWalk(duration+randomBetween(1600,3200));
+    walker.dataset.action=kind;actorLast=kind;actorBusyUntil=Date.now()+duration;
+    actorTimer=setTimeout(()=>{walker.dataset.action='';actorBusyUntil=0},duration);
+  }
+  function actorLine(kind){
+    const plan=ensureJourney().plan,stage=ensureJourney().stage.value;
+    let lines=kind==='smoke'?['Anotado. Seguimos daqui.','Registro guardado.','Estou aqui.']:kind==='resist'?['Uma vontade atravessada.','Essa pausa ficou.','Mais espaço no seu dia.']:kind==='close'?['Dia guardado.','Um dia de cada vez.']:['Oi. Estou aqui.','Uma pausa juntos?','Sem pressa.'];
+    if(kind==='touch'){
+      if(plan.alternative?.value?.trim()){
+        lines.push('Quer rever sua alternativa?');
+        const alternative=plan.alternative.value.toLowerCase();
+        if(/água|agua/.test(alternative))lines.push('A água está no seu plano.');
+        if(/caminh|passe/.test(alternative))lines.push('Quer tentar a caminhada do plano?');
+        if(/convers|ligar/.test(alternative))lines.push('Que tal a conversa que planejou?');
+      }
+      if(plan.support?.value?.trim())lines.push('Seu plano tem apoio.');
+      if(plan.reason?.value?.trim())lines.push('Seu motivo continua lá.');
+      if(stage==='returning')lines.push('Bom ter você por aqui.');
+      if(stage==='stopped')lines.push('Como está sendo hoje?');
+      if(resistCount(today())>0)lines.push(`${resistCount(today())} vontade${resistCount(today())===1?'':'s'} atravessada${resistCount(today())===1?'':'s'} hoje.`);
+      const morning=morningContext();
+      if(!morning.hasSmoked&&morning.timeLevel>=1)lines.push('Seu primeiro registro costuma vir antes.');
+      if(morning.hasSmoked&&morning.timeLevel>=1)lines.push('O primeiro registro veio mais tarde hoje.');
+    }
+    const available=lines.filter(x=>x!==actorLastLine);actorLastLine=available[Math.floor(Math.random()*available.length)]||lines[0];return actorLastLine;
+  }
+
   function ensureNimbo(){
     vale.nimbo={...defaultNimboState(),...(vale.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(vale.nimbo?.lastCareAt||{})}};
     return vale.nimbo;
@@ -3572,45 +3602,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   function determineNimboExpression(v,b,f,r){
-    const avg=(v+b+f+r)/4;
-    let expression='neutral';
-    let moodTag='atento';
-
-    const lastSmoke=smokes.length?smokes[smokes.length-1]:null;
-    const lastResist=resists.length?resists[resists.length-1]:null;
-    const latest=!lastSmoke?lastResist:!lastResist?lastSmoke:
-      (new Date(lastSmoke.timestamp)>new Date(lastResist.timestamp)?lastSmoke:lastResist);
-    const latestType=latest===lastSmoke?'smoke':'resist';
-    const latestAge=latest?Math.max(0,(Date.now()-new Date(latest.timestamp).getTime())/60000):Infinity;
-
-    if(latestAge<=8&&latestType==='smoke'){expression='confused'; moodTag='se recompondo';}
-    else if(latestAge<=8&&latestType==='resist'){expression='radiant'; moodTag='confiante';}
-    else if(v<30||f<26){expression='sleepy'; moodTag='sonolento';}
-    else if(v<42||f<38){expression='tired'; moodTag='cansado';}
-    else if(b<24){expression='bored'; moodTag='quieto';}
-    else if(r>=72&&v>=50){expression='radiant'; moodTag='firme';}
-    else if(f>=68&&v>=48){expression='playful'; moodTag='leve';}
-    else if(avg>=62){expression='happy'; moodTag='bem humorado';}
-
-    return {expression,moodTag};
+    const hour=new Date().getHours(),last=resists[resists.length-1];
+    if(last&&Date.now()-new Date(last.timestamp).getTime()>=0&&Date.now()-new Date(last.timestamp).getTime()<120000)return {expression:'radiant',moodTag:'confiante'};
+    if(hour>=22||hour<5)return {expression:'sleepy',moodTag:'tranquilo'};
+    const morning=morningContext();
+    if(morning.level>=3)return {expression:'playful',moodTag:'animado'};
+    if(morning.level>=2)return {expression:'happy',moodTag:'confiante'};
+    if(morning.level===1)return {expression:'happy',moodTag:'curioso'};
+    return {expression:'neutral',moodTag:b>=50?'à vontade':'atento'};
   }
 
-  function ambientNimboLine(){
-    if(!observed().length)return 'Oi. Eu sou o Nimbo. Vamos descobrir seu ritmo juntos.';
-    if(!game.baselineLocked)return 'Ainda estou conhecendo seu ritmo.';
-    const v=vitality(),b=bond(),f=breath(),r=resilience();
-    if(v<35)return 'Hoje pede um pouco mais de gentileza. Um registro de cada vez.';
-    if(f<38)return 'Seu fôlego se constrói aos poucos. Só precisamos continuar observando.';
-    if(b<25)return 'Ainda estamos criando vínculo. Cada registro me ajuda a entender seu ritmo.';
-    if(r<35)return 'Uma vontade não precisa virar ordem. Ela também pode só passar.';
-    const lines=[
-      'Entre uma pressão e outra, ainda existe espaço para respirar.',
-      'Nem toda vontade manda. Algumas apenas passam.',
-      'Você registra. Eu acompanho o caminho com você.',
-      'O que importa agora é enxergar o próximo passo.'
-    ];
-    return lines[Math.floor(Math.random()*lines.length)];
-  }
+  function ambientNimboLine(){return ''}
 
   function setPetExpression(expr){
     const pet=$('petZone');
@@ -3645,7 +3647,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       };
       setPetExpression(refuseReason==='sono'?'sleepy':(Math.random()<0.5?'confused':'bored'));
       petMotion('touch');
-      showPetReaction(messages[kind][Math.floor(Math.random()*messages[kind].length)],'calm',2200);
+      showPetReaction(refuseReason==='sono'?'Agora, um descanso.':refuseReason==='cheio'?'Já estou satisfeito.':refuseReason==='limpo'?'Já estou limpinho.':'Daqui a pouco?','calm',2200);
       $('petMessage').textContent='Nimbo também tem hora e humor próprios.';
       render();
       return;
@@ -3669,8 +3671,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     setPetExpression(gain.expression);
     petMotion((kind==='walk'||kind==='play')?'resist':'touch');
-    showPetReaction(gain.lines[Math.floor(Math.random()*gain.lines.length)],gain.tone,2200);
-    $('petMessage').textContent={feed:'Nimbo aceitou a comida e ficou um pouco mais presente.',bath:'Nimbo tomou banho e ficou mais leve.',walk:'Nimbo voltou do passeio com outra energia.',play:'Nimbo ficou mais animado depois de brincar.',affection:'Nimbo relaxou com o carinho.'}[kind];
+    showPetReaction({feed:'Que bom.',bath:'Prontinho.',walk:'Vamos passear.',play:'Vamos brincar!',affection:'Gostei do carinho.'}[kind],gain.tone,2200);
+    actorPlay(kind==='play'?'wiggle':kind==='walk'?'hop':'nod',1100);
+    $('petMessage').textContent='';
     scheduleSync();
     render();
   }
@@ -4070,6 +4073,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     smokes.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     resists.sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
     maybeBaseline();
+    refreshMorningBehavior();
+    $('nimboQuiet').checked=actorState().quiet.value;
 
     const t=today();
     const st=smokes.filter(x=>eventDay(x)===t);
@@ -4453,6 +4458,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     smokes.push({id:uuid(),timestamp:new Date().toISOString(),day});
     write(SMOKE_KEY,smokes);
     claimDailyAwarenessReward(day);
+    refreshMorningBehavior();
     animatePet(false);
     render();
     toast('Cigarro registrado');
@@ -4979,6 +4985,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
     setTimeout(()=>checkForUpdate(),1500);
   }
+
+  if(window.matchMedia){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');reduced.addEventListener?.('change',()=>{pauseNimboWalk();if(!motionReduced())scheduleNimboWalk(true)})}
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible'){clearTimeout(actorTimer);actorBusyUntil=0;$('petWalker').dataset.action=''}else{refreshMorningBehavior();scheduleNimboWalk(true)}});
+  setInterval(()=>{if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active'))refreshMorningBehavior()},15000);
 
   // Atualizações periódicas não devem reconstruir o mapa enquanto o usuário o explora.
   // A V7.5 reconstruía o Vale a cada 5 s, causando piscadas/reset visual do mapa.
