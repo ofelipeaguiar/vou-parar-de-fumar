@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="8.1.0">
+<meta name="app-version" content="8.2.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1644,7 +1644,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 .craving-review{position:relative;z-index:8;width:100%;max-width:420px;margin:4px auto 0;padding:15px;border-radius:18px;background:rgba(7,22,38,.90);border:1px solid rgba(114,222,241,.19);backdrop-filter:blur(7px)}
 .craving-review small{font:8px var(--pixel);letter-spacing:1px;color:#87d9b0}.craving-review h3{font-size:21px;margin:7px 0 5px}.craving-review p{font-size:11px;line-height:1.45;color:#9db0c0;margin:0}
-.craving-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}.craving-outcomes button{min-height:48px;border:1px solid rgba(118,177,230,.20);background:#11263d;color:#e7eef4;border-radius:11px;font-size:10px;font-weight:750;padding:8px 5px}.craving-outcomes button:first-child{border-color:rgba(98,233,143,.30);color:#bdf5cd}
+.craving-outcomes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:12px}.craving-outcomes button{min-height:48px;border:1px solid rgba(118,177,230,.20);background:#11263d;color:#e7eef4;border-radius:11px;font-size:10px;font-weight:750;padding:8px 5px}.craving-outcomes button:first-child{border-color:rgba(98,233,143,.30);color:#bdf5cd}
 .craving-review-actions{display:flex;gap:7px;justify-content:center;margin-top:12px;flex-wrap:wrap}.craving-review-actions button{min-height:42px;border:1px solid rgba(118,177,230,.22);background:#12283f;color:#d9e7ef;border-radius:11px;padding:9px 12px;font-size:11px;font-weight:700}.craving-review-actions .craving-review-primary{background:#dce3c5;color:#1f3932;border-color:transparent}
 .craving-review-note{margin-top:9px!important;font-size:9px!important;color:#8499aa!important}
 .craving-hero.reviewing{min-height:500px;padding-top:28px;display:flex;flex-direction:column;justify-content:center}.craving-hero.reviewing .craving-intro{display:none}.craving-hero.reviewing .craving-pet{width:250px!important;height:215px!important}.craving-hero.reviewing .craving-pet .pet-bob{width:185px!important;height:185px!important}
@@ -1664,6 +1664,27 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
   .craving-hero.playing,.craving-hero.reviewing{min-height:420px}.craving-hero.playing .craving-pet{height:265px!important}.craving-hero.playing .craving-pet .pet-bob{width:205px!important;height:205px!important}
 }
 @media(prefers-reduced-motion:reduce){.craving-pet .pet-bob,.craving-pet[class*="react-"] .pet-bob,.craving-spark{animation:none!important}}
+
+
+/* =========================================================
+   V8.2 — NIMBO IA / ORQUESTRADOR DE CENAS
+   A IA só dirige fala + estado + expressão + gesto.
+   Regras de XP, atributos e desfechos continuam 100% locais.
+   ========================================================= */
+.pet-zone.nimbo-ai-scene{--nimbo-ai-intensity:.55}
+.pet-zone.nimbo-ai-glow .pet-svg{
+  filter:drop-shadow(0 12px 9px rgba(0,0,0,.23)) drop-shadow(0 0 24px var(--nimbo-glow)) brightness(1.08)
+}
+.pet-zone.nimbo-ai-scene .pet-sway{will-change:transform}
+.pet-reaction[data-source="ai"]{border-color:rgba(182,156,255,.30);box-shadow:0 8px 24px rgba(0,0,0,.24),0 0 18px rgba(182,156,255,.06)}
+.craving-play-reaction[data-source="ai"]{border-color:rgba(182,156,255,.27);box-shadow:0 8px 22px rgba(0,0,0,.20),0 0 16px rgba(182,156,255,.06)}
+@media(prefers-reduced-motion:reduce){.pet-zone.nimbo-ai-scene .pet-sway{transform:none!important}}
+.pet-zone.nimbo-ai-scene[data-ai-intent="celebrate"] .pet-svg{filter:drop-shadow(0 12px 9px rgba(0,0,0,.23)) drop-shadow(0 0 20px var(--nimbo-glow))}
+.pet-zone.nimbo-ai-scene[data-ai-intent="support"] .pet-svg,.pet-zone.nimbo-ai-scene[data-ai-intent="company"] .pet-svg{filter:drop-shadow(0 12px 9px rgba(0,0,0,.23)) saturate(.98)}
+.craving-play-reaction.good{border-color:rgba(98,233,143,.34)}
+.craving-play-reaction.warm{border-color:rgba(255,214,107,.26)}
+.craving-play-reaction.calm{border-color:rgba(114,222,241,.24)}
+
 
 </style>
 </head>
@@ -1871,10 +1892,9 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
       <h3 id="cravingReviewTitle">E agora?</h3>
       <p id="cravingReviewCopy">Não precisa dar uma nota. Só percebe se alguma coisa mudou.</p>
       <div class="craving-outcomes" id="cravingOutcomeButtons">
-        <button type="button" data-craving-outcome="resisted">Quis fumar, mas não fumei</button>
+        <button type="button" data-craving-outcome="passed">Passou</button>
         <button type="button" data-craving-outcome="reduced">Diminuiu</button>
         <button type="button" data-craving-outcome="strong">Ainda está forte</button>
-        <button type="button" data-craving-outcome="smoked">Fumei agora</button>
       </div>
       <div class="craving-review-actions" id="cravingReviewActions" hidden>
         <button type="button" class="craving-review-primary" id="cravingReviewHome">Voltar à Home</button>
@@ -1888,7 +1908,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
   <div class="craving-support-list" id="cravingSupportList">
     <button class="craving-support-btn primary" id="cravingStayBtn" type="button"><span class="support-ico">🍃</span><span><strong>Ficar aqui por 2 minutos</strong><small>Brinque com o Nimbo enquanto o tempo passa.</small></span><span class="support-arrow">›</span></button>
-    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Brincar por 1 minuto</strong><small>Toque no Nimbo para mudar o foco por um instante.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Jogar um minuto</strong><small>Uma brincadeira curta com o Nimbo para mudar o foco.</small></span><span class="support-arrow">›</span></button>
     <button class="craving-support-btn" id="cravingMessageBtn" type="button"><span class="support-ico">💬</span><span><strong>Ler uma mensagem</strong><small>Uma ideia curta da Jornada para este momento.</small></span><span class="support-arrow">›</span></button>
   </div>
 
@@ -1899,7 +1919,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
     <button type="button" id="cravingMessageStay">Ficar com o Nimbo por 2 minutos</button>
   </div>
 
-  <div class="craving-foot" id="cravingFoot"><button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Voltar e registrar o que acontecer ›</button></div>
+  <div class="craving-foot" id="cravingFoot"><button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Se eu fumar depois, tudo bem: ainda quero registrar ›</button></div>
 </section>
 
 <section id="vale" class="tab">
@@ -2071,7 +2091,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.1.0').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.2.0').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2523,7 +2543,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   // Conteúdo de apoio nunca depende de XP. Lore e descobertas podem continuar progressivos.
   const J_ALWAYS_AVAILABLE=new Set(['pause','reason','triggers','plan','support','returning','benefits']);
 
-  // V8.1: episódios de apoio são registros sem recompensa. Só a confirmação explícita cria um evento de resistência.
+  // Arquitetura preparada para o futuro botão “Tô com vontade”.
+  // Nesta versão não há gatilho visível: apenas modelo, caminhos e registro de prática.
   const CRAVING_SUPPORT_PATHS={
     nimbo:{id:'nimbo',label:'Ficar com o Nimbo',minutes:2,kind:'presença',prompt:'Fica aqui comigo um pouco. A vontade pode existir sem decidir por você.'},
     distract:{id:'distract',label:'Distrair a cabeça',minutes:3,kind:'distração',prompt:'Vamos ocupar alguns minutos e depois olhar de novo para a vontade.'},
@@ -2547,7 +2568,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   CHRONICLES.bridge.text=CHRONICLES.bridge.text.replace('A Casa da Cartografia revelou','O mapa do Vale revelou');
   Object.values(ITEMS).forEach(item=>item.bonus='Memória de uma descoberta no Vale.');
   const J_FAMILIES=[
-    {id:'practice',name:'Pausas confirmadas',icon:'◐',steps:[1,3,5,10,20,35,50,100],value:()=>practiceSummary().total},
+    {id:'practice',name:'Espaços praticados',icon:'◐',steps:[1,3,5,10,20,35,50,100],value:()=>practiceSummary().total},
     {id:'resists',name:'Vontades atravessadas',icon:'✦',steps:[1,3,5,10,20,35,50,100],value:()=>resists.length},
     {id:'days',name:'Dias confirmados',icon:'☀',steps:[1,3,7,14,30,60,100],value:()=>completedDays().length},
     {id:'plan',name:'Plano pessoal',icon:'✎',steps:[1,2,3,4,7],value:()=>Object.values(ensureJourney().plan).filter(x=>x.value?.trim()).length},
@@ -2556,7 +2577,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   ];
   J_FAMILIES.forEach(f=>f.steps.forEach(n=>ACHIEVEMENTS.push({
     id:`j_${f.id}_${n}`,icon:f.icon,name:`${f.name} · ${n}${f.id==='reduction'?'%':''}`,
-    desc:f.id==='practice'?'Confirmações explícitas de que você quis fumar, mas não fumou, após usar o apoio.':f.id==='days'||f.id==='zero'?'Dias acumulados; não precisam ser consecutivos.':f.id==='reduction'?'Referência confirmada e ao menos três dias completos recentes.':'Um marco do seu caminho.',
+    desc:f.id==='practice'?'Prática acumulada; o desfecho não apaga o espaço criado.':f.id==='days'||f.id==='zero'?'Dias acumulados; não precisam ser consecutivos.':f.id==='reduction'?'Referência confirmada e ao menos três dias completos recentes.':'Um marco do seu caminho.',
     rewardPresence:0,condition:()=>f.value()>=n
   })));
 
@@ -3084,8 +3105,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         ...smokes.filter(x=>eventDay(x)===day).map(x=>({...x,type:'smoke'})),
         ...resists.filter(x=>eventDay(x)===day).map(x=>({...x,type:'resist'}))
       ].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
-
-
       if(events.some(event=>event.type==='resist'))score.bond+=2;
       let resistIndex=0;
       for(const event of events){
@@ -3100,12 +3119,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
           const tier=breathTierTotal(gap,reference.intervalMinutes);
           const delta=Math.max(0,tier-intervalAwarded);
           score.breath+=Math.round(delta);
-
         }
         lastSmokeAt=at;
         intervalAwarded=0;
       }
-
 
 
       const closed=isClosed(day);
@@ -3127,7 +3144,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         score.breath+=firstDelayReward(firstCigMinuteForDay(day),reference.firstCigMinute,1);
 
         // V8.1: registros de cigarro não descontam Fôlego.
-
 
         if(baselineLocked&&day>baselineEndDay){
           const dayGaps=globalSmokeGapsEndingOnDays([day]);
@@ -3722,7 +3738,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       reduced:rows.filter(x=>x.outcome==='reduced').length,
       usedAlternative:confirmed.filter(x=>x.path&&x.path!=='nimbo').length};
   }
-
   function beginCravingPractice({path='nimbo',intensity=null,source='future-craving-button'}={}){
     if(!CRAVING_SUPPORT_PATHS[path])path='nimbo';
     const at=new Date().toISOString(),row={id:uuid(),day:today(),startedAt:at,updatedAt:at,path,source,intensityBefore:intensity!==null&&intensity!==''&&Number.isFinite(Number(intensity))?Number(intensity):null,outcome:'open',endedAt:null,intensityAfter:null,linkedEventId:null};
@@ -3748,7 +3763,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     {title:'Você veio antes do automático.',copy:'Isso já interrompeu a sequência por um instante. Sem promessa grande: só este momento.'},
     {title:'Não precisa resolver tudo agora.',copy:'A vontade pode estar aqui sem virar uma decisão neste segundo. Vamos esperar um pouco juntos.'},
     {title:'Dois minutos.\\nNada além disso.',copy:'Sem meta enorme e sem palestra. Só um intervalo pequeno entre a vontade e a próxima ação.'},
-    {title:'Pru. Eu vi você chegando.',copy:'Fica aqui comigo um instante. A próxima escolha ainda não aconteceu.'},
+    {title:'Eu vi você chegando.',copy:'Fica aqui comigo um instante. A próxima escolha ainda não aconteceu.'},
     {title:'O caminho continua aqui.',copy:'Um momento difícil não apaga o que veio antes. Agora basta criar espaço para o próximo passo.'},
     {title:'A vontade pode fazer barulho.',copy:'Você não precisa fazer nada para ela sumir imediatamente. Podemos observar como ela muda.'},
     {title:'Antes de escolher, presença.',copy:'O que apareceu não dependeu de você. O próximo pequeno gesto ainda pode ser escolhido.'}
@@ -3762,7 +3777,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     {title:'Cuide do que depende de você',text:'A vontade surgir não foi uma escolha. Ficar aqui por alguns instantes, observar e escolher de novo pode ser.'},
     {title:'A próxima escolha ainda não aconteceu',text:'Não é preciso prometer “nunca mais” neste minuto. Existe apenas a decisão que ainda não foi tomada.'}
   ];
-  const CRAVING_TAP_LINES=['Pru!','Boop.','Hehe. ✨','Tô aqui.','Você de novo. Ainda bem.','Isso faz cócega.','Um pixel de cada vez.','Prrr.','Sem pressa.','Só esse instante.','👀','Pausa dramática... pronto.','Achei você.','Mais um toque?'];
+  const CRAVING_TAP_LINES=['Hm.','Boop.','Hehe. ✨','Tô aqui.','Você de novo. Ainda bem.','Isso faz cócega.','Um pixel de cada vez.','Tô aqui.','Sem pressa.','Só esse instante.','👀','Pausa dramática... pronto.','Achei você.','Mais um toque?'];
   let cravingLastIntro=-1,cravingCurrentPracticeId=null,cravingPendingLink=null,cravingTimer=null,cravingTimerEndsAt=0,cravingTimerDuration=120,cravingTapCount=0,cravingReactionTimer=null;
 
   function cravingPracticeRow(){return cravingCurrentPracticeId?ensureJourney().practices.find(x=>x.id===cravingCurrentPracticeId):null}
@@ -3807,8 +3822,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const intro=pickCravingIntro();$('cravingTitle').innerHTML=intro.title.replace(/\\n/g,'<br>');$('cravingCopy').textContent=intro.copy;
     document.body.classList.add('craving-mode-active');document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id==='craving'));
     window.scrollTo({top:0,behavior:'auto'});checkAchievements();render();
+    dispatchNimboReaction('craving_enter',{surface:'craving'});
   }
   function closeCravingMode({outcome='left',keepForNextEvent=false}={}){
+    cancelNimboScene('craving',{restore:false,invalidate:true});
     clearInterval(cravingTimer);cravingTimer=null;
     if(cravingPracticeOpen()&&!keepForNextEvent)completeCravingPractice(cravingCurrentPracticeId,{outcome});
     if(keepForNextEvent&&cravingCurrentPracticeId)cravingPendingLink={id:cravingCurrentPracticeId,until:Date.now()+30*60*1000};
@@ -3831,9 +3848,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;
     const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session');hero.classList.remove('playing');hero.classList.add('reviewing');
     $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=false;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;$('cravingReviewTitle').textContent='E agora?';$('cravingReviewCopy').textContent='Não precisa dar uma nota. Só percebe se alguma coisa mudou.';$('cravingReviewNote').textContent='Só “Quis fumar, mas não fumei” registra uma vitória e gera reconhecimento. As outras respostas não geram pontos.';setCravingExpression('happy');
+    dispatchNimboReaction('craving_end',{surface:'craving',cravingOutcome:'unknown'});
   }
   function reactCravingNimbo(){
-    if(!$('cravingHero').classList.contains('playing'))return;const pet=$('cravingNimbo');cravingTapCount++;
+    if(!$('cravingHero').classList.contains('playing'))return;
+    cancelNimboScene('craving',{restore:false,invalidate:true});
+    const pet=$('cravingNimbo');cravingTapCount++;
     const motions=['react-hop','react-wiggle','react-squish','react-tilt'],exprs=['happy','playful','wink','delighted','wry'];const motion=motions[Math.floor(Math.random()*motions.length)],expr=exprs[Math.floor(Math.random()*exprs.length)];
     motions.forEach(c=>pet.classList.remove(c));void pet.offsetWidth;pet.classList.add(motion);setCravingExpression(expr);setTimeout(()=>pet.classList.remove(motion),700);setTimeout(()=>{if($('cravingHero').classList.contains('playing'))setCravingExpression('happy')},1250);
     let line=CRAVING_TAP_LINES[Math.floor(Math.random()*CRAVING_TAP_LINES.length)];if(cravingTapCount===5)line='Cinco toques. Eu sobrevivi.';if(cravingTapCount===10)line='Dez. Tá, isso já é uma brincadeira.';if(cravingTapCount===20)line='Você é persistente. Eu respeito.';
@@ -3848,36 +3868,38 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
   function handleCravingOutcome(outcome){
     const row=cravingPracticeRow();if(!row||row.linkedEventId)return;
-    if(outcome==='resisted')registerResistedEvent(row);
-    else if(outcome==='smoked')registerSmokeEvent(row);
+    if(outcome==='resisted')registerResistedEvent(row,{react:false});
+    else if(outcome==='smoked')registerSmokeEvent(row,{react:false});
     else completeCravingPractice(row.id,{outcome});
     $('cravingOutcomeButtons').hidden=true;$('cravingReviewActions').hidden=false;
-    $('cravingMoreMinute').hidden=outcome==='resisted'||outcome==='smoked';
+    $('cravingMoreMinute').hidden=['passed','resisted','smoked'].includes(outcome);
     const copy={
+      passed:['Ela passou.','Você percebeu a mudança e registrou apenas o desfecho da prática.','Isso não cria XP nem atributos; use “Quis fumar, mas não fumei” quando quiser registrar uma resistência.','happy'],
       resisted:['Vontade registrada.','Você quis fumar, mas não fumou. Seu registro já está na Home; não precisa repetir.','Esse momento fica na sua história.','delighted'],
       reduced:['Ela diminuiu.','Você percebeu uma mudança. Podemos continuar ou experimentar outra coisa.','Sem pontos ou mudança de atributos.','happy'],
       strong:['Eu sigo com você.','A vontade pode continuar. Podemos tentar outra estratégia ou buscar seu apoio.','Sem pontos ou mudança de atributos.','neutral'],
       smoked:['Registrado. Seguimos daqui.','Este cigarro não apaga seu caminho. O Nimbo continua ao seu lado.','O cigarro já está na Home; não precisa registrar novamente.','neutral']
-    }[outcome];
-    if(!copy)return;
+    }[outcome];if(!copy)return;
     $('cravingReviewTitle').textContent=copy[0];$('cravingReviewCopy').textContent=copy[1];$('cravingReviewNote').textContent=copy[2];setCravingExpression(copy[3]);
+    const aiEvent=outcome==='resisted'&&actorMilestone('resist',{consume:false})?'milestone':outcome==='smoked'?'smoke':'craving_end';
+    dispatchNimboReaction(aiEvent,{surface:'craving',cravingOutcome:outcome});
   }
-  function registerResistedEvent(row=null){
+  function registerResistedEvent(row=null,{react=true}={}){
     if(row?.linkedEventId)return resists.find(e=>e.id===row.linkedEventId)||null;
     const event={id:row?.id||uuid(),timestamp:new Date().toISOString(),day:today()};
     if(resists.some(e=>e.id===event.id))return resists.find(e=>e.id===event.id);
     resists.push(event);write(RESIST_KEY,resists);
     if(row)completeCravingPractice(row.id,{outcome:'resisted',linkedEventId:event.id});
-    claimDailyAwarenessReward(event.day);animatePet(true);progressionCache=null;render();checkAchievements();scheduleSync();
+    claimDailyAwarenessReward(event.day);progressionCache=null;render();if(react)animatePet(true);checkAchievements();scheduleSync();
     return event;
   }
-  function registerSmokeEvent(row=null){
+  function registerSmokeEvent(row=null,{react=true}={}){
     if(row?.linkedEventId)return smokes.find(e=>e.id===row.linkedEventId)||null;
     const event={id:row?.id||uuid(),timestamp:new Date().toISOString(),day:today()};
     if(smokes.some(e=>e.id===event.id))return smokes.find(e=>e.id===event.id);
     smokes.push(event);write(SMOKE_KEY,smokes);
     if(row)completeCravingPractice(row.id,{outcome:'smoked',linkedEventId:event.id});
-    refreshMorningBehavior();animatePet(false);progressionCache=null;render();toast('Cigarro registrado');checkAchievements();scheduleSync();
+    refreshMorningBehavior();progressionCache=null;render();if(react)animatePet(false);toast('Cigarro registrado');checkAchievements();scheduleSync();
     return event;
   }
 
@@ -3975,15 +3997,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
   function jHistoryTrendHtml(){
     const days=uniq([...completedDays().slice(-6),today()]).sort().slice(-7),maxSmoke=Math.max(1,...days.map(smokeCount)),maxResist=Math.max(1,...days.map(resistCount));
-    const chartMax=Math.max(maxSmoke,maxResist);
     if(!days.length)return'<div class="j-empty">Seus registros vão formar a evolução aqui.</div>';
-    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/chartMax*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/chartMax*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}${isClosed(d)?'':' · parcial'}</span></div>`}).join('')}<p class="j-layer-note">Barras na mesma escala: cigarros / vontades confirmadas. Dias sem informação não representam zero.</p></div>`;
-  }
-  function jCravingHistoryHtml(){
-    const rows=cravingPractices().slice(-7).reverse();
-    if(!rows.length)return '<p class="j-note">Os episódios de vontade aparecerão aqui. Abrir o apoio não gera pontos.</p>';
-    const labels={open:'Sem desfecho informado',left:'Encerrou o apoio',unknown:'Sem desfecho informado',reduced:'Diminuiu',strong:'Ainda forte',smoked:'Cigarro registrado',resisted:'Sem fumar — confirmado'};
-    return '<h4>Momentos de vontade</h4><p class="j-note">Histórico de apoio; somente a confirmação de não fumar gera reconhecimento.</p>'+rows.map(row=>'<div class="j-row"><strong>'+jEsc(labels[row.outcome]||labels.unknown)+'</strong><span>'+jEsc(new Date(row.startedAt).toLocaleString('pt-BR'))+' · '+jEsc(CRAVING_SUPPORT_PATHS[row.path]?.kind||'apoio')+'</span></div>').join('');
+    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/maxSmoke*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/maxResist*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}</span></div>`}).join('')}<p class="j-layer-note">Barras: cigarros / vontades atravessadas. Tendência, não nota.</p></div>`;
   }
   function jHistoryHtml(){
     const j=ensureJourney(),e=progressionEngine(),ps=practiceSummary(),planFields=[
@@ -3997,7 +4012,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     ];
     const baseline=e.baseline.smokes===null?'—':e.baseline.smokes.toFixed(1).replace('.',',');
     const avg=avg7();
-    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Dados de consumo ficam separados das habilidades que você está treinando.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>baseline observada, não meta moral</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>histórico preservado, sem exigência de sequência</span></div></div>${jHistoryTrendHtml()}${jCravingHistoryHtml()}</section><section class="j-explore-block"><h3>O que você está treinando</h3><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>apoio usado ao longo do caminho</span></div></div></section><details id="jPlan" open><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><section class="j-explore-block"><h3>Atributos do Nimbo</h3><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></section>`;
+    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Dados de consumo ficam separados das habilidades que você está treinando.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>baseline observada, não meta moral</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>histórico preservado, sem exigência de sequência</span></div></div>${jHistoryTrendHtml()}</section><section class="j-explore-block"><h3>O que você está treinando</h3><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>apoio usado ao longo do caminho</span></div></div></section><details id="jPlan" open><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><section class="j-explore-block"><h3>Atributos do Nimbo</h3><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></section>`;
   }
   let jView='daily',jReaderId=null,jPlanDirty=false;
   function renderJourneyV7(){
@@ -4081,7 +4096,6 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let level=1;
     thresholds.forEach((t,i)=>{if(xp>=t)level=i+1});
     game.bestReduction=Math.max(0,Number(e.reduction||0));
-    level=Math.max(level,Math.min(5,Number(game.maxLevel)||1));
     game.maxLevel=level;
     write(GAME_KEY,game);
     return{xp,level,thresholds};
@@ -4138,9 +4152,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function setTemporaryPetExpression(expression,duration=2200){
     clearTimeout(petExpressionTimer);
     petExpressionOverride=expression;
-    setPetExpression(expression);
+    if(!nimboSceneIsActive('home'))setPetExpression(expression);
     petExpressionTimer=setTimeout(()=>{
       petExpressionOverride=null;
+      if(nimboSceneIsActive('home'))return;
       const current=determineNimboExpression(vitality(),bond(),breath(),resilience());
       setPetExpression(current.expression);
     },duration);
@@ -4149,16 +4164,17 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function petMotion(kind='touch'){actorPlay(kind==='resist'?'hop':kind==='idle'?'look':'nod',1000)}
 
   function animatePet(good){
-    reactPet(good?'resist':'smoke');
+    const eventType=good?chooseNimboEvent('resist'):'smoke';
+    dispatchNimboReaction(eventType,{surface:'home'});
   }
 
   function reactPet(kind){
+    if(kind==='idle'&&nimboSceneIsActive('home'))return;
     if(kind==='idle'){
       if(Date.now()<actorBusyUntil)return;
       const level=morningContext().level,hour=actorClock().hour,recovering=false;
       const perf=dailyPerformanceProfile();
-      const repertoire=recovering?['shrug','listen','tilt']
-        :hour>=22||hour<6?['yawn','settle','listen']
+      const repertoire=hour>=22||hour<6?['yawn','settle','listen']
         :perf.beforeFirstSmoke||perf.veryLongGap?['tiptoe','wiggle','hop','sway','peek']
         :perf.longGap?['stretch','sway','peek','nod','wiggle']
         :perf.heavySequence||perf.shortGap?['look','shrug','listen','tilt','settle']
@@ -4166,7 +4182,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         :level>=2?['stretch','sway','peek','nod']
         :['look','settle','listen','tilt'];
       const options=repertoire.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]);
-      if(!recovering&&Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.supportive?'happy':level>=2?'wink':'wry',1800);
+      if(Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.supportive?'happy':level>=2?'wink':'wry',1800);
       if(!actorState().quiet.value&&Date.now()-actorLastSpeech>(perf.talkative?65000:90000)&&Math.random()<(perf.talkative?.36:.22)){showPetReaction(actorLine('touch'),perf.supportive?'warm':'calm',3200);actorLastSpeech=Date.now()}
       return;
     }
@@ -4186,7 +4202,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(f>=65||perf.longGap)pet.classList.add('high-breath');
     if(r>=65)pet.classList.add('high-resilience');
     // Consumo não deixa o Nimbo doente ou menos afetuoso visualmente.
-    const tone=b<35
+    const tone=perf.supportive
+      ?{main:'#43b887',light:'#88ddae',glow:'rgba(92,200,145,.24)'}
+      :b<35
         ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
         :b<70
           ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
@@ -4196,7 +4214,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     pet.style.setProperty('--nimbo-glow',tone.glow);
     pet.style.setProperty('--nimbo-scale',(0.94+(v/100)*0.10+(perf.upbeat?.03:0)).toFixed(3));
     pet.setAttribute('aria-label',`Tocar no Nimbo. Vitalidade ${v}, Vínculo ${b}, Fôlego ${f}, Resiliência ${r}.`);
-    petMotionProfile={vitality:v,breath:f,energy:perf.energy,talkative:perf.talkative?1:0,supportive:perf.supportive?1:0,upbeat:perf.upbeat?1:0};
+    const aiMood=ensureNimbo().ai?.state||null;petMotionProfile={vitality:v,breath:f,energy:aiMood?.energy??perf.energy,playfulness:aiMood?.playfulness??50,quietness:aiMood?.quietness??50,curiosity:aiMood?.curiosity??50,talkative:perf.talkative?1:0,supportive:perf.supportive?1:0,upbeat:perf.upbeat?1:0};
   }
 
   function motionReduced(){
@@ -4212,8 +4230,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     clearTimeout(petWalkEndTimer);
     if(motionReduced())return;
     const energy=clamp(((petMotionProfile.vitality+petMotionProfile.breath)/2)*.35+Number(petMotionProfile.energy||55)*.65,25,95);
-    const min=soon?420:1000+(100-energy)*16;
-    const max=soon?980:2600+(100-energy)*30;
+    const quiet=clamp(Number(petMotionProfile.quietness||50),0,100),play=clamp(Number(petMotionProfile.playfulness||50),0,100);
+    const min=soon?420:1000+(100-energy)*16+quiet*12-play*6;
+    const max=soon?980:2600+(100-energy)*30+quiet*20-play*10;
     petWalkTimer=setTimeout(walkNimbo,randomBetween(min,max));
   }
 
@@ -4271,11 +4290,12 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function schedulePetIdle(){
     clearTimeout(petIdleTimer);
-    const perf=dailyPerformanceProfile();
-    const delay=(perf.talkative?11000:16000)+Math.random()*(perf.talkative?15000:22000);
+    const memory=nimboAiMemory();
+    const delay=Math.max(60000,Math.min(180000,memory.nextCheckSeconds*1000));
     petIdleTimer=setTimeout(()=>{
-      if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active')){
-        reactPet('idle');
+      if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active')&&!nimboSceneIsActive('home')){
+        if(currentUser&&navigator.onLine)dispatchNimboReaction('ambient',{surface:'home',priority:NIMBO_AI_PRIORITY.ambient});
+        else reactPet('idle');
       }
       schedulePetIdle();
     },delay);
@@ -4331,10 +4351,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function refreshMorningBehavior(){
     const pet=$('petZone');if(!pet)return;
     pet.dataset.morning=String(morningContext().level);
-    if(typeof petExpressionOverride!=='undefined'&&!petExpressionOverride){
-      const state=determineNimboExpression(vitality(),bond(),breath(),resilience());
-      setPetExpression(state.expression);
-      const label=$('petState');if(label)label.textContent=state.moodTag;
+    if(typeof petExpressionOverride!=='undefined'&&!petExpressionOverride&&!nimboSceneIsActive('home')){
+      setPetExpression(nimboAiBaseExpression());
+      const label=$('petState');if(label)label.textContent=nimboAiMoodLabel();
     }
   }
   $('nimboQuiet').onchange=e=>{actorState().quiet={value:e.target.checked,at:new Date().toISOString()};saveActor()};
@@ -4355,21 +4374,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(!/^[a-zÀ-ÿ]{3,16}$/i.test(part)||/^(contato|admin|teste|test|user|usuario|mail|email|info)$/i.test(part))return '';
     return part[0].toUpperCase()+part.slice(1).toLowerCase();
   }
-  function actorMilestone(kind){
+  function actorMilestone(kind,{consume=true}={}){
     const count=kind==='resist'?resists.length:kind==='close'?closedDays.length:0;
     const thresholds=kind==='resist'?[3,10,25,50,100,200,365]:[3,7,14,30,60,100,365];
     if(!count||!thresholds.includes(count))return false;
     const id=kind+':'+count,state=actorState();if(state.celebrated[id])return false;
-    state.celebrated[id]=new Date().toISOString();saveActor();return true;
+    if(consume){state.celebrated[id]=new Date().toISOString();saveActor()}
+    return true;
   }
   function actorLine(kind){
     const j=ensureJourney(),plan=j.plan,m=morningContext(),hour=actorClock().hour,perf=dailyPerformanceProfile();
     const pools={
-      smoke:['Registrado. Eu sigo com você.','Podemos cuidar do próximo momento.','Seu caminho continua aqui.','Pru… companhia presente.','Obrigado por registrar. Vamos com calma.','Uma informação para conhecer seu dia.','Se quiser apoio agora, estou aqui.','O que você aprendeu continua com você.'],
-      resist:['Pru! Essa passou.','A vontade fez cena. Você ficou.','Essa mereceu um pulinho.','Gostei dessa pausa.','Hehe. Seguimos. ✨','A vontade veio. E foi.','Um espacinho a mais.','Boa. Sem fogos... tá, um pulo.'],
-      close:['Dia guardado. Ufa.','Fechou. Descansa esse teclado.','Mais uma página nossa.','Por hoje, tá registrado.','Prr... até daqui a pouco.'],
-      milestone:['PRUUU! Essa merece festa! 🎉','Aplausos! Sim, são meus.','Tá. Agora eu vou comemorar.','Olha o tamanho desse passo!','Pru-pru! Essa entrou pra história.'],
-      touch:['Pru?','Hm. Tô de olho. 👀','Você de novo. Ainda bem.','Meu silêncio também faz companhia.','Boop.','Um pixel de cada vez.','Tô aqui. Meio esquisito, mas aqui.','Aceito carinho. Críticas, depois.','Prrr. 🙂','Essa cara vem de fábrica.','Pausa dramática... pronto.']
+      smoke:['Registrado. Eu sigo com você.','Podemos cuidar do próximo momento.','Seu caminho continua aqui.','Tô aqui. Companhia presente.','Obrigado por registrar. Vamos com calma.','Uma informação para conhecer seu dia.','Se quiser apoio agora, estou aqui.','O que você aprendeu continua com você.'],
+      resist:['Essa passou.','A vontade fez cena. Você ficou.','Essa mereceu um pulinho.','Gostei dessa pausa.','Hehe. Seguimos. ✨','A vontade veio. E foi.','Um espacinho a mais.','Boa. Sem fogos... tá, um pulo.'],
+      close:['Dia guardado. Ufa.','Fechou. Descansa esse teclado.','Mais uma página nossa.','Por hoje, tá registrado.','Até daqui a pouco.'],
+      milestone:['Essa merece festa! 🎉','Aplausos! Sim, são meus.','Tá. Agora eu vou comemorar.','Olha o tamanho desse passo!','Essa entrou pra história.'],
+      touch:['Hm?','Hm. Tô de olho. 👀','Você de novo. Ainda bem.','Meu silêncio também faz companhia.','Boop.','Um pixel de cada vez.','Tô aqui. Meio esquisito, mas aqui.','Aceito carinho. Críticas, depois.','🙂','Essa cara vem de fábrica.','Pausa dramática... pronto.']
     };
     let lines=pools[kind]||pools.touch;
     const layers=[];
@@ -4378,28 +4398,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       if(m.timeLevel>=1&&todaySmokes===1)layers.push(['O primeiro veio mais tarde hoje. Isso continua valendo.','Primeiro mais tarde hoje, hein. O registro não apaga esse espaço.']);
       layers.push(pools.smoke);
     }else if(kind==='touch'){
-      // 1. acontecimento imediato
       if(recoveryMinutes()<5)layers.push(['Eu sigo aqui com você.','Quer uma ideia para o próximo momento?','Podemos ficar juntos sem precisar explicar.']);
-      // 2. estado atual do processo
       if(j.stage.value==='returning')layers.push(['Você voltou. Isso já é prática.','Sem reconstruir tudo hoje. Só o próximo passo.']);
-      // 3. padrão comportamental relevante
       if(perf.beforeFirstSmoke)layers.push(['Ainda antes do primeiro. Vamos cuidar desse espaço.','Esse começo do dia tá diferente. Eu percebi.']);
       else if(perf.veryLongGap)layers.push(['Esse intervalo cresceu bastante.','Tem bastante ar aqui entre um e outro.']);
       else if(perf.longGap)layers.push(['Intervalo acima da sua referência.','Esse espaço ficou um pouco maior hoje.']);
       else if(perf.heavySequence)layers.push(['O dia apertou. Eu fico mais perto agora.','Sem corrigir o dia inteiro. Só cuidamos do próximo intervalo.']);
       else if(perf.shortGap)layers.push(['Um novo intervalo está começando.','O próximo espaço ainda não foi decidido.']);
       if(usualSmokeWindow())layers.push(['Hm. Esse horário eu conheço.','Hora conhecida. Cabe uma pausa antes do automático?']);
-      // 4. plano pessoal
       const alternative=(plan.alternative?.value||'').toLowerCase();
       if(/água|agua/.test(alternative))layers.push(['A água do seu plano tá por perto?']);
       else if(/caminh|passe/.test(alternative))layers.push(['A caminhada do seu plano ainda faz sentido agora?']);
       else if(alternative.trim())layers.push(['Quer testar a alternativa que você deixou no plano?']);
       if(plan.reason?.value?.trim())layers.push(['Seu motivo continua guardado no plano.']);
       if(plan.support?.value?.trim())layers.push(['Se precisar, seu apoio também faz parte do plano.']);
-      // 5. progresso recente
-      if(m.resists)layers.push([`${m.resists} vontade${m.resists===1?'':'s'} atravessada${m.resists===1?'':'s'} hoje. Pru!`]);
-      // 6. personalidade e horário
-      if(hour>=22||hour<5)layers.push(['Prr... modo noturno.','Até meus pixels estão bocejando.']);
+      if(m.resists)layers.push([`${m.resists} vontade${m.resists===1?'':'s'} atravessada${m.resists===1?'':'s'} hoje.`]);
+      if(hour>=22||hour<5)layers.push(['Modo noturno.','Até meus pixels estão bocejando.']);
       else if(hour<12)layers.push(['Bom dia. Carregando simpatia...','Acordei. O carisma vem depois.']);
       else if(hour<18)layers.push(['Essa tarde aceita uma pausa.','Tarde longa. Companhia pequena.']);
       else layers.push(['Boa noite. Ainda por aqui.','O dia andou, hein.']);
@@ -4412,6 +4426,152 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return base;
   }
 
+
+  /* =========================================================
+     V8.2 — NIMBO AI v2.1 / GEMINI VIA SUPABASE
+     O app envia contexto factual; a Edge Function interpreta Nimbo.
+     A IA dirige fala/silêncio, expressão, gesto, intensidade, estado,
+     intenção, tom, sequência e próxima checagem. XP e regras ficam locais.
+     ========================================================= */
+  const NIMBO_AI_FUNCTION='nimbo-ai';
+  const NIMBO_AI_TIMEOUT_MS=9500;
+  const NIMBO_AI_EXPRESSIONS=['neutral','happy','playful','wry','wink','delighted','sleepy','confused','radiant'];
+  const NIMBO_AI_GESTURES=['look','tilt','stretch','settle','nod','sway','peek','hop','bow','wiggle','glow','listen'];
+  const NIMBO_AI_TONES=['calm','warm','good'];
+  const NIMBO_AI_INTENTS=['company','observe','play','rest','support','celebrate','curiosity'];
+  const NIMBO_AI_EVENTS=['craving_enter','craving_end','smoke','resist','close_day','return','touch','ambient','milestone','care'];
+  const NIMBO_AI_PRIORITY={ambient:10,return:22,craving_enter:35,touch:50,care:55,craving_end:65,close_day:72,smoke:80,resist:85,milestone:92};
+  const nimboSceneRuntime={
+    home:{generation:0,active:false,priority:0,animations:[],restoreTimer:null},
+    craving:{generation:0,active:false,priority:0,animations:[],restoreTimer:null}
+  };
+  let nimboAIIdleLastAt=0,nimboAIHomeTapCount=0,nimboAIHiddenAt=0,nimboAISessionOpenedAt=Date.now();
+
+  function nimboSceneIsActive(surface='home'){return !!nimboSceneRuntime[surface]?.active}
+  function nimboSurfaceRefs(surface='home'){
+    if(surface==='craving')return{pet:$('cravingNimbo'),motion:$('cravingNimbo')?.querySelector('.pet-sway'),bubble:$('cravingPlayReaction'),state:null};
+    return{pet:$('petZone'),motion:$('petWalker')?.querySelector('.pet-sway'),bubble:$('petReaction'),state:$('petState')};
+  }
+  function safeNimboText(value,max=180){return String(value??'').replace(/[\u0000-\u001f<>]/g,' ').replace(/\s+/g,' ').trim().slice(0,max)}
+  function clampAiNumber(value,min,max,fallback){const n=Number(value);return Number.isFinite(n)?clamp(n,min,max):fallback}
+  function nimboAiMemory(){
+    const n=ensureNimbo();
+    const raw=n.ai||{};
+    const state=raw.state||{};
+    return n.ai={
+      state:{energy:clampAiNumber(state.energy,0,100,50),playfulness:clampAiNumber(state.playfulness,0,100,50),quietness:clampAiNumber(state.quietness,0,100,50),curiosity:clampAiNumber(state.curiosity,0,100,50)},
+      recent:Array.isArray(raw.recent)?raw.recent.slice(-12):[],
+      nextCheckSeconds:Math.round(clampAiNumber(raw.nextCheckSeconds,60,180,120)),
+      lastSpeechAt:Number(raw.lastSpeechAt)||0,lastNameAt:Number(raw.lastNameAt)||0,
+      lastExpression:NIMBO_AI_EXPRESSIONS.includes(raw.lastExpression)?raw.lastExpression:'neutral',
+      lastIntent:NIMBO_AI_INTENTS.includes(raw.lastIntent)?raw.lastIntent:'company',
+      lastSource:safeNimboText(raw.lastSource,24)||'',updatedAt:raw.updatedAt||''
+    };
+  }
+  function nimboAiMoodLabel(state=nimboAiMemory().state,intent=nimboAiMemory().lastIntent){
+    if(intent==='celebrate')return'celebrando';
+    if(intent==='support')return'presente';
+    if(intent==='rest'||state.quietness>=72)return'tranquilo';
+    if(intent==='play'||state.playfulness>=72)return'brincalhão';
+    if(intent==='curiosity'||state.curiosity>=72)return'curioso';
+    if(state.energy>=72)return'aceso';
+    return'à vontade';
+  }
+  function nimboAiBaseExpression(){
+    const m=nimboAiMemory(),s=m.state;
+    if(s.quietness>=78&&s.energy<48)return'sleepy';
+    if(s.playfulness>=72)return'playful';
+    if(s.curiosity>=74)return m.lastExpression==='wink'?'wink':'wry';
+    if(s.energy>=75)return'happy';
+    return NIMBO_AI_EXPRESSIONS.includes(m.lastExpression)?m.lastExpression:'neutral';
+  }
+  function persistNimboAiScene(scene,eventType){
+    const n=ensureNimbo(),m=nimboAiMemory(),now=Date.now();
+    m.state={...scene.state};m.nextCheckSeconds=scene.next_check_seconds;m.lastExpression=scene.expression;m.lastIntent=scene.intent;m.lastSource=scene.source||'gemini';m.updatedAt=new Date(now).toISOString();
+    if(scene.speak&&scene.line){m.lastSpeechAt=now;const name=actorName();if(name&&new RegExp(`(^|[^\\p{L}])${name.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')}([^\\p{L}]|$)`,'iu').test(scene.line))m.lastNameAt=now}
+    m.recent.push({line:scene.speak?scene.line:'',event:eventType,intent:scene.intent,animation:scene.animation,gestures:scene.sequence.map(x=>x.gesture),at:new Date(now).toISOString()});m.recent=m.recent.slice(-12);
+    n.ai=m;vale.updatedAt=new Date(now).toISOString();write(VALE_KEY,vale);
+    petMotionProfile={...petMotionProfile,energy:m.state.energy,playfulness:m.state.playfulness,quietness:m.state.quietness,curiosity:m.state.curiosity};
+  }
+
+  function restoreNimboSurface(surface='home'){
+    const refs=nimboSurfaceRefs(surface);if(!refs.pet)return;
+    refs.pet.classList.remove('nimbo-ai-scene','nimbo-ai-glow');refs.pet.style.removeProperty('--nimbo-ai-intensity');delete refs.pet.dataset.aiIntent;
+    if(refs.bubble){refs.bubble.removeAttribute('data-source');refs.bubble.classList.remove('show','good','calm','warm')}
+    if(surface==='home'){
+      if(!petExpressionOverride)setPetExpression(nimboAiBaseExpression());
+      if(refs.state)refs.state.textContent=nimboAiMoodLabel();
+      actorBusyUntil=0;scheduleNimboWalk(false);
+    }else if($('cravingHero')?.classList.contains('playing')||$('cravingHero')?.classList.contains('reviewing'))setCravingExpression(nimboAiBaseExpression()==='sleepy'?'neutral':nimboAiBaseExpression());
+  }
+  function cancelNimboScene(surface='home',{restore=true,invalidate=true}={}){
+    const rt=nimboSceneRuntime[surface];if(!rt)return;if(invalidate)rt.generation++;
+    rt.animations.splice(0).forEach(a=>{try{a.cancel()}catch{}});clearTimeout(rt.restoreTimer);rt.restoreTimer=null;rt.active=false;rt.priority=0;
+    const refs=nimboSurfaceRefs(surface);refs.motion?.getAnimations?.().forEach(a=>{if(a.id?.startsWith('nimbo-ai:'))try{a.cancel()}catch{}});if(restore)restoreNimboSurface(surface);
+  }
+  function normalizeNimboScene(raw){
+    const source=raw?.data??raw;if(!source||typeof source!=='object')return null;
+    const line=safeNimboText(source.line,180),speak=source.speak===true&&!!line;
+    if(!NIMBO_AI_EXPRESSIONS.includes(source.expression)||!NIMBO_AI_GESTURES.includes(source.animation)||!NIMBO_AI_TONES.includes(source.tone)||!NIMBO_AI_INTENTS.includes(source.intent))return null;
+    const intensity=clampAiNumber(source.intensity,.15,.8,null);if(intensity===null)return null;
+    const stateRaw=source.state||{},state={};for(const k of ['energy','playfulness','quietness','curiosity']){const n=clampAiNumber(stateRaw[k],0,100,null);if(n===null)return null;state[k]=Math.round(n)}
+    let sequence=Array.isArray(source.sequence)?source.sequence.slice(0,4):[];if(!sequence.length)return null;
+    sequence=sequence.map(step=>{if(!NIMBO_AI_GESTURES.includes(step?.gesture)||!NIMBO_AI_EXPRESSIONS.includes(step?.expression))return null;return{gesture:step.gesture,expression:step.expression,duration_ms:Math.round(clampAiNumber(step.duration_ms,500,2400,700)),pause_ms:Math.round(clampAiNumber(step.pause_ms,0,4000,0))}});if(sequence.some(x=>!x))return null;
+    return{version:Number(source.version)||2,revision:safeNimboText(source.revision,12)||'2.1',source:safeNimboText(source.source,24)||'gemini',line:speak?line:'',speak,expression:source.expression,animation:source.animation,tone:source.tone,intent:source.intent,intensity,state,sequence,next_check_seconds:Math.round(clampAiNumber(source.next_check_seconds,60,180,120))};
+  }
+  function nimboGestureFrames(gesture,intensity=.35){
+    const k=clampAiNumber(intensity,.15,.8,.35),dx=2+10*k,dy=2+21*k,rot=1.5+10*k,squash=.018+.09*k,stretch=.018+.08*k;
+    const neutral={transform:'translate(0px,0px) rotate(0deg) scale(1,1)'};const t=(x=0,y=0,r=0,sx=1,sy=1)=>({transform:`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${r.toFixed(1)}deg) scale(${sx.toFixed(3)},${sy.toFixed(3)})`});
+    switch(gesture){case'look':return[neutral,t(dx*.65,0,rot*.25),t(dx*.65,0,rot*.25),neutral];case'tilt':return[neutral,t(0,0,-rot*.8),t(0,0,-rot*.8),neutral];case'stretch':return[neutral,t(0,2*k,0,1+squash,.98-squash*.28),t(0,-2*k,0,.99-stretch*.15,1+stretch),neutral];case'settle':return[neutral,t(0,dy*.28,0,1+squash*.16,1-squash*.35),t(0,dy*.10,0),neutral];case'nod':return[neutral,t(0,dy*.25,0,1,1-squash*.38),t(0,-dy*.10,0),neutral];case'sway':return[neutral,t(0,0,-rot*.52),t(0,0,rot*.52),neutral];case'peek':return[neutral,t(dx*.76,-dy*.08,rot*.42,1.01,1),t(dx*.76,-dy*.08,rot*.42,1.01,1),neutral];case'hop':return[neutral,t(0,dy*.12,0,1+squash,1-squash),t(0,-dy,rot*.16,.99,1+stretch*.3),t(0,dy*.08,0,1+squash*.5,1-squash*.42),neutral];case'bow':return[neutral,t(0,dy*.20,rot*.55,1.01,1-squash*.58),t(0,dy*.20,rot*.55,1.01,1-squash*.58),neutral];case'wiggle':return[neutral,t(0,0,-rot*.76),t(0,0,rot*.76),t(0,0,-rot*.58),t(0,0,rot*.48),neutral];case'glow':return[neutral,t(0,-dy*.08,0,1+stretch*.40,1+stretch*.40),t(0,-dy*.08,0,1+stretch*.68,1+stretch*.68),neutral];case'listen':return[neutral,t(-dx*.28,-dy*.10,-rot*.60,1,1.01),t(-dx*.28,-dy*.10,-rot*.60,1,1.01),neutral];default:return[neutral,t(0,dy*.15,0),neutral]}
+  }
+  function waitNimboScene(ms,surface,generation){return new Promise(resolve=>setTimeout(()=>resolve(nimboSceneRuntime[surface]?.generation===generation),Math.max(0,ms||0)))}
+  async function playNimboScene(scene,{surface='home',priority=50,eventType='touch',generation=null}={}){
+    const rt=nimboSceneRuntime[surface],refs=nimboSurfaceRefs(surface);if(!rt||!refs.pet||!refs.motion)return false;if(rt.active&&priority<rt.priority)return false;
+    cancelNimboScene(surface,{restore:false,invalidate:generation===null});const gen=generation??rt.generation;if(gen!==rt.generation)return false;
+    rt.active=true;rt.priority=priority;refs.pet.classList.add('nimbo-ai-scene');refs.pet.dataset.aiIntent=scene.intent;refs.pet.style.setProperty('--nimbo-ai-intensity',String(scene.intensity));
+    const total=scene.sequence.reduce((sum,step)=>sum+step.duration_ms+step.pause_ms,0);if(surface==='home'){clearTimeout(actorTimer);actorTimer=null;const walker=$('petWalker');if(walker)walker.dataset.action='';actorBusyUntil=Date.now()+total+850;pauseNimboWalk(total+1400)}
+    if(refs.state)refs.state.textContent=nimboAiMoodLabel(scene.state,scene.intent);
+    if(scene.speak&&refs.bubble){clearTimeout(surface==='home'?petReactionTimer:cravingReactionTimer);refs.bubble.textContent=scene.line;refs.bubble.setAttribute('data-source',scene.source);refs.bubble.classList.remove('good','calm','warm','show');refs.bubble.classList.add(scene.tone,'show')}
+    else if(refs.bubble){refs.bubble.classList.remove('show')}
+    for(const step of scene.sequence){if(rt.generation!==gen||!rt.active)return false;if(surface==='home')setPetExpression(step.expression);else setCravingExpression(step.expression);refs.pet.classList.toggle('nimbo-ai-glow',step.gesture==='glow');
+      if(motionReduced()||typeof refs.motion.animate!=='function'){if(!(await waitNimboScene(Math.min(step.duration_ms,650),surface,gen)))return false}else{const animation=refs.motion.animate(nimboGestureFrames(step.gesture,scene.intensity),{duration:step.duration_ms,easing:'cubic-bezier(.22,.75,.25,1)',fill:'none'});animation.id=`nimbo-ai:${surface}:${gen}:${step.gesture}`;rt.animations.push(animation);await Promise.race([animation.finished.catch(()=>null),new Promise(r=>setTimeout(r,step.duration_ms+100))]);rt.animations=rt.animations.filter(x=>x!==animation);if(rt.generation!==gen||!rt.active)return false}refs.pet.classList.remove('nimbo-ai-glow');if(step.pause_ms&&!(await waitNimboScene(step.pause_ms,surface,gen)))return false}
+    if(rt.generation!==gen)return false;rt.restoreTimer=setTimeout(()=>{if(rt.generation!==gen)return;rt.active=false;rt.priority=0;restoreNimboSurface(surface)},scene.speak?850:180);return true;
+  }
+  function aiFinite(n){return Number.isFinite(Number(n))?Number(n):null}
+  function firstSmokeClockMinuteForDay(day){const first=daySmokeTimes(day)[0];return first?first.getHours()*60+first.getMinutes():null}
+  function currentCravingOutcome(explicit=null){const allowed=['passed','reduced','strong','smoked','resisted','left','unknown'];if(allowed.includes(explicit))return explicit;const row=cravingPracticeRow?.();const out=row?.outcome;return allowed.includes(out)?out:'unknown'}
+  function nimboAiPayload(eventType,surface='home',{cravingOutcome=null}={}){
+    const e=progressionEngine(Date.now(),true),j=ensureJourney(),clock=actorClock(),m=morningContext(),memory=nimboAiMemory(),day=today(),naturalDay=key(new Date()),now=Date.now();
+    const recentClosed=completedDays().slice(-14),lastSmokeTimes=smokes.map(x=>+new Date(x.timestamp)).filter(t=>Number.isFinite(t)&&t<=now),lastSmoke=lastSmokeTimes.length?Math.max(...lastSmokeTimes):null;
+    const practicesToday=j.practices.filter(x=>x.day===day).length,readingsCompleted=Array.isArray(j.completed)?j.completed.length:0;
+    const closed_days=recentClosed.map(d=>({day:d,smokes:smokeCount(d),resists:resistCount(d),mean_interval_minutes:averageIntervalsForDays([d]),first_smoke_minute:firstSmokeClockMinuteForDay(d)}));
+    const personal={reason:safeNimboText(j.plan.reason?.value,300),triggers:safeNimboText(j.plan.triggers?.value,300),alternative:safeNimboText(j.plan.alternative?.value,300)};
+    const sinceSpeech=memory.lastSpeechAt?Math.max(0,(now-memory.lastSpeechAt)/1000):null,sinceName=memory.lastNameAt?Math.max(0,(now-memory.lastNameAt)/1000):null;
+    return{
+      event:eventType,
+      profile:{stage:j.stage.value},
+      day:{key:day,natural_day:naturalDay,smokes:smokeCount(day),resists:resistCount(day),minutes_since_last_smoke:lastSmoke===null?null:(now-lastSmoke)/60000,first_smoke_delay_minutes:m.delay,first_smoke_samples:m.sampleCount,practices:practicesToday,readings_completed:readingsCompleted,last_two_hours_smokes:smokes.filter(x=>{const t=+new Date(x.timestamp);return Number.isFinite(t)&&t<=now&&now-t<=7200000}).length},
+      history:{closed_days,closed_days_total:completedDays().length,baseline_smokes:e.baseline.smokes,reference_interval_minutes:e.reference.intervalMinutes,recent_smoke_average:e.recentSmokeAverage,usual_window:usualSmokeWindow()},
+      session:{local_hour:clock.hour,screen:surface==='craving'?'craving':'home',seconds_open:Math.round((now-nimboAISessionOpenedAt)/1000),tap_count:surface==='craving'?cravingTapCount:nimboAIHomeTapCount,duration_seconds:surface==='craving'&&cravingPracticeRow()?.startedAt?Math.max(0,Math.round((now-new Date(cravingPracticeRow().startedAt).getTime())/1000)):null,craving_outcome:currentCravingOutcome(cravingOutcome),seconds_since_speech:sinceSpeech,seconds_since_name:sinceName,visible:document.visibilityState==='visible'},
+      preferences:{quiet:actorState().quiet.value,reduced_motion:motionReduced(),use_name:true,share_plan:true},
+      nimbo:{...memory.state},recent_reactions:memory.recent.slice(-12),recent_lines:actorRecentLines.slice(-6),personal
+    };
+  }
+  async function requestNimboAiScene(eventType,{surface='home',cravingOutcome=null,generation}={}){
+    if(!NIMBO_AI_EVENTS.includes(eventType))throw new Error('nimbo-ai-invalid-event');if(!sb||!currentUser||!navigator.onLine)throw new Error('nimbo-ai-unavailable');const rt=nimboSceneRuntime[surface];if(!rt||rt.generation!==generation)throw new Error('nimbo-ai-stale');
+    let timeout;const timer=new Promise((_,reject)=>{timeout=setTimeout(()=>reject(new Error('nimbo-ai-timeout')),NIMBO_AI_TIMEOUT_MS)});try{const invocation=sb.functions.invoke(NIMBO_AI_FUNCTION,{body:nimboAiPayload(eventType,surface,{cravingOutcome})});const result=await Promise.race([invocation,timer]);if(rt.generation!==generation)throw new Error('nimbo-ai-stale');if(result?.error)throw result.error;const scene=normalizeNimboScene(result?.data);if(!scene)throw new Error('nimbo-ai-invalid-scene');return scene}finally{clearTimeout(timeout)}
+  }
+  function localCravingFallback(eventType,outcome='unknown'){
+    const map={craving_enter:['Tô aqui. Primeiro, só um pouco de espaço.','happy','calm'],craving_end:['Como está a vontade agora?','neutral','calm'],smoke:['Registrado. Eu sigo com você.','neutral','warm'],resist:['Essa ficou registrada.','happy','good'],milestone:['Essa merece um pequeno festejo.','delighted','good']};const row=map[eventType]||['Tô aqui.','neutral','calm'];setCravingExpression(row[1]);const bubble=$('cravingPlayReaction');if(bubble){bubble.removeAttribute('data-source');bubble.textContent=row[0];bubble.classList.remove('good','calm','warm');bubble.classList.add(row[2],'show');clearTimeout(cravingReactionTimer);cravingReactionTimer=setTimeout(()=>bubble.classList.remove('show'),1900)}
+  }
+  function primeNimboReaction(eventType,surface){if(surface==='craving'){if(eventType==='craving_enter')setCravingExpression('happy');return}const kind=eventType==='resist'||eventType==='milestone'?'nod':eventType==='smoke'?'listen':eventType==='close_day'?'bow':eventType==='care'?'tilt':'nod';actorPlay(kind,Math.min(620,eventType==='touch'?420:560))}
+  async function dispatchNimboReaction(eventType,{surface='home',cravingOutcome=null,priority=NIMBO_AI_PRIORITY[eventType]??50,localFallback=true}={}){
+    const rt=nimboSceneRuntime[surface];if(!rt||!NIMBO_AI_EVENTS.includes(eventType))return false;if(eventType==='ambient'&&rt.active)return false;if(rt.active&&priority<rt.priority)return false;
+    cancelNimboScene(surface,{restore:false,invalidate:true});const generation=rt.generation;if(eventType==='touch'&&surface==='home')nimboAIHomeTapCount++;primeNimboReaction(eventType,surface);
+    try{const scene=await requestNimboAiScene(eventType,{surface,cravingOutcome,generation});if(rt.generation!==generation)return false;persistNimboAiScene(scene,eventType);nimboAIIdleLastAt=Date.now();schedulePetIdle();const played=await playNimboScene(scene,{surface,priority,eventType,generation});if(played&&eventType==='milestone'){const k=resists.length&&[3,10,25,50,100,200,365].includes(resists.length)?'resist':'close';actorMilestone(k,{consume:true})}return played}
+    catch(error){if(rt.generation!==generation)return false;console.debug('Nimbo AI v2.1 → fallback local:',error?.message||error);rt.active=false;rt.priority=0;if(!localFallback){restoreNimboSurface(surface);return false}if(surface==='craving')localCravingFallback(eventType,cravingOutcome);else reactPet(eventType==='close_day'?'close':eventType==='milestone'?(resists.length?'resist':'close'):eventType);return false}
+  }
+  function chooseNimboEvent(kind){if(kind==='resist'&&actorMilestone('resist',{consume:false}))return'milestone';if(kind==='close_day'&&actorMilestone('close',{consume:false}))return'milestone';return kind}
   function ensureNimbo(){
     vale.nimbo={...defaultNimboState(),...(vale.nimbo||{}),lastCareAt:{...defaultNimboState().lastCareAt,...(vale.nimbo?.lastCareAt||{})}};
     return vale.nimbo;
@@ -4528,6 +4688,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     petMotion((kind==='walk'||kind==='play')?'resist':'touch');
     showPetReaction({feed:'Que bom.',bath:'Prontinho.',walk:'Vamos passear.',play:'Vamos brincar!',affection:'Gostei do carinho.'}[kind],gain.tone,2200);
     actorPlay(kind==='play'?'wiggle':kind==='walk'?'hop':'nod',1100);
+    dispatchNimboReaction('care',{surface:'home'});
     $('petMessage').textContent='';
     scheduleSync();
     render();
@@ -5048,13 +5209,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if($('homeStoneValue'))$('homeStoneValue').textContent=Math.floor(vale.resources.stone||0);
     if($('homeSeedsValue'))$('homeSeedsValue').textContent=Math.floor(vale.resources.seeds||0);
     if($('homePresenceValue'))$('homePresenceValue').textContent=Math.floor(vale.resources.presence||0);
-    $('petState').textContent=nimbo.moodTag;
+    if(!nimboSceneIsActive('home'))$('petState').textContent=nimboAiMoodLabel();
     $('levelBadge').textContent=`FORMA ${p.level}`;
     if(!$('petReaction').classList.contains('show'))$('petMessage').textContent=ambientNimboLine();
 
     const pet=$('petZone');
     pet.dataset.level=p.level;
-    setPetExpression(petExpressionOverride||nimbo.expression);
+    if(!nimboSceneIsActive('home'))setPetExpression(petExpressionOverride||nimboAiBaseExpression());
     applyPetVisualState(v,b,f,rr);
 
     $('xpValue').textContent=p.xp;
@@ -5289,7 +5450,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         baseline:gameRes.data.baseline===null?null:Number(gameRes.data.baseline),
         baselineLocked:!!gameRes.data.baseline_locked,
         bestReduction:Number(gameRes.data.best_reduction||0),
-        maxLevel:Math.max(Number(game.maxLevel||1),Number(gameRes.data.max_level||1))
+        maxLevel:Number(gameRes.data.max_level||1)
       };
     }
 
@@ -5391,7 +5552,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function closeScoreRows(score){
     const rows=[
       ['❤','Vitalidade',score.vitality,score.vitality?'Tendência de consumo do dia em relação à sua referência.':'Hoje não houve avanço de Vitalidade; isso não retira o que já foi conquistado.'],
-      ['🌬','Fôlego',score.breath,score.breathPenalty?`Intervalos e horário do primeiro cigarro, com ${score.breathPenalty} ponto${score.breathPenalty===1?'':'s'} não gerado${score.breathPenalty===1?'':'s'} por frequência maior neste dia.`:score.breath?'Espaços maiores entre cigarros e/ou primeiro cigarro mais tarde.':'Sem novo ganho de Fôlego neste dia.'],
+      ['🌬','Fôlego',score.breath,score.breath?'Espaços maiores entre cigarros e/ou primeiro cigarro mais tarde.':'Sem novo ganho de Fôlego neste dia.'],
       ['🛡','Resiliência',score.resilience,score.resilience?'Práticas de criar espaço e vontades atravessadas. O consumo do dia não reduz esta aprendizagem.':'Nenhuma prática de Resiliência registrada neste dia.'],
       ['◇','Vínculo',score.bond,score.bond?'Presença, registro honesto e confirmação do dia.':'Sem novo ganho de Vínculo neste fechamento.']
     ];
@@ -5441,7 +5602,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     }
     progressionCache=null;
     const score=progressionEngine(Date.now(),true).days[day]||{vitality:0,breath:0,breathPenalty:0,resilience:0,bond:3,milestone:0,totalXp:3,multiplier:1,phase:'observation'};
-    reactPet('close');render();checkAchievements();scheduleSync();
+    render();checkAchievements();scheduleSync();
+    dispatchNimboReaction(chooseNimboEvent('close_day'),{surface:'home'});
     showClosedDayScore(day,score,closesActiveDay);
   }
 
@@ -5618,6 +5780,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     render();
 
     await syncAll({preferCloud:cacheMode==='prefer-cloud'});
+    if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active'))setTimeout(()=>dispatchNimboReaction('return',{surface:'home'}),500);
   }
 
   function showLogin(){
@@ -5820,11 +5983,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
 
   const homePet=$('petZone');
-  homePet.onclick=()=>reactPet('touch');
+  homePet.onclick=()=>dispatchNimboReaction('touch',{surface:'home'});
   homePet.onkeydown=e=>{
     if(e.key==='Enter'||e.key===' '){
       e.preventDefault();
-      reactPet('touch');
+      dispatchNimboReaction('touch',{surface:'home'});
     }
   };
 
@@ -5846,6 +6009,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   });
 
   document.querySelectorAll('.nav button').forEach(btn=>btn.onclick=()=>{
+    if(btn.dataset.tab!=='home')cancelNimboScene('home',{restore:false,invalidate:true});
+    if(btn.dataset.tab!=='craving')cancelNimboScene('craving',{restore:false,invalidate:true});
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));
     document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id===btn.dataset.tab));
     if(btn.dataset.tab==='vale'){
@@ -5944,7 +6109,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
   if(window.matchMedia){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');reduced.addEventListener?.('change',()=>{pauseNimboWalk();if(!motionReduced())scheduleNimboWalk(true)})}
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible'){clearTimeout(actorTimer);actorBusyUntil=0;$('petWalker').dataset.action=''}else{refreshMorningBehavior();scheduleNimboWalk(true)}});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible'){nimboAIHiddenAt=Date.now();cancelNimboScene('home',{restore:false,invalidate:true});cancelNimboScene('craving',{restore:false,invalidate:true});clearTimeout(actorTimer);actorBusyUntil=0;$('petWalker').dataset.action=''}else{const away=nimboAIHiddenAt?Date.now()-nimboAIHiddenAt:0;refreshMorningBehavior();scheduleNimboWalk(true);if(away>=90000&&currentUser&&document.querySelector('#home.tab.active'))setTimeout(()=>dispatchNimboReaction('return',{surface:'home'}),450)}});
   setInterval(()=>{if(document.visibilityState==='visible'&&document.querySelector('#home.tab.active'))refreshMorningBehavior()},15000);
 
   // Atualizações periódicas não devem reconstruir o mapa enquanto o usuário o explora.
