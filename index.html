@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="8.2.0">
+<meta name="app-version" content="8.2.1">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -2091,7 +2091,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.2.0').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.2.1').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -4240,13 +4240,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const walker=$('petWalker');if(!walker||motionReduced())return;
     if(document.visibilityState!=='visible'||!document.querySelector('#home.tab.active')||Date.now()<actorBusyUntil){scheduleNimboWalk(false);return}
     const hour=actorClock().hour;
-    const energy=clamp(22+petMotionProfile.breath*.18+Number(petMotionProfile.energy||55)*.62+morningContext().level*5-(hour>=22||hour<6?22:0),28,94);
-    const range=clamp(($('petZone').clientWidth-110)/2,24,62);
-    let target=randomBetween(-range,range);if(Math.abs(target-nimboWalkX)<15)target=nimboWalkX>=0?-range:range;
-    const duration=Math.round(clamp(Math.abs(target-nimboWalkX)/(20+energy*.34)*1000,780,3000));
+    const play=clamp(Number(petMotionProfile.playfulness||50),0,100),quiet=clamp(Number(petMotionProfile.quietness||50),0,100),curiosity=clamp(Number(petMotionProfile.curiosity||50),0,100);
+    const energy=clamp(22+petMotionProfile.breath*.15+Number(petMotionProfile.energy||55)*.58+play*.10-quiet*.09+morningContext().level*4-(hour>=22||hour<6?18:0),24,94);
+    const range=clamp((($('petZone').clientWidth-110)/2)*(0.82+curiosity/420+play/650),20,66);
+    let target=randomBetween(-range,range);if(Math.abs(target-nimboWalkX)<12)target=nimboWalkX>=0?-range:range;
+    const pace=clamp(18+energy*.30+play*.08-quiet*.07,13,52);
+    const duration=Math.round(clamp(Math.abs(target-nimboWalkX)/pace*1000,720,3600));
     walker.style.setProperty('--nimbo-dir',target>=nimboWalkX?'1':'-1');
-    walker.style.setProperty('--gaze',target>=nimboWalkX?'2px':'-2px');
-    walker.style.setProperty('--step-speed',energy>82?'.24s':energy>66?'.29s':energy>50?'.35s':'.45s');
+    walker.style.setProperty('--gaze',target>=nimboWalkX?(curiosity>68?'3px':'2px'):(curiosity>68?'-3px':'-2px'));
+    walker.style.setProperty('--step-speed',energy>82||play>78?'.24s':energy>66?'.29s':quiet>72?'.48s':energy>50?'.35s':'.43s');
     petWalkTimer=setTimeout(()=>{
       walker.style.setProperty('--walk-duration',duration+'ms');walker.style.setProperty('--walk-x',target.toFixed(1)+'px');walker.classList.add('walking');nimboWalkX=target;nimboWalkUntil=Date.now()+duration;
       petWalkEndTimer=setTimeout(()=>{walker.classList.remove('walking');walker.style.setProperty('--gaze','0px');walker.dataset.action='settle';actorTimer=setTimeout(()=>walker.dataset.action='',500);scheduleNimboWalk(false)},duration+30);
@@ -4446,6 +4448,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     craving:{generation:0,active:false,priority:0,animations:[],restoreTimer:null}
   };
   let nimboAIIdleLastAt=0,nimboAIHomeTapCount=0,nimboAIHiddenAt=0,nimboAISessionOpenedAt=Date.now();
+  const nimboHomeTapRuntime={lastAt:0,lastSpeechAt:0,lastAiAt:0,streak:0,lastLine:'',aiTimer:null};
 
   function nimboSceneIsActive(surface='home'){return !!nimboSceneRuntime[surface]?.active}
   function nimboSurfaceRefs(surface='home'){
@@ -4485,6 +4488,94 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(s.energy>=75)return'happy';
     return NIMBO_AI_EXPRESSIONS.includes(m.lastExpression)?m.lastExpression:'neutral';
   }
+  function nimboHomeMoodSnapshot(){
+    const memory=nimboAiMemory(),base=memory.state,perf=dailyPerformanceProfile(),hour=actorClock().hour;
+    let energy=base.energy,playfulness=base.playfulness,quietness=base.quietness,curiosity=base.curiosity;
+    // O Gemini define o estado persistente. Entre chamadas, o frontend só aplica
+    // pequenas correções contínuas para fatos que acabaram de mudar.
+    if(hour>=22||hour<6){energy-=8;playfulness-=6;quietness+=10;curiosity-=2}
+    if(perf.beforeFirstSmoke){energy+=7;playfulness+=4;curiosity+=6;quietness-=4}
+    if(perf.veryLongGap){energy+=6;playfulness+=5;curiosity+=6;quietness-=4}
+    else if(perf.longGap){energy+=3;playfulness+=2;curiosity+=4;quietness-=2}
+    if(perf.heavySequence){energy-=4;playfulness-=7;quietness+=9;curiosity-=2}
+    const resistsToday=Number(perf.dayScore?.resists||0);
+    if(resistsToday>0){playfulness+=Math.min(8,2+resistsToday*1.4);energy+=Math.min(5,resistsToday)}
+    // Oscilação lenta, pequena e determinística: evita humor congelado sem criar guinadas aleatórias.
+    const phase=Date.now()/90000;
+    energy+=Math.sin(phase)*2.2;playfulness+=Math.sin(phase*.73+1.4)*2.8;quietness+=Math.sin(phase*.51+2.2)*1.8;curiosity+=Math.sin(phase*.67+.3)*2.5;
+    return{energy:clamp(energy,0,100),playfulness:clamp(playfulness,0,100),quietness:clamp(quietness,0,100),curiosity:clamp(curiosity,0,100),perf,hour};
+  }
+  function nimboHomeTapPersona(mood){
+    if(nimboHomeTapRuntime.streak>=6)return'wry';
+    if(mood.quietness>=70||mood.energy<38)return'quiet';
+    if(mood.playfulness>=68)return'playful';
+    if(mood.curiosity>=68)return'curious';
+    if(mood.perf?.heavySequence)return'supportive';
+    return'warm';
+  }
+  function nimboHomeTapLine(persona,mood){
+    const pools={
+      playful:['Heh. De novo?','Tá, esse toque foi bom.','Você me pegou distraído.','Quase que eu pulo de novo.','Isso está virando brincadeira.','Eu ia ficar sério. Quase.'],
+      curious:['Hm. O que foi?','Estou olhando.','Você queria minha atenção?','Eu estava ocupado sendo misterioso.','Interessante. Outro toque.'],
+      quiet:['Eu senti. Tô mais quieto agora.','Só companhia por enquanto.','Devagar. Eu continuo aqui.','Hm. Fica por perto.','Hoje eu tô econômico nas palavras.'],
+      supportive:['Sem bronca. Eu fico por aqui.','Dia apertado. Companhia pequena.','Eu vi o toque. Seguimos daqui.','Só o próximo momento. Eu tô aqui.'],
+      wry:['Sim, eu ainda estou aqui.','Outro toque? Ambicioso.','Tá bom, eu senti.','Você não desiste de me cutucar, né?','Minha paciência é pequena. Minha companhia não.','Esse foi claramente o último. Talvez.'],
+      warm:['Oi de novo.','Tô aqui.','Hm. Gostei dessa pausa.','Você chamou?','Um toque aceito. Dois, negociamos.']
+    };
+    let pool=pools[persona]||pools.warm;
+    if(mood.perf?.beforeFirstSmoke&&Math.random()<.22)pool=[...pool,'Tem um espaço acontecendo por aqui.'];
+    else if(mood.perf?.longGap&&Math.random()<.18)pool=[...pool,'Esse intervalo tá com bastante espaço.'];
+    const available=pool.filter(x=>x!==nimboHomeTapRuntime.lastLine);const line=available[Math.floor(Math.random()*available.length)]||pool[0]||'';nimboHomeTapRuntime.lastLine=line;return line;
+  }
+  function nimboHomeTapScene(){
+    const mood=nimboHomeMoodSnapshot(),persona=nimboHomeTapPersona(mood),now=Date.now();
+    const gesturePools={
+      playful:['hop','wiggle','peek','sway','nod'],curious:['look','peek','tilt','listen'],quiet:['listen','settle','tilt','look'],supportive:['listen','nod','settle','tilt'],wry:['tilt','look','sway','listen'],warm:['nod','tilt','look','sway']
+    };
+    const expressionPools={
+      playful:['playful','wink','happy','delighted'],curious:['wry','wink','neutral','playful'],quiet:['neutral','sleepy','wry'],supportive:['neutral','happy','wry'],wry:['wry','confused','wink'],warm:['happy','neutral','wink']
+    };
+    const gestures=gesturePools[persona]||gesturePools.warm,expressions=expressionPools[persona]||expressionPools.warm;
+    const gesture=gestures[Math.floor(Math.random()*gestures.length)],expression=expressions[Math.floor(Math.random()*expressions.length)];
+    const speedBias=persona==='playful'?.82:persona==='wry'?.94:persona==='quiet'?1.35:persona==='supportive'?1.18:1;
+    const duration=Math.round(clamp((520+Math.random()*520)*speedBias,500,1650));
+    const intensity=clamp(.20+(mood.energy/100)*.23+(mood.playfulness/100)*.18+(Math.random()-.5)*.10,.15,.67);
+    const speechGap=persona==='playful'?6500:persona==='wry'?9000:persona==='quiet'?14500:10500;
+    const speechChance=persona==='playful'?.58:persona==='curious'?.46:persona==='wry'?.42:persona==='quiet'?.25:.38;
+    const speak=!actorState().quiet.value&&now-nimboHomeTapRuntime.lastSpeechAt>=speechGap&&Math.random()<speechChance;
+    const line=speak?nimboHomeTapLine(persona,mood):'';
+    if(speak)nimboHomeTapRuntime.lastSpeechAt=now;
+    const secondGesture=persona==='playful'&&Math.random()<.22?(gesture==='hop'?'wiggle':'nod'):null;
+    const sequence=[{gesture,expression,duration_ms:duration,pause_ms:secondGesture?80:0}];
+    if(secondGesture)sequence.push({gesture:secondGesture,expression:Math.random()<.5?'wink':'happy',duration_ms:Math.round(duration*.72),pause_ms:0});
+    const intent=persona==='playful'?'play':persona==='curious'?'curiosity':persona==='quiet'?'rest':persona==='supportive'?'support':'company';
+    const tone=persona==='supportive'?'warm':persona==='playful'?'good':'calm';
+    return{version:2,revision:'2.2-local',source:'local-touch',line,speak,expression:sequence[0].expression,animation:sequence[0].gesture,tone,intent,intensity,state:{energy:Math.round(mood.energy),playfulness:Math.round(mood.playfulness),quietness:Math.round(mood.quietness),curiosity:Math.round(mood.curiosity)},sequence,next_check_seconds:nimboAiMemory().nextCheckSeconds};
+  }
+  function rememberLocalNimboTouch(scene){
+    const n=ensureNimbo(),m=nimboAiMemory(),now=Date.now();m.lastExpression=scene.expression;m.lastIntent=scene.intent;m.lastSource='local-touch';
+    if(scene.speak&&scene.line)m.lastSpeechAt=now;
+    m.recent.push({line:scene.speak?scene.line:'',event:'touch',intent:scene.intent,animation:scene.animation,gestures:scene.sequence.map(x=>x.gesture),at:new Date(now).toISOString()});m.recent=m.recent.slice(-12);n.ai=m;write(VALE_KEY,vale);
+  }
+  function shouldAskAiOnHomeTap(mood,now){
+    if(!currentUser||!navigator.onLine||actorState().quiet.value)return false;
+    const cooldown=22000+mood.quietness*260-mood.playfulness*110;
+    if(now-nimboHomeTapRuntime.lastAiAt<clamp(cooldown,18000,52000))return false;
+    const chance=clamp(.32+mood.curiosity/320+mood.playfulness/500-(mood.quietness/520),.22,.64);
+    return nimboHomeTapRuntime.streak===1?Math.random()<chance:Math.random()<chance*.72;
+  }
+  function handleHomeNimboTap(){
+    const now=Date.now(),rt=nimboSceneRuntime.home;if(now-nimboHomeTapRuntime.lastAt<190)return;
+    if(rt.active&&rt.priority>=NIMBO_AI_PRIORITY.close_day)return;
+    nimboHomeTapRuntime.streak=now-nimboHomeTapRuntime.lastAt<2800?Math.min(12,nimboHomeTapRuntime.streak+1):1;nimboHomeTapRuntime.lastAt=now;nimboAIHomeTapCount++;
+    clearTimeout(nimboHomeTapRuntime.aiTimer);const mood=nimboHomeMoodSnapshot(),scene=nimboHomeTapScene();rememberLocalNimboTouch(scene);
+    playNimboScene(scene,{surface:'home',priority:NIMBO_AI_PRIORITY.touch-2,eventType:'touch'});
+    if(shouldAskAiOnHomeTap(mood,now)){
+      const tapStamp=now,localDuration=scene.sequence.reduce((s,x)=>s+x.duration_ms+x.pause_ms,0);
+      nimboHomeTapRuntime.aiTimer=setTimeout(()=>{if(nimboHomeTapRuntime.lastAt!==tapStamp||document.visibilityState!=='visible'||!document.querySelector('#home.tab.active'))return;nimboHomeTapRuntime.lastAiAt=Date.now();dispatchNimboReaction('touch',{surface:'home'});},Math.min(1350,Math.max(620,localDuration*.72)));
+    }
+  }
+
   function persistNimboAiScene(scene,eventType){
     const n=ensureNimbo(),m=nimboAiMemory(),now=Date.now();
     m.state={...scene.state};m.nextCheckSeconds=scene.next_check_seconds;m.lastExpression=scene.expression;m.lastIntent=scene.intent;m.lastSource=scene.source||'gemini';m.updatedAt=new Date(now).toISOString();
@@ -4567,7 +4658,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function primeNimboReaction(eventType,surface){if(surface==='craving'){if(eventType==='craving_enter')setCravingExpression('happy');return}const kind=eventType==='resist'||eventType==='milestone'?'nod':eventType==='smoke'?'listen':eventType==='close_day'?'bow':eventType==='care'?'tilt':'nod';actorPlay(kind,Math.min(620,eventType==='touch'?420:560))}
   async function dispatchNimboReaction(eventType,{surface='home',cravingOutcome=null,priority=NIMBO_AI_PRIORITY[eventType]??50,localFallback=true}={}){
     const rt=nimboSceneRuntime[surface];if(!rt||!NIMBO_AI_EVENTS.includes(eventType))return false;if(eventType==='ambient'&&rt.active)return false;if(rt.active&&priority<rt.priority)return false;
-    cancelNimboScene(surface,{restore:false,invalidate:true});const generation=rt.generation;if(eventType==='touch'&&surface==='home')nimboAIHomeTapCount++;primeNimboReaction(eventType,surface);
+    cancelNimboScene(surface,{restore:false,invalidate:true});const generation=rt.generation;primeNimboReaction(eventType,surface);
     try{const scene=await requestNimboAiScene(eventType,{surface,cravingOutcome,generation});if(rt.generation!==generation)return false;persistNimboAiScene(scene,eventType);nimboAIIdleLastAt=Date.now();schedulePetIdle();const played=await playNimboScene(scene,{surface,priority,eventType,generation});if(played&&eventType==='milestone'){const k=resists.length&&[3,10,25,50,100,200,365].includes(resists.length)?'resist':'close';actorMilestone(k,{consume:true})}return played}
     catch(error){if(rt.generation!==generation)return false;console.debug('Nimbo AI v2.1 → fallback local:',error?.message||error);rt.active=false;rt.priority=0;if(!localFallback){restoreNimboSurface(surface);return false}if(surface==='craving')localCravingFallback(eventType,cravingOutcome);else reactPet(eventType==='close_day'?'close':eventType==='milestone'?(resists.length?'resist':'close'):eventType);return false}
   }
@@ -5983,11 +6074,11 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('storyBackdrop').onclick=e=>{if(e.target===$('storyBackdrop'))closeStory()};
 
   const homePet=$('petZone');
-  homePet.onclick=()=>dispatchNimboReaction('touch',{surface:'home'});
+  homePet.onclick=handleHomeNimboTap;
   homePet.onkeydown=e=>{
     if(e.key==='Enter'||e.key===' '){
       e.preventDefault();
-      dispatchNimboReaction('touch',{surface:'home'});
+      handleHomeNimboTap();
     }
   };
 
