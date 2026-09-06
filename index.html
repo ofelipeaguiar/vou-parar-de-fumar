@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="8.0.0">
+<meta name="app-version" content="8.1.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1644,7 +1644,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 .craving-review{position:relative;z-index:8;width:100%;max-width:420px;margin:4px auto 0;padding:15px;border-radius:18px;background:rgba(7,22,38,.90);border:1px solid rgba(114,222,241,.19);backdrop-filter:blur(7px)}
 .craving-review small{font:8px var(--pixel);letter-spacing:1px;color:#87d9b0}.craving-review h3{font-size:21px;margin:7px 0 5px}.craving-review p{font-size:11px;line-height:1.45;color:#9db0c0;margin:0}
-.craving-outcomes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:12px}.craving-outcomes button{min-height:48px;border:1px solid rgba(118,177,230,.20);background:#11263d;color:#e7eef4;border-radius:11px;font-size:10px;font-weight:750;padding:8px 5px}.craving-outcomes button:first-child{border-color:rgba(98,233,143,.30);color:#bdf5cd}
+.craving-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}.craving-outcomes button{min-height:48px;border:1px solid rgba(118,177,230,.20);background:#11263d;color:#e7eef4;border-radius:11px;font-size:10px;font-weight:750;padding:8px 5px}.craving-outcomes button:first-child{border-color:rgba(98,233,143,.30);color:#bdf5cd}
 .craving-review-actions{display:flex;gap:7px;justify-content:center;margin-top:12px;flex-wrap:wrap}.craving-review-actions button{min-height:42px;border:1px solid rgba(118,177,230,.22);background:#12283f;color:#d9e7ef;border-radius:11px;padding:9px 12px;font-size:11px;font-weight:700}.craving-review-actions .craving-review-primary{background:#dce3c5;color:#1f3932;border-color:transparent}
 .craving-review-note{margin-top:9px!important;font-size:9px!important;color:#8499aa!important}
 .craving-hero.reviewing{min-height:500px;padding-top:28px;display:flex;flex-direction:column;justify-content:center}.craving-hero.reviewing .craving-intro{display:none}.craving-hero.reviewing .craving-pet{width:250px!important;height:215px!important}.craving-hero.reviewing .craving-pet .pet-bob{width:185px!important;height:185px!important}
@@ -1871,9 +1871,10 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
       <h3 id="cravingReviewTitle">E agora?</h3>
       <p id="cravingReviewCopy">Não precisa dar uma nota. Só percebe se alguma coisa mudou.</p>
       <div class="craving-outcomes" id="cravingOutcomeButtons">
-        <button type="button" data-craving-outcome="resisted">Passou</button>
+        <button type="button" data-craving-outcome="resisted">Quis fumar, mas não fumei</button>
         <button type="button" data-craving-outcome="reduced">Diminuiu</button>
         <button type="button" data-craving-outcome="strong">Ainda está forte</button>
+        <button type="button" data-craving-outcome="smoked">Fumei agora</button>
       </div>
       <div class="craving-review-actions" id="cravingReviewActions" hidden>
         <button type="button" class="craving-review-primary" id="cravingReviewHome">Voltar à Home</button>
@@ -1887,7 +1888,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
   <div class="craving-support-list" id="cravingSupportList">
     <button class="craving-support-btn primary" id="cravingStayBtn" type="button"><span class="support-ico">🍃</span><span><strong>Ficar aqui por 2 minutos</strong><small>Brinque com o Nimbo enquanto o tempo passa.</small></span><span class="support-arrow">›</span></button>
-    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Jogar um minuto</strong><small>Uma brincadeira curta com o Nimbo para mudar o foco.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Brincar por 1 minuto</strong><small>Toque no Nimbo para mudar o foco por um instante.</small></span><span class="support-arrow">›</span></button>
     <button class="craving-support-btn" id="cravingMessageBtn" type="button"><span class="support-ico">💬</span><span><strong>Ler uma mensagem</strong><small>Uma ideia curta da Jornada para este momento.</small></span><span class="support-arrow">›</span></button>
   </div>
 
@@ -1898,7 +1899,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
     <button type="button" id="cravingMessageStay">Ficar com o Nimbo por 2 minutos</button>
   </div>
 
-  <div class="craving-foot" id="cravingFoot"><button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Se eu fumar depois, tudo bem: ainda quero registrar ›</button></div>
+  <div class="craving-foot" id="cravingFoot"><button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Voltar e registrar o que acontecer ›</button></div>
 </section>
 
 <section id="vale" class="tab">
@@ -2070,7 +2071,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.0.0').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.1.0').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -2497,22 +2498,22 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     },
     {
       id:'practice_first',icon:'◐',name:'Antes do automático',secret:false,
-      desc:'Crie seu primeiro espaço consciente diante de uma vontade.',rewardPresence:2,
+      desc:'Confirme que quis fumar, mas não fumou, depois de usar o apoio.',rewardPresence:2,
       condition:()=>practiceSummary().total>=1
     },
     {
       id:'practice_ten',icon:'◌',name:'A impressão não é uma ordem',secret:false,
-      desc:'Pratique dez vezes criar espaço antes de decidir.',rewardPresence:4,
+      desc:'Confirme dez vontades atravessadas sem fumar após usar o apoio.',rewardPresence:4,
       condition:()=>practiceSummary().total>=10
     },
     {
       id:'practice_smoked',icon:'↺',name:'O espaço existiu',secret:true,
       desc:'Crie espaço diante da vontade mesmo em uma ocasião que terminou em cigarro.',rewardPresence:3,
-      condition:()=>practiceSummary().endedInSmoke>=1
+      condition:()=>false // Conquista anterior preservada; fumar não desbloqueia recompensa.
     },
     {
       id:'practice_alternative',icon:'◇',name:'Outra forma de pausa',secret:true,
-      desc:'Experimente um caminho de apoio diferente do automático.',rewardPresence:3,
+      desc:'Use uma alternativa de apoio e confirme que não fumou.',rewardPresence:3,
       condition:()=>practiceSummary().usedAlternative>=1
     }
   ];
@@ -2522,8 +2523,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   // Conteúdo de apoio nunca depende de XP. Lore e descobertas podem continuar progressivos.
   const J_ALWAYS_AVAILABLE=new Set(['pause','reason','triggers','plan','support','returning','benefits']);
 
-  // Arquitetura preparada para o futuro botão “Tô com vontade”.
-  // Nesta versão não há gatilho visível: apenas modelo, caminhos e registro de prática.
+  // V8.1: episódios de apoio são registros sem recompensa. Só a confirmação explícita cria um evento de resistência.
   const CRAVING_SUPPORT_PATHS={
     nimbo:{id:'nimbo',label:'Ficar com o Nimbo',minutes:2,kind:'presença',prompt:'Fica aqui comigo um pouco. A vontade pode existir sem decidir por você.'},
     distract:{id:'distract',label:'Distrair a cabeça',minutes:3,kind:'distração',prompt:'Vamos ocupar alguns minutos e depois olhar de novo para a vontade.'},
@@ -2547,7 +2547,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   CHRONICLES.bridge.text=CHRONICLES.bridge.text.replace('A Casa da Cartografia revelou','O mapa do Vale revelou');
   Object.values(ITEMS).forEach(item=>item.bonus='Memória de uma descoberta no Vale.');
   const J_FAMILIES=[
-    {id:'practice',name:'Espaços praticados',icon:'◐',steps:[1,3,5,10,20,35,50,100],value:()=>practiceSummary().total},
+    {id:'practice',name:'Pausas confirmadas',icon:'◐',steps:[1,3,5,10,20,35,50,100],value:()=>practiceSummary().total},
     {id:'resists',name:'Vontades atravessadas',icon:'✦',steps:[1,3,5,10,20,35,50,100],value:()=>resists.length},
     {id:'days',name:'Dias confirmados',icon:'☀',steps:[1,3,7,14,30,60,100],value:()=>completedDays().length},
     {id:'plan',name:'Plano pessoal',icon:'✎',steps:[1,2,3,4,7],value:()=>Object.values(ensureJourney().plan).filter(x=>x.value?.trim()).length},
@@ -2556,7 +2556,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   ];
   J_FAMILIES.forEach(f=>f.steps.forEach(n=>ACHIEVEMENTS.push({
     id:`j_${f.id}_${n}`,icon:f.icon,name:`${f.name} · ${n}${f.id==='reduction'?'%':''}`,
-    desc:f.id==='practice'?'Prática acumulada; o desfecho não apaga o espaço criado.':f.id==='days'||f.id==='zero'?'Dias acumulados; não precisam ser consecutivos.':f.id==='reduction'?'Referência confirmada e ao menos três dias completos recentes.':'Um marco do seu caminho.',
+    desc:f.id==='practice'?'Confirmações explícitas de que você quis fumar, mas não fumou, após usar o apoio.':f.id==='days'||f.id==='zero'?'Dias acumulados; não precisam ser consecutivos.':f.id==='reduction'?'Referência confirmada e ao menos três dias completos recentes.':'Um marco do seu caminho.',
     rewardPresence:0,condition:()=>f.value()>=n
   })));
 
@@ -2958,14 +2958,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     };
   }
 
-  function rhythmMultiplierFromHistory(history,referenceSmokes){
-    const recent=(history||[]).slice(-7).map(x=>x.smokes).filter(Number.isFinite);
-    if(recent.length<3)return 1;
-    const current=mean(recent);
-    if(!(referenceSmokes>0))return current===0?1.25:.55;
-    const ratio=current/referenceSmokes;
-    return clamp(1.4-.4*ratio,.35,1.25);
-  }
+  function rhythmMultiplierFromHistory(){return 1;}
 
   function vitalityReward(smokeTotal,referenceSmokes,multiplier){
     if(referenceSmokes===null)return 0;
@@ -3009,21 +3002,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     return 0;
   }
 
-  function breathShortGapPenalty(minutes,referenceInterval){
-    if(!(referenceInterval>0)||!(minutes>=0)||minutes>=referenceInterval)return 0;
-    const ratio=minutes/referenceInterval;
-    if(ratio<.40)return 5;
-    if(ratio<.60)return 3;
-    if(ratio<.80)return 2;
-    return 1;
-  }
-
-  function breathDailyFrequencyPenalty(smokeTotal,referenceSmokes){
-    if(!(referenceSmokes>0)||!(smokeTotal>referenceSmokes))return 0;
-    const excess=Math.max(0,smokeTotal-referenceSmokes);
-    const ratio=smokeTotal/referenceSmokes;
-    return Math.max(1,Math.round(excess*1.5+Math.max(0,ratio-1)*4));
-  }
+  function breathShortGapPenalty(){return 0;}
+  function breathDailyFrequencyPenalty(){return 0;}
 
   function nextBreathTier(minutes,referenceInterval){
     if(!(referenceInterval>0))return null;
@@ -3096,7 +3076,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       const score=scoreFor(day);
       // Um único dia fechado já cria uma referência provisória. A partir do dia seguinte, ela pode orientar ganhos.
       const afterBaseline=baselineAvailable&&day>baselineStartDay;
-      const multiplier=afterBaseline&&baselineLocked?rhythmMultiplierFromHistory(postBaselineClosed,reference.smokes):1;
+      const multiplier=1;
       score.multiplier=multiplier;
       score.reference={...reference};
 
@@ -3104,11 +3084,10 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         ...smokes.filter(x=>eventDay(x)===day).map(x=>({...x,type:'smoke'})),
         ...resists.filter(x=>eventDay(x)===day).map(x=>({...x,type:'resist'}))
       ].sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
-      const practices=cravingPractices().filter(x=>(x.day||actorDay(x.startedAt))===day);
 
-      if(events.length)score.bond+=2;
-      if(practices.length)score.bond+=1;
-      let resistIndex=0,practiceIndex=0;
+
+      if(events.some(event=>event.type==='resist'))score.bond+=2;
+      let resistIndex=0;
       for(const event of events){
         const at=new Date(event.timestamp).getTime();
         if(event.type==='resist'){
@@ -3121,17 +3100,13 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
           const tier=breathTierTotal(gap,reference.intervalMinutes);
           const delta=Math.max(0,tier-intervalAwarded);
           score.breath+=Math.round(delta);
-          const shortPenalty=breathShortGapPenalty(gap,reference.intervalMinutes);
-          if(shortPenalty){score.breath-=shortPenalty;score.breathPenalty+=shortPenalty}
+
         }
         lastSmokeAt=at;
         intervalAwarded=0;
       }
 
-      for(const practice of practices){
-        const base=[3,2,1][practiceIndex++]??1;
-        score.resilience+=base;
-      }
+
 
       const closed=isClosed(day);
       if(closed)score.bond+=3;
@@ -3151,10 +3126,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         score.vitality+=vitalityReward(score.smokes,reference.smokes,multiplier);
         score.breath+=firstDelayReward(firstCigMinuteForDay(day),reference.firstCigMinute,1);
 
-        // Mais cigarros do que a referência significam maior frequência ao longo do dia.
-        // A penalidade só reduz o Fôlego gerado neste próprio dia; nunca apaga Fôlego de dias anteriores.
-        const frequencyPenalty=breathDailyFrequencyPenalty(score.smokes,reference.smokes);
-        if(frequencyPenalty){score.breath-=frequencyPenalty;score.breathPenalty+=frequencyPenalty}
+        // V8.1: registros de cigarro não descontam Fôlego.
+
 
         if(baselineLocked&&day>baselineEndDay){
           const dayGaps=globalSmokeGapsEndingOnDays([day]);
@@ -3203,7 +3176,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const recentClosed=completed.slice(-7);
     const recentSmokeAverage=mean(recentClosed.map(smokeCount));
     const initialReduction=baseline.smokes>0&&recentSmokeAverage!==null?((baseline.smokes-recentSmokeAverage)/baseline.smokes)*100:null;
-    const currentMultiplier=baselineLocked?rhythmMultiplierFromHistory(postBaselineClosed,reference.smokes):1;
+    const currentMultiplier=1;
     const liveMinutes=lastSmokeAt===null?null:Math.max(0,(now-lastSmokeAt)/60000);
     const currentTier=liveMinutes===null?0:breathTierTotal(liveMinutes,reference.intervalMinutes);
     const nextTier=liveMinutes===null?null:nextBreathTier(liveMinutes,reference.intervalMinutes);
@@ -3235,21 +3208,19 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const gapRatio=(refInterval&&liveMinutes!==null)?liveMinutes/refInterval:null;
     const longGap=gapRatio!==null&&gapRatio>=1.15;
     const veryLongGap=gapRatio!==null&&gapRatio>=1.6;
-    const shortGap=gapRatio!==null&&gapRatio<0.8;
+    const shortGap=false; // Um intervalo em andamento não é avaliado como ruim.
     const heavySequence=recentBurst>=2;
     const toughMoment=heavySequence||shortGap||Boolean(dayScore&&dayScore.breathPenalty>=3);
-    const supportive=toughMoment||recoveryMinutes(now)>=5&&vitality()<48;
+    const supportive=toughMoment||ensureJourney().stage.value==='returning';
     const upbeat=beforeFirstSmoke||veryLongGap||Boolean(dayScore&&dayScore.reference&&dayScore.reference.smokes!==null&&dayScore.smokes<dayScore.reference.smokes);
     const talkative=upbeat||supportive||Boolean(dayScore&&dayScore.resists>=1);
     const energy=clamp(
       (beforeFirstSmoke?82:54)
       +(veryLongGap?16:longGap?8:0)
-      -(shortGap?12:0)
-      -(heavySequence?15:0)
       +(upbeat?8:0),
       28,96
     );
-    const expression=beforeFirstSmoke?'playful':veryLongGap?'radiant':longGap?'happy':heavySequence?'wry':shortGap?'confused':supportive?'tired':'neutral';
+    const expression=beforeFirstSmoke?'playful':veryLongGap?'radiant':longGap?'happy':supportive?'happy':'neutral';
     const moodTag=beforeFirstSmoke?'ligado':veryLongGap?'aceso':longGap?'confiante':heavySequence?'perto':shortGap?'atento':supportive?'solidário':'atento';
     const supportMessage=supportive?heavySequence?'sequência puxada':'precisando de apoio':upbeat?'ritmo favorável':'';
     return {
@@ -3746,23 +3717,20 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function cravingPractices(){return ensureJourney().practices.slice().sort((a,b)=>new Date(a.startedAt)-new Date(b.startedAt))}
   function practiceSummary(){
     const rows=cravingPractices();
-    return {
-      total:rows.length,
-      completed:rows.filter(x=>x.endedAt).length,
-      endedInSmoke:rows.filter(x=>x.outcome==='smoked').length,
-      resisted:rows.filter(x=>x.outcome==='resisted').length,
+    const confirmed=rows.filter(x=>x.outcome==='resisted'&&x.linkedEventId&&resists.some(e=>e.id===x.linkedEventId));
+    return {total:confirmed.length,completed:confirmed.length,endedInSmoke:0,resisted:confirmed.length,
       reduced:rows.filter(x=>x.outcome==='reduced').length,
-      usedAlternative:rows.filter(x=>x.path&&x.path!=='nimbo').length
-    };
+      usedAlternative:confirmed.filter(x=>x.path&&x.path!=='nimbo').length};
   }
+
   function beginCravingPractice({path='nimbo',intensity=null,source='future-craving-button'}={}){
     if(!CRAVING_SUPPORT_PATHS[path])path='nimbo';
-    const at=new Date().toISOString(),row={id:uuid(),day:today(),startedAt:at,updatedAt:at,path,source,intensityBefore:Number.isFinite(Number(intensity))?Number(intensity):null,outcome:'open',endedAt:null,intensityAfter:null,linkedEventId:null};
+    const at=new Date().toISOString(),row={id:uuid(),day:today(),startedAt:at,updatedAt:at,path,source,intensityBefore:intensity!==null&&intensity!==''&&Number.isFinite(Number(intensity))?Number(intensity):null,outcome:'open',endedAt:null,intensityAfter:null,linkedEventId:null};
     ensureJourney().practices.push(row);jPersist();return row;
   }
   function completeCravingPractice(id,{outcome='unknown',intensityAfter=null,linkedEventId=null}={}){
     const row=ensureJourney().practices.find(x=>x.id===id);if(!row)return null;
-    const at=new Date().toISOString();row.outcome=outcome;row.endedAt=at;row.updatedAt=at;row.intensityAfter=Number.isFinite(Number(intensityAfter))?Number(intensityAfter):null;row.linkedEventId=linkedEventId||row.linkedEventId||null;jPersist();checkAchievements();return row;
+    const at=new Date().toISOString();row.outcome=outcome;row.endedAt=at;row.updatedAt=at;row.intensityAfter=intensityAfter!==null&&intensityAfter!==''&&Number.isFinite(Number(intensityAfter))?Number(intensityAfter):null;row.linkedEventId=linkedEventId||row.linkedEventId||null;jPersist();checkAchievements();return row;
   }
   function supportPathForMoment(){
     const plan=ensureJourney().plan,alt=(plan.alternative?.value||'').trim();
@@ -3772,7 +3740,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
 
 
-  /* V8 — Modo Vontade: a abertura já conta como prática de criar espaço. */
+  /* V8.1 — abrir, brincar, ler e encerrar não geram XP ou atributos. */
   const CRAVING_INTROS=[
     {title:'A vontade chegou.\\nVamos criar um espaço?',copy:'Você não precisa decidir nada agora. Podemos só atravessar os próximos dois minutos juntos.'},
     {title:'A impressão chegou.\\nEla não é uma ordem.',copy:'Não precisa discutir com a vontade nem obedecer imediatamente. Primeiro, um pouco de espaço.'},
@@ -3853,14 +3821,16 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(left<=0){clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;finishCravingPlay()}
   }
   function startCravingPlay(seconds=120,path='nimbo'){
-    setCurrentCravingPath(path);clearInterval(cravingTimer);cravingTimerDuration=seconds;cravingTimerEndsAt=Date.now()+seconds*1000;cravingTapCount=0;
+    const row=cravingPracticeRow();if(!row||row.linkedEventId)return;
+    row.outcome='open';row.endedAt=null;setCurrentCravingPath(path);clearInterval(cravingTimer);cravingTimerDuration=seconds;cravingTimerEndsAt=Date.now()+seconds*1000;cravingTapCount=0;
     const screen=$('craving'),hero=$('cravingHero');screen.classList.add('play-session');hero.classList.remove('reviewing');hero.classList.add('playing');
     $('cravingReview').hidden=true;$('cravingIntro').style.display='none';$('cravingMiniTimer').hidden=false;$('cravingStopEarly').hidden=false;$('cravingNimbo').tabIndex=0;$('cravingNimbo').setAttribute('aria-label','Brincar com o Nimbo. Toque para ele reagir.');
     $('cravingSupportList').style.display='none';$('cravingFoot').style.display='none';$('cravingMessagePanel').hidden=true;setCravingExpression(path==='distract'?'playful':'happy');updateCravingTimer();cravingTimer=setInterval(updateCravingTimer,250);$('cravingNimbo').focus({preventScroll:true});
   }
   function finishCravingPlay(){
+    clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;
     const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session');hero.classList.remove('playing');hero.classList.add('reviewing');
-    $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=false;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;$('cravingReviewTitle').textContent='E agora?';$('cravingReviewCopy').textContent='Não precisa dar uma nota. Só percebe se alguma coisa mudou.';$('cravingReviewNote').textContent='Nenhuma resposta registra automaticamente uma vontade superada na Home.';setCravingExpression('happy');
+    $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=false;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;$('cravingReviewTitle').textContent='E agora?';$('cravingReviewCopy').textContent='Não precisa dar uma nota. Só percebe se alguma coisa mudou.';$('cravingReviewNote').textContent='Só “Quis fumar, mas não fumei” registra uma vitória e gera reconhecimento. As outras respostas não geram pontos.';setCravingExpression('happy');
   }
   function reactCravingNimbo(){
     if(!$('cravingHero').classList.contains('playing'))return;const pet=$('cravingNimbo');cravingTapCount++;
@@ -3877,14 +3847,42 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const msg=pool[Math.floor(Math.random()*pool.length)];$('cravingMessageTitle').textContent=msg.title;$('cravingMessageText').textContent=msg.text;$('cravingMessagePanel').hidden=false;$('cravingMessagePanel').scrollIntoView({block:'nearest',behavior:'smooth'});
   }
   function handleCravingOutcome(outcome){
-    if(cravingCurrentPracticeId)completeCravingPractice(cravingCurrentPracticeId,{outcome});
-    $('cravingOutcomeButtons').hidden=true;$('cravingReviewActions').hidden=false;$('cravingMoreMinute').hidden=outcome==='resisted';
-    if(outcome==='resisted'){$('cravingReviewTitle').textContent='Ela passou.';$('cravingReviewCopy').textContent='Você criou espaço antes de decidir. Isso não registra automaticamente o botão “Quis fumar, mas não fumei”.';$('cravingReviewNote').textContent='Se quiser contar esta vontade como superada, registre na Home.';setCravingExpression('delighted')}
-    else if(outcome==='reduced'){$('cravingReviewTitle').textContent='Ela diminuiu.';$('cravingReviewCopy').textContent='Não precisa zerar para este intervalo ter valido. A vontade mudou de intensidade — e você percebeu.';$('cravingReviewNote').textContent='Você pode voltar ou ficar mais um minuto.';setCravingExpression('wink')}
-    else {$('cravingReviewTitle').textContent='Ela ainda está forte.';$('cravingReviewCopy').textContent='Tudo bem. O exercício não era vencer a vontade em dois minutos; era impedir que ela decidisse sozinha.';$('cravingReviewNote').textContent='Você pode ficar mais um minuto ou voltar e registrar o que acontecer.';setCravingExpression('wry')}
+    const row=cravingPracticeRow();if(!row||row.linkedEventId)return;
+    if(outcome==='resisted')registerResistedEvent(row);
+    else if(outcome==='smoked')registerSmokeEvent(row);
+    else completeCravingPractice(row.id,{outcome});
+    $('cravingOutcomeButtons').hidden=true;$('cravingReviewActions').hidden=false;
+    $('cravingMoreMinute').hidden=outcome==='resisted'||outcome==='smoked';
+    const copy={
+      resisted:['Vontade registrada.','Você quis fumar, mas não fumou. Seu registro já está na Home; não precisa repetir.','Esse momento fica na sua história.','delighted'],
+      reduced:['Ela diminuiu.','Você percebeu uma mudança. Podemos continuar ou experimentar outra coisa.','Sem pontos ou mudança de atributos.','happy'],
+      strong:['Eu sigo com você.','A vontade pode continuar. Podemos tentar outra estratégia ou buscar seu apoio.','Sem pontos ou mudança de atributos.','neutral'],
+      smoked:['Registrado. Seguimos daqui.','Este cigarro não apaga seu caminho. O Nimbo continua ao seu lado.','O cigarro já está na Home; não precisa registrar novamente.','neutral']
+    }[outcome];
+    if(!copy)return;
+    $('cravingReviewTitle').textContent=copy[0];$('cravingReviewCopy').textContent=copy[1];$('cravingReviewNote').textContent=copy[2];setCravingExpression(copy[3]);
   }
+  function registerResistedEvent(row=null){
+    if(row?.linkedEventId)return resists.find(e=>e.id===row.linkedEventId)||null;
+    const event={id:row?.id||uuid(),timestamp:new Date().toISOString(),day:today()};
+    if(resists.some(e=>e.id===event.id))return resists.find(e=>e.id===event.id);
+    resists.push(event);write(RESIST_KEY,resists);
+    if(row)completeCravingPractice(row.id,{outcome:'resisted',linkedEventId:event.id});
+    claimDailyAwarenessReward(event.day);animatePet(true);progressionCache=null;render();checkAchievements();scheduleSync();
+    return event;
+  }
+  function registerSmokeEvent(row=null){
+    if(row?.linkedEventId)return smokes.find(e=>e.id===row.linkedEventId)||null;
+    const event={id:row?.id||uuid(),timestamp:new Date().toISOString(),day:today()};
+    if(smokes.some(e=>e.id===event.id))return smokes.find(e=>e.id===event.id);
+    smokes.push(event);write(SMOKE_KEY,smokes);
+    if(row)completeCravingPractice(row.id,{outcome:'smoked',linkedEventId:event.id});
+    refreshMorningBehavior();animatePet(false);progressionCache=null;render();toast('Cigarro registrado');checkAchievements();scheduleSync();
+    return event;
+  }
+
   function pendingPracticeForEvent(){
-    if(!cravingPendingLink)return null;if(Date.now()>cravingPendingLink.until){const expired=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);if(expired&&!expired.endedAt)completeCravingPractice(expired.id,{outcome:'unknown'});cravingPendingLink=null;return null}const row=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);return row||null;
+    if(!cravingPendingLink)return null;if(Date.now()>cravingPendingLink.until){const expired=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);if(expired&&!expired.endedAt)completeCravingPractice(expired.id,{outcome:'unknown'});cravingPendingLink=null;return null}const row=ensureJourney().practices.find(x=>x.id===cravingPendingLink.id);return row&&!row.linkedEventId?row:null;
   }
   function linkPendingPracticeToEvent(outcome,eventId){const row=pendingPracticeForEvent();if(!row)return;completeCravingPractice(row.id,{outcome,linkedEventId:eventId});cravingPendingLink=null;}
 
@@ -3977,8 +3975,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
   function jHistoryTrendHtml(){
     const days=uniq([...completedDays().slice(-6),today()]).sort().slice(-7),maxSmoke=Math.max(1,...days.map(smokeCount)),maxResist=Math.max(1,...days.map(resistCount));
+    const chartMax=Math.max(maxSmoke,maxResist);
     if(!days.length)return'<div class="j-empty">Seus registros vão formar a evolução aqui.</div>';
-    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/maxSmoke*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/maxResist*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}</span></div>`}).join('')}<p class="j-layer-note">Barras: cigarros / vontades atravessadas. Tendência, não nota.</p></div>`;
+    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/chartMax*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/chartMax*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}${isClosed(d)?'':' · parcial'}</span></div>`}).join('')}<p class="j-layer-note">Barras na mesma escala: cigarros / vontades confirmadas. Dias sem informação não representam zero.</p></div>`;
+  }
+  function jCravingHistoryHtml(){
+    const rows=cravingPractices().slice(-7).reverse();
+    if(!rows.length)return '<p class="j-note">Os episódios de vontade aparecerão aqui. Abrir o apoio não gera pontos.</p>';
+    const labels={open:'Sem desfecho informado',left:'Encerrou o apoio',unknown:'Sem desfecho informado',reduced:'Diminuiu',strong:'Ainda forte',smoked:'Cigarro registrado',resisted:'Sem fumar — confirmado'};
+    return '<h4>Momentos de vontade</h4><p class="j-note">Histórico de apoio; somente a confirmação de não fumar gera reconhecimento.</p>'+rows.map(row=>'<div class="j-row"><strong>'+jEsc(labels[row.outcome]||labels.unknown)+'</strong><span>'+jEsc(new Date(row.startedAt).toLocaleString('pt-BR'))+' · '+jEsc(CRAVING_SUPPORT_PATHS[row.path]?.kind||'apoio')+'</span></div>').join('');
   }
   function jHistoryHtml(){
     const j=ensureJourney(),e=progressionEngine(),ps=practiceSummary(),planFields=[
@@ -3992,7 +3997,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     ];
     const baseline=e.baseline.smokes===null?'—':e.baseline.smokes.toFixed(1).replace('.',',');
     const avg=avg7();
-    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Dados de consumo ficam separados das habilidades que você está treinando.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>baseline observada, não meta moral</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>histórico preservado, sem exigência de sequência</span></div></div>${jHistoryTrendHtml()}</section><section class="j-explore-block"><h3>O que você está treinando</h3><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>apoio usado ao longo do caminho</span></div></div></section><details id="jPlan" open><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><section class="j-explore-block"><h3>Atributos do Nimbo</h3><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></section>`;
+    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Dados de consumo ficam separados das habilidades que você está treinando.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>baseline observada, não meta moral</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>histórico preservado, sem exigência de sequência</span></div></div>${jHistoryTrendHtml()}${jCravingHistoryHtml()}</section><section class="j-explore-block"><h3>O que você está treinando</h3><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>apoio usado ao longo do caminho</span></div></div></section><details id="jPlan" open><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><section class="j-explore-block"><h3>Atributos do Nimbo</h3><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></section>`;
   }
   let jView='daily',jReaderId=null,jPlanDirty=false;
   function renderJourneyV7(){
@@ -4076,6 +4081,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let level=1;
     thresholds.forEach((t,i)=>{if(xp>=t)level=i+1});
     game.bestReduction=Math.max(0,Number(e.reduction||0));
+    level=Math.max(level,Math.min(5,Number(game.maxLevel)||1));
     game.maxLevel=level;
     write(GAME_KEY,game);
     return{xp,level,thresholds};
@@ -4098,7 +4104,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(perf.veryLongGap)return'Esse intervalo está grande. Tô elétrico por aqui.';
     if(perf.longGap)return'Hoje abriu um espaço bom. Quero ver até onde ele vai.';
     if(perf.heavySequence)return'O dia apertou um pouco. Eu fico mais perto no próximo intervalo.';
-    if(perf.shortGap)return'Intervalo curto. Sem cobrança: o próximo espaço ainda pode ser diferente.';
+    if(perf.shortGap)return'Cada intervalo começa de novo. Seu caminho continua.';
     return{
       tired:'A semana apertou um pouco. Eu continuo aqui — o histórico ainda vale.',
       neutral:'Estou acompanhando. Manter o mapa dos seus dias vivo já importa.',
@@ -4149,7 +4155,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function reactPet(kind){
     if(kind==='idle'){
       if(Date.now()<actorBusyUntil)return;
-      const level=morningContext().level,hour=actorClock().hour,recovering=recoveryMinutes()<5;
+      const level=morningContext().level,hour=actorClock().hour,recovering=false;
       const perf=dailyPerformanceProfile();
       const repertoire=recovering?['shrug','listen','tilt']
         :hour>=22||hour<6?['yawn','settle','listen']
@@ -4160,14 +4166,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         :level>=2?['stretch','sway','peek','nod']
         :['look','settle','listen','tilt'];
       const options=repertoire.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]);
-      if(!recovering&&Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.supportive?'wry':level>=2?'wink':'wry',1800);
+      if(!recovering&&Math.random()<(perf.upbeat?.34:perf.supportive?.28:.20))setTemporaryPetExpression(perf.upbeat?'wink':perf.supportive?'happy':level>=2?'wink':'wry',1800);
       if(!actorState().quiet.value&&Date.now()-actorLastSpeech>(perf.talkative?65000:90000)&&Math.random()<(perf.talkative?.36:.22)){showPetReaction(actorLine('touch'),perf.supportive?'warm':'calm',3200);actorLastSpeech=Date.now()}
       return;
     }
     const milestone=actorMilestone(kind);
-    const choices=milestone?['party','exitReturn']:kind==='resist'?['hop','wiggle','tiptoe','bow']:kind==='close'?['bow','stretch']:kind==='smoke'?['settle','listen','tilt','shrug']:['tilt','peek','nod','shrug','tiptoe'];
+    const choices=milestone?['party','exitReturn']:kind==='resist'?['hop','wiggle','tiptoe','bow']:kind==='close'?['bow','stretch']:kind==='smoke'?['settle','listen','nod']:['tilt','peek','nod','shrug','tiptoe'];
     const options=choices.filter(x=>x!==actorLast);actorPlay(options[Math.floor(Math.random()*options.length)]||choices[0]);
-    setTemporaryPetExpression(milestone?'delighted':kind==='resist'?'radiant':kind==='smoke'?'wry':Math.random()<.5?'wink':'wry',milestone?3500:2400);
+    setTemporaryPetExpression(milestone?'delighted':kind==='resist'?'radiant':kind==='smoke'?'neutral':Math.random()<.5?'wink':'wry',milestone?3500:2400);
     showPetReaction(actorLine(milestone?'milestone':kind),kind==='resist'||milestone?'good':'warm',3400);actorLastSpeech=Date.now();
   }
 
@@ -4180,9 +4186,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(f>=65||perf.longGap)pet.classList.add('high-breath');
     if(r>=65)pet.classList.add('high-resilience');
     // Consumo não deixa o Nimbo doente ou menos afetuoso visualmente.
-    const tone=perf.supportive
-      ?{main:'#43b887',light:'#88ddae',glow:'rgba(92,200,145,.24)'}
-      :b<35
+    const tone=b<35
         ?{main:'#43ad78',light:'#82d8a4',glow:'rgba(83,190,126,.22)'}
         :b<70
           ?{main:'#4fca80',light:'#8bf1b0',glow:'rgba(98,233,143,.28)'}
@@ -4217,7 +4221,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const walker=$('petWalker');if(!walker||motionReduced())return;
     if(document.visibilityState!=='visible'||!document.querySelector('#home.tab.active')||Date.now()<actorBusyUntil){scheduleNimboWalk(false);return}
     const hour=actorClock().hour;
-    const energy=recoveryMinutes()<5?30:clamp(22+petMotionProfile.breath*.18+Number(petMotionProfile.energy||55)*.62+morningContext().level*5-(hour>=22||hour<6?22:0),28,94);
+    const energy=clamp(22+petMotionProfile.breath*.18+Number(petMotionProfile.energy||55)*.62+morningContext().level*5-(hour>=22||hour<6?22:0),28,94);
     const range=clamp(($('petZone').clientWidth-110)/2,24,62);
     let target=randomBetween(-range,range);if(Math.abs(target-nimboWalkX)<15)target=nimboWalkX>=0?-range:range;
     const duration=Math.round(clamp(Math.abs(target-nimboWalkX)/(20+energy*.34)*1000,780,3000));
@@ -4361,7 +4365,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function actorLine(kind){
     const j=ensureJourney(),plan=j.plan,m=morningContext(),hour=actorClock().hour,perf=dailyPerformanceProfile();
     const pools={
-      smoke:['Cof. Tô tortinho. Fica aqui comigo.','Esse pegou um pouco. Já passa.','Registrado. O próximo momento ainda não aconteceu.','Pru… eu continuo aqui.','Tá registrado. Sem julgamento.','Bom. Agora sabemos que aconteceu.','Sem discurso. Só fica aqui um pouquinho.','Minha cara ficou esquisita. Minha companhia não mudou.'],
+      smoke:['Registrado. Eu sigo com você.','Podemos cuidar do próximo momento.','Seu caminho continua aqui.','Pru… companhia presente.','Obrigado por registrar. Vamos com calma.','Uma informação para conhecer seu dia.','Se quiser apoio agora, estou aqui.','O que você aprendeu continua com você.'],
       resist:['Pru! Essa passou.','A vontade fez cena. Você ficou.','Essa mereceu um pulinho.','Gostei dessa pausa.','Hehe. Seguimos. ✨','A vontade veio. E foi.','Um espacinho a mais.','Boa. Sem fogos... tá, um pulo.'],
       close:['Dia guardado. Ufa.','Fechou. Descansa esse teclado.','Mais uma página nossa.','Por hoje, tá registrado.','Prr... até daqui a pouco.'],
       milestone:['PRUUU! Essa merece festa! 🎉','Aplausos! Sim, são meus.','Tá. Agora eu vou comemorar.','Olha o tamanho desse passo!','Pru-pru! Essa entrou pra história.'],
@@ -4375,7 +4379,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       layers.push(pools.smoke);
     }else if(kind==='touch'){
       // 1. acontecimento imediato
-      if(recoveryMinutes()<5)layers.push(['Tô tortinho. Fica aqui comigo.','Cof. Minha cara tá carregando. Minha companhia continua igual.','Só um instante. Eu me ajeito por aqui.']);
+      if(recoveryMinutes()<5)layers.push(['Eu sigo aqui com você.','Quer uma ideia para o próximo momento?','Podemos ficar juntos sem precisar explicar.']);
       // 2. estado atual do processo
       if(j.stage.value==='returning')layers.push(['Você voltou. Isso já é prática.','Sem reconstruir tudo hoje. Só o próximo passo.']);
       // 3. padrão comportamental relevante
@@ -4383,7 +4387,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
       else if(perf.veryLongGap)layers.push(['Esse intervalo cresceu bastante.','Tem bastante ar aqui entre um e outro.']);
       else if(perf.longGap)layers.push(['Intervalo acima da sua referência.','Esse espaço ficou um pouco maior hoje.']);
       else if(perf.heavySequence)layers.push(['O dia apertou. Eu fico mais perto agora.','Sem corrigir o dia inteiro. Só cuidamos do próximo intervalo.']);
-      else if(perf.shortGap)layers.push(['Foi um intervalo curto. Sem cobrança.','O próximo espaço ainda não foi decidido.']);
+      else if(perf.shortGap)layers.push(['Um novo intervalo está começando.','O próximo espaço ainda não foi decidido.']);
       if(usualSmokeWindow())layers.push(['Hm. Esse horário eu conheço.','Hora conhecida. Cabe uma pausa antes do automático?']);
       // 4. plano pessoal
       const alternative=(plan.alternative?.value||'').toLowerCase();
@@ -4437,15 +4441,15 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   function determineNimboExpression(v,b,f,r){
     const hour=actorClock().hour,last=resists[resists.length-1],perf=dailyPerformanceProfile();
-    if(recoveryMinutes()<5)return {expression:'wry',moodTag:'se recompondo'};
+    // A resposta mais recente tem prioridade; fumar não cria uma janela de desconforto.
     if(last&&Date.now()-new Date(last.timestamp).getTime()>=0&&Date.now()-new Date(last.timestamp).getTime()<120000)return {expression:'radiant',moodTag:'confiante'};
     if(hour>=22||hour<5)return {expression:'sleepy',moodTag:'tranquilo'};
     if(perf.beforeFirstSmoke)return {expression:'playful',moodTag:'ligado'};
     if(perf.veryLongGap)return {expression:'radiant',moodTag:'aceso'};
     if(perf.longGap)return {expression:'happy',moodTag:'solto'};
-    if(perf.heavySequence)return {expression:'wry',moodTag:'perto'};
-    if(perf.shortGap)return {expression:'confused',moodTag:'mexido'};
-    if(perf.supportive)return {expression:'tired',moodTag:'junto'};
+    if(perf.heavySequence)return {expression:'neutral',moodTag:'presente'};
+    if(perf.shortGap)return {expression:'neutral',moodTag:'atento'};
+    if(perf.supportive)return {expression:'happy',moodTag:'junto'};
     const morning=morningContext();
     if(morning.level>=3)return {expression:'playful',moodTag:'animado'};
     if(morning.level>=2)return {expression:'happy',moodTag:'confiante'};
@@ -4461,7 +4465,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(perf.veryLongGap)return 'Intervalo grande. Tô animado e um pouco exibido.';
     if(perf.longGap)return 'O dia abriu um bom espaço. Vamos cuidar dele.';
     if(perf.heavySequence)return 'Dia apertado. Eu continuo aqui; o próximo intervalo ainda existe.';
-    if(perf.shortGap)return 'Foi um intervalo curto. Sem cobrança — cuidamos do próximo.';
+    if(perf.shortGap)return 'Um novo intervalo está começando. Eu sigo aqui.';
     return message(mood(vitality(),bond()),bond());
   }
 
@@ -5285,7 +5289,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
         baseline:gameRes.data.baseline===null?null:Number(gameRes.data.baseline),
         baselineLocked:!!gameRes.data.baseline_locked,
         bestReduction:Number(gameRes.data.best_reduction||0),
-        maxLevel:Number(gameRes.data.max_level||1)
+        maxLevel:Math.max(Number(game.maxLevel||1),Number(gameRes.data.max_level||1))
       };
     }
 
@@ -5379,33 +5383,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   $('cravingRegisterAnyway').onclick=()=>closeCravingMode({keepForNextEvent:true});
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&cravingTimerEndsAt)updateCravingTimer()});
 
-  $('smokeBtn').onclick=()=>{
-    const day=today();
-    const event={id:uuid(),timestamp:new Date().toISOString(),day};
-    smokes.push(event);
-    write(SMOKE_KEY,smokes);
-    linkPendingPracticeToEvent('smoked',event.id);
-    claimDailyAwarenessReward(day);
-    refreshMorningBehavior();
-    animatePet(false);
-    render();
-    toast('Cigarro registrado');
-    checkAchievements();
-    scheduleSync();
-  };
-
-  $('resistBtn').onclick=()=>{
-    const day=today();
-    const event={id:uuid(),timestamp:new Date().toISOString(),day};
-    resists.push(event);
-    write(RESIST_KEY,resists);
-    linkPendingPracticeToEvent('resisted',event.id);
-    claimDailyAwarenessReward(day);
-    animatePet(true);
-    render();
-    checkAchievements();
-    scheduleSync();
-  };
+  $('smokeBtn').onclick=()=>{registerSmokeEvent(pendingPracticeForEvent());cravingPendingLink=null};
+  $('resistBtn').onclick=()=>{registerResistedEvent(pendingPracticeForEvent());cravingPendingLink=null};
 
   let pendingCloseDay=null;
 
