@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="app-version" content="8.2.1">
+<meta name="app-version" content="8.3.0">
 <meta name="theme-color" content="#07111f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1686,6 +1686,157 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 .craving-play-reaction.calm{border-color:rgba(114,222,241,.24)}
 
 
+/* V8.3 — calmer hierarchy, clear exits, reading-first Journey */
+#home .quick-actions-v8{grid-template-columns:1fr 1fr!important;gap:8px!important;margin:10px 0}
+#home .quick-actions-v8 .quick{position:relative;display:grid;grid-template-columns:23px 1fr;column-gap:8px;align-content:center;align-items:center;min-height:72px!important;height:auto;border-radius:17px;padding:12px!important;text-align:left;box-shadow:none}
+#home .quick-actions-v8 .quick-icon{grid-row:1/3;margin:0!important;font-size:21px!important}
+#home .quick-actions-v8 .quick-title{font-size:14px!important;line-height:1.25!important;font-weight:700}
+#home .quick-actions-v8 .quick-sub{opacity:1;grid-column:2;font-size:12px!important;line-height:1.35!important;margin-top:3px!important;color:#afc0ce}
+#home .quick-actions-v8 .quick.craving{grid-column:1/-1;grid-template-columns:32px 1fr 20px;min-height:68px!important;background:linear-gradient(110deg,#86edb1,#66dba5);border:1px solid #9bf1be;color:#092c23;padding:12px 17px!important;box-shadow:0 5px 20px #52d99015}
+#home .quick-actions-v8 .quick.craving .quick-title{font-size:18px!important;letter-spacing:-.35px}
+#home .quick-actions-v8 .quick.craving .quick-sub{color:#254f42;font-size:13px!important}
+.quick-arrow{grid-column:3;grid-row:1/3;font-size:23px;font-weight:400}
+#home .quick-actions-v8 .quick.smoke{background:#152339;border:1px solid #344357;color:#e6edf4}
+#home .quick-actions-v8 .quick.resist{background:#122c2d;border:1px solid #31564c;color:#d7eddf}
+#home .quick-actions-v8 .quick.resist .quick-icon{color:#9ce5ba}
+#home .quick-actions-v8 .quick.resist .quick-sub{color:#b4cec4}
+#home .quick-actions-v8 button:active{transform:translateY(1px);filter:brightness(.95)}
+#home .quick-actions-v8 button:focus-visible,#craving button:focus-visible{outline:3px solid #ffd66b;outline-offset:3px}
+/* All hidden controls really disappear even when component styles use display. */
+#craving [hidden]{display:none!important}
+body.craving-mode-active .wrap{padding-bottom:0}
+#craving.active{display:flex;flex-direction:column;min-height:calc(100svh - 14px - env(safe-area-inset-top));gap:12px;padding-bottom:0}
+#craving .craving-topbar{flex-shrink:0;grid-template-columns:72px 1fr 72px;margin:0;height:44px}
+#craving .craving-back{font-size:14px;min-width:60px}
+#craving .craving-mode-label{font-size:12px;letter-spacing:1px}
+#craving .craving-hero{padding:8px 18px 18px;border-radius:24px;flex-shrink:0;min-height:0;background:radial-gradient(ellipse at 50% 20%,#23475a55,transparent 70%),#10263b;border-color:#305069}
+#craving .craving-hero::before{opacity:.6}
+#craving .craving-pet.pet-zone{height:125px!important;width:220px!important}
+#craving .craving-pet .pet-bob{height:118px!important;width:118px!important}
+#craving .craving-title{font-family:inherit;font-size:23px;line-height:1.2;font-weight:650;letter-spacing:-.65px}
+#craving .craving-copy{font-size:15px;line-height:1.5;min-height:0;margin-top:7px;color:#b6c9d5}
+#craving .craving-timer-card{display:none}
+#craving .craving-support-list{gap:8px;margin:0}
+#craving .craving-support-btn{min-height:77px;border-radius:16px;grid-template-columns:42px 1fr 14px;padding:12px;gap:12px;background:#12263a}
+#craving .craving-support-btn.primary{background:#183b36;border-color:#386455}
+#craving .craving-support-btn strong{font-size:16px;line-height:1.3}
+#craving .craving-support-btn small{font-size:13px;line-height:1.4;color:#b1c6d0;margin-top:4px}
+#craving .support-ico{background:transparent;font-size:24px}
+#craving .craving-foot,#craving.play-session .craving-foot{display:grid!important;grid-template-columns:1fr;gap:6px;position:sticky;bottom:0;z-index:20;margin-top:auto;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#07111fe8,#07111f 30%);border-top:1px solid #263e49}
+#craving .pause-register{border:1px solid #466259;background:#16332f;color:#d7f1df;min-height:54px;border-radius:13px;font-size:15px;font-weight:650;padding:9px 12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px 10px}
+#craving .pause-register span{color:#b7d1c5;font-size:12px;font-weight:400}
+#craving .craving-register-anyway{min-height:52px;border:0;border-radius:13px;background:#dce6dd;color:#17342d;text-decoration:none;font-size:16px;font-weight:650;padding:8px 12px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px 10px}
+#craving .craving-register-anyway span{font-size:12px;color:#35554a;font-weight:400}
+#craving .craving-hero.playing{min-height:350px;flex:1;justify-content:center;padding-top:40px}
+#craving .craving-hero.playing .craving-pet{height:250px!important;width:min(100%,320px)!important}
+#craving .craving-hero.playing .pet-bob{width:215px!important;height:215px!important}
+#craving .craving-mini-timer{padding:9px 12px;top:14px;right:14px}
+#craving .craving-mini-timer strong{font-size:14px;font-variant-numeric:tabular-nums}
+#craving .craving-stop-early{font-size:14px;min-height:44px;color:#b9ced8}
+#craving .craving-hero.reviewing{min-height:300px;flex:1;padding-top:18px;justify-content:center}
+#craving .craving-hero.reviewing .craving-pet{height:160px!important;width:220px!important}
+#craving .craving-hero.reviewing .pet-bob{height:150px!important;width:150px!important}
+#craving .craving-review{padding:12px 0;background:none;border:0;backdrop-filter:none}
+#craving .craving-review h3{font-size:24px;letter-spacing:-.6px}
+#craving .craving-review p{font-size:15px;color:#b6c9d5}
+#craving .craving-review small{font-size:12px}
+#craving .craving-review-actions{gap:8px;display:flex;flex-wrap:wrap}
+#craving .craving-review-actions button{min-height:48px;font-size:14px;padding:10px 14px}
+#craving .craving-review-note:empty{display:none}
+#craving .craving-message-panel{margin:0;padding:24px;border-radius:20px;background:#182b3a;border-color:#455461}
+#craving .craving-message-panel small{font-size:12px}
+#craving .craving-message-panel strong{font:400 29px/1.18 Georgia,serif;margin:16px 0}
+#craving .craving-message-panel p{font-size:17px;line-height:1.75;color:#d0dcd9}
+#craving .craving-message-panel button{font-size:14px;min-height:48px;margin-top:22px}
+#craving.reading-session .craving-hero,#craving.reading-session .craving-support-list{display:none!important}
+#craving .craving-play-reaction{font-size:13px;line-height:1.4;max-width:85%;top:64px}
+/* Journey: single featured reading, distinct collections, quiet navigation. */
+body:has(#journey.active) .home-header{margin-bottom:18px;align-items:center}
+body:has(#journey.active) .home-header h1{font-size:16px;letter-spacing:-.3px}
+body:has(#journey.active) .home-header .subtitle{display:none}
+#journey{--j-border:#314854;--j-ink:#e4ece7;--j-muted:#adc1c8;color:var(--j-ink)}
+#journey .j-compact-head{align-items:center;margin:0 0 18px}
+#journey .j-compact-head h2{font-size:30px;letter-spacing:-1.1px;line-height:1.1}
+#journey .j-compact-head>span{font-size:12px;color:#a5bec6;max-width:95px;white-space:normal;text-align:right;line-height:1.5}
+#journey .j-purpose{font-size:14px;line-height:1.45;margin-top:6px;color:var(--j-muted)}
+#journey .j-tabs{border:1px solid #263e4b;background:#0c1d2c;border-radius:14px;padding:4px;gap:2px;margin:0 0 20px;display:grid;grid-template-columns:.75fr 1fr 1.2fr 1.25fr}
+#journey .j-tabs button{min-width:0;min-height:46px;border:0;border-radius:10px;font-size:14px;line-height:1.2;padding:8px 2px;color:#afc3ca;position:relative}
+#journey .j-tabs button.active{background:#29443e;color:#e6f1df;box-shadow:0 2px 8px #0002}
+#journey .j-tabs b{position:absolute;right:2px;top:0;font-size:10px;padding:2px 4px;border-radius:8px;background:#c4dcae;color:#173b30;line-height:1;min-width:13px}
+#journey .j-feature{position:relative;padding:24px;border:1px solid #587063;border-radius:23px;background:linear-gradient(130deg,#314f48,#193633);box-shadow:0 10px 32px #00000012}
+#journey .j-feature h3{font:400 31px/1.12 Georgia,serif;letter-spacing:-.7px;margin:16px 0 12px;color:#f0f2e5;max-width:440px}
+#journey .j-kicker{font-family:inherit;font-size:12px;letter-spacing:1.1px;color:#c2d5c4}
+#journey .j-feature p{font-size:16px;line-height:1.55;color:#c9d9d1;margin:0 0 20px}
+#journey .j-primary{min-height:48px;font-size:15px;border-radius:12px;padding:12px 16px;background:#e2e7cd;color:#203d32;display:inline-flex;gap:24px;justify-content:space-between;align-items:center}
+#journey .j-doorways{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+#journey .j-doorways button{position:relative;text-align:left;min-height:109px;background:#102632;border:1px solid #304b53;border-radius:16px;color:#dcebe2;padding:14px;display:grid;gap:5px;align-content:start}
+#journey .j-doorways button>span{color:#c6d9b6;font-size:20px;line-height:1;margin-bottom:6px}
+#journey .j-doorways strong{font-size:16px;font-weight:650}
+#journey .j-doorways small{font-size:13px;color:#adc4cb;line-height:1.35}
+#journey .j-doorways i{position:absolute;right:14px;top:13px;font-style:normal;color:#8caab4}
+#journey details{margin:0;border-bottom:1px solid #2b424c;padding:0}
+#journey summary{min-height:52px;font-size:15px;padding:16px 2px;line-height:1.4;color:#d7e4dc;list-style-position:inside}
+#journey summary::marker{color:#9ebeb1;font-size:12px}
+#journey details>p{font-size:16px;line-height:1.6;color:#b6cbd0}
+#journey .j-moment{margin:0 0 16px;font-size:14px}
+#journey .j-moment select,#journey .j-topic-label select{min-height:46px;font-size:16px}
+#journey .j-text-button,#journey .j-essential button{font-size:14px;min-height:48px;line-height:1.4}
+#journey .j-essential{margin-top:24px;gap:20px}
+#journey .j-section{font-size:16px;margin:20px 0 9px;font-weight:650;letter-spacing:-.2px}
+#journey .j-row{position:relative;border:0;border-bottom:1px solid #2f4650;border-radius:0;background:transparent;margin:0;padding:17px 8px 17px 12px;box-shadow:none;min-height:92px}
+#journey .j-row strong{font-size:17px;line-height:1.35;color:#e0e9e5;font-weight:600}
+#journey .j-row small{font-size:12px;line-height:1.4;color:#a9bfc8;margin-bottom:5px}
+#journey .j-row .j-state-label{font-size:12px;line-height:1.4;margin-top:7px;font-weight:450;color:#b8cfbd}
+#journey .j-row span{font-size:13px;line-height:1.45}
+#journey .j-row:not(:disabled):hover{background:#203c3a66}
+#journey .j-row:active:not(:disabled){background:#29463e}
+#journey .j-reading-progress{border-left:2px solid #b3a0df}
+#journey .j-reading-unread{border-left:2px solid #bace9e}
+#journey .j-reading-locked strong{color:#a4b5bf}
+#journey .j-continue .j-row{border:1px solid #3f4e5d;border-radius:14px;background:#162938}
+#journey .j-library-switch{display:flex;gap:20px;border-bottom:1px solid #304651;margin-bottom:16px}
+#journey .j-library-switch button{min-height:46px;background:none;border:0;border-bottom:2px solid transparent;color:#adc2cb;font-size:16px;padding:6px 0}
+#journey .j-library-switch button[aria-pressed=true]{color:#e3ebcd;border-bottom-color:#c2d1a7}
+#journey .j-filter-row{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:4px;gap:6px;margin:0 0 4px;scrollbar-width:thin}
+#journey .j-filter-row button{flex-shrink:0;font-size:14px;min-height:44px;border-radius:22px;padding:8px 13px;background:#112632}
+#journey .j-filter-row button[aria-pressed=true]{background:#2c463c;color:#e6eed4;border-color:#94b69d}
+#journey .j-library-options summary{font-size:14px;min-height:46px;padding:12px 2px}
+#journey .j-topic-label{font-size:14px;margin-bottom:14px}
+#journey .j-list-count{font-size:12px;color:#a8bec7;margin:18px 0 4px}
+#journey .j-achievement-intro{display:flex;gap:16px;align-items:center;padding:16px 0 20px;border-bottom:1px solid #3c4e4a;margin-bottom:16px}
+.j-medal{color:#e0d2a1;font-size:38px;line-height:1}
+#journey .j-achievement-intro strong{font-size:24px;font-weight:550;letter-spacing:-.5px}
+#journey .j-achievement-intro p{font-size:14px;color:#b5c9c8;margin:6px 0 0}
+#journey .j-new-discoveries{background:#222f31;border:1px solid #5b5e45;border-radius:17px;padding:16px}
+#journey .j-new-discoveries h3{font-size:14px;color:#e2d8b7;margin:0 0 5px}
+#journey .j-achievement-new{border-left:0!important}
+#journey .j-achievement-group summary{font-size:15px;display:flex;gap:12px;justify-content:space-between;align-items:center}
+#journey .j-achievement-group summary span{font-size:12px;color:#b7cebb;text-align:right;flex-shrink:0}
+#journey .j-layer-grid{grid-template-columns:1fr;gap:0;border:1px solid #324953;border-radius:16px;overflow:hidden;margin:14px 0 18px}
+#journey .j-layer-card{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:15px;border:0;border-radius:0;border-bottom:1px solid #2a414b;background:#122631}
+#journey .j-layer-card:last-child{border-bottom:0}
+#journey .j-layer-card small{font-size:14px;line-height:1.4;color:#c4d4d7}
+#journey .j-layer-card strong{grid-column:2;grid-row:1/3;align-self:center;font-size:26px;margin:0;font-variant-numeric:tabular-nums;font-weight:550}
+#journey .j-layer-card span{font-size:12px;margin:0;line-height:1.4}
+#journey .j-explore-block{margin:0}
+#journey .j-explore-block>h3{font-size:18px;margin:0 0 6px}
+#journey .j-explore-block>p{font-size:14px;line-height:1.6}
+#journey .j-trend-day,#journey .j-trend-value,#journey .j-trend h4,#journey .j-layer-note{font-size:12px}
+#journey .j-trend-row{grid-template-columns:48px 1fr 44px;gap:8px;margin:12px 0}
+#journey .j-trend{padding:16px}
+#journey .j-attribute-head{font-size:16px}
+#journey .j-attribute-copy,#journey .j-plan-hint,#journey .j-note{font-size:14px;line-height:1.55}
+#journey #jPlanForm label{font-size:16px;line-height:1.5;margin:18px 0}
+.j-dialog{border-radius:22px;max-height:90svh;overscroll-behavior:contain}
+.j-dialog header span{font-size:13px}
+.j-reader-content{padding:10px 24px 26px}
+.j-reader-content small{font-size:12px;line-height:1.6}
+.j-reader-actions{position:sticky;bottom:-26px;background:#102431;padding:12px 0 calc(12px + env(safe-area-inset-bottom));margin-bottom:-26px}
+.j-reader-actions button{font-size:14px;min-height:48px;border-radius:12px}
+.j-reader-actions button:first-child{background:transparent;color:#dce3c5;border:1px solid #607267}
+@media(max-width:359px){#home .quick-actions-v8 .quick{grid-template-columns:1fr;padding:10px!important}#home .quick-actions-v8 .quick:not(.craving) .quick-icon{display:none}#home .quick-actions-v8 .quick:not(.craving) .quick-sub{grid-column:1}#journey .j-tabs{grid-template-columns:1fr 1fr}#journey .j-feature{padding:20px}#journey .j-feature h3{font-size:28px}}
+@media(prefers-reduced-motion:reduce){#craving *,#journey *{scroll-behavior:auto!important}.craving-spark{display:none}}
+
 </style>
 </head>
 <body>
@@ -1811,10 +1962,10 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
     <div><strong id="pendingDaysTitle"></strong><p id="pendingDaysSummary"></p></div>
     <button type="button" class="secondary" id="reviewPendingDays">Revisar dias</button>
   </div>
-  <div class="quick-actions quick-actions-v731 quick-actions-v8">
-    <button class="quick smoke" id="smokeBtn" type="button" aria-label="Registrar que fumei agora"><span class="quick-icon">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
-    <button class="quick craving" id="cravingBtn" type="button" aria-label="Abrir apoio porque estou com vontade de fumar"><span class="quick-icon craving-icon" aria-hidden="true"><svg viewBox="0 0 32 24"><path d="M9.2 20h13.2a6.1 6.1 0 0 0 .7-12.2A8.1 8.1 0 0 0 7.6 9.6 5.2 5.2 0 0 0 9.2 20Z"/></svg></span><span class="quick-title">Tô com<br>vontade</span><span class="quick-sub">Abrir apoio agora</span></button>
-    <button class="quick resist" id="resistBtn" type="button" aria-label="Registrar que quis fumar, mas não fumei"><span class="quick-icon">✦</span><span class="quick-title">Quis fumar,<br>mas não fumei</span><span class="quick-sub">+ Resiliência</span></button>
+  <div class="quick-actions quick-actions-v731 quick-actions-v8" aria-label="Apoio e registros">
+    <button class="quick craving" id="cravingBtn" type="button"><span class="quick-icon craving-icon" aria-hidden="true"><svg viewBox="0 0 32 24"><path d="M9.2 20h13.2a6.1 6.1 0 0 0 .7-12.2A8.1 8.1 0 0 0 7.6 9.6 5.2 5.2 0 0 0 9.2 20Z"/></svg></span><span class="quick-title">Tô com vontade</span><span class="quick-sub">Uma pausa com o Nimbo</span><span class="quick-arrow" aria-hidden="true">↗</span></button>
+    <button class="quick smoke" id="smokeBtn" type="button"><span class="quick-icon" aria-hidden="true">＋</span><span class="quick-title">Fumei agora</span><span class="quick-sub">Registrar cigarro</span></button>
+    <button class="quick resist" id="resistBtn" type="button"><span class="quick-icon" aria-hidden="true">✦</span><span class="quick-title">Quis, mas não fumei</span><span class="quick-sub">Registrar vontade atravessada</span></button>
   </div>
 
   <div class="daily-summary-row" aria-label="Resumo de hoje">
@@ -1867,7 +2018,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 <section id="craving" class="tab craving-screen" aria-label="Modo vontade">
   <div class="craving-topbar">
-    <button class="craving-back" id="cravingBack" type="button">‹ Voltar</button>
+    <button class="craving-back" id="cravingBack" type="button">‹ Hoje</button>
     <div class="craving-mode-label">MODO VONTADE</div>
     <div class="craving-mode-dot" aria-hidden="true"></div>
   </div>
@@ -1888,38 +2039,37 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
     </div>
 
     <div class="craving-review" id="cravingReview" hidden>
-      <small>DOIS MINUTOS DEPOIS</small>
+      <small>SUA PAUSA</small>
       <h3 id="cravingReviewTitle">E agora?</h3>
       <p id="cravingReviewCopy">Não precisa dar uma nota. Só percebe se alguma coisa mudou.</p>
-      <div class="craving-outcomes" id="cravingOutcomeButtons">
-        <button type="button" data-craving-outcome="passed">Passou</button>
-        <button type="button" data-craving-outcome="reduced">Diminuiu</button>
-        <button type="button" data-craving-outcome="strong">Ainda está forte</button>
-      </div>
-      <div class="craving-review-actions" id="cravingReviewActions" hidden>
-        <button type="button" class="craving-review-primary" id="cravingReviewHome">Voltar à Home</button>
-        <button type="button" id="cravingMoreMinute" hidden>Ficar mais 1 minuto</button>
+      <div class="craving-outcomes" id="cravingOutcomeButtons" hidden></div>
+      <div class="craving-review-actions" id="cravingReviewActions">
+        <button type="button" id="cravingMoreMinute">Mais 1 minuto</button>
+        <button type="button" id="cravingReviewHome">Escolher outra atividade</button>
       </div>
       <p class="craving-review-note" id="cravingReviewNote"></p>
     </div>
 
-    <button class="craving-stop-early" id="cravingStopEarly" type="button" hidden>encerrar antes</button>
+    <button class="craving-stop-early" id="cravingStopEarly" type="button" hidden>Encerrar a pausa</button>
   </div>
 
   <div class="craving-support-list" id="cravingSupportList">
-    <button class="craving-support-btn primary" id="cravingStayBtn" type="button"><span class="support-ico">🍃</span><span><strong>Ficar aqui por 2 minutos</strong><small>Brinque com o Nimbo enquanto o tempo passa.</small></span><span class="support-arrow">›</span></button>
-    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Jogar um minuto</strong><small>Uma brincadeira curta com o Nimbo para mudar o foco.</small></span><span class="support-arrow">›</span></button>
-    <button class="craving-support-btn" id="cravingMessageBtn" type="button"><span class="support-ico">💬</span><span><strong>Ler uma mensagem</strong><small>Uma ideia curta da Jornada para este momento.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn primary" id="cravingStayBtn" type="button"><span class="support-ico">🍃</span><span><strong>Ficar com o Nimbo</strong><small>2 min · Sem pressa. Ele faz companhia.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn" id="cravingGameBtn" type="button"><span class="support-ico">🎮</span><span><strong>Uma brincadeira rápida</strong><small>1 min · Toque no Nimbo e veja as reações.</small></span><span class="support-arrow">›</span></button>
+    <button class="craving-support-btn" id="cravingMessageBtn" type="button"><span class="support-ico">💬</span><span><strong>Ler algo curto</strong><small>Uma ideia da Jornada, no seu ritmo.</small></span><span class="support-arrow">›</span></button>
   </div>
 
   <div class="craving-message-panel" id="cravingMessagePanel" hidden>
     <small>DO VALE</small>
     <strong id="cravingMessageTitle"></strong>
     <p id="cravingMessageText"></p>
-    <button type="button" id="cravingMessageStay">Ficar com o Nimbo por 2 minutos</button>
+    <button type="button" id="cravingMessageStay">Escolher outra atividade</button>
   </div>
 
-  <div class="craving-foot" id="cravingFoot"><button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Se eu fumar depois, tudo bem: ainda quero registrar ›</button></div>
+  <div class="craving-foot" id="cravingFoot">
+    <button id="cravingRegisterResist" class="pause-register" type="button">✦ Quis, mas não fumei <span>Registrar e voltar</span></button>
+    <button class="craving-register-anyway" id="cravingRegisterAnyway" type="button">Seguir meu dia <span>Voltar sem registrar</span></button>
+  </div>
 </section>
 
 <section id="vale" class="tab">
@@ -1978,15 +2128,16 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 <section id="history" class="tab"><div class="panel"><h2>Histórico</h2><div id="historyList"></div></div></section>
 
 <section id="journey" class="tab">
-<div class="j-compact-head"><div><h2>Jornada</h2><p class="j-purpose">Apoio para criar espaço entre a vontade e a ação.</p></div><span id="jEvolution"></span></div>
+<div class="j-compact-head"><div><h2>Jornada</h2><p class="j-purpose">Leituras, descobertas e seu caminho.</p></div><span id="jEvolution"></span></div>
 <div class="j-xp-panel" hidden aria-hidden="true"><div class="j-xp-caption"><span id="jXpCaption"></span><span id="jXpTarget"></span></div><div class="j-xp-track" id="jXpTrack" role="progressbar" aria-label="XP do caminho do Nimbo"><i id="jXpFill"></i></div><p id="jNext"></p></div>
-<nav class="j-tabs" aria-label="Seções da Jornada"><button data-jview="daily" class="active">Para você <b id="jDailyBadge"></b></button><button data-jview="explore">Explorar <b id="jExploreBadge"></b></button><button data-jview="history">Minha história <b id="jHistoryBadge"></b></button></nav>
-<div id="jDaily"></div><div id="jExplore" hidden></div><div id="jHistory" hidden></div>
+<nav class="j-tabs" aria-label="Seções da Jornada"><button data-jview="daily" class="active">Início <b id="jDailyBadge"></b></button><button data-jview="explore">Leituras <b id="jExploreBadge"></b></button><button data-jview="achievements">Conquistas <b id="jAchievementsBadge"></b></button><button data-jview="history">Meu caminho <b id="jHistoryBadge"></b></button></nav>
+<div id="jDaily"></div><div id="jExplore" hidden></div><div id="jAchievementsPane" hidden></div><div id="jHistory" hidden></div>
 <div class="j-essential"><button data-jread="pause">Uma pausa agora</button><button data-jread="support">Encontrar tratamento</button></div>
 <div hidden aria-hidden="true"><span id="xpValue"></span><i id="xpBar"></i><span id="xpNote"></span></div>
 </section>
 <dialog id="jReader" class="j-dialog"><header><span id="jReaderKind"></span><button id="jReaderClose" aria-label="Fechar leitura">✕</button></header><div class="j-reader-content"><h2 id="jReaderTitle"></h2><div id="jReaderBody"></div><div id="jReaderSource"></div><div id="jReaderPrompt"></div><div class="j-reader-actions"><button id="jSave">Salvar</button><button id="jComplete">Concluir leitura</button></div></div></dialog>
 
+<dialog id="jAchievementDialog" class="j-dialog"><header><span>CONQUISTA</span><button id="jAchievementClose" aria-label="Fechar conquista">✕</button></header><div class="j-reader-content"><div class="j-medal" aria-hidden="true">✦</div><h2 id="jAchievementTitle"></h2><p id="jAchievementDescription"></p><p id="jAchievementDate"></p><button class="j-primary" id="jAchievementDone">Continuar</button></div></dialog>
 <section id="more" class="tab">
   <div class="panel">
     <h2>Conta e sincronização</h2>
@@ -2091,7 +2242,7 @@ body.craving-mode-active .home-header,body.craving-mode-active .nav{display:none
 
 <script>
 (() => {
-  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.2.1').trim();
+  const APP_VERSION=(document.querySelector('meta[name="app-version"]')?.content||'8.3.0').trim();
   const SUPABASE_URL='https://trqzodxaizsifxanxhed.supabase.co';
   const SUPABASE_KEY='sb_publishable_S2vR3DjnuME7YKbAJhzQjg_qk658k0n';
 
@@ -3808,7 +3959,8 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
   function resetCravingScreen(){
     clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;cravingTapCount=0;
-    const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session');hero.classList.remove('playing','reviewing');
+    cancelNimboScene('craving',{restore:false,invalidate:true});$('cravingPlayReaction').classList.remove('show');clearTimeout(cravingReactionTimer);
+    const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session','reading-session');hero.classList.remove('playing','reviewing');
     $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=true;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;
     $('cravingSupportList').style.display='';$('cravingFoot').style.display='';$('cravingMessagePanel').hidden=true;$('cravingIntro').style.display='';
     $('cravingNimbo').tabIndex=-1;$('cravingNimbo').setAttribute('aria-label','Nimbo no Modo Vontade');
@@ -3819,14 +3971,14 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     if(cravingPracticeOpen())completeCravingPractice(cravingCurrentPracticeId,{outcome:'left'});
     cravingCurrentPracticeId=beginCravingPractice({path:'nimbo',source:'craving-button'}).id;
     resetCravingScreen();cloneCravingNimbo();
-    const intro=pickCravingIntro();$('cravingTitle').innerHTML=intro.title.replace(/\\n/g,'<br>');$('cravingCopy').textContent=intro.copy;
+    $('cravingTitle').textContent='Um pouco de espaço.';$('cravingCopy').textContent='Escolha uma companhia para este momento.';
     document.body.classList.add('craving-mode-active');document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id==='craving'));
     window.scrollTo({top:0,behavior:'auto'});checkAchievements();render();
     dispatchNimboReaction('craving_enter',{surface:'craving'});
   }
   function closeCravingMode({outcome='left',keepForNextEvent=false}={}){
     cancelNimboScene('craving',{restore:false,invalidate:true});
-    clearInterval(cravingTimer);cravingTimer=null;
+    clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;
     if(cravingPracticeOpen()&&!keepForNextEvent)completeCravingPractice(cravingCurrentPracticeId,{outcome});
     if(keepForNextEvent&&cravingCurrentPracticeId)cravingPendingLink={id:cravingCurrentPracticeId,until:Date.now()+30*60*1000};
     document.body.classList.remove('craving-mode-active');document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('active',s.id==='home'));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab==='home'));
@@ -3840,16 +3992,37 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   function startCravingPlay(seconds=120,path='nimbo'){
     const row=cravingPracticeRow();if(!row||row.linkedEventId)return;
     row.outcome='open';row.endedAt=null;setCurrentCravingPath(path);clearInterval(cravingTimer);cravingTimerDuration=seconds;cravingTimerEndsAt=Date.now()+seconds*1000;cravingTapCount=0;
-    const screen=$('craving'),hero=$('cravingHero');screen.classList.add('play-session');hero.classList.remove('reviewing');hero.classList.add('playing');
+    const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('reading-session');screen.classList.add('play-session');hero.classList.remove('reviewing');hero.classList.add('playing');
     $('cravingReview').hidden=true;$('cravingIntro').style.display='none';$('cravingMiniTimer').hidden=false;$('cravingStopEarly').hidden=false;$('cravingNimbo').tabIndex=0;$('cravingNimbo').setAttribute('aria-label','Brincar com o Nimbo. Toque para ele reagir.');
-    $('cravingSupportList').style.display='none';$('cravingFoot').style.display='none';$('cravingMessagePanel').hidden=true;setCravingExpression(path==='distract'?'playful':'happy');updateCravingTimer();cravingTimer=setInterval(updateCravingTimer,250);$('cravingNimbo').focus({preventScroll:true});
+    $('cravingSupportList').style.display='none';$('cravingFoot').style.display='';$('cravingMessagePanel').hidden=true;setCravingExpression(path==='distract'?'playful':'happy');updateCravingTimer();cravingTimer=setInterval(updateCravingTimer,250);$('cravingNimbo').focus({preventScroll:true});
   }
   function finishCravingPlay(){
+    if(!document.body.classList.contains('craving-mode-active')||!cravingPracticeRow())return;
     clearInterval(cravingTimer);cravingTimer=null;cravingTimerEndsAt=0;
-    const screen=$('craving'),hero=$('cravingHero');screen.classList.remove('play-session');hero.classList.remove('playing');hero.classList.add('reviewing');
-    $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;$('cravingReview').hidden=false;$('cravingOutcomeButtons').hidden=false;$('cravingReviewActions').hidden=true;$('cravingMoreMinute').hidden=true;$('cravingReviewTitle').textContent='E agora?';$('cravingReviewCopy').textContent='Não precisa dar uma nota. Só percebe se alguma coisa mudou.';$('cravingReviewNote').textContent='Só “Quis fumar, mas não fumei” registra uma vitória e gera reconhecimento. As outras respostas não geram pontos.';setCravingExpression('happy');
-    dispatchNimboReaction('craving_end',{surface:'craving',cravingOutcome:'unknown'});
+    cancelNimboScene('craving',{restore:false,invalidate:true});
+    $('craving').classList.remove('play-session','reading-session');
+    $('cravingHero').classList.remove('playing');$('cravingHero').classList.add('reviewing');
+    $('cravingMiniTimer').hidden=true;$('cravingStopEarly').hidden=true;
+    $('cravingReview').hidden=false;$('cravingOutcomeButtons').hidden=true;
+    $('cravingReviewActions').hidden=false;$('cravingMoreMinute').hidden=false;
+    $('cravingReviewTitle').textContent='No seu tempo.';
+    $('cravingReviewCopy').textContent='Pode ficar mais um pouco ou seguir seu dia.';
+    $('cravingReviewNote').textContent='';$('cravingFoot').style.display='';$('cravingPlayReaction').classList.remove('show');clearTimeout(cravingReactionTimer);
+    $('cravingNimbo').tabIndex=-1;setCravingExpression('happy');
+    $('cravingMoreMinute').focus({preventScroll:true});
   }
+  function returnToCravingChoices(){
+    resetCravingScreen();setCravingExpression('happy');
+    window.scrollTo({top:0,behavior:'auto'});$('cravingStayBtn').focus({preventScroll:true});
+  }
+  function finishCravingWithRecord(){
+    const row=cravingPracticeRow();if(!row||row.linkedEventId)return;
+    registerResistedEvent(row,{react:false});
+    closeCravingMode({outcome:'resisted'});
+    toast('Vontade atravessada registrada');
+    dispatchNimboReaction('resist',{surface:'home'});
+  }
+
   function reactCravingNimbo(){
     if(!$('cravingHero').classList.contains('playing'))return;
     cancelNimboScene('craving',{restore:false,invalidate:true});
@@ -3861,7 +4034,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const spark=document.createElement('span');spark.className='craving-spark';spark.textContent=Math.random()<.5?'✦':'·';spark.style.left=`${38+Math.random()*25}%`;spark.style.top=`${33+Math.random()*25}%`;$('cravingSparks').appendChild(spark);setTimeout(()=>spark.remove(),800);
   }
   function showCravingJourneyMessage(){
-    setCurrentCravingPath('journey');let pool=CRAVING_JOURNEY_MESSAGES.slice(),j=ensureJourney();
+    resetCravingScreen();$('craving').classList.add('reading-session');setCurrentCravingPath('journey');let pool=CRAVING_JOURNEY_MESSAGES.slice(),j=ensureJourney();
     if(j.stage.value==='returning')pool.unshift({title:'Voltar é a própria prática',text:'Não há placa contando quantos dias você ficou longe. O caminho reaparece quando você volta a pisar nele.'});
     if((j.plan.reason?.value||'').trim())pool.unshift({title:'Seu motivo ainda está no plano',text:`Você escreveu um motivo que continua guardado aqui. Não precisa transformá-lo em cobrança; deixe que ele só lembre por que vale criar este intervalo.`});
     const msg=pool[Math.floor(Math.random()*pool.length)];$('cravingMessageTitle').textContent=msg.title;$('cravingMessageText').textContent=msg.text;$('cravingMessagePanel').hidden=false;$('cravingMessagePanel').scrollIntoView({block:'nearest',behavior:'smooth'});
@@ -3964,9 +4137,9 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     const states={unread:['●','Não lido'],progress:['◔','Em leitura'],done:['✓','Lido'],locked:['◇','Bloqueado']};
     const [icon,label]=states[status],minutes=Math.max(1,Math.ceil(c.body.split(/\s+/).length/180));
     const always=J_ALWAYS_AVAILABLE.has(id),requirement=id.startsWith('c:')?J_STORY_XP[id.slice(2)]:c.xp;
-    return `<button class="j-row j-reading-${status}" ${accessible?`data-jread="${id}"`:'disabled'}><small>${jEsc(c.kind)} · ${minutes} min${always?' · SEM BLOQUEIO':''}</small><strong>${jEsc(c.title)}</strong><span class="j-state-label ${always?'j-always':''}">${icon} ${label}${j.bookmarks[id]?.value?' · Salvo':''}</span>${accessible?'':`<span>${requirement} XP${c.attr?' ou '+({bond:'Vínculo',resilience:'Resiliência',breath:'Fôlego',vitality:'Vitalidade'}[c.attr[0]])+' '+c.attr[1]+' com 7 dias completos':''}</span>`}</button>`;
+    return `<button class="j-row j-reading-${status}" ${accessible?`data-jread="${id}"`:'disabled'}><small>${jEsc(c.kind)} · ${minutes} min</small><strong>${jEsc(c.title)}</strong><span class="j-state-label ${always?'j-always':''}">${icon} ${label}${j.bookmarks[id]?.value?' · Salvo':''}</span>${accessible?'':`<span>${requirement} XP${c.attr?' ou '+({bond:'Vínculo',resilience:'Resiliência',breath:'Fôlego',vitality:'Vitalidade'}[c.attr[0]])+' '+c.attr[1]+' com 7 dias completos':''}</span>`}</button>`;
   }
-  let jExploreStatus='all',jExploreKind='all',jStoryStatus='all';
+  let jExploreStatus='all',jExploreKind='all',jStoryStatus='all',jLibraryMode='support';
   function jAchievementFamiliesHtml(){
     const j=ensureJourney();
     return J_FAMILIES.map(f=>{const achieved=f.steps.filter(n=>vale.achievements.includes(`j_${f.id}_${n}`)),next=f.steps.find(n=>!achieved.includes(n));return `<details class="j-achievement-group"><summary>${f.icon} ${f.name} <span>${achieved.length}/${f.steps.length}${achieved.some(n=>!vale.seenAchievements.includes(`j_${f.id}_${n}`))?' · NOVO':''}</span></summary><p class="j-note">${next?`${Math.floor(f.value())} de ${next} para o próximo marco`:'Todos os marcos deste ciclo descobertos'}</p>${f.steps.filter(n=>achieved.includes(n)||n===next).map(n=>{const id=`j_${f.id}_${n}`,a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row" ${achieved.includes(n)?`data-jachievement="${id}"`:'disabled'}><strong>${jEsc(a.name)} ${achieved.includes(n)&&!vale.seenAchievements.includes(id)?'<b class="j-new">NOVO</b>':''}</strong><span>${achieved.includes(n)?(j.dates[id]?new Date(j.dates[id]).toLocaleDateString('pt-BR'):'Descoberta anterior'):'Próximo marco'}</span><small>${jEsc(a.desc)}</small></button>`}).join('')}</details>`}).join('');
@@ -3984,21 +4157,33 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
   }
   function jRenderExplore(){
     const j=ensureJourney();
-    const filtered=J_CONTENT.filter(c=>(jExploreKind==='all'||c.kind===jExploreKind)&&(jExploreStatus==='all'||(jExploreStatus==='saved'?j.bookmarks[c.id]?.value:jReadStatus(c.id)===jExploreStatus)));
-    const rank={unread:0,progress:1,done:2,locked:3};filtered.sort((a,b)=>rank[jReadStatus(a.id)]-rank[jReadStatus(b.id)]||a.xp-b.xp);
-    const memories=vale.inventory.map(id=>ITEMS[id]).filter(Boolean);
-    $('jExplore').innerHTML=`${jInbox()}<section class="j-explore-block"><h3>Biblioteca de apoio</h3><p>Práticas, filosofia aplicada, saúde e relatos. Apoio essencial nunca fica atrás de XP.</p><div class="j-filter-row" aria-label="Filtrar por leitura">${[['all','Todos'],['unread','Não lidos'],['progress','Em leitura'],['done','Lidos'],['saved','Salvos']].map(([id,title])=>`<button data-jfilter="${id}" aria-pressed="${jExploreStatus===id}">${title}</button>`).join('')}</div><label class="j-topic-label" for="jTopic">Tema<select id="jTopic"><option value="all">Todos os temas</option>${['Apoio prático','Saúde','Relato real','Encontrar apoio'].map(k=>`<option value="${k}">${k}</option>`).join('')}</select></label><div class="j-catalog-list">${filtered.map(c=>jCard(c.id)).join('')||'<div class="j-empty">Nenhuma leitura nesta seleção.</div>'}</div></section><section class="j-explore-block" id="jStories"><h3>Crônicas do Vale</h3><p>Ficção original. Aqui o estoicismo aparece como prática: impressão, espaço, escolha e retorno.</p><div class="j-filter-row" aria-label="Filtrar crônicas">${[['all','Todas'],['pending','Por terminar'],['unread','Não lidas'],['done','Lidas']].map(([id,label])=>`<button data-jstoryfilter="${id}" aria-pressed="${jStoryStatus===id}">${label}</button>`).join('')}</div><div id="jStoriesList"></div></section><section class="j-explore-block" id="jAchievements"><h3>Conquistas</h3><p>Marcos de prática e de caminho. Nenhuma sequência é zerada por um cigarro.</p>${jAchievementFamiliesHtml()}<details><summary>Descobertas especiais</summary>${ACHIEVEMENTS.filter(a=>!a.id.startsWith('j_')&&vale.achievements.includes(a.id)).map(a=>`<button class="j-row" data-jachievement="${a.id}"><strong>${jEsc(a.name)} ${vale.seenAchievements.includes(a.id)?'':'<b class="j-new">NOVO</b>'}</strong><span>${jEsc(a.desc)}</span></button>`).join('')||'<p class="j-note">As descobertas especiais aparecem conforme você pratica e retorna.</p>'}</details></section>${memories.length?`<section class="j-explore-block"><h3>Memórias do caminho</h3>${memories.map(item=>`<article class="j-memory"><h4>${item.icon} ${jEsc(item.name)}</h4><p>${jEsc(item.desc)}</p></article>`).join('')}</section>`:''}`;
-    const topic=$('jTopic');if(topic)topic.value=jExploreKind;jRenderStories();
+    const pool=jLibraryMode==='stories'?Object.keys(J_STORY_XP).sort((a,b)=>J_STORY_XP[a]-J_STORY_XP[b]).map(id=>jContent('c:'+id)).filter(Boolean):J_CONTENT;
+    const filtered=pool.filter(c=>(jExploreKind==='all'||c.kind===jExploreKind)&&(jExploreStatus==='all'||(jExploreStatus==='saved'?j.bookmarks[c.id]?.value:jReadStatus(c.id)===jExploreStatus)));
+    if(jLibraryMode==='support'){const rank={progress:0,unread:1,done:2,locked:3};filtered.sort((a,b)=>rank[jReadStatus(a.id)]-rank[jReadStatus(b.id)]||a.xp-b.xp)}
+    $('jExplore').innerHTML=`<div class="j-library-switch" aria-label="Acervo"><button data-jlibrary="support" aria-pressed="${jLibraryMode==='support'}">Apoio e ideias</button><button data-jlibrary="stories" aria-pressed="${jLibraryMode==='stories'}">Crônicas do Vale</button></div><div class="j-filter-row" aria-label="Estado da leitura">${[['all','Todas'],['progress','Continuar'],['saved','Salvas'],['unread','Não lidas'],['done','Lidas']].map(([id,title])=>`<button data-jfilter="${id}" aria-pressed="${jExploreStatus===id}">${title}</button>`).join('')}</div><details class="j-library-options" ${jExploreKind!=='all'?'open':''}><summary>Filtrar por tema</summary><label class="j-topic-label" for="jTopic">Tema<select id="jTopic"><option value="all">Todos os temas</option>${[...new Set(pool.map(c=>c.kind))].map(k=>`<option value="${jEsc(k)}">${jEsc(k)}</option>`).join('')}</select></label></details><p class="j-list-count">${filtered.length} leitura${filtered.length===1?'':'s'}${jLibraryMode==='stories'?' · Ficção original do Vale':''}</p><div class="j-catalog-list">${filtered.map(c=>jCard(c.id)).join('')||'<div class="j-empty">Nenhuma leitura aqui por enquanto. Experimente outro filtro.</div>'}</div>`;
+    $('jTopic').value=jExploreKind;
   }
+  function jAchievementsHtml(){
+    const fresh=unseenAchievementIds().filter(id=>ACHIEVEMENTS.some(a=>a.id===id));
+    return `<div class="j-achievement-intro"><span class="j-medal" aria-hidden="true">✦</span><div><strong>${vale.achievements.length} descobertas</strong><p>Os pequenos passos também ficam.</p></div></div>${fresh.length?`<section class="j-new-discoveries"><h3>Novas para você</h3>${fresh.slice(0,4).map(id=>{const a=ACHIEVEMENTS.find(a=>a.id===id);return `<button class="j-row j-achievement-new" data-jachievement="${id}"><small>CONQUISTA · NOVA</small><strong>${jEsc(a.name)}</strong><span>Ver descoberta →</span></button>`}).join('')}</section>`:''}<h3 class="j-section">Seu percurso</h3>${jAchievementFamiliesHtml()}<details><summary>Descobertas especiais</summary>${ACHIEVEMENTS.filter(a=>!a.id.startsWith('j_')&&vale.achievements.includes(a.id)).map(a=>`<button class="j-row" data-jachievement="${a.id}"><strong>${jEsc(a.name)}</strong><span>${vale.seenAchievements.includes(a.id)?'Ver conquista':'Nova descoberta'}</span></button>`).join('')||'<p class="j-note">Suas descobertas vão aparecer aqui.</p>'}</details><details><summary>Memórias do Vale</summary>${vale.inventory.map(id=>ITEMS[id]).filter(Boolean).map(item=>`<article class="j-memory"><h4>${item.icon} ${jEsc(item.name)}</h4><p>${jEsc(item.desc)}</p></article>`).join('')||'<p class="j-note">As memórias chegam ao longo do caminho.</p>'}</details>`;
+  }
+  function jOpenAchievement(id){
+    const a=ACHIEVEMENTS.find(a=>a.id===id);if(!a||!vale.achievements.includes(id))return;
+    vale.seenAchievements=uniq([...vale.seenAchievements,id]);jPersist();
+    $('jAchievementTitle').textContent=a.name;$('jAchievementDescription').textContent=a.desc;
+    const date=ensureJourney().dates[id];$('jAchievementDate').textContent=date?'Descoberta em '+new Date(date).toLocaleDateString('pt-BR'):'Faz parte do seu caminho.';
+    $('jAchievementDialog').dataset.achievement=id;$('jAchievementDialog').showModal();jBadges();
+  }
+
   function jBadges(){
     const j=ensureJourney(),fresh=j.unlocked.filter(id=>!j.seen.includes(id)&&!J_ALWAYS_AVAILABLE.has(id)),daily=j.editions[today()]&&!j.editionSeen.includes(today())?1:0;
-    const explore=fresh.length+unseenAchievementIds().length,history=0;
-    for(const [id,count] of [['jDailyBadge',daily],['jExploreBadge',explore],['jHistoryBadge',history],['journeyNavBadge',daily+explore]]){const el=$(id);if(!el)continue;el.textContent=count>9?'9+':count?String(count):'';el.classList.toggle('show',count>0)}
+    const explore=fresh.length,achievements=unseenAchievementIds().length,history=0;
+    for(const [id,count] of [['jDailyBadge',daily],['jExploreBadge',explore],['jHistoryBadge',history],['jAchievementsBadge',achievements],['journeyNavBadge',daily+explore+achievements]]){const el=$(id);if(!el)continue;el.textContent=count>9?'9+':count?String(count):'';el.classList.toggle('show',count>0)}
   }
   function jHistoryTrendHtml(){
-    const days=uniq([...completedDays().slice(-6),today()]).sort().slice(-7),maxSmoke=Math.max(1,...days.map(smokeCount)),maxResist=Math.max(1,...days.map(resistCount));
+    const days=uniq([...completedDays().slice(-6),today()]).sort().slice(-7),maxSmoke=Math.max(1,...days.map(smokeCount)),maxResist=Math.max(maxSmoke,...days.map(resistCount));
     if(!days.length)return'<div class="j-empty">Seus registros vão formar a evolução aqui.</div>';
-    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/maxSmoke*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/maxResist*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}</span></div>`}).join('')}<p class="j-layer-note">Barras: cigarros / vontades atravessadas. Tendência, não nota.</p></div>`;
+    return `<div class="j-trend"><h4>Últimos dias</h4>${days.map(d=>{const s=smokeCount(d),r=resistCount(d);return `<div class="j-trend-row"><span class="j-trend-day">${dayDate(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}</span><div class="j-trend-bars"><div class="j-trend-bar"><i style="width:${Math.round(s/maxResist*100)}%"></i></div><div class="j-trend-bar resist"><i style="width:${Math.round(r/maxResist*100)}%"></i></div></div><span class="j-trend-value">${s}/${r}</span></div>`}).join('')}<p class="j-layer-note">Cinza: cigarros · Verde: vontades atravessadas. Mesma escala; hoje ainda em andamento.</p></div>`;
   }
   function jHistoryHtml(){
     const j=ensureJourney(),e=progressionEngine(),ps=practiceSummary(),planFields=[
@@ -4012,18 +4197,25 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     ];
     const baseline=e.baseline.smokes===null?'—':e.baseline.smokes.toFixed(1).replace('.',',');
     const avg=avg7();
-    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Dados de consumo ficam separados das habilidades que você está treinando.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>baseline observada, não meta moral</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>histórico preservado, sem exigência de sequência</span></div></div>${jHistoryTrendHtml()}</section><section class="j-explore-block"><h3>O que você está treinando</h3><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>apoio usado ao longo do caminho</span></div></div></section><details id="jPlan" open><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><section class="j-explore-block"><h3>Atributos do Nimbo</h3><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></section>`;
+    return `<section class="j-explore-block"><h3>O que aconteceu</h3><p>Resumo dos dias completos registrados.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Consumo médio recente</small><strong>${avg===null?'—':avg.toFixed(1).replace('.',',')}</strong><span>cigarros/dia nos dias completos recentes</span></div><div class="j-layer-card"><small>Referência inicial</small><strong>${baseline}</strong><span>cigarros/dia na referência inicial</span></div><div class="j-layer-card"><small>Dias confirmados</small><strong>${completedDays().length}</strong><span>dias completos registrados</span></div></div></section><details><summary>Registros dos últimos dias</summary>${jHistoryTrendHtml()}</details><details class="j-explore-block"><summary>Práticas e leituras</summary><p>Prática vale mesmo quando o desfecho não é perfeito.</p><div class="j-layer-grid"><div class="j-layer-card"><small>Vontades atravessadas</small><strong>${resists.length}</strong><span>momentos em que você criou espaço e não fumou</span></div><div class="j-layer-card"><small>Retomadas</small><strong>${vale.returnedAfterGap?1:0}</strong><span>voltar também é prática</span></div><div class="j-layer-card"><small>Leituras concluídas</small><strong>${j.completed.length}</strong><span>textos concluídos</span></div></div></details><details id="jPlan"><summary>✎ Meu plano pessoal</summary><form id="jPlanForm">${planFields.map(([id,label,hint])=>`<label>${label}<small class="j-plan-hint">${hint}</small><textarea name="${id}" maxlength="1500" rows="2">${jEsc(j.plan[id]?.value||'')}</textarea></label>`).join('')}<button class="j-primary" type="submit">Salvar meu plano</button><p class="j-note">Seu plano é privado na sua conta e pode ser reescrito quando sua experiência mudar.</p></form></details><details class="j-explore-block"><summary>Atributos do Nimbo</summary><p>Eles representam dimensões diferentes do caminho; não são medidas clínicas.</p><div class="j-attribute-list">${[['Vitalidade',vitality(),'Tendência de consumo em relação à sua referência.'],['Fôlego',breath(),'Intervalos e horário do primeiro cigarro; não é função pulmonar.'],['Resiliência',resilience(),'Vontades atravessadas e práticas de criar espaço, sem punição pelo consumo do dia.'],['Vínculo',bond(),'Presença, registros honestos, plano, leituras e retorno ao app.']].map(([name,n,copy])=>`<div class="j-attribute-card"><div class="j-attribute-head"><span>${name}</span><strong>${n}</strong></div><div class="j-attribute-copy">${copy}</div></div>`).join('')}</div></details>`;
   }
   let jView='daily',jReaderId=null,jPlanDirty=false;
   function renderJourneyV7(){
     if(jPlanDirty||document.activeElement?.closest('#jPlanForm')||$('jReader')?.open){jBadges();return}
+    const openDetails=new Set([...document.querySelectorAll('#journey details[open]')].map(el=>el.id||el.querySelector('summary')?.textContent));
     const j=refreshJourney(),p=progress(),xp=p.xp,level=p.level,lo=p.thresholds[level-1],hi=p.thresholds[level];
     $('jEvolution').textContent=`Nimbo · forma ${level}`;$('jXpCaption').textContent=`${xp} XP`;$('jXpTarget').textContent=hi?`${Math.max(0,hi-xp)} para evoluir`:'Forma máxima atual';$('jXpFill').style.width=(hi?clamp((xp-lo)/(hi-lo)*100,0,100):100)+'%';$('jXpTrack').setAttribute('aria-valuemin',String(lo));$('jXpTrack').setAttribute('aria-valuemax',String(hi||Math.max(xp,lo)));$('jXpTrack').setAttribute('aria-valuenow',String(hi?clamp(xp,lo,hi):Math.max(xp,lo)));$('jNext').textContent='A ajuda essencial não depende deste progresso.';
     const edition=j.editions[today()],primary=jContent(edition.ids[0]),companion=jContent(edition.ids[1]);
-    $('jDaily').innerHTML=`<div class="j-moment"><label for="jStage">Meu momento</label><select id="jStage"><option value="observing">Estou observando</option><option value="reducing">Estou reduzindo</option><option value="stopped">Parei de fumar</option><option value="returning">Quero retomar</option></select></div><p class="j-daily-context">Mude seu momento quando precisar. A leitura abaixo se adapta na hora.</p><article class="j-feature"><span class="j-kicker">PARA AGORA · ${jEsc(dayText(today()))}</span><h3>${jEsc(primary.title)}</h3><p>${jEsc(edition.reason)}</p><button class="j-primary" data-jread="${primary.id}">${jReadStatus(primary.id)==='done'?'✓ Reler leitura':jReadStatus(primary.id)==='progress'?'◔ Continuar leitura':'● Começar leitura'}</button></article><div class="j-practice"><small>UMA IDEIA PARA LEVAR</small><p>${jEsc(primary.prompt)}</p><button data-jplan>Levar para meu plano</button></div>${companion?`<details><summary>Outra perspectiva</summary>${jCard(companion.id)}</details>`:''}<div class="j-support-note">A vontade pode aparecer sem pedir permissão. O que você faz depois ainda pode ser treinado. A ajuda não é prêmio e não exige XP.</div><button class="j-text-button" data-jview="explore">Explorar leituras, crônicas e conquistas →</button><br><button class="j-text-button" data-jedition>Marcar seleção de hoje como vista</button>`;
-    $('jStage').value=j.stage.value;jRenderExplore();$('jHistory').innerHTML=jHistoryHtml();jApplyView();jBadges();
+    const continuing=j.seen.slice().reverse().find(id=>id!==primary.id&&jReadStatus(id)==='progress');
+    const minutes=Math.max(1,Math.ceil(primary.body.split(/\s+/).length/180));
+    const fresh=unseenAchievementIds().length;
+    $('jDaily').innerHTML=`<article class="j-feature"><span class="j-kicker">LEITURA DO DIA · ${minutes} MIN</span><h3>${jEsc(primary.title)}</h3><p>${jEsc(edition.reason)}</p><button class="j-primary" data-jread="${primary.id}">${jReadStatus(primary.id)==='done'?'Reler':jReadStatus(primary.id)==='progress'?'Continuar leitura':'Abrir leitura'} <span aria-hidden="true">↗</span></button></article>${continuing?`<section class="j-continue"><h3 class="j-section">De onde você parou</h3>${jCard(continuing)}</section>`:''}<div class="j-doorways"><button data-jview="explore"><span aria-hidden="true">≡</span><strong>Suas leituras</strong><small>Apoio e histórias</small><i aria-hidden="true">↗</i></button><button data-jview="achievements"><span aria-hidden="true">✦</span><strong>Conquistas</strong><small>${fresh?fresh+' nova'+(fresh===1?'':'s'):vale.achievements.length+' descobertas'}</small><i aria-hidden="true">↗</i></button></div><details class="j-reflection"><summary>Uma ideia para levar</summary><p>${jEsc(primary.prompt)}</p><button class="j-text-button" data-jplan>Levar para meu plano →</button></details><details class="j-preferences"><summary>Ajustar meu momento</summary><div class="j-moment"><label for="jStage">Agora eu…</label><select id="jStage"><option value="observing">Estou observando</option><option value="reducing">Estou reduzindo</option><option value="stopped">Parei de fumar</option><option value="returning">Quero retomar</option></select></div></details>${companion?`<details><summary>Outra perspectiva</summary>${jCard(companion.id)}</details>`:''}`;
+    $('jStage').value=j.stage.value;jRenderExplore();$('jHistory').innerHTML=jHistoryHtml();$('jAchievementsPane').innerHTML=jAchievementsHtml();document.querySelectorAll('#journey details').forEach(el=>{if(openDetails.has(el.id||el.querySelector('summary')?.textContent))el.open=true});jApplyView();jBadges();
   }
-  function jApplyView(){for(const [id,v] of [['jDaily','daily'],['jExplore','explore'],['jHistory','history']])$(id).hidden=jView!==v;document.querySelectorAll('[data-jview]').forEach(b=>{b.classList.toggle('active',b.dataset.jview===jView);b.setAttribute('aria-pressed',String(b.dataset.jview===jView))})}
+  function jApplyView(){
+    for(const [id,v] of [['jDaily','daily'],['jExplore','explore'],['jAchievementsPane','achievements'],['jHistory','history']])$(id).hidden=jView!==v;
+    document.querySelectorAll('.j-tabs [data-jview]').forEach(b=>{b.classList.toggle('active',b.dataset.jview===jView);b.setAttribute('aria-pressed',String(b.dataset.jview===jView))});
+  }
   function jRead(id){
     if(!jAccessible(id))return;const c=jContent(id);if(!c)return;
     jReaderId=id;const j=ensureJourney();j.seen=uniq([...j.seen,id]);
@@ -4035,20 +4227,24 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     $('jSave').textContent=j.bookmarks[id]?.value?'Remover dos salvos':'Salvar';$('jComplete').textContent=j.completed.includes(id)?'✓ Leitura concluída':'Concluir leitura';
     jPersist();jBadges();const dialog=$('jReader');if(!dialog.open)dialog.showModal();
   }
+  $('jAchievementClose').onclick=()=>$('jAchievementDialog').close();
+  $('jAchievementDone').onclick=()=>$('jAchievementDialog').close();
+  $('jAchievementDialog').addEventListener('close',()=>{const id=$('jAchievementDialog').dataset.achievement;renderJourneyV7();const trigger=[...document.querySelectorAll('[data-jachievement]')].find(b=>b.dataset.jachievement===id&&!b.disabled&&!b.closest('[hidden]'));(trigger||document.querySelector('.j-tabs .active'))?.focus({preventScroll:true})});
   $('jReaderClose').onclick=()=>$('jReader').close();
-  $('jReader').addEventListener('close',()=>{renderJourneyV7();jReaderId=null});
+  $('jReader').addEventListener('close',()=>{const id=jReaderId;renderJourneyV7();jReaderId=null;const trigger=[...document.querySelectorAll('[data-jread]')].find(b=>b.dataset.jread===id&&!b.closest('[hidden]'));(trigger||document.querySelector('.j-tabs .active'))?.focus({preventScroll:true})});
   $('jSave').onclick=()=>{if(!jReaderId)return;const j=ensureJourney();j.bookmarks[jReaderId]={value:!j.bookmarks[jReaderId]?.value,at:new Date().toISOString()};jRead(jReaderId)};
-  $('jComplete').onclick=()=>{if(!jReaderId)return;const j=ensureJourney();j.completed=uniq([...j.completed,jReaderId]);if(jReaderId.startsWith('c:'))vale.readChronicles=uniq([...vale.readChronicles,jReaderId.slice(2)]);jPersist();$('jComplete').textContent='✓ Leitura concluída'};
+  $('jComplete').onclick=()=>{if(!jReaderId)return;const j=ensureJourney();j.completed=uniq([...j.completed,jReaderId]);if(jReaderId.startsWith('c:'))vale.readChronicles=uniq([...vale.readChronicles,jReaderId.slice(2)]);jPersist();$('jReader').close();toast('Leitura concluída')};
   $('journey').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
-    if(b.dataset.jview){jView=b.dataset.jview;jApplyView()}
+    if(b.dataset.jview){jView=b.dataset.jview;jApplyView();window.scrollTo({top:0,behavior:'auto'})}
+    if(b.dataset.jlibrary){jLibraryMode=b.dataset.jlibrary;jExploreKind='all';jRenderExplore()}
     if(b.dataset.jfilter){jExploreStatus=b.dataset.jfilter;jRenderExplore()}
     if(b.dataset.jstoryfilter){jStoryStatus=b.dataset.jstoryfilter;jRenderStories()}
     if(b.dataset.jjump){const el=$(b.dataset.jjump);if(el.tagName==='DETAILS')el.open=true;el.scrollIntoView({block:'start',behavior:'smooth'})}
     if(b.dataset.jread)jRead(b.dataset.jread);
     if(b.hasAttribute('data-jedition')){const j=ensureJourney();j.editionSeen=uniq([...j.editionSeen,today()]);jPersist();jBadges();b.textContent='✓ Edição vista'}
     if(b.hasAttribute('data-jplan')){jView='history';jApplyView();$('jPlan').open=true;$('jPlan').scrollIntoView({block:'start',behavior:'smooth'})}
-    if(b.dataset.jachievement){vale.seenAchievements=uniq([...vale.seenAchievements,b.dataset.jachievement]);jPersist();b.querySelector('.j-new')?.remove();b.disabled=true;b.classList.remove('j-achievement-new');b.innerHTML='<strong>✓ Conquista reconhecida</strong>';jBadges();$('jInbox').innerHTML=jInbox();toast('Conquista reconhecida')}
+    if(b.dataset.jachievement)jOpenAchievement(b.dataset.jachievement);
     if(b.hasAttribute('data-jseen')){const j=ensureJourney();j.seen=uniq([...j.seen,...j.unlocked]);vale.seenAchievements=uniq([...vale.seenAchievements,...vale.achievements]);jPersist();renderJourneyV7()}
   });
   $('journey').addEventListener('input',e=>{if(e.target.closest('#jPlanForm'))jPlanDirty=true});
@@ -4653,7 +4849,7 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
     let timeout;const timer=new Promise((_,reject)=>{timeout=setTimeout(()=>reject(new Error('nimbo-ai-timeout')),NIMBO_AI_TIMEOUT_MS)});try{const invocation=sb.functions.invoke(NIMBO_AI_FUNCTION,{body:nimboAiPayload(eventType,surface,{cravingOutcome})});const result=await Promise.race([invocation,timer]);if(rt.generation!==generation)throw new Error('nimbo-ai-stale');if(result?.error)throw result.error;const scene=normalizeNimboScene(result?.data);if(!scene)throw new Error('nimbo-ai-invalid-scene');return scene}finally{clearTimeout(timeout)}
   }
   function localCravingFallback(eventType,outcome='unknown'){
-    const map={craving_enter:['Tô aqui. Primeiro, só um pouco de espaço.','happy','calm'],craving_end:['Como está a vontade agora?','neutral','calm'],smoke:['Registrado. Eu sigo com você.','neutral','warm'],resist:['Essa ficou registrada.','happy','good'],milestone:['Essa merece um pequeno festejo.','delighted','good']};const row=map[eventType]||['Tô aqui.','neutral','calm'];setCravingExpression(row[1]);const bubble=$('cravingPlayReaction');if(bubble){bubble.removeAttribute('data-source');bubble.textContent=row[0];bubble.classList.remove('good','calm','warm');bubble.classList.add(row[2],'show');clearTimeout(cravingReactionTimer);cravingReactionTimer=setTimeout(()=>bubble.classList.remove('show'),1900)}
+    const map={craving_enter:['Tô aqui. Primeiro, só um pouco de espaço.','happy','calm'],craving_end:['No seu tempo.','neutral','calm'],smoke:['Registrado. Eu sigo com você.','neutral','warm'],resist:['Essa ficou registrada.','happy','good'],milestone:['Essa merece um pequeno festejo.','delighted','good']};const row=map[eventType]||['Tô aqui.','neutral','calm'];setCravingExpression(row[1]);const bubble=$('cravingPlayReaction');if(bubble){bubble.removeAttribute('data-source');bubble.textContent=row[0];bubble.classList.remove('good','calm','warm');bubble.classList.add(row[2],'show');clearTimeout(cravingReactionTimer);cravingReactionTimer=setTimeout(()=>bubble.classList.remove('show'),1900)}
   }
   function primeNimboReaction(eventType,surface){if(surface==='craving'){if(eventType==='craving_enter')setCravingExpression('happy');return}const kind=eventType==='resist'||eventType==='milestone'?'nod':eventType==='smoke'?'listen':eventType==='close_day'?'bow':eventType==='care'?'tilt':'nod';actorPlay(kind,Math.min(620,eventType==='touch'?420:560))}
   async function dispatchNimboReaction(eventType,{surface='home',cravingOutcome=null,priority=NIMBO_AI_PRIORITY[eventType]??50,localFallback=true}={}){
@@ -5622,17 +5818,18 @@ E, aos poucos, Nimbo começava a entender que um dia teria de voltar por inteiro
 
   $('cravingBtn').onclick=openCravingMode;
   $('cravingBack').onclick=()=>closeCravingMode({outcome:'left'});
+  $('cravingRegisterResist').onclick=finishCravingWithRecord;
   $('cravingStayBtn').onclick=()=>startCravingPlay(120,'nimbo');
   $('cravingGameBtn').onclick=()=>startCravingPlay(60,'distract');
   $('cravingMessageBtn').onclick=showCravingJourneyMessage;
-  $('cravingMessageStay').onclick=()=>startCravingPlay(120,'nimbo');
+  $('cravingMessageStay').onclick=returnToCravingChoices;
   $('cravingStopEarly').onclick=finishCravingPlay;
   $('cravingNimbo').onclick=reactCravingNimbo;
   $('cravingNimbo').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&$('cravingHero').classList.contains('playing')){e.preventDefault();reactCravingNimbo()}};
   document.querySelectorAll('[data-craving-outcome]').forEach(btn=>btn.onclick=()=>handleCravingOutcome(btn.dataset.cravingOutcome));
-  $('cravingReviewHome').onclick=()=>{const row=cravingPracticeRow();const outcome=row?.outcome||'left';if(outcome==='reduced'||outcome==='strong')cravingPendingLink={id:row.id,until:Date.now()+30*60*1000};closeCravingMode({outcome})};
+  $('cravingReviewHome').onclick=returnToCravingChoices;
   $('cravingMoreMinute').onclick=()=>startCravingPlay(60,'nimbo');
-  $('cravingRegisterAnyway').onclick=()=>closeCravingMode({keepForNextEvent:true});
+  $('cravingRegisterAnyway').onclick=()=>closeCravingMode({outcome:'left'});
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&cravingTimerEndsAt)updateCravingTimer()});
 
   $('smokeBtn').onclick=()=>{registerSmokeEvent(pendingPracticeForEvent());cravingPendingLink=null};
